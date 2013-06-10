@@ -3,24 +3,37 @@
 <!DOCTYPE html>
 
 <html>
-	
-	@views.html.main.head(title)
-    
-    <body>
 
-	@views.html.main.navbar()
+@views.html.main.head(title)
 
-    <div class="container">
+<body>
+	<div id="wrap">
+		<!-- necessary for sticky footer. wrap all content except footer -->
 
-      <h1>Bootstrap starter template</h1>
-      <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+		<!-- main navigation bar -->
+		@views.html.main.navbar()
 
-    </div> <!-- /container -->
+		<div class="container">
 
-    <!-- Le javascript
+			<h1>Bootstrap starter template</h1>
+			<p>
+				Use this document as a way to quick start any new project.<br>
+				All you get is this message and a barebones HTML document.
+			</p>
+
+		</div>
+		<!-- /container -->
+
+		<!-- Le javascript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+		<!-- Placed at the end of the document so the pages load faster -->
 
 
-  </body>
+		<!-- necessary for sticky footer -->
+		<div id="push"></div>
+	</div><!-- wrap ends here -->
+	
+	<!-- footer -->
+	@views.html.main.footer()
+</body>
 </html>
