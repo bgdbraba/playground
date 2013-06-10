@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import models.Gender;
 import play.db.ebean.Model;
 import play.i18n.Lang;
 
@@ -19,6 +20,8 @@ public class User extends Model{
 	public String firstName;
 	
 	public String lastName;
+	
+	public Gender gender;
 	
 	public String phone;
 	
