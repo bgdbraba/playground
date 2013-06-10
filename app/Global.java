@@ -15,7 +15,7 @@ public class Global extends GlobalSettings{
 
 //	@Override
 //	public Result onError(RequestHeader request, Throwable t) {
-//	    // return internalServerError(views.html.render().errorPage(t));
+//	    return internalServerError(views.html.main.render().errorPage(t));
 //	}
 
 	@Override
