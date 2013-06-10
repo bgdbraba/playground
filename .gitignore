@@ -4,6 +4,10 @@ project/target
 target
 tmp
 .history
+.target
+.settings
+conf/evolutions
+/.target
 dist
 /.idea
 /*.iml
@@ -13,4 +17,4 @@ dist
 /.project
 /RUNNING_PID
 /.settings
-.target
+
