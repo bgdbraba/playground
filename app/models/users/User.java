@@ -52,4 +52,6 @@ public class User extends Model{
 		return find.all();
 	}
 
+
+
 }
