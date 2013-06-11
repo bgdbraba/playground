@@ -1,19 +1,48 @@
+@import conf._
 
+<!-- Navigation bar -->
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse"
-				data-target=".nav-collapse">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+		
+			<!-- Responsive navigation bar -->
+			<button type="button" class="btn btn-navbar" data-toggle="collapse"	data-target=".nav-collapse">
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="#">Project name</a>
+			
+			<!-- brand name or project name -->
+			<a class="brand" href="@routes.Application.home()">PlayGround</a>
+			
 			<div class="nav-collapse collapse">
+				<!--navigation goes here--> 				
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
+					<li class="active"><a href="@routes.Application.home()">@MyMessages.get("home")</a></li>
+				</ul>		
+				
+				<!-- Login and Profile -->	
+				<ul class="nav pull-right">
+				
+					<!-- Profile -->
+	    			<li class="pull-right">
+			    		@if(session.containsKey("id")){   		
+			    			<a href=""><i class="icon-user icon-white"></i>
+			    			 @models.users.User.getFullName(session.get("id"))</a>
+			    		}
+	    			</li>
+	    			
+	    			<!-- Login or Logout -->
+	    			<li class="pull-right">
+			    		@if(session.containsKey("id")){   		
+			    			<a href="@routes.Application.logout()"><i class="icon-off icon-white"></i> @MyMessages.get("logout")</a>
+			    			
+			    		}else{
+			    			<a href="@routes.Application.login()"><i class="icon-off icon-white"></i> @MyMessages.get("login")</a>
+			    		}
+	    			</li>
+	    			
+	    		</ul>
 			</div>
 			<!--/.nav-collapse -->
 		</div>

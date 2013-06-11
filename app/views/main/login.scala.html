@@ -1,0 +1,33 @@
+@(login: Form[Login])
+
+@import conf._
+@import helper._
+@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+
+@main("Login") {
+	
+	<h2>@MyMessages.get("login.title")</h2>
+	
+		@if(login.hasGlobalErrors) { 
+            <div class="alert alert-error">
+  				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<strong>@login.globalError.message</strong>
+			</div>
+		}
+
+	@form(routes.Application.authenticate) {
+		
+		<fieldset>
+    	@inputText(login("id"), '_label -> MyMessages.get("username"), '_iconcls -> "icon-user")
+
+		@inputPassword(login("password"), '_label -> MyMessages.get("password"),'_iconcls -> "icon-key")
+        </fieldset>
+		
+		<div class="actions">
+			<input class="btn btn-primary" type="submit" value="@MyMessages.get("login")" id="submit" />
+		</div>
+	}
+
+}

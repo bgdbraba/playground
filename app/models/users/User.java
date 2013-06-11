@@ -7,7 +7,9 @@ import javax.persistence.Id;
 
 import models.Gender;
 import play.db.ebean.Model;
-import play.i18n.Lang;
+import play.db.ebean.Model.Finder;
+import conf.Language;
+
 
 @Entity
 public class User extends Model{
@@ -29,7 +31,7 @@ public class User extends Model{
 	
 	public Long dateOfBirth;
 	
-	public Lang language;
+	public Language language;
 	
 	public boolean active;
 	
@@ -54,7 +56,17 @@ public class User extends Model{
 	public static List<User> findAll(){
 		return find.all();
 	}
-
-
+	
+	public static String getFullName(String id){
+		return find.ref(id).firstName + " " + find.ref(id).lastName;
+	}
+	
+	public static String getFirstName(String id){
+		return find.ref(id).firstName;
+	}
+	
+	public static String getLastName(String id){
+		return find.ref(id).lastName;
+	}
 
 }

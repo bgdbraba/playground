@@ -4,6 +4,17 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET		/home						controllers.Application.home()
+
+# Pages
+
+# Login page
+GET		/login						controllers.Application.login()
+POST	/login						controllers.Application.authenticate()
+GET		/logout						controllers.Application.logout()
+
+# Language
+GET		/changeLanguage/:code		controllers.Application.setLanguage(code: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

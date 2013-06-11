@@ -1,0 +1,10 @@
+@import conf._
+
+<!-- All languages -->
+@for(language <- Language.values()) {
+	@if(LanguageSettings.getLanguageAsEnum()==language){    		
+    		<li class="pull-right active"><a class="languageSelect" href="" data-lang="@language.toString().toLowerCase()">@language</a></li>
+	}else{
+			<li class="pull-right"><a class="languageSelect" href="" data-lang="@language.toString().toLowerCase()">@language</a></li>
+	}
+}

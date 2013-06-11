@@ -1,0 +1,13 @@
+@import models.users._
+		@if(session().get("id") != null){	
+		
+			@defining(User.find.byId(session.get("id"))){ user =>
+			
+			@if(user != null){
+			}
+			
+			
+			}
+		}else{
+			@views.html.anonymous.subnav()
+		}

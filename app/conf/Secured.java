@@ -1,4 +1,4 @@
-package main;
+package conf;
 
 import play.mvc.Http;
 import play.mvc.Security;

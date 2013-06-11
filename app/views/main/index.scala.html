@@ -1,7 +1,9 @@
 @(message: String)
 
+@import conf._
+
 @main("PlayGrounded") {
     
-    <h1>play</h1>
+    <h1>@MyMessages.get("Test")</h1>
     
 }
