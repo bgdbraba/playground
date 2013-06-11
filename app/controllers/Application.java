@@ -1,12 +1,16 @@
 package controllers;
 
+
+
 import models.Login;
 import models.users.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import conf.LanguageSettings;
 
+@Security.Authenticated(Secured.class)
 public class Application extends Controller {
   	
 	public static Result index() {
@@ -15,7 +19,7 @@ public class Application extends Controller {
 	
 	public static Result login() {
 		if (session().containsKey("id")) {
-			return TODO;
+			return redirect(routes.UserController.profile());
 		} else {
 			return ok(views.html.main.login.render(Form.form(Login.class)));
 		}
@@ -28,11 +32,12 @@ public class Application extends Controller {
 			return badRequest(views.html.main.login.render(filledForm));
 		} else {
 			Login credentials = filledForm.get();
+			session().clear();
 			session("id", credentials.id);
 			
 			LanguageSettings.setLang(User.find.byId(credentials.id).language.toString().toLowerCase());
 			// go to profile
-			return TODO;
+			return redirect(routes.UserController.profile());
 		}
 	}
 	

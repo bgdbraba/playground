@@ -54,5 +54,4 @@ public class User extends Model{
 				.eq("active", true)
 				.findUnique();
 	}
-
 }

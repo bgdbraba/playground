@@ -16,9 +16,9 @@ GET		/logout						controllers.Application.logout()
 # Language
 GET		/changeLanguage/:code		controllers.Application.setLanguage(code: String)
 
+# User management
+GET 	/profile					controllers.UserController.profile()
+GET 	/users						controllers.UserController.showUsers()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-# User management
-GET 	/:id						controllers.UserController.profile(id : String)
-GET 	/users						controllers.UserController.showUsers()
