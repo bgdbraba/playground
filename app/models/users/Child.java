@@ -1,9 +1,13 @@
 package models.users;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import models.users.information.Address;
+
 @Entity
+@DiscriminatorValue("child")
 public class Child extends User{
 	
 	public String phoneWork;

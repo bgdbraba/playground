@@ -1,3 +1,5 @@
+import conf.Language;
+import models.users.Admin;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
@@ -21,6 +23,13 @@ public class Global extends GlobalSettings{
 	@Override
 	public void onStart(Application app) {
 		Logger.info("Application has started");
+		
+		Admin admin = new Admin();
+		admin.id = "bgdbraba";
+		admin.password = "imei6uuw";
+		admin.language = Language.NL;
+		
+		Admin.create(admin);
 	}
 
 	@Override

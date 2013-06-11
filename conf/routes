@@ -4,9 +4,9 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET		/home						controllers.Application.home()
 
 # Pages
+GET		/home						controllers.PagesController.home()
 
 # Login page
 GET		/login						controllers.Application.login()
@@ -18,3 +18,7 @@ GET		/changeLanguage/:code		controllers.Application.setLanguage(code: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# User management
+GET 	/:id						controllers.UserController.profile(id : String)
+GET 	/users						controllers.UserController.showUsers()

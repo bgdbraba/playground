@@ -1,7 +1,9 @@
 package conf;
 
 import play.mvc.Http;
+import play.mvc.Result;
 import play.mvc.Security;
+import controllers.routes;
 
 public class Secured extends Security.Authenticator {
 
@@ -10,9 +12,9 @@ public class Secured extends Security.Authenticator {
         return ctx.session().get("id");
     }
 
-//    @Override
-//    public Result onUnauthorized(Http.Context ctx) {
-//        return redirect(routes.Application.login());
-//    }
+    @Override
+    public Result onUnauthorized(Http.Context ctx) {
+        return redirect(routes.Application.login());
+    }
     
 }

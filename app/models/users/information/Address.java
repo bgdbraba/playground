@@ -1,4 +1,4 @@
-package models.users;
+package models.users.information;
 
 import java.util.Locale;
 

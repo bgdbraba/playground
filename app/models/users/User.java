@@ -2,16 +2,23 @@ package models.users;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-import models.Gender;
+import models.users.enums.Gender;
+import models.users.enums.UserType;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 import conf.Language;
 
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="userType")
 public class User extends Model{
 
 	@Id
@@ -33,7 +40,10 @@ public class User extends Model{
 	
 	public Language language;
 	
-	public boolean active;
+	public boolean active = true;
+	
+	@Column(insertable=false,updatable=false)
+    public UserType userType;
 	
 	public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 	
@@ -43,30 +53,6 @@ public class User extends Model{
 				.eq("password", password)
 				.eq("active", true)
 				.findUnique();
-	}
-	
-	public static void create(User user){
-		user.save();
-	}
-	
-	public static void remove(String id){
-		find.ref(id).delete();
-	}
-	
-	public static List<User> findAll(){
-		return find.all();
-	}
-	
-	public static String getFullName(String id){
-		return find.ref(id).firstName + " " + find.ref(id).lastName;
-	}
-	
-	public static String getFirstName(String id){
-		return find.ref(id).firstName;
-	}
-	
-	public static String getLastName(String id){
-		return find.ref(id).lastName;
 	}
 
 }

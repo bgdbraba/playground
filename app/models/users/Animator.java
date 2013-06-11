@@ -1,11 +1,13 @@
 package models.users;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
-import play.db.ebean.Model.Finder;
+import models.users.information.Address;
 
 @Entity
+@DiscriminatorValue("animator")
 public class Animator extends User{
 	
 	@OneToOne

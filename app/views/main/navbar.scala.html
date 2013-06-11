@@ -13,12 +13,12 @@
 			</button>
 			
 			<!-- brand name or project name -->
-			<a class="brand" href="@routes.Application.home()">PlayGround</a>
+			<a class="brand" href="@routes.PagesController.home()">PlayGround</a>
 			
 			<div class="nav-collapse collapse">
 				<!--navigation goes here--> 				
 				<ul class="nav">
-					<li class="active"><a href="@routes.Application.home()">@MyMessages.get("home")</a></li>
+					<li class="active"><a href="@routes.PagesController.home()">@MyMessages.get("home")</a></li>
 				</ul>		
 				
 				<!-- Login and Profile -->	
@@ -28,7 +28,7 @@
 	    			<li class="pull-right">
 			    		@if(session.containsKey("id")){   		
 			    			<a href=""><i class="icon-user icon-white"></i>
-			    			 @models.users.User.getFullName(session.get("id"))</a>
+			    			 @session.get("id")</a>
 			    		}
 	    			</li>
 	    			

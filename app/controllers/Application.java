@@ -8,13 +8,9 @@ import play.mvc.Result;
 import conf.LanguageSettings;
 
 public class Application extends Controller {
-  
-    public static Result home() {
-        return ok(views.html.main.index.render("new application is ready."));
-    }  
-	
+  	
 	public static Result index() {
-        return redirect(routes.Application.home());
+        return redirect(routes.PagesController.home());
     }
 	
 	public static Result login() {
@@ -42,9 +38,8 @@ public class Application extends Controller {
 	
 	public static Result logout() {
 		session().clear();
-		return redirect(routes.Application.home());
+		return redirect(routes.PagesController.home());
     }
-	
 
 	public static Result setLanguage(String langCode) {
 		LanguageSettings.setLang(langCode);
