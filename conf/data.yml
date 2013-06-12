@@ -1,6 +1,8 @@
 # Admin
 
-- !!models.Admin
+- !!models.users.Admin
      id:     bgdbraba
      password: imei6uuw
-     language: models.Language.NL
+     language: NL
+     firstName: Bartel
+     lastName: De Brabandere

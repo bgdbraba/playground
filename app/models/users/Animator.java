@@ -27,5 +27,16 @@ public class Animator extends User{
 		find.ref(id).delete();
 	}
 	
+	public static void addAddress(String animatorId, Long addressId){
+		Animator  animator = Animator.find.byId(animatorId);
+		Address address	= Address.find.byId(addressId);
+		
+		animator.address = address;
+		
+		animator.update();
+	}
+	
+	
+	
 
 }

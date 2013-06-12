@@ -1,0 +1,12 @@
+<script type="text/javascript">
+		/* Table initialisation */
+		$(document).ready(function() {
+			$('.datatable').dataTable( {
+				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+				"sPaginationType": "bootstrap",
+				"oLanguage": {
+					"sUrl": "@routes.Assets.at(conf.LanguageSettings.getDatatableURL())"
+		        }
+			} );
+		} );
+</script>

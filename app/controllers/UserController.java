@@ -12,8 +12,8 @@ public class UserController extends Controller{
 		if(!session().containsKey("id")){
 			return badRequest();
 		}else{
-			System.out.println("username" +request().username());
-			User user = User.find.byId(request().username());
+			
+			User user = User.findById(request().username());
 			
 			return ok(views.html.users.profile.render(user));
 		}

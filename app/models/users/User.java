@@ -1,9 +1,8 @@
 package models.users;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -17,7 +16,7 @@ import conf.Language;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="userType")
+@DiscriminatorColumn(name="utype")
 public class User extends Model{
 
 	@Id
@@ -42,7 +41,7 @@ public class User extends Model{
 	public boolean active = true;
 	
 	@Column(insertable=false,updatable=true)
-    public UserType userType;
+    public UserType utype;
 	
 	public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 	
@@ -53,6 +52,10 @@ public class User extends Model{
 				.eq("active", true)
 				.findUnique();
 	}
+	
+	public static User findById(String id) {
+    	return find.where().eq("id", id).findUnique();
+    }
 
 	public static void initialize(String id, String password, String firstName, 
 									String lastName, Gender gender, String phone, 
@@ -88,6 +91,10 @@ public class User extends Model{
 	}
 	
 	public boolean is(UserType t) {
-    	return userType == t;
+    	return utype == t;
+    }
+	
+    public static boolean is(String id, UserType t) {
+    	return find.where().eq("id", id).eq("userType", t.toString().toLowerCase()).findRowCount() > 0;
     }
 }
