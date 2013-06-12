@@ -1,12 +1,15 @@
-import models.users.Admin;
+import java.util.List;
+
 import models.users.User;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
+import play.libs.Yaml;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
 import play.mvc.Results;
-import conf.Language;
+
+import com.avaje.ebean.Ebean;
 
 
 public class Global extends GlobalSettings{
@@ -24,14 +27,11 @@ public class Global extends GlobalSettings{
 	@Override
 	public void onStart(Application app) {
 		Logger.info("Application has started");
-		if(User.authenticate("bgdbraba", "imei6uuw") == null){
-			Admin admin = new Admin();
-			admin.id = "bgdbraba";
-			admin.password = "imei6uuw";
-			admin.language = Language.NL;
 		
-			Admin.create(admin);
-		}
+		 // Check if the database is empty
+        if (User.find.findRowCount() == 0) {
+            Ebean.save((List) Yaml.load("initial-data.yml"));
+        }
 	}
 
 	@Override

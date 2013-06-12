@@ -86,4 +86,8 @@ public class User extends Model{
 		
 		user.update();
 	}
+	
+	public boolean is(UserType t) {
+    	return userType == t;
+    }
 }

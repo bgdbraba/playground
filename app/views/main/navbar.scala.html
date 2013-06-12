@@ -13,12 +13,15 @@
 			</button>
 			
 			<!-- brand name or project name -->
-			<a class="brand" href="@routes.Application.index()">PlayGround</a>
+			<a class="brand" href="@routes.Application.index()"><span>Play</span>Ground</a>
 			
 			<div class="nav-collapse collapse">
+			
 				<!--navigation goes here--> 				
 				<ul class="nav">
-					<li class="active"><a href="@routes.Application.index()">@MyMessages.get("home")</a></li>
+					<li><a href="@routes.Application.index()"><i class="icon-home icon-white"></i> @MyMessages.get("home")</a></li>
+	      			<li><a href="@routes.PagesController.about()"><i class="icon-info icon-white"></i> @MyMessages.get("about")</a></li>
+	      			<li><a href="@routes.PagesController.contact()"><i class="icon-envelope-alt icon-white"></i> @MyMessages.get("contact")</a></li>
 				</ul>		
 				
 				<!-- Login and Profile -->	
@@ -27,8 +30,7 @@
 					<!-- Profile -->
 	    			<li class="pull-right">
 			    		@if(session.containsKey("id")){   		
-			    			<a href=""><i class="icon-user icon-white"></i>
-			    			 @session.get("id")</a>
+			    			<a href="@routes.UserController.profile()"><i class="icon-user icon-white"></i> @session.get("id")</a>
 			    		}
 	    			</li>
 	    			

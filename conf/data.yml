@@ -1,0 +1,6 @@
+# Admin
+
+- !!models.Admin
+     id:     bgdbraba
+     password: imei6uuw
+     language: models.Language.NL

@@ -6,11 +6,12 @@
 GET     /                           controllers.Application.index()
 
 # Pages
+GET		/about						controllers.PagesController.about()
+GET		/contact					controllers.PagesController.contact()
 
 # Login page
 GET		/login						controllers.Application.login()
 GET		/logout						controllers.Application.logout()
-
 POST	/login						controllers.Application.authenticate()
 
 # Language

@@ -4,10 +4,10 @@ package controllers;
 
 import models.Login;
 import models.users.User;
+import play.Routes;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Security;
 import conf.LanguageSettings;
 
 public class Application extends Controller {
@@ -30,8 +30,8 @@ public class Application extends Controller {
 		if (filledForm.hasErrors()) {
 			return badRequest(views.html.main.login.render(filledForm));
 		} else {
-			Login credentials = filledForm.get();
 			session().clear();
+			Login credentials = filledForm.get();
 			session("id", credentials.id);
 			
 			LanguageSettings.setLang(User.find.byId(credentials.id).language.toString().toLowerCase());
@@ -49,4 +49,15 @@ public class Application extends Controller {
 		LanguageSettings.setLang(langCode);
 		return ok();
 	}  
+	
+	/**
+	 * This method is used for setting up the correct javascriptroutes.
+	 * 
+	 * @return OK with an initiated javascript router
+	 */
+	public static Result javascriptRoutes() {
+		response().setContentType("text/javascript");
+		return ok(Routes.javascriptRouter("jsRoutes",
+				routes.javascript.Application.setLanguage()));
+	}
 }
