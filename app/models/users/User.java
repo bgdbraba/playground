@@ -53,4 +53,37 @@ public class User extends Model{
 				.eq("active", true)
 				.findUnique();
 	}
+
+	public static void initialize(String id, String password, String firstName, 
+									String lastName, Gender gender, String phone, 
+									String email, Long dateOfBirth, Language language){
+		User user = User.find.byId(id);
+		
+		user.password = password;
+		user.firstName = firstName;
+		user.lastName = lastName;
+		user.gender = gender;
+		user.phone = phone;
+		user.email = email;
+		user.dateOfBirth = dateOfBirth;
+		user.language = language;
+		
+		user.update();
+	}
+	
+	public static void activate(String id){
+		User user = User.find.byId(id);
+		
+		user.active = false;
+		
+		user.update();
+	}
+	
+	public static void deactivate(String id){
+		User user = User.find.byId(id);
+		
+		user.active = true;
+		
+		user.update();
+	}
 }
