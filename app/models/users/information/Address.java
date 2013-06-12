@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import models.users.User;
+
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 
 @Entity
 public class Address extends Model{
@@ -25,8 +28,18 @@ public class Address extends Model{
 	
 	public String city;
 	
-	public static void initialize(){
+	public static Finder<Long, Address> find = new Finder<Long, Address>(Long.class, Address.class);
+	
+	public static void initialize(Long id, Locale country, String street, String number, String zipCode, String city){
+		Address address = Address.find.byId(id);
 		
+		address.country = country;
+		address.street = street;
+		address.number = number;
+		address.zipCode = zipCode;
+		address.city = city;
+		
+		address.update();
 	}
 	
 	public static void create(Address address){

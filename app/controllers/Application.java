@@ -10,7 +10,6 @@ import play.mvc.Result;
 import play.mvc.Security;
 import conf.LanguageSettings;
 
-@Security.Authenticated(Secured.class)
 public class Application extends Controller {
   	
 	public static Result index() {
