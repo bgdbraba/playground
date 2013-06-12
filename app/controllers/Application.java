@@ -14,7 +14,7 @@ import conf.LanguageSettings;
 public class Application extends Controller {
   	
 	public static Result index() {
-        return redirect(routes.PagesController.home());
+        return ok(views.html.main.index.render());
     }
 	
 	public static Result login() {
@@ -43,7 +43,7 @@ public class Application extends Controller {
 	
 	public static Result logout() {
 		session().clear();
-		return redirect(routes.PagesController.home());
+		return redirect(routes.Application.index());
     }
 
 	public static Result setLanguage(String langCode) {

@@ -15,7 +15,6 @@ import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 import conf.Language;
 
-
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="userType")

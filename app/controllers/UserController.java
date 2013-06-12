@@ -7,9 +7,13 @@ import play.mvc.Result;
 public class UserController extends Controller{
 	
 	public static Result profile(){
-		User user = User.find.byId(request().username());
-		
-		return ok(views.html.users.profile.render(user));
+		if(session().containsKey("id")){
+			return badRequest();
+		}else{
+			User user = User.find.byId(request().username());
+			
+			return ok(views.html.users.profile.render(user));
+		}
 	}
 	
 	public static Result showUsers(){

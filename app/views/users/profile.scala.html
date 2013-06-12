@@ -1,0 +1,31 @@
+@(user: models.users.User)
+
+@import conf._
+@import views.html.main._
+
+@main(MyMessages.get("profile")){
+	
+	<!-- display user information -->
+	<table class="table table-bordered table-striped">
+		<tr>
+			<td>@MyMessages.get("username")</td>
+			<td>@user.id</td>
+		</tr>
+		<tr>
+			<td>@MyMessages.get("userType")</td>
+			<td>@MyMessages.get(user.userType.toString())</td>
+		</tr>
+		<tr>
+			<td>@MyMessages.get("firstName")</td>
+			<td>@user.firstName</td>
+		</tr>
+		<tr>
+			<td>@MyMessages.get("lastName")</td>
+			<td>@user.lastName</td>
+		</tr>
+
+	</table>
+	
+	<div class="actions">
+	</div>
+}
