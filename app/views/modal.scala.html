@@ -1,0 +1,22 @@
+@(title: String, id: String)(content: Html)(extraButtons: Html)
+
+@import conf._
+
+<!-- Modal -->
+<div id="@id" class="modal hide fade" tabindex="-1"
+	role="dialog" aria-labelledby="@(id)Label" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h3 id="@(id)Label">@title</h3>
+	</div>
+
+	<div class="modal-body">
+		@content
+	</div>
+
+	<div class="modal-footer">
+		@extraButtons
+		<button class="btn" data-dismiss="modal" aria-hidden="true">@MyMessages.get("button.close")</button>
+	</div>
+</div>

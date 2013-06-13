@@ -1,9 +1,11 @@
-@(user: models.users.User)
+@(user: models.users.User)(userForm: Form[models.users.forms.UserForm])
 
 @import conf._
 @import views.html.main._
 
 @main(MyMessages.get("profile")){
+	
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 	
 	<!-- display user information -->
 	<table class="table table-bordered table-striped">
@@ -23,5 +25,8 @@
 	</table>
 	
 	<div class="actions">
+			@modalForm(MyMessages.get("edit"), "userModal", MyMessages.get("edit")) {
+				@views.html.users.editForm(userForm)
+			}
 	</div>
 }

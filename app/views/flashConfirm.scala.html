@@ -1,0 +1,17 @@
+@(fail: String, success: String)
+
+<p>
+@if(flash.containsKey("fail")) {
+	<div class="alert alert-error">
+  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  		<strong>@fail</strong> @flash.get("fail")
+	</div>
+}
+
+@if(flash.containsKey("success")) {
+	<div class="alert alert-success">
+  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+  		<strong>@success</strong> @flash.get("success")
+	</div>
+}
+</p>

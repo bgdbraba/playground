@@ -6,3 +6,7 @@
      language: NL
      firstName: Bartel
      lastName: De Brabandere
+     dateOfBirth: 0
+     email: b@b
+     phone: 000
+     gender: M  
