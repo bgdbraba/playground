@@ -1,0 +1,21 @@
+@(playgrounds: List[models.playground.Playground])
+
+@import conf._
+
+@views.html.table{
+<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("name")</th>
+		<th>@MyMessages.get("city")</th>
+		<th>@MyMessages.get("zipCode")</th>
+		<th>@MyMessages.get("address")</th>
+		<!-- Extra option buttons -->
+	</tr>
+</thead>
+<tbody>
+	@for(playground <- playgrounds) { 
+		@views.html.playground.item(playground)
+	}
+</tbody>
+}

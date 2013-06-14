@@ -15,8 +15,6 @@ public class Address extends Model{
 	@GeneratedValue
 	public Long id;
 	
-	public Locale country;
-	
 	public String street;
 	
 	public String number;
@@ -27,10 +25,9 @@ public class Address extends Model{
 	
 	public static Finder<Long, Address> find = new Finder<Long, Address>(Long.class, Address.class);
 	
-	public static void initialize(Long id, Locale country, String street, String number, String zipCode, String city){
+	public static void initialize(Long id, String street, String number, String zipCode, String city){
 		Address address = Address.find.byId(id);
-		
-		address.country = country;
+
 		address.street = street;
 		address.number = number;
 		address.zipCode = zipCode;
@@ -39,8 +36,16 @@ public class Address extends Model{
 		address.update();
 	}
 	
-	public static void create(Address address){
+	public static Address create(){
+		Address address = new Address();
+		
 		address.save();
+		
+		return address;
+	}
+	
+	public String getAddress(){
+		return street + " " + number;
 	}
 
 }

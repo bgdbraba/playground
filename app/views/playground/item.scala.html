@@ -1,0 +1,13 @@
+@(playground: models.playground.Playground)
+
+<!-- Header: ID | Name | City | Zipcode | Address -->
+
+<tr>
+
+	<td><a href="@routes.PlaygroundController.showDetails(playground.id)">@playground.id</a></td>
+	<td>@playground.name</td>
+	<td>@playground.address.city</td>
+	<td>@playground.address.zipCode</td>
+	<td>@playground.address.getAddress()</td>
+
+</tr>

@@ -1,4 +1,6 @@
-@views.html.subnavbar{
-<!-- empty content -->
+@import conf._
 
+@views.html.subnavbar{
+	<li><a href="@routes.OrganizerController.showOrganizers()" >@MyMessages.get("organizerManagement")</a></li>
+	<li><a href="@routes.PlaygroundController.showPlaygrounds()" >@MyMessages.get("playgroundManagement")</a></li>
 }

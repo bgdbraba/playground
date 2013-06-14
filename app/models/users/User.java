@@ -75,7 +75,7 @@ public class User extends Model{
     }
 	
     public static boolean is(String id, UserType t) {
-    	return find.where().eq("id", id).eq("userType", t.toString().toLowerCase()).findRowCount() > 0;
+    	return find.where().eq("id", id).eq("utype", t.toString().toLowerCase()).findRowCount() > 0;
     }
 
 	public UserForm toUserForm() {

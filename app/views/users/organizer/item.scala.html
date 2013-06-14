@@ -1,0 +1,10 @@
+@(organizer: models.users.Organizer)
+
+<!-- Header: ID | full name | email | detailed view button -->
+<tr>
+	<td><a href="@routes.OrganizerController.showDetails(organizer.id)">@organizer.id</a></td>
+	<td>@organizer.firstName</td>
+	<td>@organizer.lastName</td>
+	<td>@organizer.email</td>
+	<td>@organizer.phone</td>
+</tr>

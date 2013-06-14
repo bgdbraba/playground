@@ -19,12 +19,31 @@ public class Playground extends Model{
 	@OneToOne
 	public Address address;
 	
+	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
+	
 	public static Playground create(){
 		Playground playground = new Playground();
 		
 		playground.save();
 		
 		return playground;
+	}
+	
+	public static void initialize(Long playgroundId, String name){
+		Playground playground = Playground.find.byId(playgroundId);
+		
+		playground.name = name;
+		
+		playground.update();
+	}
+	
+	public static void addAddress(Long playgroundId, Long addressId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Address address = Address.find.byId(addressId);
+		
+		playground.address = address;
+		
+		playground.update();
 	}
 
 }
