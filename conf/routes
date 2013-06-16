@@ -17,6 +17,9 @@ POST	/login						controllers.Application.authenticate()
 # Language
 GET		/changeLanguage/:code		controllers.Application.setLanguage(code: String)
 
+# Password generation
+GET		/register/generate/password				controllers.Application.getGeneratedPassword()
+
 # User management
 GET 	/profile					controllers.UserController.profile()
 POST	/profile					controllers.UserController.editUser()

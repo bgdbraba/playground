@@ -14,7 +14,7 @@
 }
 
 	<div class="actions">
-			<a href="@routes.OrganizerController.linkPlaygroundPage(organizer.id)" class="btn btn-success">@MyMessages.get("link.playgound")</a>
+			<a href="@routes.OrganizerController.linkPlaygroundPage(organizer.id)" class="btn btn-success">@MyMessages.get("link.playground")</a>
 			@if(organizer.active) {
 				<a href="@routes.OrganizerController.deactivate(organizer.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
 			}else{

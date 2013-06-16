@@ -36,7 +36,7 @@
         }
       }
       
-            #wrap > .container {
+      #wrap > .container {
         padding-top: 60px;
       }
       .container .credit {
@@ -47,3 +47,39 @@
     body {
         padding-top: 0;
     }
+}
+
+.subnav {
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .subnav {
+        position: static;
+        top: auto;
+        z-index: auto;
+        width: auto;
+        height: auto;
+    }
+    .subnav .nav > li {
+        float: none;
+    }
+}
+@media (min-width: 980px) {
+  .subnav-fixed {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 1020;
+  }
+ .subnav-fixed .nav {
+    width: 938px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1210px) {
+  .subnav-fixed .nav {
+    width: 1168px;
+  }
+}
+ 

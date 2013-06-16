@@ -9,6 +9,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import conf.LanguageSettings;
+import conf.PasswordGenerator;
 
 public class Application extends Controller {
   	
@@ -50,6 +51,11 @@ public class Application extends Controller {
 		return ok();
 	}  
 	
+	public static Result getGeneratedPassword() {
+		return ok(PasswordGenerator.generate());
+	}
+
+	
 	/**
 	 * This method is used for setting up the correct javascriptroutes.
 	 * 
@@ -58,6 +64,7 @@ public class Application extends Controller {
 	public static Result javascriptRoutes() {
 		response().setContentType("text/javascript");
 		return ok(Routes.javascriptRouter("jsRoutes",
-				routes.javascript.Application.setLanguage()));
+				routes.javascript.Application.setLanguage(),
+				routes.javascript.Application.getGeneratedPassword()));
 	}
 }

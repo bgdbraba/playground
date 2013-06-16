@@ -57,7 +57,7 @@ public class User extends Model{
 	public static void activate(String id){
 		User user = User.find.byId(id);
 		
-		user.active = false;
+		user.active = true;
 		
 		user.update();
 	}
@@ -65,7 +65,7 @@ public class User extends Model{
 	public static void deactivate(String id){
 		User user = User.find.byId(id);
 		
-		user.active = true;
+		user.active = false;
 		
 		user.update();
 	}

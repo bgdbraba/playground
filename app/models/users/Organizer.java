@@ -6,10 +6,12 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
+import conf.DateConverter;
 import conf.Language;
 
 import models.playground.Playground;
 import models.users.enums.Gender;
+import models.users.forms.OrganizerForm;
 
 @Entity
 @DiscriminatorValue("organizer")
@@ -72,6 +74,23 @@ public class Organizer extends User{
 		}
 		
 		return result;
+	}
+
+	public OrganizerForm toForm() {
+		OrganizerForm form = new OrganizerForm();
+		
+		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+		form.email = email;
+		form.firstName = firstName;
+		form.lastName = lastName;
+		form.gender = gender;
+		form.id = id;
+		form.language = language;
+		form.password1 = password;
+		form.password2 = password;
+		form.phone = phone;
+		
+		return form;
 	}
 	
 }

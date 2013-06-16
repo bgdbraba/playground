@@ -2,6 +2,7 @@ package controllers;
 
 import models.playground.forms.LinkPlaygroundForm;
 import models.users.Organizer;
+import models.users.User;
 import models.users.forms.OrganizerForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -22,7 +23,14 @@ public class OrganizerController extends Controller{
 	}
 	
 	public static Result showDetails(String id){
-		return TODO;
+		if (Secured.isAdmin()) {
+			Organizer organizer = Organizer.find.byId(id);
+			OrganizerForm editForm = organizer.toForm();
+			return ok(views.html.users.organizer.details.render(organizer,
+					Form.form(OrganizerForm.class).fill(editForm)));
+		} else {
+			return forbidden();
+		}
 	}
 	
 	public static Result registerOrganizer(){
@@ -57,7 +65,9 @@ public class OrganizerController extends Controller{
 	
 	public static Result linkPlaygroundPage(String organizerId) {
 		if (Secured.isAdmin()) {
-			return TODO;
+			Organizer organizer = Organizer.find.byId(organizerId);
+			return ok(views.html.users.organizer.linkPlayground.render(organizer,
+					Form.form(LinkPlaygroundForm.class)));
 		} else {
 			return forbidden();
 		}
@@ -89,7 +99,8 @@ public class OrganizerController extends Controller{
 
 	public static Result deactivate(String organizerId) {
 		if (Secured.isAdmin()) {
-			return TODO;
+			User.deactivate(organizerId);
+			return redirect(routes.OrganizerController.showDetails(organizerId));
 		} else {
 			return forbidden();
 		}
@@ -97,7 +108,8 @@ public class OrganizerController extends Controller{
 
 	public static Result activate(String organizerId) {
 		if (Secured.isAdmin()) {
-			return TODO;
+			User.activate(organizerId);
+			return redirect(routes.OrganizerController.showDetails(organizerId));
 		} else {
 			return forbidden();
 		}
