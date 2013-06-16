@@ -1,5 +1,8 @@
 package models.playground;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -44,6 +47,14 @@ public class Playground extends Model{
 		playground.address = address;
 		
 		playground.update();
+	}
+	
+	public static Map<String,String> options() {
+		Map<String,String> options = new HashMap<String,String>();
+		for(Playground playground : find.all()) {
+			options.put(playground.id.toString(), playground.name + ", " + playground.address.city);
+		}
+		return options;
 	}
 
 }

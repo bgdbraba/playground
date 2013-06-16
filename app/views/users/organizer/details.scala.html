@@ -1,0 +1,34 @@
+@(organizer: models.users.Organizer)(organizerForm: Form[models.users.forms.OrganizerForm])
+
+@import conf._
+
+@views.html.main.main(MyMessages.get("teacher.details")) {
+
+	@flashConfirm(MyMessages.get("fail"), MyMessages.get("organizer.edit.success"))
+
+	<h1>@organizer.lastName, @organizer.firstName</h1>
+@views.html.detailslist{
+
+			<dt>@MyMessages.get("id")</dt>
+			<dd>@organizer.id</dd>
+}
+
+	<div class="actions">
+			<a href="@routes.OrganizerController.linkPlaygroundPage(organizer.id)" class="btn btn-success">@MyMessages.get("link.playgound")</a>
+			@if(organizer.active) {
+				<a href="@routes.OrganizerController.deactivate(organizer.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
+			}else{
+				<a href="@routes.OrganizerController.activate(organizer.id)" class="btn btn-success">@MyMessages.get("activate")</a>
+			}
+	</div>
+
+	<hr>
+	
+	<div class="actions">
+		@modalForm(MyMessages.get("edit"), "organizerModal", MyMessages.get("edit")) {
+			@editForm(organizerForm)
+		}
+		<a href="@routes.OrganizerController.showOrganizers()" class="btn">@Messages("go.back")</a>
+	</div>
+
+}

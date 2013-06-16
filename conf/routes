@@ -22,10 +22,14 @@ GET 	/profile					controllers.UserController.profile()
 POST	/profile					controllers.UserController.editUser()
 
 # Organizer management
-GET		/organizers					controllers.OrganizerController.showOrganizers()
-POST	/organizers					controllers.OrganizerController.registerOrganizer()
-GET		/organizers/:id				controllers.OrganizerController.showDetails(id: String)
-POST	/organizers/:id/details		controllers.OrganizerController.editOrganizer(id: String)
+GET		/organizers											controllers.OrganizerController.showOrganizers()
+POST	/organizers											controllers.OrganizerController.registerOrganizer()
+GET		/organizers/:id/details								controllers.OrganizerController.showDetails(id: String)
+POST	/organizers/:id/details								controllers.OrganizerController.editOrganizer(id: String)
+GET		/organizers/deactivate/:organizerId    				controllers.OrganizerController.deactivate(organizerId: String)
+GET		/organizers/activate/:organizerId    				controllers.OrganizerController.activate(organizerId: String)
+GET		/organizers/:organizerId/linkPlayground				controllers.OrganizerController.linkPlaygroundPage(organizerId: String)
+POST	/organizers/:organizerId/linkPlayground				controllers.OrganizerController.linkPlaygroundToOrganizer(organizerId: String)
 
 # School management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()

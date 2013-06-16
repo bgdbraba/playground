@@ -1,0 +1,24 @@
+@(organizer: models.users.Organizer)(linkPlaygroundForm: Form[models.playground.forms.LinkPlaygroundForm])
+
+@import conf._
+@import helper._
+
+@main.main(MyMessages.get("link.playground")) {
+
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+
+	<h1>@organizer.lastName, @organizer.firstName</h1>
+	
+	<h3>@MyMessages.get("teacher.linked.to"):</h3>
+	
+	<p>	
+		@views.html.playground.list(organizer.playgrounds)
+	</p>	
+
+	<div class="actions">
+		@modalForm(MyMessages.get("link.playground"), "linkPlaygroundModal", MyMessages.get("link.playground")) {
+			@linkForm(organizer.id, linkPlaygroundForm)
+		}
+		<a href="@routes.OrganizerController.showDetails(organizer.id)" class="btn">@MyMessages.get("go.back")</a>
+	</div>
+}

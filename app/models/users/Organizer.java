@@ -59,4 +59,19 @@ public class Organizer extends User{
 		
 		return Organizer.find.byId(id);
 	}
+	
+	public static boolean alreadyHasPlayground(String organizerId, Long playgroundId) {
+		boolean result = false;
+		
+		Organizer organizer = Organizer.find.byId(organizerId);
+		
+		for(Playground playground : organizer.playgrounds){
+			if(playgroundId == playground.id){
+				result = true;
+			}
+		}
+		
+		return result;
+	}
+	
 }
