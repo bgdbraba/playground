@@ -1,13 +1,14 @@
 package models.users.forms;
 
-import models.users.User;
+import models.users.Organizer;
 import models.users.enums.Gender;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
+import conf.IdGenerator;
 import conf.Language;
 
-public class UserForm {
+public class OrganizerForm {
 	
 	public String id;
 	
@@ -39,9 +40,16 @@ public class UserForm {
 	@Pattern(value="^[0-9]+$")
 	public String phone;
 	
-	public void update(String userId){
+	public Organizer submit() {
+		id = IdGenerator.generateUnique(firstName, lastName);
 		
-		User.initializeUser(id, password1, dateOfBirth, firstName, lastName, gender, language, email,   phone);
-	
+		Organizer organizer = Organizer.create(id,password1,language,firstName, lastName ,dateOfBirth, gender, email, phone);
+		
+		return organizer;
 	}
+
+	public void update(){
+		Organizer.update(id,password1,language,firstName,lastName, dateOfBirth,gender,email,phone);
+	}
+
 }

@@ -4,6 +4,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import conf.Language;
+
+import models.users.enums.Gender;
 import models.users.information.Address;
 
 @Entity
@@ -35,5 +38,39 @@ public class Child extends User{
 	
 	public static void remove(String id){
 		find.ref(id).delete();
+	}
+	
+	public static void update(String id, String password, Language language,
+			String firstName, String lastName, String dateOfBirth,
+			Gender gender, String email, String phone) {
+		
+		User.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
+		
+		
+		// other child options update
+		
+		Child child = Child.find.byId(id);
+		
+		child.notPayed = 0;
+		
+		// ..... so forth and so on
+		
+		
+		
+	}
+
+	public static Child create(String id, String password,
+			Language language, String firstName, String lastName,
+			String dateOfBirth, Gender gender, String email, String phone) {
+		
+		Child child = new Child();
+		
+		child.id = id;
+		
+		child.save();
+		
+		Child.update(id, password, language, firstName, lastName, dateOfBirth, gender, email, phone);
+		
+		return Child.find.byId(id);
 	}
 }

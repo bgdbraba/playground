@@ -23,7 +23,9 @@ POST	/profile					controllers.UserController.editUser()
 
 # Organizer management
 GET		/organizers					controllers.OrganizerController.showOrganizers()
+POST	/organizers					controllers.OrganizerController.registerOrganizer()
 GET		/organizers/:id				controllers.OrganizerController.showDetails(id: String)
+POST	/organizers/:id/details		controllers.OrganizerController.editOrganizer(id: String)
 
 # School management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()

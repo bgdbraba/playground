@@ -1,0 +1,17 @@
+@(organizers: List[models.users.Organizer])(organizerForm: Form[models.users.forms.OrganizerForm])
+
+@import conf._
+
+@views.html.main.main(MyMessages.get("organizerManagement")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("organizers.success"))
+	
+	<h1>@MyMessages.get("organizerManagement")</h1>
+
+	@list(organizers)
+	
+	@modalForm(MyMessages.get("organizers.add"), "organizerModal", MyMessages.get("organizers.add")) {
+		@addForm(organizerForm)
+	}
+	
+}

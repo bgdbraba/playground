@@ -1,0 +1,53 @@
+@(organizerForm: Form[models.users.forms.OrganizerForm]) 
+
+@import conf._
+@import models.users.enums._
+@import helper._
+@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@form(routes.OrganizerController.registerOrganizer()) {
+
+<fieldset>
+
+	@inputText(organizerForm("firstName"), '_label -> MyMessages.get("firstName"))
+
+	@inputText(organizerForm("lastName"), '_label -> MyMessages.get("lastName"))
+	
+	@inputText(organizerForm("password1"), '_label -> MyMessages.get("password"))
+	
+	<p>
+		<a href="#" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
+	</p>
+	
+	<hr>
+
+	@inputRadioGroup(
+		organizerForm("gender"),
+		options(Gender.options()), 
+		'_label -> MyMessages.get("gender")
+	)
+
+	<hr>
+	
+	@inputText(organizerForm("dateOfBirth"), '_label -> MyMessages.get("dateOfBirth"), 'placeholder -> MyMessages.get("date.help"))
+	
+	<hr>
+	
+	@inputRadioGroup(
+		organizerForm("language"), 
+		options(Language.options()), 
+		'_label -> MyMessages.get("language")
+	)
+	
+	<hr>
+	
+	@input(organizerForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
+		<input id="email" type="email" name="@name" value="@value">
+	} 
+
+	@inputText(organizerForm("phone"), '_label -> MyMessages.get("phone"))
+
+</fieldset>
+
+}

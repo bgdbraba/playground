@@ -4,6 +4,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
+import conf.Language;
+
+import models.users.enums.Gender;
 import models.users.information.Address;
 
 @Entity
@@ -35,7 +38,32 @@ public class Animator extends User{
 		
 		animator.update();
 	}
-	
+
+	public static void update(String id, String password, Language language,
+			String firstName, String lastName, String dateOfBirth,
+			Gender gender, String email, String phone) {
+		
+		User.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
+		
+		
+		// update animator stuff here
+		
+	}
+
+	public static Animator create(String id, String password,
+			Language language, String firstName, String lastName,
+			String dateOfBirth, Gender gender, String email, String phone) {
+		
+		Animator animator = new Animator();
+		
+		animator.id = id;
+		
+		animator.save();
+		
+		Animator.update(id, password, language, firstName, lastName, dateOfBirth, gender, email, phone);
+		
+		return Animator.find.byId(id);
+	}
 	
 	
 
