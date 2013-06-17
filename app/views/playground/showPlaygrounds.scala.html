@@ -8,8 +8,11 @@
 	
 	@views.html.playground.list(playgrounds)
 	
-	@modalForm(MyMessages.get("playground.add"), "playgroundModal", MyMessages.get("playground.add")) {
-		@addForm(playgroundForm)
+	<hr>
+	
+	@actions{
+		@modalForm(MyMessages.get("playground.add"), "playgroundModal", MyMessages.get("playground.add")) {
+			@addForm(playgroundForm)
+		}
 	}
-		
 }

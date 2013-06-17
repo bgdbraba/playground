@@ -15,21 +15,21 @@
 			<dd>@organizer.playground.name</dd>
 	}
 
-	<div class="actions">
+	@actions{
 			@if(organizer.active) {
 				<a href="@routes.OrganizerController.deactivate(organizer.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
 			}else{
 				<a href="@routes.OrganizerController.activate(organizer.id)" class="btn btn-success">@MyMessages.get("activate")</a>
 			}
-	</div>
+	}
 
 	<hr>
 	
-	<div class="actions">
+	@actions{
 		@modalForm(MyMessages.get("edit"), "organizerModal", MyMessages.get("edit")) {
 			@editForm(organizerForm)
 		}
 		<a href="@routes.OrganizerController.showOrganizers()" class="btn">@Messages("go.back")</a>
-	</div>
+	}
 
 }

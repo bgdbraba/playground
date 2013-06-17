@@ -4,19 +4,19 @@
 
 <html>
 
-@views.html.head(title)
+@head(title)
 
 <body>
 	<div id="wrap">
 		<!-- necessary for sticky footer. wrap all content except footer -->
 
 		<!-- main navigation bar -->
-		@views.html.navbar()
+		@navbar()
 
 		<div class="container">
 		
 		<!-- Sidebar -->
-				@views.html.subnav()
+				@subnav()
 
 			@content
 
@@ -29,9 +29,9 @@
 	</div><!-- wrap ends here -->
 	
 	<!-- footer -->
-	@views.html.footer()
+	@footer()
 	
-	@views.html.scriptsAfter()
+	@scriptsAfter()
 	
 </body>
 </html>

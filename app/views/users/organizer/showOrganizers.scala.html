@@ -8,8 +8,9 @@
 
 	@list(organizers)
 	
-	@modalForm(MyMessages.get("organizers.add"), "organizerModal", MyMessages.get("organizers.add")) {
-		@addForm(organizerForm)
+	@actions{
+		@modalForm(MyMessages.get("organizers.add"), "organizerModal", MyMessages.get("organizers.add")) {
+			@addForm(organizerForm)
+		}
 	}
-	
 }
