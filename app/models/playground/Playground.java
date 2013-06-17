@@ -32,6 +32,9 @@ public class Playground extends Model{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Formula> formulas;
 	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<Role> roles;
+	
 	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
 	
 	public static Playground create(){
@@ -67,14 +70,14 @@ public class Playground extends Model{
 		return options;
 	}
 	
-//	public static void addGroup(Long playgroundId, Long groupId){
-//		Playground playground = Playground.find.byId(playgroundId);
-//		Group group = Group.find.byId(groupId);
-//		
-//		playground.groups.add(group);
-//		
-//		playground.update();
-//	}
+	public static void addRole(Long playgroundId, Long roleId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Role role = Role.find.byId(roleId);
+		
+		playground.roles.add(role);
+		
+		playground.update();
+	}
 	
 	public static void addOrganizer(Long playgroundId, String organizerId){
 		Playground playground = Playground.find.byId(playgroundId);
