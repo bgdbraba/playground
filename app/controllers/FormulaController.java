@@ -26,8 +26,13 @@ public class FormulaController extends Controller{
 				flash("fail", "register.formula.fail");
 				return badRequest(views.html.playground.formula.showFormulas.render(playground.formulas, filledForm));
 			} else {
-				filledForm.get().submit();
-				flash("success", "register.formula.success");
+				flash("success", "register.formula.success");			
+				
+				FormulaForm formulaForm = filledForm.get();
+				formulaForm.playgroundId = playground.id;
+				
+				formulaForm.submit();
+				
 				return redirect(routes.FormulaController.showFormulas());
 			}
 			
