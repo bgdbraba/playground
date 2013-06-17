@@ -1,13 +1,18 @@
 package models.playground;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.Formula;
+import models.users.Organizer;
 import models.users.information.Address;
 import play.db.ebean.Model;
 
@@ -21,6 +26,15 @@ public class Playground extends Model{
 	
 	@OneToOne
 	public Address address;
+	
+	@OneToMany(cascade=CascadeType.PERSIST,mappedBy="playground")
+	public List<Group> groups;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<Organizer> organizers;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<Formula> formulas;
 	
 	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
 	
@@ -55,6 +69,33 @@ public class Playground extends Model{
 			options.put(playground.id.toString(), playground.name + ", " + playground.address.city);
 		}
 		return options;
+	}
+	
+//	public static void addGroup(Long playgroundId, Long groupId){
+//		Playground playground = Playground.find.byId(playgroundId);
+//		Group group = Group.find.byId(groupId);
+//		
+//		playground.groups.add(group);
+//		
+//		playground.update();
+//	}
+	
+	public static void addOrganizer(Long playgroundId, String organizerId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Organizer organizer = Organizer.find.byId(organizerId);
+		
+		playground.organizers.add(organizer);
+		
+		playground.update();
+	}
+	
+	public static void addFormula(Long playgroundId, Long formulaId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Formula formula = Formula.find.byId(formulaId);
+		
+		playground.formulas.add(formula);
+		
+		playground.update();
 	}
 
 }

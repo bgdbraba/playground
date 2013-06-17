@@ -4,21 +4,20 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-
-import conf.DateConverter;
-import conf.Language;
+import javax.persistence.ManyToOne;
 
 import models.playground.Playground;
 import models.users.enums.Gender;
 import models.users.forms.OrganizerForm;
+import conf.DateConverter;
+import conf.Language;
 
 @Entity
 @DiscriminatorValue("organizer")
 public class Organizer extends User{
 	
-	@ManyToMany
-	public List<Playground> playgrounds;
+	@ManyToOne
+	public Playground playground;
 	
 	public static Finder<String, Organizer> find = new Finder<String, Organizer>(String.class, Organizer.class);
 
@@ -30,14 +29,10 @@ public class Organizer extends User{
 		Organizer organizer = Organizer.find.byId(organizerId);
 		Playground playground = Playground.find.byId(playgroundId);
 		
-		organizer.playgrounds.add(playground);
-		organizer.saveManyToManyAssociations("playgrounds");
+		organizer.playground = playground;
+		
+		organizer.update();
 	}
-	
-	public static List<Playground> getPlaygroundsOfOrganizer(String id){
-		return find.byId(id).playgrounds;
-	}
-
 
 	public static void update(String id, String password, Language language,
 			String firstName, String lastName, String dateOfBirth,
@@ -63,17 +58,7 @@ public class Organizer extends User{
 	}
 	
 	public static boolean alreadyHasPlayground(String organizerId, Long playgroundId) {
-		boolean result = false;
-		
-		Organizer organizer = Organizer.find.byId(organizerId);
-		
-		for(Playground playground : organizer.playgrounds){
-			if(playgroundId == playground.id){
-				result = true;
-			}
-		}
-		
-		return result;
+		return Organizer.find.byId(organizerId).playground != null;
 	}
 
 	public OrganizerForm toForm() {
