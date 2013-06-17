@@ -1,0 +1,16 @@
+@(formulas: List[models.playground.Formula])(formulaForm: Form[models.playground.forms.FormulaForm])
+
+@main(MyMessages.get("formula.management")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("formula.management")</h1>
+
+	@list(formulas)
+	
+	@actions{
+		@modalForm(MyMessages.get("formula.add"), "formulaModal", MyMessages.get("formula.add")) {
+			@addForm(formulaForm)
+		}
+	}
+}

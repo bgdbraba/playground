@@ -17,7 +17,9 @@ public class FormulaForm {
 	public Long playgroundId;
 	
 	public void submit(){
-		Formula.create();
+		Formula formula = Formula.create();
+		
+		id = formula.id;
 		
 		update();
 	}

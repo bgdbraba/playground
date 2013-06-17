@@ -41,6 +41,8 @@ POST	/playgrounds/:id/details								controllers.PlaygroundController.editPlaygr
 # Formula management
 GET		/formulas						controllers.FormulaController.showFormulas()
 POST	/formulas						controllers.FormulaController.registerFormula()
+GET		/formulas/:id/details			controllers.FormulaController.showDetails(id: Long)
+POST	/formulas/:id/details			controllers.FormulaController.editFormula(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
