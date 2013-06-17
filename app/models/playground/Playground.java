@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import models.Formula;
 import models.users.Organizer;
 import models.users.information.Address;
 import play.db.ebean.Model;

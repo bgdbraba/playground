@@ -1,11 +1,10 @@
-package models;
+package models.playground;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import models.playground.Playground;
 
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
