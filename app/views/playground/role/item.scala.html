@@ -1,0 +1,8 @@
+@(role: models.playground.Role)
+
+<tr>
+	<td><a href="@routes.RoleController.showDetails(role.id)">@role.id</a></td>
+	<td>@role.name</td>
+	<td>@role.beginAge</td>
+	<td>@role.endAge</td>
+</tr>

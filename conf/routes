@@ -44,6 +44,12 @@ POST	/formulas						controllers.FormulaController.registerFormula()
 GET		/formulas/:id/details			controllers.FormulaController.showDetails(id: Long)
 POST	/formulas/:id/details			controllers.FormulaController.editFormula(id: Long)
 
+# Formula management
+GET		/roles						controllers.RoleController.showRoles()
+POST	/roles						controllers.RoleController.registerRole()
+GET		/roles/:id/details			controllers.RoleController.showDetails(id: Long)
+POST	/roles/:id/details			controllers.RoleController.editRole(id: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 

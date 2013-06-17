@@ -1,0 +1,18 @@
+@(roles: List[models.playground.Role])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("name")</th>
+		<th>@MyMessages.get("beginAge")</th>
+		<th>@MyMessages.get("endAge")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@for(role <- roles) {
+		@item(role)
+	}
+	</tbody>
+}

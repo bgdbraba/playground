@@ -1,0 +1,16 @@
+@(roles: List[models.playground.Role])(roleForm: Form[models.playground.forms.RoleForm])
+
+@main(MyMessages.get("role.management")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("role.management")</h1>
+
+	@list(roles)
+	
+	@actions{
+		@modalForm(MyMessages.get("role.add"), "roleModal", MyMessages.get("role.add")) {
+			@addForm(roleForm)
+		}
+	}
+}
