@@ -1,6 +1,5 @@
 package controllers;
 
-import models.playground.forms.LinkPlaygroundForm;
 import models.users.Organizer;
 import models.users.User;
 import models.users.forms.OrganizerForm;
@@ -61,40 +60,6 @@ public class OrganizerController extends Controller{
 	
 	public static Result editOrganizer(String id){
 		return TODO;
-	}
-	
-	public static Result linkPlaygroundPage(String organizerId) {
-		if (Secured.isAdmin()) {
-			Organizer organizer = Organizer.find.byId(organizerId);
-			return ok(views.html.users.organizer.linkPlayground.render(organizer,
-					Form.form(LinkPlaygroundForm.class)));
-		} else {
-			return forbidden();
-		}
-	}
-
-	public static Result linkPlaygroundToOrganizer(String organizerId) {
-		if (Secured.isAdmin()) {
-			Form<LinkPlaygroundForm> filledForm = Form.form(LinkPlaygroundForm.class).bindFromRequest();
-			if (filledForm.hasErrors()) {
-				flash("fail", "");
-				return badRequest(views.html.users.organizer.linkPlayground.render(Organizer.find.byId(organizerId), filledForm));
-				
-			} else if (Organizer.alreadyHasPlayground(organizerId,filledForm.get().playgroundId)) {
-				flash("fail", "");
-				return badRequest(views.html.users.organizer.linkPlayground.render(Organizer.find.byId(organizerId), filledForm));
-				
-			} else {
-				LinkPlaygroundForm form = filledForm.get();
-				form.organizerId = organizerId;
-				form.submit();
-				flash("success", "");
-				
-				return redirect(routes.OrganizerController.linkPlaygroundPage(organizerId));
-			}
-		} else {
-			return forbidden();
-		}
 	}
 
 	public static Result deactivate(String organizerId) {

@@ -33,23 +33,32 @@ public class OrganizerForm {
 	@Required
 	public Gender gender;
 
+	@Required
 	@Constraints.Email
 	@Pattern(value="^[a-zA-Z0-9.!#$%&â€™*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$")
 	public String email;
 
+	@Required
 	@Pattern(value="^[0-9]+$")
 	public String phone;
+	
+	@Required
+	public Long playgroundId;
 	
 	public Organizer submit() {
 		id = IdGenerator.generateUnique(firstName, lastName);
 		
 		Organizer organizer = Organizer.create(id,password1,language,firstName, lastName ,dateOfBirth, gender, email, phone);
 		
+		Organizer.addPlayground(id, playgroundId);
+		
 		return organizer;
 	}
 
 	public void update(){
 		Organizer.update(id,password1,language,firstName,lastName, dateOfBirth,gender,email,phone);
+		
+		Organizer.addPlayground(id, playgroundId);
 	}
 
 }

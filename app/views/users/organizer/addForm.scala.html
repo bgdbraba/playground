@@ -47,6 +47,13 @@
 	} 
 
 	@inputText(organizerForm("phone"), '_label -> MyMessages.get("phone"))
+	
+	@select(
+		organizerForm("playgroundId"), 
+		options(models.playground.Playground.options()), 
+		'_label -> MyMessages.get("choose.playground"),
+		'_default -> MyMessages.get("choose.playground")
+	)
 
 </fieldset>
 

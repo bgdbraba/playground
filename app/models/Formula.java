@@ -24,7 +24,5 @@ public class Formula extends Model{
 	public Playground playground;
 
 	public static Finder<Long, Formula> find = new Finder<Long, Formula>(Long.class, Formula.class);
-	
-	
 
 }

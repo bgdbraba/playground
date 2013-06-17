@@ -27,9 +27,6 @@ public class Playground extends Model{
 	@OneToOne
 	public Address address;
 	
-	@OneToMany(cascade=CascadeType.PERSIST,mappedBy="playground")
-	public List<Group> groups;
-	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Organizer> organizers;
 	
