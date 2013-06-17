@@ -1,0 +1,12 @@
+@(animator: models.users.Animator)
+
+<!-- Header: ID | full name | email | detailed view button -->
+<tr>
+	<td><a href="@routes.AnimatorController.showDetails(animator.id)">@animator.id</a></td>
+	<td>@animator.firstName</td>
+	<td>@animator.lastName</td>
+	<td>@animator.email</td>
+	<td>@animator.phone</td>
+	<td>@animator.accountNumber</td>
+	<td>@MyMessages.get(animator.hasFollowedCourse.toString())</td>
+</tr>

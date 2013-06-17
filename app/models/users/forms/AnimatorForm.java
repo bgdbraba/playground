@@ -45,7 +45,7 @@ public class AnimatorForm {
 	public String phone;
 	
 	@Required
-	public boolean hasFollowedCourse;
+	public boolean hasFollowedCourse = false;
 	
 	@Required
 	public String accountNumber;

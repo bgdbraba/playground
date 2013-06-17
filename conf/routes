@@ -32,6 +32,11 @@ POST	/organizers/:id/details								controllers.OrganizerController.editOrganize
 GET		/organizers/deactivate/:organizerId    				controllers.OrganizerController.deactivate(organizerId: String)
 GET		/organizers/activate/:organizerId    				controllers.OrganizerController.activate(organizerId: String)
 
+# Animator management
+GET		/animators											controllers.AnimatorController.showAnimators()
+POST	/animators											controllers.AnimatorController.registerAnimator()
+GET		/animators/:id/details								controllers.AnimatorController.showDetails(id: String)
+
 # School management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()
 POST	/playgrounds											controllers.PlaygroundController.registerPlayground()

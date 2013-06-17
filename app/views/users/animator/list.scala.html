@@ -1,0 +1,21 @@
+@(animators: List[models.users.Animator])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("firstname")</th>
+		<th>@MyMessages.get("lastname")</th>
+		<th>@MyMessages.get("email")</th>
+		<th>@MyMessages.get("phone")</th>
+		<th>@MyMessages.get("accountNumber")</th>
+		<th>@MyMessages.get("followed.course")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@for(animator <- animators) {
+		@item(animator)
+	}
+	</tbody>
+}

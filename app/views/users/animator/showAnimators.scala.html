@@ -1,0 +1,16 @@
+@(animators: List[models.users.Animator])(animatorForm: Form[models.users.forms.AnimatorForm])
+
+@main(MyMessages.get("animator.management")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("animator.management")</h1>
+
+	@list(animators)
+	
+	@actions{
+		@modalForm(MyMessages.get("animators.add"), "animtorModal", MyMessages.get("animators.add")) {
+			@addForm(animatorForm)
+		}
+	}
+}
