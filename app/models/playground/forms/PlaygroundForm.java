@@ -41,7 +41,5 @@ public class PlaygroundForm {
 		Playground.addAddress(playground.id, address.id);
 		
 		update(playground.id);
-	}
-	
-	
+	}	
 }

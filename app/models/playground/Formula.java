@@ -45,7 +45,7 @@ public class Formula extends Model{
 		
 		formula.playground = playground;
 		
-		formula.save();
+		formula.update();
 	}
 
 }
