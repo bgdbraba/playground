@@ -1,4 +1,4 @@
-@import conf._
+@import models.users._
 
 <!-- Navigation bar -->
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,7 +30,7 @@
 					<!-- Profile -->
 	    			<li class="pull-right">
 			    		@if(session.containsKey("id")){   		
-			    			<a href="@routes.UserController.profile()"><i class="icon-user icon-white"></i> @session.get("id")</a>
+			    			<a href="@routes.UserController.profile()"><i class="icon-user icon-white"></i> @User.getName(session.get("id"))</a>
 			    		}
 	    			</li>
 	    			

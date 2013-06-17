@@ -1,8 +1,6 @@
 @(playgrounds: List[models.playground.Playground])(playgroundForm: Form[models.playground.forms.PlaygroundForm])
 
-@import conf._
-
-@views.html.main.main(MyMessages.get("playgroundManagement")) {
+@main(MyMessages.get("playgroundManagement")) {
 
 	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
 	

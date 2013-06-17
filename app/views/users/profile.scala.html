@@ -1,8 +1,5 @@
 @(user: models.users.User)(userForm: Form[models.users.forms.UserForm])
 
-@import conf._
-@import views.html.main._
-
 @main(MyMessages.get("profile")){
 	
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))

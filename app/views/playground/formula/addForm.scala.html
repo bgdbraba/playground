@@ -1,0 +1,23 @@
+@(formulaForm: Form[models.playground.forms.FormulaForm])
+
+@import helper._
+@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@form(routes.FormulaController.registerFormula()) {
+
+<fieldset>
+
+	<h4>@MyMessages.get("name")</h4>
+	@inputText(formulaForm("name"), '_label -> MyMessages.get("name"), '_help -> MyMessages.get("name"))
+	
+	<hr>
+    
+    <h4>@MyMessages.get("cost")</h4>
+	@inputText(formulaForm("cost"), '_label -> MyMessages.get("cost") , '_help -> MyMessages.get("cost"))
+	   
+    
+</fieldset>
+
+}
+

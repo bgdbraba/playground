@@ -14,14 +14,14 @@ import conf.PasswordGenerator;
 public class Application extends Controller {
   	
 	public static Result index() {
-        return ok(views.html.main.index.render());
+        return ok(views.html.index.render());
     }
 	
 	public static Result login() {
 		if (session().containsKey("id")) {
 			return redirect(routes.UserController.profile());
 		} else {
-			return ok(views.html.main.login.render(Form.form(Login.class)));
+			return ok(views.html.login.render(Form.form(Login.class)));
 		}
     }
 	
@@ -29,7 +29,7 @@ public class Application extends Controller {
 	public static Result authenticate() {
 		Form<Login> filledForm = Form.form(Login.class).bindFromRequest();
 		if (filledForm.hasErrors()) {
-			return badRequest(views.html.main.login.render(filledForm));
+			return badRequest(views.html.login.render(filledForm));
 		} else {
 			session().clear();
 			Login credentials = filledForm.get();

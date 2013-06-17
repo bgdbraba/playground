@@ -46,6 +46,12 @@ public class User extends Model{
 	
 	public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 	
+	public static String getName(String id){
+		User user = User.find.byId(id);
+		
+		return user.firstName + " " + user.lastName;
+	}
+	
 	public static User authenticate(String id, String password){
 		return find.where()
 				.eq("id",id)

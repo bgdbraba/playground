@@ -4,14 +4,14 @@
 
 <html>
 
-@views.html.main.head(title)
+@views.html.head(title)
 
 <body>
 	<div id="wrap">
 		<!-- necessary for sticky footer. wrap all content except footer -->
 
 		<!-- main navigation bar -->
-		@views.html.main.navbar()
+		@views.html.navbar()
 
 		<div class="container">
 		
@@ -29,9 +29,9 @@
 	</div><!-- wrap ends here -->
 	
 	<!-- footer -->
-	@views.html.main.footer()
+	@views.html.footer()
 	
-	@views.html.main.scriptsAfter()
-	<script src="@routes.Assets.at("javascripts/main.js")" type="text/javascript"></script>
+	@views.html.scriptsAfter()
+	
 </body>
 </html>

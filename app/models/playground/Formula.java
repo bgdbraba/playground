@@ -5,9 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @Entity
 public class Formula extends Model{
@@ -23,5 +21,31 @@ public class Formula extends Model{
 	public Playground playground;
 
 	public static Finder<Long, Formula> find = new Finder<Long, Formula>(Long.class, Formula.class);
+	
+	public static Formula create(){
+		Formula formula = new Formula();
+		
+		formula.save();
+		
+		return formula;
+	}
+	
+	public static void initialize(Long id, String name, double cost){
+		Formula formula = Formula.find.byId(id);
+		
+		formula.cost = cost;
+		formula.name = name;
+		
+		formula.update();
+	}
+	
+	public static void addPlayground(Long formulaId, Long playgroundId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Formula formula = Formula.find.byId(formulaId);
+		
+		formula.playground = playground;
+		
+		formula.save();
+	}
 
 }

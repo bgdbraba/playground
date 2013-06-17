@@ -1,8 +1,6 @@
 @(organizers: List[models.users.Organizer])(organizerForm: Form[models.users.forms.OrganizerForm])
 
-@import conf._
-
-@views.html.main.main(MyMessages.get("organizerManagement")) {
+@main(MyMessages.get("organizerManagement")) {
 	
 	@flashConfirm(MyMessages.get("fail"),MyMessages.get("organizers.success"))
 	

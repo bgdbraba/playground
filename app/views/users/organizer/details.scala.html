@@ -1,20 +1,19 @@
 @(organizer: models.users.Organizer)(organizerForm: Form[models.users.forms.OrganizerForm])
 
-@import conf._
-
-@views.html.main.main(MyMessages.get("teacher.details")) {
+@main(MyMessages.get("teacher.details")) {
 
 	@flashConfirm(MyMessages.get("fail"), MyMessages.get("organizer.edit.success"))
 
 	<h1>@organizer.lastName, @organizer.firstName</h1>
-@views.html.detailslist{
+
+	@detailslist{
 
 			<dt>@MyMessages.get("id")</dt>
 			<dd>@organizer.id</dd>
 			
 			<dt>@MyMessages.get("playground")</dt>
 			<dd>@organizer.playground.name</dd>
-}
+	}
 
 	<div class="actions">
 			@if(organizer.active) {

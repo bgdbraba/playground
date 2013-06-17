@@ -5,20 +5,20 @@
 		
 			@defining(User.find.byId(session.get("id"))){ user =>
 			
-			@if(user != null){
-				@if(user.is(UserType.ADMIN)) {
-						 @views.html.users.admin.subnavbar()
+				@if(user != null){
+					@if(user.is(UserType.ADMIN)) {
+							 @views.html.users.admin.subnavbar()
+					}
+					@if(user.is(UserType.ORGANIZER)) {
+							 @views.html.users.organizer.subnavbar()
+					}
+					@if(user.is(UserType.ANIMATOR)) {
+							 @views.html.users.admin.subnavbar()
+					}
+					@if(user.is(UserType.CHILD)) {
+							 @views.html.users.admin.subnavbar()
+					}
 				}
-				@if(user.is(UserType.ORGANIZER)) {
-						 @views.html.users.organizer.subnavbar()
-				}
-				@if(user.is(UserType.ANIMATOR)) {
-						 @views.html.users.admin.subnavbar()
-				}
-				@if(user.is(UserType.CHILD)) {
-						 @views.html.users.admin.subnavbar()
-				}
-			}
 			
 			
 			}

@@ -31,11 +31,16 @@ GET		/organizers/:id/details								controllers.OrganizerController.showDetails(
 POST	/organizers/:id/details								controllers.OrganizerController.editOrganizer(id: String)
 GET		/organizers/deactivate/:organizerId    				controllers.OrganizerController.deactivate(organizerId: String)
 GET		/organizers/activate/:organizerId    				controllers.OrganizerController.activate(organizerId: String)
+
 # School management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()
 POST	/playgrounds											controllers.PlaygroundController.registerPlayground()
 GET		/playgrounds/:id/details								controllers.PlaygroundController.showDetails(id: Long)
 POST	/playgrounds/:id/details								controllers.PlaygroundController.editPlayground(id: Long)
+
+# Formula management
+GET		/formulas						controllers.FormulaController.showFormulas()
+POST	/formulas						controllers.FormulaController.registerFormula()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
