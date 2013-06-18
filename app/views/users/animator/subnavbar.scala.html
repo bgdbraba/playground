@@ -1,4 +1,8 @@
-@views.html.subnavbar{
-<!-- empty content -->
+@import models.users._
 
+@views.html.subnavbar{
+	@if(Animator.find.byId(session.get("id")).administration){
+		<li><a href="@routes.ChildController.showChildren()" >@MyMessages.get("children.management")</a></li>
+	}
+	
 }

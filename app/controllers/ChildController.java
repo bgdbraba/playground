@@ -9,9 +9,11 @@ import models.users.forms.ChildForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import conf.DateConverter;
 import conf.MyMessages;
 
+@Security.Authenticated(Secured.class)
 public class ChildController extends Controller{
 	
 	public static Result registerChild(){

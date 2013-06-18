@@ -1,0 +1,14 @@
+@(animator: models.users.Animator)
+
+@import models.users._
+@import helper._
+@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@form(routes.AnimatorController.giveAdministration(animator.id)) {
+	@if(Animator.alreadyAdministrationInPlayground(animator.playground.id)){
+		<p>@MyMessages.get("administration.already.given") to @User.getName(Animator.hasAdministration(animator.playground.id).id)</p>
+	}else{
+		<p>@MyMessages.get("administration.confirmation")
+	}
+}

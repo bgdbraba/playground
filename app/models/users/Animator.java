@@ -7,8 +7,11 @@ import javax.persistence.OneToOne;
 
 import models.playground.Playground;
 import models.users.enums.Gender;
+import models.users.forms.AnimatorForm;
 import models.users.information.Address;
+import conf.DateConverter;
 import conf.Language;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("animator")
@@ -96,6 +99,59 @@ public class Animator extends User{
 		animator.administration = false;
 		
 		animator.update();
+	}
+
+	public AnimatorForm toAnimatorForm() {
+		AnimatorForm form = new AnimatorForm();
+		
+		form.id = id;
+		form.accountNumber = accountNumber;
+		form.firstName = firstName;
+		form.lastName = lastName;
+		form.language = language;
+		form.addressId = address.id;
+		form.city = address.city;
+		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+		form.email = email;
+		form.gender = gender;
+		form.hasFollowedCourse = hasFollowedCourse;
+		form.number = address.number;
+		form.password1 = password;
+		form.password2 = password;
+		form.phone = phone;
+		form.playgroundId = playground.id;
+		form.street = address.street;
+		form.zipCode = address.zipCode;
+		
+		return form;
+	}
+
+	public static boolean alreadyAdministrationInPlayground(Long playgroundId) {
+		Playground playground = Playground.find.byId(playgroundId);
+		
+		int i = 0;
+		
+		while(i < playground.animators.size() && !playground.animators.get(i).administration){
+			i++;
+		}
+		
+		return i != playground.animators.size();
+	}
+	
+	public static Animator hasAdministration(Long playgroundId){
+		if(!alreadyAdministrationInPlayground(playgroundId)){
+			return null;
+		}else{
+			Playground playground = Playground.find.byId(playgroundId);
+			
+			int i = 0;
+			
+			while(i < playground.animators.size() && !playground.animators.get(i).administration){
+				i++;
+			}
+			
+			return playground.animators.get(i);
+		}
 	}
 
 }

@@ -3,7 +3,7 @@
 @import models.users.enums._
 @import helper._
 @import helper.twitterBootstrap._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+@implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 @form(routes.ChildController.registerChild()) {
 
@@ -92,8 +92,8 @@
 	
 	@inputText(
 		childForm("doctor"), 
-		'_label -> MyMessages.get("accountNumber"),
-		'_help -> MyMessages.get("accountNumber.help")
+		'_label -> MyMessages.get("doctor"),
+		'_help -> MyMessages.get("doctor.help")
 	)
 	
 	@textarea(	
@@ -108,7 +108,8 @@
 	
 	@checkbox(
 		childForm("photographable"),
-		'_label -> MyMessages.get("photographable")
+		'_label -> MyMessages.get("photographable"),
+		'_value -> true
 	)
 </fieldset>
 

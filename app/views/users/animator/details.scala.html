@@ -20,10 +20,18 @@
 		}
 		
 		@if(animator.active){
-					<a href="@routes.AnimatorController.deactivate(animator.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
-				}else{
-					<a href="@routes.AnimatorController.activate(animator.id)" class="btn btn-success">@MyMessages.get("button.activate")</a>
-				}
+			<a href="@routes.AnimatorController.deactivate(animator.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
+		}else{
+			<a href="@routes.AnimatorController.activate(animator.id)" class="btn btn-success">@MyMessages.get("activate")</a>
+		}
+		
+		@if(animator.administration){
+			<a href="@routes.AnimatorController.takeAwayAdministration(animator.id)" class="btn btn-danger">@MyMessages.get("take.away.administration")</a>
+		}else{
+			@modalForm(MyMessages.get("give.administration"), "administrationModal", MyMessages.get("give.administration")) {
+				@views.html.users.animator.administrationForm(animator)
+			}
+		}
 				
 		<a href="@routes.AnimatorController.showAnimators()" class="btn">@MyMessages.get("go.back")</a>
 	

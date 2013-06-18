@@ -9,8 +9,6 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.DateConverter;
-import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class AnimatorController extends Controller{
@@ -43,7 +41,14 @@ public class AnimatorController extends Controller{
 	}
 	
 	public static Result showDetails(String id){
-		return TODO;
+		if (Secured.isOrganizer() && Secured.samePlayground(id) ) {
+			Animator animator = Animator.find.byId(id);
+			AnimatorForm editForm = animator.toAnimatorForm();
+			return ok(views.html.users.animator.details.render(animator,Form.form(AnimatorForm.class).fill(editForm)));
+		
+		} else {
+			return forbidden();
+		}
 	}
 	
 	public static Result showAnimators(){
@@ -59,16 +64,20 @@ public class AnimatorController extends Controller{
 	}
 	
 	public static Result giveAdministration(String animatorId){
-		if (Secured.isAnimator()) {
-			Animator.grantAdministration(animatorId);
-			return redirect(routes.AnimatorController.showDetails(animatorId));
+		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
+			if(Animator.alreadyAdministrationInPlayground(Animator.find.byId(animatorId).playground.id)){
+				return redirect(routes.AnimatorController.showDetails(animatorId));
+			}else{
+				Animator.grantAdministration(animatorId);
+				return redirect(routes.AnimatorController.showDetails(animatorId));
+			}
 		} else {
 			return forbidden();
 		}
 	}
 	
 	public static Result takeAwayAdministration(String animatorId){
-		if (Secured.isAnimator()) {
+		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
 			Animator.forbidAdministration(animatorId);
 			return redirect(routes.AnimatorController.showDetails(animatorId));
 		} else {
@@ -87,7 +96,7 @@ public class AnimatorController extends Controller{
 	}
 
 	public static Result activate(String animatorId) {
-		if (Secured.isAdmin()) {
+		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
 			User.activate(animatorId);
 			
 			return redirect(routes.AnimatorController.showDetails(animatorId));
