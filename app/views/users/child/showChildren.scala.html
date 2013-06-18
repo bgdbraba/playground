@@ -1,0 +1,16 @@
+@(children: List[models.users.Child])(childForm: Form[models.users.forms.ChildForm])
+
+@main(MyMessages.get("child.management")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("child.management")</h1>
+
+	@list(children)
+	
+	@actions{
+		@modalForm(MyMessages.get("children.add"), "childModal", MyMessages.get("children.add")) {
+			@addForm(childForm)
+		}
+	}
+}

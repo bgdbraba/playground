@@ -1,9 +1,12 @@
 package models.users.forms;
 
+import models.users.Child;
 import models.users.enums.Gender;
+import models.users.information.Address;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
+import conf.IdGenerator;
 import conf.Language;
 
 public class ChildForm {
@@ -66,6 +69,31 @@ public class ChildForm {
 	public Long playgroundId;
 	
 	public Long addressId;
+	
+	
+	public Child submit(){
+		id = IdGenerator.generateUnique(firstName, lastName);
+		
+		Address address = Address.create();
+		
+		addressId = address.id;
+		
+		Child child = Child.create(id);
+		
+		update();
+		
+		return child;
+		
+	}
+	
+	public void update(){
+		Address.initialize(addressId, street, number, zipCode, city);
+				
+		Child.update(id, password1, language, firstName, lastName, dateOfBirth, gender, email, phone, phoneWork, phoneAlt, receiveMail, photographable, remarks, doctor);
+		
+		Child.addAddress(id, addressId);
+		Child.addPlayground(id, playgroundId);
+	}
 	
 	
 

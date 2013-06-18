@@ -45,7 +45,7 @@ public class Address extends Model{
 	}
 	
 	public String getAddress(){
-		return street + " " + number;
+		return street + " " + number + " " + city;
 	}
 
 }

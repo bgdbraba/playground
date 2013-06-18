@@ -80,12 +80,12 @@ public class AnimatorForm {
 	}
 
 	public void update(){
-		Address.initialize(addressId, street, number, zipCode, city);
-		
-		Animator.update(id,password1,language,firstName,lastName, dateOfBirth,gender,email,phone, accountNumber, hasFollowedCourse);
-
-		Animator.addAddress(id, addressId);
-		Animator.addPlayground(id, playgroundId);
+			Address.initialize(addressId, street, number, zipCode, city);
+			
+			Animator.update(id,password1,language,firstName,lastName, dateOfBirth,gender,email,phone, accountNumber, hasFollowedCourse);
+	
+			Animator.addAddress(id, addressId);
+			Animator.addPlayground(id, playgroundId);
 	}
 
 }

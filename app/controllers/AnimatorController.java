@@ -3,6 +3,7 @@ package controllers;
 import models.playground.Playground;
 import models.users.Animator;
 import models.users.Organizer;
+import models.users.User;
 import models.users.forms.AnimatorForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -63,6 +64,24 @@ public class AnimatorController extends Controller{
 			
 			return ok(views.html.users.animator.showAnimators.render(playground.animators, Form.form(AnimatorForm.class)));
 		}else{
+			return forbidden();
+		}
+	}
+	
+	public static Result giveAdministration(String animatorId){
+		if (Secured.isAnimator()) {
+			Animator.grantAdministration(animatorId);
+			return redirect(routes.AnimatorController.showDetails(animatorId));
+		} else {
+			return forbidden();
+		}
+	}
+	
+	public static Result takeAwayAdministration(String animatorId){
+		if (Secured.isAnimator()) {
+			Animator.forbidAdministration(animatorId);
+			return redirect(routes.AnimatorController.showDetails(animatorId));
+		} else {
 			return forbidden();
 		}
 	}

@@ -1,0 +1,12 @@
+@(child: models.users.Child)
+
+<!-- Header: ID | full name | email | detailed view button -->
+<tr>
+	<td><a href="@routes.ChildController.showDetails(child.id)">@child.id</a></td>
+	<td>@child.firstName</td>
+	<td>@child.lastName</td>
+	<td>@child.email</td>
+	<td>@child.phone</td>
+	<td>@child.address.getAddress()</td>
+	<td>@child.notPayed &euro;</td>
+</tr>
