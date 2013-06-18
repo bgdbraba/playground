@@ -1,16 +1,12 @@
 package models.users.forms;
 
-import models.users.Animator;
-import models.users.Organizer;
 import models.users.enums.Gender;
-import models.users.information.Address;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
-import conf.IdGenerator;
 import conf.Language;
 
-public class AnimatorForm {
+public class ChildForm {
 	
 	public String id;
 	
@@ -44,12 +40,6 @@ public class AnimatorForm {
 	public String phone;
 	
 	@Required
-	public boolean hasFollowedCourse = false;
-	
-	@Required
-	public String accountNumber;
-
-	@Required
 	public String street;
 	
 	@Required
@@ -61,31 +51,20 @@ public class AnimatorForm {
 	@Required
 	public String city;
 	
+	public String phoneWork;
+	
+	public String phoneAlt;
+	
+	public String doctor;
+	
+	public String remarks;
+	
+	public boolean receiveMail = true;
+	
+	public boolean photographable = true;
+	
 	public Long playgroundId;
 	
 	public Long addressId;
-	
-	public Animator submit() {
-		id = IdGenerator.generateUnique(firstName, lastName);
-		
-		Address address = Address.create();
-		
-		addressId = address.id;
-		
-		Animator animator = Animator.create(id);
-		
-		update();
-		
-		return animator;
-	}
-
-	public void update(){
-		Address.initialize(addressId, street, number, zipCode, city);
-		
-		Animator.update(id,password1,language,firstName,lastName, dateOfBirth,gender,email,phone, accountNumber, hasFollowedCourse);
-
-		Animator.addAddress(id, addressId);
-		Animator.addPlayground(id, playgroundId);
-	}
 
 }

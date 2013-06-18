@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.users.Animator;
+import models.users.Child;
 import models.users.Organizer;
 import models.users.information.Address;
 import play.db.ebean.Model;
@@ -38,6 +39,9 @@ public class Playground extends Model{
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Animator> animators;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<Child> children;
 	
 	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
 	
@@ -106,6 +110,15 @@ public class Playground extends Model{
 		Animator animator = Animator.find.byId(animatorId);
 		
 		playground.animators.add(animator);
+		
+		playground.update();
+	}
+	
+	public static void addChild(Long playgroundId, String childId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Child child = Child.find.byId(childId);
+		
+		playground.children.add(child);
 		
 		playground.update();
 	}

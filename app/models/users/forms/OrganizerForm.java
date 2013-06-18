@@ -27,7 +27,6 @@ public class OrganizerForm {
 	public String lastName;
 	
 	@Required
-	@Pattern(value="^[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]$")
 	public String dateOfBirth;
 	
 	@Required
