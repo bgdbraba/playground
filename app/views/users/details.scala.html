@@ -1,0 +1,27 @@
+@(user : models.users.User)
+
+@import models.users._
+
+<dt>@MyMessages.get("id")</dt>
+<dd>@user.id</dd>
+
+<dt>@MyMessages.get("firstName")</dt>
+<dd>@user.firstName</dd>
+
+<dt>@MyMessages.get("firstName")</dt>
+<dd>@user.firstName</dd>
+
+<dt>@MyMessages.get("gender")</dt>
+<dd>@MyMessages.get(user.gender.toString())</dd>
+
+<dt>@MyMessages.get("dateOfBirth")</dt>
+<dd>@user.getDateOfBirthAsString()</dd>
+
+<dt>@MyMessages.get("language")</dt>
+<dd>@MyMessages.get(user.language.toString())</dd>
+
+<dt>@MyMessages.get("email")</dt>
+<dd>@user.email</dd>
+
+<dt>@MyMessages.get("phone")</dt>
+<dd>@user.phone</dd>

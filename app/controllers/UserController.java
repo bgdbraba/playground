@@ -36,18 +36,7 @@ public class UserController extends Controller{
 		
 		if (!editedForm.field("password1").value().equals(editedForm.field("password2").value())) {
 			editedForm.reject("password2",MyMessages.get("password.mismatch"));
-		}
-		
-		long date = DateConverter.isCorrectDateOfBirth(editedForm.field("dateOfBirth").value());
-		
-		if (date == -1) {
-			editedForm.reject("dateOfBirth", MyMessages.get("form.date.notadate"));
-		} else if (date == -2) {
-			editedForm.reject("dateOfBirth", MyMessages.get("form.date.toobig"));
-		} else if (date == -3) {
-			editedForm.reject("dateOfBirth", MyMessages.get("form.date.toosmall"));
-		}
-		
+		}	
 		
 		if (editedForm.hasErrors()) {
 			flash("fail", "edit.fail");

@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class DateConverter {
 
-	public static SimpleDateFormat formatBirth = new SimpleDateFormat("dd/MM/yyyy");
+	public static SimpleDateFormat formatBirth = new SimpleDateFormat("dd-MM-yyyy");
 
 	public static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 

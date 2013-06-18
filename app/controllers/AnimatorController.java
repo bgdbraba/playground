@@ -24,16 +24,6 @@ public class AnimatorController extends Controller{
 			
 			Form<AnimatorForm> filledForm = Form.form(AnimatorForm.class).bindFromRequest();
 		
-			long date = DateConverter.isCorrectDateOfBirth(filledForm.field("dateOfBirth").value());
-			
-			if (date == -1) {
-				filledForm.reject("dateOfBirth",MyMessages.get("date.notadate"));
-			} else if (date == -2) {
-				filledForm.reject("dateOfBirth",MyMessages.get("date.toobig"));
-			} else if (date == -3) {
-				filledForm.reject("dateOfBirth", MyMessages.get("date.toosmall"));
-			}
-
 			if (filledForm.hasErrors()) {
 				flash("fail", "register.animator.fail");
 				return badRequest(views.html.users.animator.showAnimators.render(playground.animators, filledForm));
@@ -85,5 +75,30 @@ public class AnimatorController extends Controller{
 			return forbidden();
 		}
 	}
+	
+	public static Result deactivate(String animatorId) {
+		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
+			User.deactivate(animatorId);
+			
+			return redirect(routes.AnimatorController.showDetails(animatorId));
+		} else {
+			return forbidden();
+		}
+	}
+
+	public static Result activate(String animatorId) {
+		if (Secured.isAdmin()) {
+			User.activate(animatorId);
+			
+			return redirect(routes.AnimatorController.showDetails(animatorId));
+		} else {
+			return forbidden();
+		}
+	}
+	
+	public static Result editAnimator(String id){
+		return TODO;
+	}
+
 
 }

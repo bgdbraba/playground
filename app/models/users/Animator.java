@@ -97,6 +97,5 @@ public class Animator extends User{
 		
 		animator.update();
 	}
-	
 
 }

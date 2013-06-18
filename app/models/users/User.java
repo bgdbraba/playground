@@ -118,4 +118,12 @@ public class User extends Model{
 		
 		user.update();		
 	}
+
+	public static User getUser(String id){
+		return User.find.byId(id);
+	}
+	
+	public String getDateOfBirthAsString(){
+		return DateConverter.getDateAsString(this.dateOfBirth);
+	}
 }

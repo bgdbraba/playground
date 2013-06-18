@@ -1,0 +1,34 @@
+@(animator: models.users.Animator)(animatorForm: Form[models.users.forms.AnimatorForm])
+
+@import models.users._
+
+@main(User.getName(animator.id)) {
+
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
+			
+	<h1>@animator.lastName, @animator.firstName</h1>
+			
+	@detailslist{
+			@views.html.users.details(User.getUser(animator.id))				
+			@views.html.users.addressDetails(animator.address)
+	}
+	
+	@actions{
+		
+		@modalForm(MyMessages.get("edit"), "animatorModal", MyMessages.get("edit")) {
+			@editForm(animatorForm)
+		}
+		
+		@if(animator.active){
+					<a href="@routes.AnimatorController.deactivate(animator.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
+				}else{
+					<a href="@routes.AnimatorController.activate(animator.id)" class="btn btn-success">@MyMessages.get("button.activate")</a>
+				}
+				
+		<a href="@routes.AnimatorController.showAnimators()" class="btn">@MyMessages.get("go.back")</a>
+	
+	}
+
+}
+
+

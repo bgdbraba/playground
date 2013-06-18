@@ -1,6 +1,7 @@
 package controllers;
 
 import models.users.Animator;
+import models.users.Organizer;
 import models.users.User;
 import models.users.enums.UserType;
 import play.mvc.Http;
@@ -38,4 +39,8 @@ public class Secured extends Security.Authenticator {
     public static boolean hasAdministration(){
     	return Animator.find.byId(Http.Context.current().request().username()).administration;
     }
+
+	public static boolean samePlayground(String animatorId) {
+		return Organizer.find.byId(Http.Context.current().request().username()).playground.equals(Animator.find.byId(animatorId).playground);
+	}
 }

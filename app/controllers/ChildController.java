@@ -23,16 +23,6 @@ public class ChildController extends Controller{
 			
 			Form<ChildForm> filledForm = Form.form(ChildForm.class).bindFromRequest();
 		
-			long date = DateConverter.isCorrectDateOfBirth(filledForm.field("dateOfBirth").value());
-			
-			if (date == -1) {
-				filledForm.reject("dateOfBirth",MyMessages.get("date.notadate"));
-			} else if (date == -2) {
-				filledForm.reject("dateOfBirth",MyMessages.get("date.toobig"));
-			} else if (date == -3) {
-				filledForm.reject("dateOfBirth", MyMessages.get("date.toosmall"));
-			}
-
 			if (filledForm.hasErrors()) {
 				flash("fail", "register.child.fail");
 			

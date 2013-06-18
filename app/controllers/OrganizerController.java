@@ -36,15 +36,6 @@ public class OrganizerController extends Controller{
 		if (Secured.isAdmin()) {
 			Form<OrganizerForm> filledForm = Form.form(OrganizerForm.class).bindFromRequest();
 
-			long date = DateConverter.isCorrectDateOfBirth(filledForm.field("dateOfBirth").value());
-			if (date == -1) {
-				filledForm.reject("dateOfBirth",MyMessages.get("date.notadate"));
-			} else if (date == -2) {
-				filledForm.reject("dateOfBirth",MyMessages.get("date.toobig"));
-			} else if (date == -3) {
-				filledForm.reject("dateOfBirth", MyMessages.get("date.toosmall"));
-			}
-
 			if (filledForm.hasErrors()) {
 				flash("fail", "register.organizer.fail");
 				return badRequest(views.html.users.organizer.showOrganizers.render(Organizer.find.all(), filledForm));
