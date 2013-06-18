@@ -1,19 +1,31 @@
-@(animatorForm: Form[models.users.forms.AnimatorForm]) 
+@(childForm: Form[models.users.forms.ChildForm]) 
 
 @import models.users.enums._
 @import helper._
 @import helper.twitterBootstrap._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@form(routes.AnimatorController.registerAnimator()) {
+@form(routes.ChildController.registerChild()) {
 
 <fieldset>
 
-	@inputText(animatorForm("firstName"), '_label -> MyMessages.get("firstName") , '_help -> MyMessages.get("firstName.help"))
+	@inputText(
+		childForm("firstName"), 
+		'_label -> MyMessages.get("firstName") , 
+		'_help -> MyMessages.get("firstName.help")
+	)
 
-	@inputText(animatorForm("lastName"), '_label -> MyMessages.get("lastName"), '_help -> MyMessages.get("lastName.help"))
+	@inputText(
+		childForm("lastName"), 
+		'_label -> MyMessages.get("lastName"), 
+		'_help -> MyMessages.get("lastName.help")
+	)
 	
-	@inputText(animatorForm("password1"), '_label -> MyMessages.get("password"), '_help -> MyMessages.get("password.help"))
+	@inputText(
+		childForm("password1"), 
+		'_label -> MyMessages.get("password"), 
+		'_help -> MyMessages.get("password.help")
+	)
 	
 	<p>
 		<a href="#" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
@@ -22,70 +34,82 @@
 	<hr>
 
 	@inputRadioGroup(
-		animatorForm("gender"),
+		childForm("gender"),
 		options(Gender.options()), 
 		'_label -> MyMessages.get("gender")
 	)
 
 	<hr>
 	
-	@inputDate(animatorForm("dateOfBirth"), '_label -> MyMessages.get("dateOfBirth"), 'placeholder -> MyMessages.get("date.help"))
+	@inputDate(
+		childForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth")
+	)
 	
 	<hr>
 	
 	@inputRadioGroup(
-		animatorForm("language"), 
+		childForm("language"), 
 		options(Language.options()), 
 		'_label -> MyMessages.get("language")
 	)
 	
 	<hr>
 	
-	@input(animatorForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
+	@input(childForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
 		<input id="email" type="email" name="@name" value="@value">
 	} 
 
-	@inputText(animatorForm("phone"), '_label -> MyMessages.get("phone"))
+	@inputText(childForm("phone"), '_label -> MyMessages.get("phone"))
 	
-	@select(
-		animatorForm("playgroundId"), 
-		options(models.playground.Playground.options()), 
-		'_label -> MyMessages.get("choose.playground"),
-		'_default -> MyMessages.get("choose.playground")
-	)
+	@inputText(childForm("phoneWork"), '_label -> MyMessages.get("phone.work"))
+	
+	@inputText(childForm("phoneAlt"), '_label -> MyMessages.get("phone.alt"))
 	
 	@inputText(
-		animatorForm("city"), 
+		childForm("city"), 
 		'_label -> MyMessages.get("city"),
 		'_help -> MyMessages.get("city.help")
 	)
 	
 	@inputText(
-		animatorForm("street"), 
+		childForm("street"), 
 		'_label -> MyMessages.get("street"),
 		'_help -> MyMessages.get("street.help")
 	)
 	
 	@inputText(
-		animatorForm("number"), 
+		childForm("number"), 
 		'_label -> MyMessages.get("number"),
 		'_help -> MyMessages.get("number.help")
 	)
 	
 	@inputText(
-		animatorForm("zipCode"), 
+		childForm("zipCode"), 
 		'_label -> MyMessages.get("zipCode"),
 		'_help -> MyMessages.get("zipCode.help")
 	)
 	
 	@inputText(
-		animatorForm("accountNumber"), 
+		childForm("doctor"), 
 		'_label -> MyMessages.get("accountNumber"),
 		'_help -> MyMessages.get("accountNumber.help")
 	)
 	
-	@checkbox(animatorForm("hasFollowedCourse"))
-
+	@textarea(	
+		childForm("remarks"),
+		'_label -> MyMessages.get("remarks")
+	)
+	
+	@checkbox(
+		childForm("receiveMail"),
+		'_label -> MyMessages.get("receive.mail")
+	)
+	
+	@checkbox(
+		childForm("photographable"),
+		'_label -> MyMessages.get("photographable")
+	)
 </fieldset>
 
 }
