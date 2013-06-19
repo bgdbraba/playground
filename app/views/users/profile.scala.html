@@ -9,20 +9,20 @@
 	<!-- display user information -->
 	<table class="table table-bordered table-striped">
 		<tr>
-			<td>@MyMessages.get("username")</td>
+			<td><strong>@MyMessages.get("username")</strong></td>
 			<td>@user.id</td>
 		</tr>
 		<tr>
-			<td>@MyMessages.get("firstName")</td>
+			<td><strong>@MyMessages.get("firstName")</strong></td>
 			<td>@user.firstName</td>
 		</tr>
 		<tr>
-			<td>@MyMessages.get("lastName")</td>
+			<td><strong>@MyMessages.get("lastName")</strong></td>
 			<td>@user.lastName</td>
 		</tr>
 
 	</table>
-	
+	<br>
 	<div class="actions">
 			@modalForm(MyMessages.get("edit"), "userModal", MyMessages.get("edit")) {
 				@views.html.users.editForm(userForm)

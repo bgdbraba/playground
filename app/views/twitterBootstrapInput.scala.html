@@ -7,15 +7,15 @@
     <label for="@elements.id"><strong>@elements.label</strong> <small>@elements.infos.mkString("")</small></label>
     
     @if(elements.args.containsKey('_iconcls)){
-    <div class="input-prepend">
+ 	<div class="input-prepend">
     <span class="add-on">
         <i class="@elements.args.get('_iconcls) icon-size"></i>
     </span>
         @elements.input
-        <span class="help-inline error small"><small>@elements.errors.mkString("; ")</small></span> 
+        <span class="help-block error small"><small>@elements.errors.mkString("; ")</small></span> 
     </div>
     }else{
     	@elements.input
-        <span class="help-inline error small"><small>@elements.errors.mkString("; ")</small></span> 
+        <span class="help-block error small"><small>@elements.errors.mkString("; ")</small></span> 
     }
 </div>

@@ -2,7 +2,7 @@
 
 @import views.html.helper.FieldConstructor
 @import helper._
-@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(views.html.twitterBootstrapInput.render) } 
 
 @helper.form(routes.PlaygroundController.registerPlayground()) {
 
@@ -11,33 +11,37 @@
 	@inputText(
 		playgroundForm("name"), 
 		'_label -> MyMessages.get("name"),
-		'_help -> MyMessages.get("name.help")
-	)
-	
-	@inputText(
-		playgroundForm("city"), 
-		'_label -> MyMessages.get("city"),
-		'_help -> MyMessages.get("city.help")
-	)
-	
-	@inputText(
-		playgroundForm("street"), 
-		'_label -> MyMessages.get("street"),
-		'_help -> MyMessages.get("street.help")
-	)
-	
-	@inputText(
-		playgroundForm("number"), 
-		'_label -> MyMessages.get("number"),
-		'_help -> MyMessages.get("number.help")
+		'_help -> MyMessages.get("name.help"),
+		'_iconcls -> "icon-edit"
 	)
 	
 	@inputText(
 		playgroundForm("zipCode"), 
 		'_label -> MyMessages.get("zipCode"),
-		'_help -> MyMessages.get("zipCode.help")
+		'_help -> MyMessages.get("zipCode.help"),
+		'_iconcls -> "icon-map-marker"
 	)
-
+	
+	@inputText(
+		playgroundForm("city"), 
+		'_label -> MyMessages.get("city"),
+		'_help -> MyMessages.get("city.help"),
+		'_iconcls -> "icon-map-marker"
+	)
+	
+	@inputText(
+		playgroundForm("street"), 
+		'_label -> MyMessages.get("street"),
+		'_help -> MyMessages.get("street.help"),
+		'_iconcls -> "icon-road"
+	)
+	
+	@inputText(
+		playgroundForm("number"), 
+		'_label -> MyMessages.get("number"),
+		'_help -> MyMessages.get("number.help"),
+		'_iconcls -> "icon-hand-up"
+	)
 </fieldset>
 
 }

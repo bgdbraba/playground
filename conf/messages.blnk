@@ -16,6 +16,7 @@ about=
 contact=
 login=
 logout=
+
 true=
 false=
 
@@ -61,8 +62,6 @@ firstname=
 lastname=
 accountNumber=
 followed.course
-true=
-false=
 animators.add=
 register.formula.success=
 begin.age=

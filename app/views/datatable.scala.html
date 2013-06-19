@@ -7,8 +7,14 @@
 				"oTableTools": {
 					"sSwfPath": "@routes.Assets.at("swf/copy_csv_xls_pdf.swf")",
 					"aButtons": [
-						"copy",
-						"print",
+						{
+							"sExtends":    "copy",
+							"sButtonText": "Kopieer"
+						},
+						{
+							"sExtends":    "print",
+							"sButtonText": "Druk Af"
+						},
 						"csv",
 						"pdf",
 						{
