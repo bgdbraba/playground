@@ -1,0 +1,32 @@
+@(child: models.users.Child)(childForm: Form[models.users.forms.ChildForm])
+
+@import models.users._
+
+@main(User.getName(child.id)) {
+
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
+			
+	<h1>@child.lastName, @child.firstName</h1>
+			
+	@detailslist{
+			@views.html.users.details(User.getUser(child.id))				
+			@views.html.users.addressDetails(child.address)
+	}
+	
+	@actions{
+		
+		@modalForm(MyMessages.get("edit"), "childModal", MyMessages.get("edit")) {
+			@editForm(childForm)
+		}
+		
+		@if(child.active){
+			<a href="@routes.ChildController.deactivate(child.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
+		}else{
+			<a href="@routes.ChildController.activate(child.id)" class="btn btn-success">@MyMessages.get("activate")</a>
+		}
+			
+		<a href="@routes.ChildController.showChildren()" class="btn">@MyMessages.get("go.back")</a>
+	
+	}
+
+}

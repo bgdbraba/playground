@@ -11,6 +11,7 @@ import models.users.enums.Gender;
 import models.users.forms.OrganizerForm;
 import conf.DateConverter;
 import conf.Language;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("organizer")

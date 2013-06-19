@@ -4,6 +4,7 @@ import models.playground.Playground;
 import models.users.Animator;
 import models.users.Child;
 import models.users.Organizer;
+import models.users.User;
 import models.users.forms.AnimatorForm;
 import models.users.forms.ChildForm;
 import play.data.Form;
@@ -59,7 +60,14 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result showDetails(String id){
-		return TODO;
+		if (Secured.isAnimator() && Secured.hasAdministration() ) {
+			Child child = Child.find.byId(id);
+			ChildForm editForm = child.toChildForm();
+			return ok(views.html.users.child.details.render(child,Form.form(ChildForm.class).fill(editForm)));
+		
+		} else {
+			return forbidden();
+		}
 	}
 	
 
@@ -68,11 +76,23 @@ public class ChildController extends Controller{
 	}
 
 	public static Result deactivate(String childId) {
-		return TODO;
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			User.deactivate(childId);
+			
+			return redirect(routes.ChildController.showDetails(childId));
+		} else {
+			return forbidden();
+		}
 	}
 
 	public static Result activate(String childId) {
-		return TODO;
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			User.activate(childId);
+			
+			return redirect(routes.ChildController.showDetails(childId));
+		} else {
+			return forbidden();
+		}
 	}
 
 }

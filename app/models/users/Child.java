@@ -1,13 +1,22 @@
 package models.users;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.ChildDay;
 import models.playground.Playground;
 import models.users.enums.Gender;
+import models.users.forms.ChildForm;
 import models.users.information.Address;
+import models.users.information.ChildSessionCard;
+import play.db.ebean.Model.Finder;
+import conf.DateConverter;
 import conf.Language;
 
 @Entity
@@ -33,6 +42,12 @@ public class Child extends User{
 	
 	@ManyToOne
 	public Playground playground;
+	
+	@OneToOne
+	public ChildSessionCard card;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="child")
+	public List<ChildDay> days;
 	
 	public static Finder<String, Child> find = new Finder<String, Child>(String.class, Child.class);
 	
@@ -87,5 +102,36 @@ public class Child extends User{
 		child.address = address;
 		
 		child.update();
+	}
+
+	public ChildForm toChildForm() {
+		ChildForm form = new ChildForm();
+		
+		form.id = id;
+		form.firstName = firstName;
+		form.lastName = lastName;
+		form.language = language;
+		form.addressId = address.id;
+		form.city = address.city;
+		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+		form.email = email;
+		form.gender = gender;
+		form.number = address.number;
+		form.password1 = password;
+		form.password2 = password;
+		form.phone = phone;
+		form.playgroundId = playground.id;
+		form.street = address.street;
+		form.zipCode = address.zipCode;
+		form.doctor = doctor;
+		form.remarks = remarks;
+		form.phoneAlt = phoneAlt;
+		form.phoneWork = phoneWork;
+		form.password1 = password;
+		form.password2 = password;
+		form.photographable = photographable;
+		form.receiveMail = receiveMail;
+		
+		return form;
 	}
 }

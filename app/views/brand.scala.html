@@ -1,0 +1,27 @@
+@import models.users._
+@import models.users.enums._
+
+		@if(session().get("id") != null){	
+		
+			@defining(User.find.byId(session.get("id"))){ user =>
+			
+				@if(user != null){
+					@if(user.is(UserType.ADMIN)) {
+							 <a class="brand" href="@routes.Application.index()">PlayGround</a>
+					}
+					@if(user.is(UserType.ORGANIZER)) {
+							 <a class="brand" href="@routes.Application.index()">@Organizer.find.byId(session.get("id")).playground.name.toUpperCase()</a>
+					}
+					@if(user.is(UserType.ANIMATOR)) {
+							 <a class="brand" href="@routes.Application.index()">@Animator.find.byId(session.get("id")).playground.name.toUpperCase()</a>
+					}
+					@if(user.is(UserType.CHILD)) {
+							 <a class="brand" href="@routes.Application.index()">@Child.find.byId(session.get("id")).playground.name.toUpperCase()</a>
+					}
+				}
+			
+			
+			}
+		}else{
+			<a class="brand" href="@routes.Application.index()">PlayGround</a>
+		}

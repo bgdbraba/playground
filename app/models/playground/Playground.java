@@ -43,6 +43,9 @@ public class Playground extends Model{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Child> children;
 	
+	@OneToOne
+	public SessionCard sessionCard = null;
+	
 	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
 	
 	public static Playground create(){
@@ -121,6 +124,10 @@ public class Playground extends Model{
 		playground.children.add(child);
 		
 		playground.update();
+	}
+	
+	public static boolean sessionCardActive(Long id){
+		return Playground.find.byId(id).sessionCard != null;
 	}
 
 }
