@@ -63,8 +63,8 @@ animators.add=Animator Toevoegen
 register.formula.success=Formule succesvol geregistreerd!
 begin.age=Beginleeftijd
 end.age=Eindleeftijd
-begin.age.help=vb.:"2"
-end.age.help=vb.:"10"
+begin.age.help=   (vb.:"2")
+end.age.help=   (vb.:"10")
 password.help= 
 give.administration=Geef Administratie
 administration.confirmation=Bent u zeker dat u administratierechten aan deze animator wil toekennen?
@@ -77,5 +77,14 @@ phone.work=Telefoon (werk)
 phone.alt=Telefoon (alternatief)
 profile=Profiel
 phone.help= 
+cost.help=  (vb.:"0.70")
+date.help=(vb.:"01-02-1991")
+email.help= 
+phone.placeholder=051203378
+hasFollowedCourse=Cursus Gevolgd?
+required=*
+accountNumber.placeholder=79750609630936
 
+sessionCardCompensation= Compensatie met beurtenkaart
+sessionCardCompensation.help= (aantal beurten)
 

@@ -12,7 +12,10 @@ public class FormulaForm {
 	public String name;
 	
 	@Required
-	public String cost;
+	public String cost = "0.00";
+	
+	@Required
+	public String sessionCardCompensation = "0";
 	
 	public Long playgroundId;
 	
@@ -25,7 +28,7 @@ public class FormulaForm {
 	}
 
 	public void update() {
-		Formula.initialize(id, name, Double.parseDouble(cost));
+		Formula.initialize(id, name, Double.parseDouble(cost), Integer.parseInt(sessionCardCompensation));
 		
 		Formula.addPlayground(id, playgroundId);		
 		

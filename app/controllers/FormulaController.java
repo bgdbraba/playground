@@ -24,7 +24,9 @@ public class FormulaController extends Controller{
 			
 			if (filledForm.hasErrors()) {
 				flash("fail", "register.formula.fail");
+				
 				return badRequest(views.html.playground.formula.showFormulas.render(playground.formulas, filledForm));
+				
 			} else {
 				flash("success", "register.formula.success");			
 				

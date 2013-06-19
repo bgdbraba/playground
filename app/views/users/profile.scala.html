@@ -23,9 +23,9 @@
 
 	</table>
 	<br>
-	<div class="actions">
+	@actions{
 			@modalForm(MyMessages.get("edit"), "userModal", MyMessages.get("edit")) {
 				@views.html.users.editForm(userForm)
 			}
-	</div>
+	}
 }

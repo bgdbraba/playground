@@ -1,0 +1,29 @@
+@(roleForm: Form[models.playground.forms.RoleForm])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+<fieldset>
+
+	@inputText(roleForm("name"), 
+		'_label -> MyMessages.get("name"), 
+		'_help -> MyMessages.get("name.help"),
+		'_iconcls -> "icon-edit"
+		)
+	
+	<hr>
+    
+	@inputText(roleForm("beginAge"), 
+		'_label -> MyMessages.get("begin.age") , 
+		'_help -> MyMessages.get("begin.age.help"),
+		'_iconcls -> "icon-sort-up"
+		)
+	
+	<hr>
+	@inputText(roleForm("endAge"), 
+		'_label -> MyMessages.get("end.age") , 
+		'_help -> MyMessages.get("end.age.help"),
+		'_iconcls -> "icon-sort-down"
+		)
+	    
+</fieldset>

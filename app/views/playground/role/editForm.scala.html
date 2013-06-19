@@ -1,0 +1,9 @@
+@(roleForm: Form[models.playground.forms.RoleForm])(id : Long)
+
+@import helper._
+
+@form(routes.RoleController.editRole(id)) {
+
+@fieldset(roleForm)
+
+}

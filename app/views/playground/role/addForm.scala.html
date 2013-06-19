@@ -1,27 +1,10 @@
 @(roleForm: Form[models.playground.forms.RoleForm])
 
 @import helper._
-@import helper.twitterBootstrap._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
 
 @form(routes.RoleController.registerRole()) {
 
-<fieldset>
-
-	<h4>@MyMessages.get("name")</h4>
-	@inputText(roleForm("name"), '_label -> MyMessages.get("name"), '_help -> MyMessages.get("name"))
-	
-	<hr>
-    
-    <h4>@MyMessages.get("begin.age")</h4>
-	@inputText(roleForm("beginAge"), '_label -> MyMessages.get("begin.age") , '_help -> MyMessages.get("begin.age.help"))
-	
-	<hr>
-	
-	<h4>@MyMessages.get("end.age")</h4>
-	@inputText(roleForm("endAge"), '_label -> MyMessages.get("end.age") , '_help -> MyMessages.get("end.age.help"))
-	    
-</fieldset>
+@fieldset(roleForm)
 
 }
 

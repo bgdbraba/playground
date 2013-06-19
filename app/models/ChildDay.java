@@ -17,5 +17,9 @@ public class ChildDay extends Model{
 	
 	@ManyToOne
 	public Child child;
+	
+	public long date;
+	
+	
 
 }

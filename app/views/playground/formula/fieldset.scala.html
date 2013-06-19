@@ -1,0 +1,32 @@
+@(formulaForm: Form[models.playground.forms.FormulaForm])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+<fieldset>
+
+	
+	@inputText(formulaForm("name"),
+		'_label -> MyMessages.get("name"),
+		'_help -> MyMessages.get("name.help"),
+		'_iconcls -> "icon-edit"
+		)
+	
+	<hr>
+          
+	@inputText(formulaForm("cost"), 
+		'_label -> MyMessages.get("cost") , 
+		'_help -> MyMessages.get("cost.help"),
+		'_iconcls -> "icon-euro"
+		)
+	
+	<hr>	
+	
+	@inputText(formulaForm("sessionCardCompensation"), 
+		'_label -> MyMessages.get("sessionCardCompensation") , 
+		'_help -> MyMessages.get("sessionCardCompensation.help"),
+		'_iconcls -> "icon-credit-card"
+		)
+	   
+    
+</fieldset>

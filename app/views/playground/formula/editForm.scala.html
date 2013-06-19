@@ -1,0 +1,9 @@
+@(formulaForm: Form[models.playground.forms.FormulaForm], id : Long)
+
+@import helper._
+
+@form(routes.FormulaController.editFormula(id)) {
+
+	@fieldset(formulaForm)
+
+}

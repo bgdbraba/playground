@@ -80,9 +80,21 @@ phone.work=
 phone.alt=
 profile=
 phone.help=
+cost.help=
+sessionCardCompensation=
+sessionCardCompensation.help=
+date.help=
+email.help=
+phone.placeholder=
+hasFollowedCourse=
+required=
+accountNumber.placeholder=
+
 
 edit.success=
 edit.fail=
 edit.playground.fail=
 edit.playground.success=
+login.fail=
+
 

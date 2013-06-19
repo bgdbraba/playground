@@ -2,18 +2,33 @@
 
 @import models.users.enums._
 @import helper._
-@import helper.twitterBootstrap._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 @form(routes.AnimatorController.registerAnimator()) {
 
 <fieldset>
 
-	@inputText(animatorForm("firstName"), '_label -> MyMessages.get("firstName") , '_help -> MyMessages.get("firstName.help"))
+	@inputText(animatorForm("firstName"),
+		'_label -> MyMessages.get("firstname"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-edit"
+		)
+		
+		<hr>
 
-	@inputText(animatorForm("lastName"), '_label -> MyMessages.get("lastName"), '_help -> MyMessages.get("lastName.help"))
+	@inputText(animatorForm("lastName"), 
+		'_label -> MyMessages.get("lastname"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-edit"
+		)
 	
-	@inputText(animatorForm("password1"), '_label -> MyMessages.get("password"), '_help -> MyMessages.get("password.help"))
+		<hr>
+	
+	@inputText(animatorForm("password1"), 
+		'_label -> MyMessages.get("password"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-key"
+		)
 	
 	<p>
 		<a href="#" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
@@ -21,70 +36,95 @@
 	
 	<hr>
 
-	@inputRadioGroup(
-		animatorForm("gender"),
-		options(Gender.options()), 
-		'_label -> MyMessages.get("gender")
+	@inputRadioGroup(animatorForm("gender"),
+		 options(Gender.options()), 
+		'_label -> MyMessages.get("gender"),
+		'_help -> MyMessages.get("required")
+		
 	)
 
 	<hr>
 	
-	@inputDate(animatorForm("dateOfBirth"), '_label -> MyMessages.get("dateOfBirth"), 'placeholder -> MyMessages.get("date.help"))
+	@inputText(animatorForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth"), 
+		'placeholder -> MyMessages.get("date.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+		)
 	
 	<hr>
 	
 	@inputRadioGroup(
 		animatorForm("language"), 
 		options(Language.options()), 
-		'_label -> MyMessages.get("language")
+		'_label -> MyMessages.get("language"),
+		'_help -> MyMessages.get("required")
 	)
 	
 	<hr>
 	
-	@input(animatorForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
+	@input(animatorForm("email"), 
+		'_label -> MyMessages.get("email"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-envelope"
+		) { (id, name, value, _) =>
 		<input id="email" type="email" name="@name" value="@value">
 	} 
 
-	@inputText(animatorForm("phone"), '_label -> MyMessages.get("phone"))
+	<hr>
 	
-	@select(
-		animatorForm("playgroundId"), 
-		options(models.playground.Playground.options()), 
-		'_label -> MyMessages.get("choose.playground"),
-		'_default -> MyMessages.get("choose.playground")
-	)
+	@inputText(animatorForm("phone"), 
+		'_label -> MyMessages.get("phone"),
+		'_help -> MyMessages.get("required"),
+		'placeholder -> MyMessages.get("phone.placeholder"),
+		'_iconcls -> "icon-phone"
+		)
+	
+	<hr>
 	
 	@inputText(
 		animatorForm("city"), 
 		'_label -> MyMessages.get("city"),
-		'_help -> MyMessages.get("city.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-location-arrow"
+		
 	)
 	
 	@inputText(
 		animatorForm("street"), 
 		'_label -> MyMessages.get("street"),
-		'_help -> MyMessages.get("street.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-road"
 	)
 	
 	@inputText(
 		animatorForm("number"), 
 		'_label -> MyMessages.get("number"),
-		'_help -> MyMessages.get("number.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-hand-up"
 	)
 	
 	@inputText(
 		animatorForm("zipCode"), 
 		'_label -> MyMessages.get("zipCode"),
-		'_help -> MyMessages.get("zipCode.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-map-marker"
 	)
+	
+	<hr>
 	
 	@inputText(
 		animatorForm("accountNumber"), 
 		'_label -> MyMessages.get("accountNumber"),
-		'_help -> MyMessages.get("accountNumber.help")
+		'_help -> MyMessages.get("required"),
+		'placeholder -> MyMessages.get("accountNumber.placeholder"),
+		'_prependedInput -> "BE"
 	)
 	
-	@checkbox(animatorForm("hasFollowedCourse"))
+	@checkbox(animatorForm("hasFollowedCourse"),
+		'_label -> MyMessages.get("hasFollowedCourse"),
+		'_help -> MyMessages.get("required")
+		)
 
 </fieldset>
 

@@ -17,6 +17,8 @@ public class Formula extends Model{
 	
 	public double cost;
 	
+	public int sessionCardCompensation;
+	
 	@ManyToOne
 	public Playground playground;
 
@@ -30,11 +32,12 @@ public class Formula extends Model{
 		return formula;
 	}
 	
-	public static void initialize(Long id, String name, double cost){
+	public static void initialize(Long id, String name, double cost, int sessionCardCompensation){
 		Formula formula = Formula.find.byId(id);
 		
 		formula.cost = cost;
 		formula.name = name;
+		formula.sessionCardCompensation = sessionCardCompensation;
 		
 		formula.update();
 	}
