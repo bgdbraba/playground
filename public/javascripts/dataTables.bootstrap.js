@@ -145,5 +145,3 @@ if ( $.fn.DataTable.TableTools ) {
 		}
 	} );
 }
-
-

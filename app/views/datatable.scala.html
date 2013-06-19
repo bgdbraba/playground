@@ -2,11 +2,25 @@
 		/* Table initialisation */
 		$(document).ready(function() {
 			$('.datatable').dataTable( {
-				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-				"sPaginationType": "bootstrap",
+				"sDom": "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>",
+				"sDom": 'T<"clear">lfrtip',
+				"oTableTools": {
+					"sSwfPath": "@routes.Assets.at("swf/copy_csv_xls_pdf.swf")",
+					"aButtons": [
+						"copy",
+						"print",
+						"csv",
+						"pdf",
+						{
+							"sExtends":    "xls",
+							"sFileName": "*.xls"
+						}
+					]
+				},
 				"oLanguage": {
 					"sUrl": "@routes.Assets.at(conf.LanguageSettings.getDatatableURL())"
-		        }
+		        },
+		        "sPaginationType": "bootstrap"
 			} );
 		} );
 </script>

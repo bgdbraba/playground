@@ -17,3 +17,5 @@ $('.generate-password').on('click', function(event) {
 		}
 	});
 });
+
+
