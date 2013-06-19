@@ -1,0 +1,24 @@
+@(playground: models.playground.Playground)(playgroundForm: Form[models.playground.forms.PlaygroundForm])
+
+@import models.playground._
+
+@main(playground.name) {
+
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
+			
+	<h1>@playground.name</h1>
+			
+	@detailslist{
+			
+	}
+	
+	@actions{
+		
+		@modalForm(MyMessages.get("edit"), "playgroundModal", MyMessages.get("edit")) {
+			@editForm(playgroundForm, playground.id)
+		}
+			
+		<a href="@routes.PlaygroundController.showPlaygrounds()" class="btn">@MyMessages.get("go.back")</a>
+	
+	}
+}

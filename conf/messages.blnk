@@ -16,10 +16,8 @@ about=
 contact=
 login=
 logout=
-
 true=
 false=
-
 login.title=
 username=
 password=
@@ -81,4 +79,10 @@ not.payed=
 phone.work=
 phone.alt=
 profile=
+phone.help=
+
+edit.success=
+edit.fail=
+edit.playground.fail=
+edit.playground.success=
 

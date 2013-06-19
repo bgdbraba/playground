@@ -27,6 +27,7 @@ public class PlaygroundController extends Controller{
 			return badRequest(views.html.playground.showPlaygrounds.render(Playground.find.all(), filledForm));
 			} else {
 				flash("success", MyMessages.get("register.playground.success"));
+				
 				filledForm.get().create();
 				
 				return redirect(routes.PlaygroundController.showPlaygrounds());
@@ -39,10 +40,9 @@ public class PlaygroundController extends Controller{
 	
 	public static Result showDetails(Long id) {
 		if (Secured.isAdmin()) {
-			return TODO;
-//			School school = School.find.byId(id);
-//			return ok(views.html.schools.school.details.render(school,
-//					form(School.class).fill(school)));
+			Playground playground = Playground.find.byId(id);
+			return ok(views.html.playground.details.render(playground,
+					Form.form(PlaygroundForm.class).fill(playground.toForm())));
 		} else {
 			return forbidden();
 		}
@@ -50,19 +50,18 @@ public class PlaygroundController extends Controller{
 	
 	public static Result editPlayground(Long id) {
 		if (Secured.isAdmin()) {
-			return TODO;
-//			Form<School> editedForm = form(School.class).bindFromRequest();
-//			if (editedForm.hasErrors()) {
-//				flash("fail", "");
-//				return badRequest(views.html.schools.school.details.render(
-//						School.find.byId(id), editedForm));
-//			} else {
-//				flash("success", "");
-//				School editedSchool = editedForm.get();
-//				editedSchool.schoolId = id;
-//				editedSchool.update();
-//				return redirect(routes.SchoolController.showDetails(id));
-//			}
+			Form<PlaygroundForm> editedForm = Form.form(PlaygroundForm.class).bindFromRequest();
+			
+			if (editedForm.hasErrors()) {
+				flash("fail", "edit.playground.fail");
+				return badRequest(views.html.playground.details.render(Playground.find.byId(id), editedForm));
+			} else {
+				flash("success", "edit.playground.succes");
+				PlaygroundForm playgroundForm = editedForm.get();
+				playgroundForm.update(id);
+				
+				return redirect(routes.PlaygroundController.showDetails(id));
+			}
 		} else {
 			return forbidden();
 		}

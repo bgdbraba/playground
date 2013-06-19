@@ -15,6 +15,9 @@ public class PlaygroundForm {
 	public String name;
 	
 	@Required
+	public String phone;
+	
+	@Required
 	public String street;
 	
 	@Required
@@ -31,7 +34,9 @@ public class PlaygroundForm {
 		
 		Address.initialize(playground.address.id, street, number, zipCode, city);
 		
-		Playground.initialize(playground.id, name);	
+		Playground.addAddress(playground.id, playground.address.id);
+		
+		Playground.initialize(playground.id, name,phone);	
 	}
 	
 	public void create(){

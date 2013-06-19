@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.playground.forms.PlaygroundForm;
 import models.users.Animator;
 import models.users.Child;
 import models.users.Organizer;
@@ -24,6 +25,8 @@ public class Playground extends Model{
 	public Long id;
 	
 	public String name;
+	
+	public String phone;
 	
 	@OneToOne
 	public Address address;
@@ -56,10 +59,11 @@ public class Playground extends Model{
 		return playground;
 	}
 	
-	public static void initialize(Long playgroundId, String name){
+	public static void initialize(Long playgroundId, String name, String phone){
 		Playground playground = Playground.find.byId(playgroundId);
 		
 		playground.name = name;
+		playground.phone = phone;
 		
 		playground.update();
 	}
@@ -128,6 +132,20 @@ public class Playground extends Model{
 	
 	public static boolean sessionCardActive(Long id){
 		return Playground.find.byId(id).sessionCard != null;
+	}
+
+	public PlaygroundForm toForm() {
+		PlaygroundForm form = new PlaygroundForm();
+		
+		form.id = id;
+		form.name = name;
+		form.number = address.number;
+		form.phone = phone;
+		form.street = address.street;
+		form.zipCode = address.zipCode;
+		form.city = address.city;
+		
+		return form;
 	}
 
 }

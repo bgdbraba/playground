@@ -76,5 +76,6 @@ not.payed=Niet Betaald
 phone.work=Telefoon (werk)
 phone.alt=Telefoon (alternatief)
 profile=Profiel
+phone.help= 
 
 
