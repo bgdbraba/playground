@@ -1,0 +1,67 @@
+@(userForm: Form[models.users.forms.UserForm])
+
+@import helper._
+@import models.users.enums._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+<fieldset>
+
+	@inputText(userForm("id"),
+	 	'readonly -> "readonly", 
+	 	'_label -> MyMessages.get("id"),
+	 	'_iconcls -> "icon-user"
+	 	)
+
+	@inputPassword(userForm("password1"),
+	 	'_label -> MyMessages.get("password"),
+	 	'_iconcls -> "icon-key"
+	 	)
+	
+	@inputPassword(userForm("password2"), 
+		'_label -> MyMessages.get("password.repeat"),
+		'_help -> MyMessages.get("Required"),
+	 	'_iconcls -> "icon-key"
+	 	)
+
+	@inputText(userForm("firstName"), 
+		'_label -> MyMessages.get("firstName"),
+	 	'_iconcls -> "icon-edit"
+	 	)
+
+	@inputText(userForm("lastName"), 
+		'_label -> MyMessages.get("lastName"),
+	 	'_iconcls -> "icon-edit"
+	 	)
+
+	@inputRadioGroup(
+		userForm("gender"),
+		options(Gender.options()), 
+		'_label -> MyMessages.get("gender")
+	)
+
+	@inputDate(userForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth"), 
+		'placeholder -> MyMessages.get("date.help"),
+	 	'_iconcls -> "icon-calendar"
+	 	)
+
+	@inputRadioGroup(
+		userForm("language"), 
+		options(Language.options()), 
+		'_label -> MyMessages.get("language")
+	)
+
+	@input(userForm("email"), '_label -> MyMessages.get("email"),
+	 	'_iconcls -> "icon-envelope-alt",
+		'_help -> MyMessages.get("Required")
+	 	) { (id, name, value, _) =>
+		<input id="email" type="email" name="@name" value="@value">
+	} 
+
+	@inputText(userForm("phone"), 
+		'_label -> MyMessages.get("phone"),
+		'_help -> MyMessages.get("Required"),
+	 	'_iconcls -> "icon-phone"
+	 	)
+
+</fieldset>

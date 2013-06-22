@@ -1,0 +1,85 @@
+@(organizerForm: Form[models.users.forms.OrganizerForm]) 
+
+@import models.users.enums._
+@import helper._
+@implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+
+<fieldset>
+
+	@inputText(organizerForm("id"),
+	 	'readonly -> "readonly", 
+	 	'_label -> MyMessages.get("id"),
+	 	'_iconcls -> "icon-user"
+	)
+
+	@inputText(organizerForm("firstName"), 
+		'_label -> MyMessages.get("firstname"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-edit"
+		)
+
+	@inputText(organizerForm("lastName"),  
+		'_label -> MyMessages.get("lastname"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-edit"
+		)
+	@inputText(organizerForm("password1"), 
+		'_label -> MyMessages.get("password"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-key"
+		)
+	
+	<p>
+		<a href="#" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
+	</p>
+	
+	<hr>
+
+	@inputRadioGroup(
+		organizerForm("gender"),
+		options(Gender.options()), 
+		'_label -> MyMessages.get("gender"),
+		'_help -> MyMessages.get("required")
+	)
+
+	<hr>
+	
+	@inputText(organizerForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth"), 
+		'placeholder -> MyMessages.get("date.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+		)
+	<hr>
+	
+	@inputRadioGroup(
+		organizerForm("language"), 
+		options(Language.options()), 
+		'_label -> MyMessages.get("language"),
+		'_help -> MyMessages.get("required")
+	)
+	
+	<hr>
+	
+	@input(organizerForm("email"), '_label -> MyMessages.get("email"),	
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-envelope") { (id, name, value, _) =>
+		<input id="email" type="email" name="@name" value="@value">
+	} 
+
+	@inputText(organizerForm("phone"), 
+		'_label -> MyMessages.get("phone"),
+		'_help -> MyMessages.get("required"),
+		'placeholder -> MyMessages.get("phone.placeholder"),
+		'_iconcls -> "icon-phone"
+	)
+		
+	@select(
+		organizerForm("playgroundId"), 
+		options(models.playground.Playground.options()), 
+		'_label -> MyMessages.get("choose.playground"),
+		'_default -> MyMessages.get("choose.playground")
+	)
+
+</fieldset>

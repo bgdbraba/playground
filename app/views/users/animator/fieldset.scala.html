@@ -1,0 +1,133 @@
+@(animatorForm: Form[models.users.forms.AnimatorForm]) 
+
+@import models.users.enums._
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<fieldset>
+	
+	@inputText(animatorForm("id"),
+	 	'readonly -> "readonly", 
+	 	'_label -> MyMessages.get("id"),
+	 	'_iconcls -> "icon-user"
+	 	)
+
+	@inputText(animatorForm("firstName"),
+		'_label -> MyMessages.get("firstname"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-edit"
+		)
+		
+		<hr>
+
+	@inputText(animatorForm("lastName"), 
+		'_label -> MyMessages.get("lastname"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-edit"
+		)
+	
+		<hr>
+	
+	@inputText(animatorForm("password1"), 
+		'_label -> MyMessages.get("password"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-key"
+		)
+	
+	<p>
+		<a href="#" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
+	</p>
+	
+	<hr>
+
+	@inputRadioGroup(animatorForm("gender"),
+		 options(Gender.options()), 
+		'_label -> MyMessages.get("gender"),
+		'_help -> MyMessages.get("required")
+		
+	)
+
+	<hr>
+	
+	@inputText(animatorForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth"), 
+		'placeholder -> MyMessages.get("date.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+		)
+	
+	<hr>
+	
+	@inputRadioGroup(
+		animatorForm("language"), 
+		options(Language.options()), 
+		'_label -> MyMessages.get("language"),
+		'_help -> MyMessages.get("required")
+	)
+	
+	<hr>
+	
+	@input(animatorForm("email"), 
+		'_label -> MyMessages.get("email"), 
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-envelope"
+		) { (id, name, value, _) =>
+		<input id="email" type="email" name="@name" value="@value">
+	} 
+
+	<hr>
+	
+	@inputText(animatorForm("phone"), 
+		'_label -> MyMessages.get("phone"),
+		'_help -> MyMessages.get("required"),
+		'placeholder -> MyMessages.get("phone.placeholder"),
+		'_iconcls -> "icon-phone"
+		)
+	
+	<hr>
+	
+	@inputText(
+		animatorForm("city"), 
+		'_label -> MyMessages.get("city"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-location-arrow"
+		
+	)
+	
+	@inputText(
+		animatorForm("street"), 
+		'_label -> MyMessages.get("street"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-road"
+	)
+	
+	@inputText(
+		animatorForm("number"), 
+		'_label -> MyMessages.get("number"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-hand-up"
+	)
+	
+	@inputText(
+		animatorForm("zipCode"), 
+		'_label -> MyMessages.get("zipCode"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-map-marker"
+	)
+	
+	<hr>
+	
+	@inputText(
+		animatorForm("accountNumber"), 
+		'_label -> MyMessages.get("accountNumber"),
+		'_help -> MyMessages.get("required"),
+		'placeholder -> MyMessages.get("accountNumber.placeholder"),
+		'_prependedInput -> "BE"
+	)
+	
+	@checkbox(animatorForm("hasFollowedCourse"),
+		'_label -> MyMessages.get("hasFollowedCourse"),
+		'_help -> MyMessages.get("required")
+		)
+
+</fieldset>

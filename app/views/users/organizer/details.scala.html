@@ -27,7 +27,7 @@
 	
 	@actions{
 		@modalForm(MyMessages.get("edit"), "organizerModal", MyMessages.get("edit")) {
-			@editForm(organizerForm)
+			@editForm(organizerForm, organizer.id)
 		}
 		<a href="@routes.OrganizerController.showOrganizers()" class="btn">@Messages("go.back")</a>
 	}

@@ -89,6 +89,7 @@ phone.placeholder=
 hasFollowedCourse=
 required=
 accountNumber.placeholder=
+password.repeat= 
 
 
 edit.success=

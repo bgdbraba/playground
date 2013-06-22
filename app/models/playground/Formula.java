@@ -50,5 +50,11 @@ public class Formula extends Model{
 		
 		formula.update();
 	}
+	
+	public String toString(Long id){
+		Formula formula = Formula.find.byId(id);
+		
+		return formula.name + " (" + formula.cost + ";" + formula.sessionCardCompensation + ")";
+	}
 
 }

@@ -16,7 +16,7 @@
 	@actions{
 		
 		@modalForm(MyMessages.get("edit"), "animatorModal", MyMessages.get("edit")) {
-			@editForm(animatorForm)
+			@editForm(animatorForm, animator.id)
 		}
 		
 		@if(animator.active){

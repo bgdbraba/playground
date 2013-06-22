@@ -82,8 +82,10 @@ date.help=(vb.:"01-02-1991")
 email.help= 
 phone.placeholder=051203378
 hasFollowedCourse=Cursus Gevolgd?
+Required=*
 required=*
 accountNumber.placeholder=79750609630936
+password.repeat=Herhaal Wachtwoord 
 
 sessionCardCompensation= Compensatie met beurtenkaart
 sessionCardCompensation.help= (aantal beurten)

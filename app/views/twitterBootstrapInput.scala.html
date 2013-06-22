@@ -4,7 +4,7 @@
 * Generate input according twitter bootsrap rules *
 **************************************************@
 <div class="@if(elements.hasErrors) {alert alert-error}">
-    <label for="@elements.id"><strong>@elements.label</strong> <small> @elements.infos.mkString("")</small></label>
+    <label for="@elements.id"><strong>@elements.label</strong> <small> @MyMessages.get(elements.infos.mkString(""))</small></label>
     
     @if(elements.args.containsKey('_iconcls)){
  	<div class="input-prepend">
@@ -15,7 +15,7 @@
     
         @elements.input
         
-        <span class="help-block error small"><small>@elements.errors.mkString("; ")</small></span> 
+        <span class="help-block error small"><small>@MyMessages.get(elements.errors.mkString("; "))</small></span> 
     </div>
     }else{
     	@if(elements.args.containsKey('_prependedInput)){

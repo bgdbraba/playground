@@ -1,1 +1,9 @@
-@(organizerForm: Form[models.users.forms.OrganizerForm])
+@(organizerForm: Form[models.users.forms.OrganizerForm], id : String) 
+
+@import helper._
+
+@form(routes.OrganizerController.editOrganizer(id)) {
+
+	@fieldset(organizerForm)
+
+}

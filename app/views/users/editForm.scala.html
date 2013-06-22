@@ -1,44 +1,9 @@
 @(userForm: Form[models.users.forms.UserForm])
 
 @import helper._
-@import helper.twitterBootstrap._
-@import models.users.enums._
-@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
-
 
 @form(routes.UserController.editUser()) {
-
-<fieldset>
-
-	@inputText(userForm("id"), 'readonly -> "readonly", '_label -> MyMessages.get("id"))
-
-	@inputPassword(userForm("password1"), '_label -> MyMessages.get("password"))
 	
-	@inputPassword(userForm("password2"), '_label -> MyMessages.get("passwordRepeat"))
+	@fieldset(userForm)
 
-	@inputText(userForm("firstName"), '_label -> MyMessages.get("firstName"))
-
-	@inputText(userForm("lastName"), '_label -> MyMessages.get("lastName"))
-
-	@inputRadioGroup(
-		userForm("gender"),
-		options(Gender.options()), 
-		'_label -> MyMessages.get("gender")
-	)
-
-	@inputDate(userForm("dateOfBirth"), '_label -> MyMessages.get("dateOfBirth"), 'placeholder -> MyMessages.get("date.help"))
-
-	@inputRadioGroup(
-		userForm("language"), 
-		options(Language.options()), 
-		'_label -> MyMessages.get("language")
-	)
-
-	@input(userForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
-		<input id="email" type="email" name="@name" value="@value">
-	} 
-
-	@inputText(userForm("phone"), '_label -> MyMessages.get("phone"))
-
-</fieldset>
 }

@@ -1,1 +1,9 @@
-@(childForm: Form[models.users.forms.ChildForm])
+@(childForm: Form[models.users.forms.ChildForm], id : String)
+
+@import helper._
+
+@form(routes.ChildController.editChild(id)) {
+
+	@fieldset(childForm)
+
+}

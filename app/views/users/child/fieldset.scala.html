@@ -1,0 +1,116 @@
+@(childForm: Form[models.users.forms.ChildForm]) 
+
+@import models.users.enums._
+@import helper._
+@implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+<fieldset>
+	@inputText(childForm("id"),
+	 	'readonly -> "readonly", 
+	 	'_label -> MyMessages.get("id"),
+	 	'_iconcls -> "icon-user"
+	)
+	
+	@inputText(
+		childForm("firstName"), 
+		'_label -> MyMessages.get("firstName") , 
+		'_help -> MyMessages.get("firstName.help")
+	)
+
+	@inputText(
+		childForm("lastName"), 
+		'_label -> MyMessages.get("lastName"), 
+		'_help -> MyMessages.get("lastName.help")
+	)
+	
+	@inputText(
+		childForm("password1"), 
+		'_label -> MyMessages.get("password"), 
+		'_help -> MyMessages.get("password.help")
+	)
+	
+	<p>
+		<a href="" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
+	</p>
+	
+	<hr>
+
+	@inputRadioGroup(
+		childForm("gender"),
+		options(Gender.options()), 
+		'_label -> MyMessages.get("gender")
+	)
+
+	<hr>
+	
+	@inputDate(
+		childForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth")
+	)
+	
+	<hr>
+	
+	@inputRadioGroup(
+		childForm("language"), 
+		options(Language.options()), 
+		'_label -> MyMessages.get("language")
+	)
+	
+	<hr>
+	
+	@input(childForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
+		<input id="email" type="email" name="@name" value="@value">
+	} 
+
+	@inputText(childForm("phone"), '_label -> MyMessages.get("phone"))
+	
+	@inputText(childForm("phoneWork"), '_label -> MyMessages.get("phone.work"))
+	
+	@inputText(childForm("phoneAlt"), '_label -> MyMessages.get("phone.alt"))
+	
+	@inputText(
+		childForm("city"), 
+		'_label -> MyMessages.get("city"),
+		'_help -> MyMessages.get("city.help")
+	)
+	
+	@inputText(
+		childForm("street"), 
+		'_label -> MyMessages.get("street"),
+		'_help -> MyMessages.get("street.help")
+	)
+	
+	@inputText(
+		childForm("number"), 
+		'_label -> MyMessages.get("number"),
+		'_help -> MyMessages.get("number.help")
+	)
+	
+	@inputText(
+		childForm("zipCode"), 
+		'_label -> MyMessages.get("zipCode"),
+		'_help -> MyMessages.get("zipCode.help")
+	)
+	
+	@inputText(
+		childForm("doctor"), 
+		'_label -> MyMessages.get("doctor"),
+		'_help -> MyMessages.get("doctor.help")
+	)
+	
+	@textarea(	
+		childForm("remarks"),
+		'_label -> MyMessages.get("remarks")
+	)
+	
+	@checkbox(
+		childForm("receiveMail"),
+		'_label -> MyMessages.get("receive.mail")
+	)
+	
+	@checkbox(
+		childForm("photographable"),
+		'_label -> MyMessages.get("photographable"),
+		'_value -> true
+	)
+</fieldset>

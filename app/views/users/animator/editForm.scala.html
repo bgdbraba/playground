@@ -1,1 +1,9 @@
-@(animatorForm: Form[models.users.forms.AnimatorForm])
+@(animatorForm: Form[models.users.forms.AnimatorForm], id : String)
+
+@import helper._
+
+@form(routes.AnimatorController.editAnimator(id)) {
+
+@fieldset(animatorForm)
+
+}
