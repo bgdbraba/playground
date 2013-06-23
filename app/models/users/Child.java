@@ -9,15 +9,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import models.ChildDay;
+import models.day.ChildDay;
 import models.playground.Playground;
 import models.users.enums.Gender;
 import models.users.forms.ChildForm;
 import models.users.information.Address;
 import models.users.information.ChildSessionCard;
-import play.db.ebean.Model.Finder;
 import conf.DateConverter;
 import conf.Language;
+import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("child")

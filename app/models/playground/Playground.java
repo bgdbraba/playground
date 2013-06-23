@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.day.PlaygroundDay;
 import models.playground.forms.PlaygroundForm;
 import models.users.Animator;
 import models.users.Child;
@@ -45,6 +46,10 @@ public class Playground extends Model{
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Child> children;
+	
+
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<PlaygroundDay> playgroundDays;
 	
 	@OneToOne
 	public SessionCard sessionCard = null;
