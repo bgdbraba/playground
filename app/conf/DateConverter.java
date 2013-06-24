@@ -3,6 +3,7 @@ package conf;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateConverter {
@@ -85,5 +86,32 @@ public class DateConverter {
 		return hours.substring(hours.length() - 2) + ":"
 				+ minutes.substring(minutes.length() - 2) + ":"
 				+ seconds.substring(seconds.length() - 2);
+	}
+	
+	public static long getCurrentDate2(){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date today = null;
+		try {
+			today = dateFormat.parse(dateFormat.format(new Date()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return today.getTime();
+		
+	}
+	
+	public static long getCurrentDate(){
+		Calendar cal = Calendar.getInstance();
+		
+		cal.clear(Calendar.HOUR_OF_DAY);
+		cal.clear(Calendar.HOUR);
+		cal.clear(Calendar.MINUTE);
+		cal.clear(Calendar.SECOND);
+		cal.clear(Calendar.MILLISECOND);
+		
+		return cal.getTime().getTime();
+		
 	}
 }

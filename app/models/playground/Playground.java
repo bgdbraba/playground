@@ -29,6 +29,8 @@ public class Playground extends Model{
 	
 	public String phone;
 	
+	public boolean sessionCardActive;
+	
 	@OneToOne
 	public Address address;
 	
@@ -50,6 +52,10 @@ public class Playground extends Model{
 
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<PlaygroundDay> playgroundDays;
+	
+	// Aanwezige kinderen op het plein op dit moment
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<Child> present;
 	
 	@OneToOne
 	public SessionCard sessionCard = null;
@@ -135,8 +141,36 @@ public class Playground extends Model{
 		playground.update();
 	}
 	
-	public static boolean sessionCardActive(Long id){
-		return Playground.find.byId(id).sessionCard != null;
+	public static void activateSessionCard(Long playgroundId){
+		Playground playground = Playground.find.byId(playgroundId);
+		playground.sessionCardActive = true;
+		
+		playground.update();
+	}
+	
+	public static void deactivateSessionCard(Long playgroundId){
+		Playground playground = Playground.find.byId(playgroundId);
+		playground.sessionCardActive = false;
+		
+		playground.update();
+	}
+	
+	public static void addPresentChild(Long playgroundId, String childId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Child child = Child.find.byId(childId);
+		
+		playground.present.add(child);
+		
+		playground.update();
+	}
+	
+	public static void removePresentChild(Long playgroundId, String childId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Child child = Child.find.byId(childId);
+		
+		playground.present.add(child);
+		
+		playground.update();
 	}
 
 	public PlaygroundForm toForm() {

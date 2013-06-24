@@ -43,6 +43,8 @@ public class Child extends User{
 	@ManyToOne
 	public Playground playground;
 	
+	public boolean sessionCardActive;
+	
 	@OneToOne
 	public ChildSessionCard card;
 	
@@ -100,6 +102,38 @@ public class Child extends User{
 		Address address = Address.find.byId(addressId);
 		
 		child.address = address;
+		
+		child.update();
+	}
+	
+	public static void addChildDay(String childId, Long childDayId){
+		Child child = Child.find.byId(childId);
+		ChildDay childDay = ChildDay.find.byId(childDayId);
+		
+		child.days.add(childDay);
+		
+		child.update();
+	}
+	
+	public static void addChildSessionCard(String childId, Long childSessionCardId){
+		Child child = Child.find.byId(childId);
+		ChildSessionCard childSessionCard = ChildSessionCard.find.byId(childSessionCardId);
+		
+		child.card = childSessionCard;
+		
+		child.update();
+	}
+	
+	public static void activateSessionCard(String childId){
+		Child child = Child.find.byId(childId);
+		child.sessionCardActive = true;
+		
+		child.update();
+	}
+	
+	public static void deactivateSessionCard(String childId){
+		Child child = Child.find.byId(childId);
+		child.sessionCardActive = false;
 		
 		child.update();
 	}

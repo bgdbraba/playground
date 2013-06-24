@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import conf.DateConverter;
+
 import models.playground.Formula;
 import models.users.Child;
 import play.db.ebean.Model;
@@ -30,7 +32,7 @@ public class ChildDay extends Model{
 	
 	public static Finder<Long, ChildDay> find = new Finder<Long, ChildDay>(Long.class, ChildDay.class);
 	
-	public ChildDay create(){
+	public static ChildDay create(){
 		ChildDay childDay = new ChildDay();
 		
 		childDay.save();
@@ -38,14 +40,15 @@ public class ChildDay extends Model{
 		return childDay;
 	}
 	
-	public void initialize(Long childDayId){
+	public static void initialize(Long childDayId){
 		ChildDay childDay = ChildDay.find.byId(childDayId);
-		childDay.date = System.currentTimeMillis();
+		
+		childDay.date = DateConverter.getCurrentDate();
 		
 		childDay.update();
 	}
 	
-	public void addChild(Long childDayId, String childId){
+	public static void addChild(Long childDayId, String childId){
 		ChildDay childDay = ChildDay.find.byId(childDayId);
 		Child child = Child.find.byId(childId);
 		
@@ -54,7 +57,7 @@ public class ChildDay extends Model{
 		childDay.update();
 	}
 	
-	public void addFormula(Long childDayId, Long formulaId){
+	public static void addFormula(Long childDayId, Long formulaId){
 		ChildDay childDay = ChildDay.find.byId(childDayId);
 		Formula formula = Formula.find.byId(formulaId);
 		
@@ -63,6 +66,10 @@ public class ChildDay extends Model{
 		childDay.saveManyToManyAssociations("formulas");
 		
 		childDay.update();		
+	}
+	
+	public static boolean exists(String childId){
+		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()) != null;
 	}
 
 }
