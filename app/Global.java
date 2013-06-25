@@ -1,5 +1,6 @@
 import java.util.List;
 
+import models.users.Admin;
 import models.users.User;
 import play.Application;
 import play.GlobalSettings;
@@ -33,6 +34,12 @@ public class Global extends GlobalSettings{
             Ebean.save((List) Yaml.load("data.yml"));
 
         }
+        
+        Admin admin = new Admin();
+        admin.id = "bartel";
+        admin.password = "bartel";
+        
+        admin.save();
 		
 		
 	}
