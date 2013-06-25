@@ -1,0 +1,56 @@
+@(activityForm: Form[models.playground.forms.ActivityForm])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+<fieldset>
+
+	
+	@inputText(activityForm("name"),
+		'_label -> MyMessages.get("name"),
+		'_help -> MyMessages.get("name.help"),
+		'_iconcls -> "icon-edit"
+		)
+	
+	<hr>
+          
+	@inputText(activityForm("cost"), 
+		'_label -> MyMessages.get("cost") , 
+		'_help -> MyMessages.get("cost.help"),
+		'_iconcls -> "icon-euro"
+		)
+	
+	<hr>	
+	
+	@inputText(activityForm("beginDate"), 
+		'_label -> MyMessages.get("begin.date"), 
+		'placeholder -> MyMessages.get("date.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+	)
+	
+	@inputText(activityForm("beginTime"), 
+		'_label -> MyMessages.get("begin.time"), 
+		'placeholder -> MyMessages.get("time.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-time"
+	)
+	
+	<hr>
+	
+	@inputText(activityForm("endDate"), 
+		'_label -> MyMessages.get("end.date"), 
+		'placeholder -> MyMessages.get("date.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+	)
+	
+	@inputText(activityForm("endTime"), 
+		'_label -> MyMessages.get("end.time"), 
+		'placeholder -> MyMessages.get("time.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-time"
+	)
+	   
+    
+</fieldset>

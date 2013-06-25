@@ -1,0 +1,10 @@
+@(activityForm: Form[models.playground.forms.ActivityForm])
+
+@import helper._
+
+@form(routes.ActivityController.registerActivity()) {
+
+	@fieldset(activityForm)
+
+}
+

@@ -11,6 +11,8 @@ public class DateConverter {
 	public static SimpleDateFormat formatBirth = new SimpleDateFormat("dd-MM-yyyy");
 
 	public static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+	
+	public static SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
 
 	public static String getDateAsString(long date) {
 		return formatBirth.format(new Date(date));
@@ -100,6 +102,18 @@ public class DateConverter {
 		
 		return today.getTime();
 		
+	}
+	
+	public static long parseTime(String timeStamp){
+		long date = 0;
+
+		try {
+			date = formatTime.parse(timeStamp).getTime();
+		} catch (ParseException e) {
+			date = -1;
+		}
+
+		return date;
 	}
 	
 	public static long getCurrentDate(){

@@ -1,0 +1,16 @@
+@(activities: List[models.playground.Activity])(activityForm: Form[models.playground.forms.ActivityForm])
+
+@main(MyMessages.get("activity.management")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("activity.management")</h1>
+
+	@list(activities)
+	
+	@actions{
+		@modalForm(MyMessages.get("activity.add"), "activityModal", MyMessages.get("activity.add")) {
+			@addForm(activityForm)
+		}
+	}
+}

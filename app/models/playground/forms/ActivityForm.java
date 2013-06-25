@@ -1,5 +1,8 @@
 package models.playground.forms;
 
+import conf.DateConverter;
+import models.playground.Activity;
+import models.playground.Playground;
 import play.data.validation.Constraints.Required;
 
 public class ActivityForm {
@@ -25,6 +28,22 @@ public class ActivityForm {
 	public String endTime;
 	
 	public Long playgroundId;
+	
+	public void submit(){
+		Activity activity = Activity.create();
+		
+		id = activity.id;
+		
+		update();
+	}
+	
+	public void update(){
+		Activity.initialize(id, name, Double.parseDouble(cost), DateConverter.parseDate(beginDate) + DateConverter.parseTime(beginTime), DateConverter.parseDate(endDate)+ DateConverter.parseTime(endTime));
+		
+		Activity.addPlayground(id, playgroundId);
+		
+		Playground.addActivity(playgroundId, id);
+	}
 	
 	
 

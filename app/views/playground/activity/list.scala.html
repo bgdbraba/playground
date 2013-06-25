@@ -1,0 +1,17 @@
+@(activities: List[models.playground.Activity])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("name")</th>
+		<th>@MyMessages.get("cost")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@for(activity <- activities) {
+		@item(activity)
+	}
+	</tbody>
+}

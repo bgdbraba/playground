@@ -1,0 +1,9 @@
+@(activityForm: Form[models.playground.forms.ActivityForm], id : Long)
+
+@import helper._
+
+@form(routes.ActivityController.editActivity(id)) {
+
+	@fieldset(activityForm)
+
+}

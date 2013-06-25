@@ -47,7 +47,26 @@ public class Activity extends Model {
 		return activity;
 	}
 	
-	public static void initialize(Long activityId){
-		// NOG AF TE WERKEN
+
+	public static void addPlayground(Long id, Long playgroundId) {
+		Activity activity = Activity.find.byId(id);
+		Playground playground = Playground.find.byId(playgroundId);
+		
+		activity.playground = playground;
+		
+		activity.update();
+	}
+
+
+	public static void initialize(Long id, String name, double cost,
+			long beginDate, long endDate) {
+		Activity activity = Activity.find.byId(id);
+		
+		activity.beginDate = beginDate;
+		activity.endDate = endDate;
+		activity.name = name;
+		activity.cost = cost;
+		
+		activity.update();
 	}
 }
