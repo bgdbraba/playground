@@ -57,6 +57,9 @@ public class Playground extends Model{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Child> present;
 	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
+	public List<Activity> activities;
+	
 	@OneToOne
 	public SessionCard sessionCard = null;
 	
@@ -137,6 +140,15 @@ public class Playground extends Model{
 		Child child = Child.find.byId(childId);
 		
 		playground.children.add(child);
+		
+		playground.update();
+	}
+	
+	public static void addActivity(Long playgroundId, Long activityId){
+		Playground playground = Playground.find.byId(playgroundId);
+		Activity activity = Activity.find.byId(activityId);
+		
+		playground.activities.add(activity);
 		
 		playground.update();
 	}
