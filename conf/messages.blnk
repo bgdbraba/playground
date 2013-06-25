@@ -90,6 +90,12 @@ hasFollowedCourse=
 required=
 accountNumber.placeholder=
 password.repeat= 
+Optional=
+photographable=
+doctor=
+receiveMail=
+remarks= 
+remarks.help=
 
 
 edit.success=

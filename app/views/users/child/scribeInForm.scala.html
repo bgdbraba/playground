@@ -5,10 +5,7 @@
 @implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 @form(routes.ChildController.scribeIn(child.id)) {
-	
-	@for((formula <- formulas){
-		<input type="checkbox" name="formula" value="@formula" class=""> formula.name</input>
-	}
+
 	
 	<br>
 	@actions{

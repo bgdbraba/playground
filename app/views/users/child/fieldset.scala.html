@@ -14,20 +14,28 @@
 	@inputText(
 		childForm("firstName"), 
 		'_label -> MyMessages.get("firstName") , 
-		'_help -> MyMessages.get("firstName.help")
+		'_help -> MyMessages.get("required"),
+	 	'_iconcls -> "icon-edit"
 	)
 
 	@inputText(
 		childForm("lastName"), 
 		'_label -> MyMessages.get("lastName"), 
-		'_help -> MyMessages.get("lastName.help")
+		'_help -> MyMessages.get("required"),
+	 	'_iconcls -> "icon-edit"
 	)
 	
-	@inputText(
-		childForm("password1"), 
-		'_label -> MyMessages.get("password"), 
-		'_help -> MyMessages.get("password.help")
-	)
+	@inputText(childForm("password1"), 
+		'_label -> MyMessages.get("password"),
+		'_help -> MyMessages.get("Required"),
+	 	'_iconcls -> "icon-key"
+	 )
+	
+	@inputText(childForm("password2"), 
+		'_label -> MyMessages.get("password.repeat"),
+		'_help -> MyMessages.get("Required"),
+	 	'_iconcls -> "icon-key"
+	 )
 	
 	<p>
 		<a href="" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
@@ -43,10 +51,12 @@
 
 	<hr>
 	
-	@inputDate(
-		childForm("dateOfBirth"), 
-		'_label -> MyMessages.get("dateOfBirth")
-	)
+	@inputText(childForm("dateOfBirth"), 
+		'_label -> MyMessages.get("dateOfBirth"), 
+		'placeholder -> MyMessages.get("date.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+		)
 	
 	<hr>
 	
@@ -58,59 +68,79 @@
 	
 	<hr>
 	
-	@input(childForm("email"), '_label -> MyMessages.get("email")) { (id, name, value, _) =>
+	@input(childForm("email"), '_label -> MyMessages.get("email"),
+	 	'_iconcls -> "icon-envelope-alt",
+		'_help -> MyMessages.get("Required")
+		) { (id, name, value, _) =>
 		<input id="email" type="email" name="@name" value="@value">
 	} 
 
-	@inputText(childForm("phone"), '_label -> MyMessages.get("phone"))
+	@inputText(childForm("phone"), 
+		'_label -> MyMessages.get("phone"),
+		'_help -> MyMessages.get("Required"),
+	 	'_iconcls -> "icon-phone"
+	 	)
 	
-	@inputText(childForm("phoneWork"), '_label -> MyMessages.get("phone.work"))
+	@inputText(childForm("phoneWork"), 
+		'_label -> MyMessages.get("phone.work"),
+		'_help -> MyMessages.get("Optional"),
+	 	'_iconcls -> "icon-phone"
+	 	)
 	
-	@inputText(childForm("phoneAlt"), '_label -> MyMessages.get("phone.alt"))
+	@inputText(childForm("phoneAlt"), 
+		'_label -> MyMessages.get("phone.alt"),
+		'_help -> MyMessages.get("Optional"),
+	 	'_iconcls -> "icon-phone"
+	 	)
 	
 	@inputText(
 		childForm("city"), 
 		'_label -> MyMessages.get("city"),
-		'_help -> MyMessages.get("city.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-location-arrow"
 	)
 	
 	@inputText(
 		childForm("street"), 
 		'_label -> MyMessages.get("street"),
-		'_help -> MyMessages.get("street.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-road"
 	)
 	
 	@inputText(
 		childForm("number"), 
 		'_label -> MyMessages.get("number"),
-		'_help -> MyMessages.get("number.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-hand-up"
 	)
 	
 	@inputText(
 		childForm("zipCode"), 
 		'_label -> MyMessages.get("zipCode"),
-		'_help -> MyMessages.get("zipCode.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-map-marker"
 	)
 	
 	@inputText(
 		childForm("doctor"), 
 		'_label -> MyMessages.get("doctor"),
-		'_help -> MyMessages.get("doctor.help")
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-user-md"
 	)
 	
 	@textarea(	
 		childForm("remarks"),
-		'_label -> MyMessages.get("remarks")
+		'_label -> MyMessages.get("remarks"),
+		'_help -> MyMessages.get("remarks.help")
 	)
 	
 	@checkbox(
 		childForm("receiveMail"),
 		'_label -> MyMessages.get("receive.mail")
-	)
+	) 
 	
 	@checkbox(
 		childForm("photographable"),
-		'_label -> MyMessages.get("photographable"),
-		'_value -> true
+		'_label -> MyMessages.get("photographable")
 	)
 </fieldset>

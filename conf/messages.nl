@@ -86,6 +86,12 @@ Required=*
 required=*
 accountNumber.placeholder=79750609630936
 password.repeat=Herhaal Wachtwoord 
+Optional=optioneel
+photographable=Recht om te fotograferen?
+doctor=Huisarts
+receive.mail=Mail ontvangen?
+remarks=Opmerkingen
+remarks.help=( allergien, ziektes, ... )
 
 sessionCardCompensation= Compensatie met beurtenkaart
 sessionCardCompensation.help= (aantal beurten)

@@ -19,7 +19,7 @@
 			@editForm(childForm, child.id)
 		}
 		
-		<a href="@routes.ChildController.scribeInPage(child.id)" class="btn btn-inverse">@MyMessages.get("scribe.in")</a>		
+		@*<a href="@routes.ChildController.scribeInPage(child.id)" class="btn btn-inverse">@MyMessages.get("scribe.in")</a>	*@	
 		
 		@if(child.active){
 			<a href="@routes.ChildController.deactivate(child.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>

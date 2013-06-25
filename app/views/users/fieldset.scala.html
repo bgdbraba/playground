@@ -12,12 +12,13 @@
 	 	'_iconcls -> "icon-user"
 	 	)
 
-	@inputPassword(userForm("password1"),
+	@inputText(userForm("password1"),
 	 	'_label -> MyMessages.get("password"),
+		'_help -> MyMessages.get("Required"),
 	 	'_iconcls -> "icon-key"
 	 	)
 	
-	@inputPassword(userForm("password2"), 
+	@inputText(userForm("password2"), 
 		'_label -> MyMessages.get("password.repeat"),
 		'_help -> MyMessages.get("Required"),
 	 	'_iconcls -> "icon-key"
@@ -39,11 +40,12 @@
 		'_label -> MyMessages.get("gender")
 	)
 
-	@inputDate(userForm("dateOfBirth"), 
+	@inputText(userForm("dateOfBirth"), 
 		'_label -> MyMessages.get("dateOfBirth"), 
 		'placeholder -> MyMessages.get("date.help"),
-	 	'_iconcls -> "icon-calendar"
-	 	)
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-calendar"
+		)
 
 	@inputRadioGroup(
 		userForm("language"), 
