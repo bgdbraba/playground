@@ -1,18 +1,15 @@
 package controllers;
 
+import models.day.forms.DayForm;
 import models.playground.Playground;
 import models.users.Animator;
 import models.users.Child;
-import models.users.Organizer;
 import models.users.User;
-import models.users.forms.AnimatorForm;
 import models.users.forms.ChildForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.DateConverter;
-import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class ChildController extends Controller{
@@ -63,7 +60,7 @@ public class ChildController extends Controller{
 		if (Secured.isAnimator() && Secured.hasAdministration() ) {
 			Child child = Child.find.byId(id);
 			ChildForm editForm = child.toChildForm();
-			return ok(views.html.users.child.details.render(child,Form.form(ChildForm.class).fill(editForm)));
+			return ok(views.html.users.child.details.render(child,Form.form(ChildForm.class).fill(editForm),Form.form(DayForm.class)));
 		
 		} else {
 			return forbidden();
@@ -93,6 +90,51 @@ public class ChildController extends Controller{
 		} else {
 			return forbidden();
 		}
+	}
+	
+	public static Result scribeInPage(String childId){
+		return ok(views.html.users.child.scribeIn.render(Form.form(DayForm.class),Child.find.byId(childId)));
+	}
+	
+	public static Result payment(String childId){
+		return TODO;
+	}
+	
+	public static Result scribeIn(String childId){
+		// FORM FILLED IN RIGHT ?
+		
+		// IS THERE A PLAYGROUNDDAY YET?
+		
+		// IS THERE A FORMULADAY YET?
+		
+		// IS THERE A CHILDDAY YET ?
+		Form<DayForm> filledForm = Form.form(DayForm.class).bindFromRequest();
+		DayForm form = filledForm.get();
+		for(String b : form.formulas){
+			System.out.println(b);
+		}
+		System.out.println("ingeschreven");
+		
+		return redirect(routes.ChildController.payment(childId));
+	}
+	
+	public static Result scribeOut(String childId){
+		
+		System.out.println("uitgeschreven");
+		return TODO;
+	}
+	
+
+	
+	public static Result payNow(String childId){
+		System.out.println("betaal nu");
+		return TODO;
+	}
+	
+	public static Result payLater(String childId){
+		System.out.println("betaal later");
+		
+		return redirect(routes.ChildController.scribeIn(childId));
 	}
 
 }

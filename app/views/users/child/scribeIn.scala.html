@@ -1,0 +1,10 @@
+@(dayForm: Form[models.day.forms.DayForm] ,child: models.users.Child) 
+
+@main(MyMessages.get("scribe.in")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("scribe.in")</h1>
+
+	@views.html.users.child.scribeInForm(dayForm,child)
+}

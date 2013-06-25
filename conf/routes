@@ -47,9 +47,16 @@ GET		/children											controllers.ChildController.showChildren()
 POST	/children											controllers.ChildController.registerChild()
 GET		/children/:id/details								controllers.ChildController.showDetails(id: String)
 POST	/children/:id/details								controllers.ChildController.editChild(id: String)
-GET		/children/deactivate/:childId    					controllers.ChildController.deactivate(childId: String)
-GET		/children/activate/:childId    						controllers.ChildController.activate(childId: String)
+GET		/children/:childId/deactivate    					controllers.ChildController.deactivate(childId: String)
+GET		/children/:childId/activate    						controllers.ChildController.activate(childId: String)
 
+# Day management
+GET 	/children/:id/scribeInPage							controllers.ChildController.scribeInPage(id : String)
+POST 	/children/:id/scribeIn								controllers.ChildController.scribeIn(id : String)
+GET		/children/:id/scribeOut								controllers.ChildController.scribeOut(id : String)
+GET		/children/:id/payMent								controllers.ChildController.payment(id : String)
+GET		/children/:id/payNow								controllers.ChildController.payNow(id : String)
+GET		/children/:id/payLater								controllers.ChildController.payLater(id : String)
 
 # School management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()

@@ -83,4 +83,8 @@ public class PlaygroundDay extends Model{
 		
 		playgroundDay.update();
 	}
+
+	public static boolean exists(Long playgroundId) {
+		return PlaygroundDay.find.where().eq("playground", playgroundId).eq("date", DateConverter.getCurrentDate()) != null;
+	}
 }

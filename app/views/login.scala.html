@@ -22,9 +22,9 @@
 		@inputPassword(login("password"), '_label -> MyMessages.get("password"),'_iconcls -> "icon-key")
         </fieldset>
 		<br>
-		<div class="actions">
+		@actions{
 			<input class="btn btn-primary" type="submit" value="@MyMessages.get("login")" id="submit" />
-		</div>
+		}
 	}
 
 }

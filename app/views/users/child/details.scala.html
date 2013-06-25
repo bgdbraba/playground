@@ -1,4 +1,4 @@
-@(child: models.users.Child)(childForm: Form[models.users.forms.ChildForm])
+@(child: models.users.Child)(childForm: Form[models.users.forms.ChildForm])(dayForm: Form[models.day.forms.DayForm])
 
 @import models.users._
 
@@ -18,6 +18,8 @@
 		@modalForm(MyMessages.get("edit"), "childModal", MyMessages.get("edit")) {
 			@editForm(childForm, child.id)
 		}
+		
+		<a href="@routes.ChildController.scribeInPage(child.id)" class="btn btn-inverse">@MyMessages.get("scribe.in")</a>		
 		
 		@if(child.active){
 			<a href="@routes.ChildController.deactivate(child.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>

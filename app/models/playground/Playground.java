@@ -53,7 +53,7 @@ public class Playground extends Model{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<PlaygroundDay> playgroundDays;
 	
-	// Aanwezige kinderen op het plein op dit moment
+	// CHILDREN PRESENT ON PLAYGROUND THIS EXACT MOMENT
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Child> present;
 	

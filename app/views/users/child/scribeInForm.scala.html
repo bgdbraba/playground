@@ -1,0 +1,19 @@
+@(dayForm: Form[models.day.forms.DayForm] ,child: models.users.Child) 
+
+@import models.playground._
+@import helper._
+@implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@form(routes.ChildController.scribeIn(child.id)) {
+	
+	@for((formula <- formulas){
+		<input type="checkbox" name="formula" value="@formula" class=""> formula.name</input>
+	}
+	
+	<br>
+	@actions{
+			<input class="btn btn-primary" type="submit" value="@MyMessages.get("go.forth")" id="submit" />
+			<a href="#" class="btn" >@MyMessages.get("go.back")</a>
+	}
+	
+}
