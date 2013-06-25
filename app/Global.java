@@ -33,14 +33,7 @@ public class Global extends GlobalSettings{
         if (User.find.findRowCount() == 0) {
             Ebean.save((List) Yaml.load("data.yml"));
 
-        }
-        
-        Admin admin = new Admin();
-        admin.id = "bartel";
-        admin.password = "bartel";
-        
-        admin.save();
-		
+        }		
 		
 	}
 
