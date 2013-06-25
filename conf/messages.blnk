@@ -96,6 +96,13 @@ doctor=
 receiveMail=
 remarks= 
 remarks.help=
+begin.date=
+end.date=
+begin.time=
+end.time=
+time.help=
+activity.management=
+activity.add=
 
 
 edit.success=

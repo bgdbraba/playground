@@ -92,6 +92,13 @@ doctor=Huisarts
 receive.mail=Mail ontvangen?
 remarks=Opmerkingen
 remarks.help=( allergien, ziektes, ... )
+begin.date=Begin Datun
+end.date=Eind Datum
+begin.time=Begin Tijd
+end.time=Eind Tijd
+time.help=(vb.:"08:00")
+activity.management=Activiteiten
+activity.add=Activiteit toevoegen
 
 sessionCardCompensation= Compensatie met beurtenkaart
 sessionCardCompensation.help= (aantal beurten)
