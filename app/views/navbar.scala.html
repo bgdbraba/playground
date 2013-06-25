@@ -32,7 +32,7 @@
 					<!-- Profile -->
 	    			<li class="pull-right">
 			    		@if(session.containsKey("id")){   		
-			    			<a href="@routes.UserController.profile()"><i class="icon-user icon-white"></i> @User.getName(session.get("id"))</a>
+			    			<a href="@routes.UserController.profile()"><i class="icon-user icon-white"></i> @BasicUser.getName(session.get("id"))</a>
 			    		}
 	    			</li>
 	    			

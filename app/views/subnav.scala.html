@@ -3,7 +3,7 @@
 
 		@if(session().get("id") != null){	
 		
-			@defining(User.find.byId(session.get("id"))){ user =>
+			@defining(BasicUser.find.byId(session.get("id"))){ user =>
 			
 				@if(user != null){
 					@if(user.is(UserType.ADMIN)) {

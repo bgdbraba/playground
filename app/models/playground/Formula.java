@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import conf.MyMessages;
+
 import play.db.ebean.Model;
 
 @Entity
@@ -53,10 +55,8 @@ public class Formula extends Model{
 		formula.update();
 	}
 	
-	public String toString(Long id){
-		Formula formula = Formula.find.byId(id);
-		
-		return formula.name + " (" + formula.cost + ";" + formula.sessionCardCompensation + ")";
+	public String toString(){
+		return name + " (" + MyMessages.get("cost") + " " + cost + " ; " + MyMessages.get("sessionCardCompensation")+ " " + sessionCardCompensation + ")";
 	}
 	
 	public static List<Formula> findAllForPlayground(Long playgroundId){

@@ -3,7 +3,7 @@ package controllers;
 import models.playground.Playground;
 import models.users.Animator;
 import models.users.Organizer;
-import models.users.User;
+import models.users.BasicUser;
 import models.users.forms.AnimatorForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -87,7 +87,7 @@ public class AnimatorController extends Controller{
 	
 	public static Result deactivate(String animatorId) {
 		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
-			User.deactivate(animatorId);
+			BasicUser.deactivate(animatorId);
 			
 			return redirect(routes.AnimatorController.showDetails(animatorId));
 		} else {
@@ -97,7 +97,7 @@ public class AnimatorController extends Controller{
 
 	public static Result activate(String animatorId) {
 		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
-			User.activate(animatorId);
+			BasicUser.activate(animatorId);
 			
 			return redirect(routes.AnimatorController.showDetails(animatorId));
 		} else {

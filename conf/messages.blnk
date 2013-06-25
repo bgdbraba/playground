@@ -103,12 +103,17 @@ end.time=
 time.help=
 activity.management=
 activity.add=
-
-
 edit.success=
 edit.fail=
 edit.playground.fail=
 edit.playground.success=
 login.fail=
-
+register.formula.succes=
+scribe.in=
+go.forth=
+pay.now=
+pay.later=
+payment.info=
+payment=
+scribe.out=
 

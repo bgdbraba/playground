@@ -21,7 +21,7 @@ import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("child")
-public class Child extends User{
+public class Child extends BasicUser{
 	
 	public String phoneWork;
 	
@@ -45,6 +45,8 @@ public class Child extends User{
 	
 	public boolean sessionCardActive;
 	
+	public boolean onPlayground = false;
+	
 	@OneToOne
 	public ChildSessionCard card;
 	
@@ -53,6 +55,7 @@ public class Child extends User{
 	
 	public static Finder<String, Child> find = new Finder<String, Child>(String.class, Child.class);
 	
+	public Child(){}
 
 	public static void remove(String id){
 		find.ref(id).delete();
@@ -64,7 +67,7 @@ public class Child extends User{
 			String phoneWork, String phoneAlt,boolean receiveMail,
 			boolean photographable, String remarks, String doctor) {
 		
-		User.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
+		BasicUser.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
 		
 		Child child = Child.find.byId(id);
 		

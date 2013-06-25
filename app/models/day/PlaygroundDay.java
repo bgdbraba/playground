@@ -6,12 +6,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import models.playground.Formula;
 import models.playground.Playground;
-import models.users.Child;
 import play.db.ebean.Model;
 import conf.DateConverter;
 
@@ -40,13 +39,31 @@ public class PlaygroundDay extends Model{
 		return playgroundDay;
 	}
 	
-	public static void initialize(Long playgroundDayId){
+	public static void initialize(Long playgroundDayId, Long playgroundId){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
 		playgroundDay.date = DateConverter.getCurrentDate();
 		
+		PlaygroundDay.addPlayground(playgroundDay.id, playgroundId);
+		
+		Playground playgrounded = Playground.find.byId(playgroundId);
+		
+		for(Formula formula : playgrounded.formulas){
+			System.out.println("HAS FORMULAS");
+			FormulaDay formulaDay = FormulaDay.create();
+			FormulaDay.initialize(formulaDay.id);
+			FormulaDay.addFormula(formulaDay.id, formula.id);
+			FormulaDay.addPlaygroundDay(formulaDay.id, playgroundDayId);	
+			
+			PlaygroundDay.addFormulaDay(playgroundDayId, formulaDay.id);			
+		}		
+		
 		playgroundDay.update();
 	}
+	
+	
+	
+	
 	
 	public static void addFormulaDay(Long playgroundDayId, Long formulaDayId){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
@@ -86,5 +103,19 @@ public class PlaygroundDay extends Model{
 
 	public static boolean exists(Long playgroundId) {
 		return PlaygroundDay.find.where().eq("playground", playgroundId).eq("date", DateConverter.getCurrentDate()) != null;
+	}
+	
+	public static FormulaDay getFormulaDay(Long playgroundDayId, Long formulaId){
+		
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		
+		for(FormulaDay day : playgroundDay.formulaDays){
+			System.out.println("ENTERSSSS");
+			if(day.formula == Formula.find.byId(formulaId)){
+				return day;
+			}
+		}
+		
+		return null;
 	}
 }

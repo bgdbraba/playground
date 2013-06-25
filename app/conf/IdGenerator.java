@@ -1,6 +1,6 @@
 package conf;
 
-import models.users.User;
+import models.users.BasicUser;
 
 
 public class IdGenerator{
@@ -53,7 +53,7 @@ public class IdGenerator{
     
     private static boolean idExists(String id){
     	
-    	return User.find.byId(id)!=null;
+    	return BasicUser.find.byId(id)!=null;
     	
     }
 

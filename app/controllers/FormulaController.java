@@ -3,7 +3,7 @@ package controllers;
 import models.playground.Playground;
 import models.playground.forms.FormulaForm;
 import models.users.Organizer;
-import models.users.User;
+import models.users.BasicUser;
 import models.users.forms.OrganizerForm;
 import play.data.Form;
 import play.mvc.Controller;

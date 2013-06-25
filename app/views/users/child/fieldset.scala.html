@@ -136,11 +136,13 @@
 	
 	@checkbox(
 		childForm("receiveMail"),
-		'_label -> MyMessages.get("receive.mail")
+		'_label -> MyMessages.get("receive.mail"),
+		'checked -> "checked"
 	) 
 	
 	@checkbox(
 		childForm("photographable"),
-		'_label -> MyMessages.get("photographable")
+		'_label -> MyMessages.get("photographable"),
+		'checked -> "checked"
 	)
 </fieldset>

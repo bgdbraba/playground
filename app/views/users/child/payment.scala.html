@@ -1,0 +1,14 @@
+@(child : models.users.Child)
+
+
+@main(MyMessages.get("payment")) {
+	
+	<h1>@MyMessages.get("payment") <strong>&euro; @child.notPayed</strong></h1>
+	
+	<h3>@MyMessages.get("payment.info")</h3>
+
+	@actions{
+		<a href="@routes.ChildController.payNow(child.id)" class="btn btn-success">@MyMessages.get("pay.now")</a>
+		<a href="@routes.ChildController.payLater(child.id)" class="btn btn-alert">@MyMessages.get("pay.later")</a>	
+	}
+}

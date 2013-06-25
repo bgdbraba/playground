@@ -2,14 +2,14 @@
 
 @import models.users._
 
-@main(User.getName(animator.id)) {
+@main(BasicUser.getName(animator.id)) {
 
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 			
 	<h1>@animator.lastName, @animator.firstName</h1>
 			
 	@detailslist{
-			@views.html.users.details(User.getUser(animator.id))				
+			@views.html.users.details(BasicUser.getUser(animator.id))				
 			@views.html.users.addressDetails(animator.address)
 	}
 	

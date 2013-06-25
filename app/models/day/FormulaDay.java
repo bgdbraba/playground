@@ -102,4 +102,11 @@ public class FormulaDay extends Model{
 		
 		formulaDay.update();
 	}
+	
+	public static FormulaDay findByFormulaId(Long formulaId, Long playgroundDayId){
+		Formula formula = Formula.find.byId(formulaId);
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		
+		return find.where().eq("formula", formula).eq("playgroundDay",playgroundDay).findList().get(0);
+	}
 }

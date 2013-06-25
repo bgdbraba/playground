@@ -3,7 +3,7 @@ package controllers;
 
 
 import models.Login;
-import models.users.User;
+import models.users.BasicUser;
 import play.Routes;
 import play.data.Form;
 import play.mvc.Controller;
@@ -35,7 +35,7 @@ public class Application extends Controller {
 			Login credentials = filledForm.get();
 			session("id", credentials.id);
 			
-			LanguageSettings.setLang(User.find.byId(credentials.id).language.toString().toLowerCase());
+			LanguageSettings.setLang(BasicUser.find.byId(credentials.id).language.toString().toLowerCase());
 			// go to profile
 			return redirect(routes.UserController.profile());
 		}

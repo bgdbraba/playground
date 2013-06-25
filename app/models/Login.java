@@ -1,6 +1,6 @@
 package models;
 
-import models.users.User;
+import models.users.BasicUser;
 import play.i18n.Messages;
 
 public class Login {
@@ -11,7 +11,7 @@ public class Login {
 	public String validate() {
 		String result = null;
 		
-		if (User.authenticate(id, password) == null) {
+		if (BasicUser.authenticate(id, password) == null) {
 			result = Messages.get("login.fail");
 		}
 		

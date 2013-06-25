@@ -2,14 +2,14 @@
 
 @import models.users._
 
-@main(User.getName(child.id)) {
+@main(BasicUser.getName(child.id)) {
 
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 			
 	<h1>@child.lastName, @child.firstName</h1>
 			
 	@detailslist{
-			@views.html.users.details(User.getUser(child.id))				
+			@views.html.users.details(BasicUser.getUser(child.id))				
 			@views.html.users.addressDetails(child.address)
 	}
 	
@@ -19,8 +19,6 @@
 			@editForm(childForm, child.id)
 		}
 		
-		@*<a href="@routes.ChildController.scribeInPage(child.id)" class="btn btn-inverse">@MyMessages.get("scribe.in")</a>	*@	
-		
 		@if(child.active){
 			<a href="@routes.ChildController.deactivate(child.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
 		}else{
@@ -29,6 +27,14 @@
 			
 		<a href="@routes.ChildController.showChildren()" class="btn">@MyMessages.get("go.back")</a>
 	
+	}
+	<br>
+	@actions{
+		@if(!child.onPlayground){
+			<a href="@routes.ChildController.scribeInPage(child.id)" class="btn btn-inverse btn-large">@MyMessages.get("scribe.in")</a>	
+		}else{
+			<a href="@routes.ChildController.scribeOut(child.id)" class="btn btn-inverse btn-large">@MyMessages.get("scribe.out")</a>
+		}
 	}
 
 }

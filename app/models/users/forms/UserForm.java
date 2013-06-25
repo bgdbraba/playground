@@ -1,6 +1,6 @@
 package models.users.forms;
 
-import models.users.User;
+import models.users.BasicUser;
 import models.users.enums.Gender;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Pattern;
@@ -40,7 +40,7 @@ public class UserForm {
 	
 	public void update(String userId){
 		
-		User.initializeUser(id, password1, dateOfBirth, firstName, lastName, gender, language, email,   phone);
+		BasicUser.initializeUser(id, password1, dateOfBirth, firstName, lastName, gender, language, email,   phone);
 	
 	}
 }

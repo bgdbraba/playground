@@ -1,15 +1,20 @@
 package controllers;
 
+import java.util.Arrays;
+import java.util.Map;
+
 import models.day.forms.DayForm;
 import models.playground.Playground;
 import models.users.Animator;
 import models.users.Child;
-import models.users.User;
+import models.users.BasicUser;
 import models.users.forms.ChildForm;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import conf.DateConverter;
 
 @Security.Authenticated(Secured.class)
 public class ChildController extends Controller{
@@ -74,7 +79,7 @@ public class ChildController extends Controller{
 
 	public static Result deactivate(String childId) {
 		if (Secured.isAnimator() && Secured.hasAdministration()) {
-			User.deactivate(childId);
+			BasicUser.deactivate(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
 		} else {
@@ -84,7 +89,7 @@ public class ChildController extends Controller{
 
 	public static Result activate(String childId) {
 		if (Secured.isAnimator() && Secured.hasAdministration()) {
-			User.activate(childId);
+			BasicUser.activate(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
 		} else {
@@ -97,44 +102,50 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result payment(String childId){
-		return TODO;
+		return ok(views.html.users.child.payment.render(Child.find.byId(childId)));
 	}
 	
 	public static Result scribeIn(String childId){
-		// FORM FILLED IN RIGHT ?
 		
-		// IS THERE A PLAYGROUNDDAY YET?
-		
-		// IS THERE A FORMULADAY YET?
-		
-		// IS THERE A CHILDDAY YET ?
 		Form<DayForm> filledForm = Form.form(DayForm.class).bindFromRequest();
 		DayForm form = filledForm.get();
-		for(String b : form.formulas){
-			System.out.println(b);
-		}
-		System.out.println("ingeschreven");
-		
+		form.childId = childId;
+		System.out.println(DateConverter.getCurrentDate());
+		// get request value from submitted form
+	    Map<String, String[]> map = request().body().asFormUrlEncoded();
+	    
+	    if(map.size() > 0){
+	    	String[] checkedVal = map.get("formula"); // get selected topics
+	
+		    // assign checked value to model
+		    form.formulas = Arrays.asList(checkedVal);
+	    } 
+	 	    
+	    form.submit();
+	    
 		return redirect(routes.ChildController.payment(childId));
 	}
 	
 	public static Result scribeOut(String childId){
+		Child child = Child.find.byId(childId);
+		child.onPlayground = false;
+		child.update();
 		
-		System.out.println("uitgeschreven");
-		return TODO;
+		Playground.removePresentChild(child.playground.id, childId);
+		
+		return redirect(routes.ChildController.showChildren());
 	}
 	
 
 	
 	public static Result payNow(String childId){
-		System.out.println("betaal nu");
-		return TODO;
+		Child.find.byId(childId).notPayed = 0.00;
+		
+		return redirect(routes.ChildController.showChildren());
 	}
 	
-	public static Result payLater(String childId){
-		System.out.println("betaal later");
-		
-		return redirect(routes.ChildController.scribeIn(childId));
+	public static Result payLater(String childId){		
+		return redirect(routes.ChildController.showChildren());
 	}
 
 }

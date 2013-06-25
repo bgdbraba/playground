@@ -1,6 +1,6 @@
 package controllers;
 
-import models.users.User;
+import models.users.BasicUser;
 import models.users.forms.UserForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -19,7 +19,7 @@ public class UserController extends Controller{
 			return badRequest();
 		}else{
 			
-			User user = User.find.byId(request().username());
+			BasicUser user = BasicUser.find.byId(request().username());
 			
 			UserForm editForm = user.toUserForm();
 			
@@ -41,14 +41,14 @@ public class UserController extends Controller{
 		if (editedForm.hasErrors()) {
 			flash("fail", "edit.fail");
 			
-			User user = User.find.byId(session("id"));
+			BasicUser user = BasicUser.find.byId(session("id"));
 			
 			return badRequest(views.html.users.profile.render(user, editedForm));
 		
 		} else {
 			flash("success", "edit.success");
 			editedForm.get().update(request().username());
-			User user = User.find.byId(session("id"));
+			BasicUser user = BasicUser.find.byId(session("id"));
 
 			LanguageSettings.setLang(user.language.toString().toLowerCase());
 			

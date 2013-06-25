@@ -15,7 +15,9 @@ import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("organizer")
-public class Organizer extends User{
+public class Organizer extends BasicUser{
+	
+	public Organizer(){}
 	
 	@ManyToOne
 	public Playground playground;
@@ -39,7 +41,7 @@ public class Organizer extends User{
 			String firstName, String lastName, String dateOfBirth,
 			Gender gender, String email, String phone) {
 		
-		User.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
+		BasicUser.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
 		
 	}
 

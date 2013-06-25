@@ -1,7 +1,7 @@
 package controllers;
 
 import models.users.Organizer;
-import models.users.User;
+import models.users.BasicUser;
 import models.users.forms.OrganizerForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -55,7 +55,7 @@ public class OrganizerController extends Controller{
 
 	public static Result deactivate(String organizerId) {
 		if (Secured.isAdmin()) {
-			User.deactivate(organizerId);
+			BasicUser.deactivate(organizerId);
 			return redirect(routes.OrganizerController.showDetails(organizerId));
 		} else {
 			return forbidden();
@@ -64,7 +64,7 @@ public class OrganizerController extends Controller{
 
 	public static Result activate(String organizerId) {
 		if (Secured.isAdmin()) {
-			User.activate(organizerId);
+			BasicUser.activate(organizerId);
 			return redirect(routes.OrganizerController.showDetails(organizerId));
 		} else {
 			return forbidden();

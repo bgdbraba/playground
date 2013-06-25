@@ -15,7 +15,7 @@ import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("animator")
-public class Animator extends User{
+public class Animator extends BasicUser{
 	
 	@OneToOne
 	public Address address;
@@ -31,6 +31,8 @@ public class Animator extends User{
 	
 	public static Finder<String, Animator> find = new Finder<String, Animator>(String.class, Animator.class);
 
+	public Animator(){}
+	
 	public static void create(Animator animator){
 		animator.save();
 	}
@@ -43,7 +45,7 @@ public class Animator extends User{
 			String firstName, String lastName, String dateOfBirth,
 			Gender gender, String email, String phone, String accountNumber, boolean hasFollowedCourse) {
 		
-		User.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
+		BasicUser.initializeUser(id, password, dateOfBirth, firstName, lastName, gender, language, email, phone);
 		
 		Animator animator = Animator.find.byId(id);
 		

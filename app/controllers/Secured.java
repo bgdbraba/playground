@@ -2,7 +2,7 @@ package controllers;
 
 import models.users.Animator;
 import models.users.Organizer;
-import models.users.User;
+import models.users.BasicUser;
 import models.users.enums.UserType;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -21,19 +21,19 @@ public class Secured extends Security.Authenticator {
     }
     
     public static boolean isAdmin() {
-    	return User.is(Http.Context.current().request().username(),UserType.ADMIN);
+    	return BasicUser.is(Http.Context.current().request().username(),UserType.ADMIN);
     }
     
     public static boolean isOrganizer() {
-    	return User.is(Http.Context.current().request().username(),UserType.ORGANIZER);
+    	return BasicUser.is(Http.Context.current().request().username(),UserType.ORGANIZER);
     }
     
     public static boolean isChild() {
-    	return User.is(Http.Context.current().request().username(),UserType.CHILD);
+    	return BasicUser.is(Http.Context.current().request().username(),UserType.CHILD);
     }
     
     public static boolean isAnimator() {
-    	return User.is(Http.Context.current().request().username(),UserType.ANIMATOR);
+    	return BasicUser.is(Http.Context.current().request().username(),UserType.ANIMATOR);
     }
     
     public static boolean hasAdministration(){

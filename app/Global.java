@@ -1,7 +1,7 @@
 import java.util.List;
 
 import models.users.Admin;
-import models.users.User;
+import models.users.BasicUser;
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
@@ -30,7 +30,7 @@ public class Global extends GlobalSettings{
 		Logger.info("Application has started");
 		
 		 // Check if the database is empty
-        if (User.find.findRowCount() == 0) {
+        if (BasicUser.find.findRowCount() == 0) {
             Ebean.save((List) Yaml.load("data.yml"));
 
         }		

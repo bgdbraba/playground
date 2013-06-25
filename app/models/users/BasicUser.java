@@ -18,7 +18,8 @@ import conf.Language;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="utype")
-public class User extends Model{
+
+public class BasicUser extends Model{
 
 	@Id
 	public String id;
@@ -44,15 +45,15 @@ public class User extends Model{
 	@Column(insertable=false,updatable=true)
     public UserType utype;
 	
-	public static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
+	public static Finder<String, BasicUser> find = new Finder<String, BasicUser>(String.class, BasicUser.class);
 	
 	public static String getName(String id){
-		User user = User.find.byId(id);
+		BasicUser user = BasicUser.find.byId(id);
 		
 		return user.firstName + " " + user.lastName;
 	}
 	
-	public static User authenticate(String id, String password){
+	public static BasicUser authenticate(String id, String password){
 		return find.where()
 				.eq("id",id)
 				.eq("password", password)
@@ -61,7 +62,7 @@ public class User extends Model{
 	}
 
 	public static void activate(String id){
-		User user = User.find.byId(id);
+		BasicUser user = BasicUser.find.byId(id);
 		
 		user.active = true;
 		
@@ -69,7 +70,7 @@ public class User extends Model{
 	}
 	
 	public static void deactivate(String id){
-		User user = User.find.byId(id);
+		BasicUser user = BasicUser.find.byId(id);
 		
 		user.active = false;
 		
@@ -105,7 +106,7 @@ public class User extends Model{
 										, String firstName, String lastName, Gender gender
 										, Language language, String email, String phone){
 		
-		User user = User.find.byId(id);
+		BasicUser user = BasicUser.find.byId(id);
 		
 		user.password = password;
 		user.firstName = firstName;
@@ -119,8 +120,8 @@ public class User extends Model{
 		user.update();		
 	}
 
-	public static User getUser(String id){
-		return User.find.byId(id);
+	public static BasicUser getUser(String id){
+		return BasicUser.find.byId(id);
 	}
 	
 	public String getDateOfBirthAsString(){
