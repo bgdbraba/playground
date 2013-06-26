@@ -58,17 +58,20 @@ GET		/children/:id/payMent								controllers.ChildController.payment(id : Strin
 GET		/children/:id/payNow								controllers.ChildController.payNow(id : String)
 GET		/children/:id/payLater								controllers.ChildController.payLater(id : String)
 
-# School management
+# Playground management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()
 POST	/playgrounds											controllers.PlaygroundController.registerPlayground()
 GET		/playgrounds/:id/details								controllers.PlaygroundController.showDetails(id: Long)
 POST	/playgrounds/:id/details								controllers.PlaygroundController.editPlayground(id: Long)
+GET		/playgrounds/:id/today									controllers.PlaygroundController.showToday(id: Long)
+
 
 # Formula management
-GET		/formulas						controllers.FormulaController.showFormulas()
-POST	/formulas						controllers.FormulaController.registerFormula()
-GET		/formulas/:id/details			controllers.FormulaController.showDetails(id: Long)
-POST	/formulas/:id/details			controllers.FormulaController.editFormula(id: Long)
+GET		/formulas								controllers.FormulaController.showFormulas()
+POST	/formulas								controllers.FormulaController.registerFormula()
+GET		/formulas/:id/details					controllers.FormulaController.showDetails(id: Long)
+POST	/formulas/:id/details					controllers.FormulaController.editFormula(id: Long)
+
 
 # Activity management
 GET		/activities						controllers.ActivityController.showActivities()

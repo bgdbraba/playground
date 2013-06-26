@@ -4,6 +4,7 @@
 	@if(Animator.find.byId(session.get("id")).administration){
 		<li><a href="@routes.ChildController.showChildren()" >@MyMessages.get("children.management")</a></li>
 		<li><a href="@routes.ActivityController.showActivities()" >@MyMessages.get("activity.management")</a></li>
+		<li><a href="@routes.PlaygroundController.showToday(Animator.find.byId(session.get("id")).playground.id)" >@MyMessages.get("day.management")</a></li>
 	}
 	
 }

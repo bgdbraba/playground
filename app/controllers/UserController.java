@@ -39,14 +39,14 @@ public class UserController extends Controller{
 		}	
 		
 		if (editedForm.hasErrors()) {
-			flash("fail", "edit.fail");
+			flash("fail", MyMessages.get("edit.fail"));
 			
 			BasicUser user = BasicUser.find.byId(session("id"));
 			
 			return badRequest(views.html.users.profile.render(user, editedForm));
 		
 		} else {
-			flash("success", "edit.success");
+			flash("success", MyMessages.get("edit.success"));
 			editedForm.get().update(request().username());
 			BasicUser user = BasicUser.find.byId(session("id"));
 

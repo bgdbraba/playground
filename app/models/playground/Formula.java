@@ -2,14 +2,16 @@ package models.playground;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import conf.MyMessages;
-
+import models.day.FormulaDay;
 import play.db.ebean.Model;
+import conf.MyMessages;
 
 @Entity
 public class Formula extends Model{
@@ -25,6 +27,9 @@ public class Formula extends Model{
 	
 	@ManyToOne
 	public Playground playground;
+	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="formula")
+	public List<FormulaDay> formulaDays;
 
 	public static Finder<Long, Formula> find = new Finder<Long, Formula>(Long.class, Formula.class);
 	
@@ -51,6 +56,15 @@ public class Formula extends Model{
 		Formula formula = Formula.find.byId(formulaId);
 		
 		formula.playground = playground;
+		
+		formula.update();
+	}
+	
+	public static void addFormulaDay(Long formulaId, Long formulaDayId){
+		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
+		Formula formula = Formula.find.byId(formulaId);
+		
+		formula.formulaDays.add(formulaDay);
 		
 		formula.update();
 	}

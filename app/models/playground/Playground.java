@@ -61,7 +61,7 @@ public class Playground extends Model{
 	public List<Activity> activities;
 	
 	@OneToOne
-	public SessionCard sessionCard = null;
+	public SessionCard sessionCard;
 	
 	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
 	
@@ -180,7 +180,7 @@ public class Playground extends Model{
 		Playground playground = Playground.find.byId(playgroundId);
 		Child child = Child.find.byId(childId);
 		
-		playground.present.add(child);
+		playground.present.remove(child);
 		
 		playground.update();
 	}

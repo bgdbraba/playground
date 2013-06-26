@@ -24,7 +24,7 @@ public class FormulaForm {
 		
 		id = formula.id;
 		
-		update();
+		this.update();
 	}
 
 	public void update() {

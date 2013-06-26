@@ -1,12 +1,16 @@
 package controllers;
 
-import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.forms.PlaygroundForm;
+import models.users.Animator;
+import models.users.BasicUser;
+import models.users.enums.UserType;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
+import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class PlaygroundController extends Controller{
@@ -53,10 +57,10 @@ public class PlaygroundController extends Controller{
 			Form<PlaygroundForm> editedForm = Form.form(PlaygroundForm.class).bindFromRequest();
 			
 			if (editedForm.hasErrors()) {
-				flash("fail", "edit.playground.fail");
+				flash("fail", MyMessages.get("edit.playground.fail"));
 				return badRequest(views.html.playground.details.render(Playground.find.byId(id), editedForm));
 			} else {
-				flash("success", "edit.playground.succes");
+				flash("success", MyMessages.get("edit.playground.succes"));
 				PlaygroundForm playgroundForm = editedForm.get();
 				playgroundForm.update(id);
 				
@@ -67,6 +71,15 @@ public class PlaygroundController extends Controller{
 		}
 	}
 	
+	public static Result showToday(Long playgroundId){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			
+				return ok(views.html.day.playgroundToday.render(Playground.find.byId(playgroundId)));
+
+		}else{
+			return forbidden();
+		}
+	}
 	
 
 }

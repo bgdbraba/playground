@@ -1,5 +1,6 @@
 package controllers;
 
+import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.forms.FormulaForm;
 import models.users.Organizer;
@@ -23,12 +24,12 @@ public class FormulaController extends Controller{
 			Playground playground = organizer.playground;			
 			
 			if (filledForm.hasErrors()) {
-				flash("fail", "register.formula.fail");
+				flash("fail", MyMessages.get("register.formula.fail"));
 				
 				return badRequest(views.html.playground.formula.showFormulas.render(playground.formulas, filledForm));
 				
 			} else {
-				flash("success", "register.formula.success");			
+				flash("success", MyMessages.get("register.formula.success"));			
 				
 				FormulaForm formulaForm = filledForm.get();
 				formulaForm.playgroundId = playground.id;
@@ -73,6 +74,10 @@ public class FormulaController extends Controller{
 		}else{
 			return forbidden();
 		}
+	}
+	
+	public static Result getFormulasForPlayground(Long playgroundId){
+		return TODO;
 	}
 
 }

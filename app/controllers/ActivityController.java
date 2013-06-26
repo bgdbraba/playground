@@ -1,10 +1,13 @@
 package controllers;
 
+import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.forms.ActivityForm;
 import models.playground.forms.FormulaForm;
 import models.users.Animator;
+import models.users.BasicUser;
 import models.users.Organizer;
+import models.users.enums.UserType;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -21,12 +24,12 @@ public class ActivityController extends Controller{
 			Playground playground = animator.playground;			
 			
 			if (filledForm.hasErrors()) {
-				flash("fail", "register.formula.fail");
+				flash("fail", MyMessages.get("register.activity.fail"));
 			
 				return badRequest(views.html.playground.activity.showActivities.render(playground.activities, filledForm));
 							
 			} else {
-				flash("success", "register.formula.success");			
+				flash("success", MyMessages.get("register.activity.success"));			
 							
 				ActivityForm activityForm = filledForm.get();
 				activityForm.playgroundId = playground.id;
@@ -43,10 +46,16 @@ public class ActivityController extends Controller{
 	}
 	
 	public static Result showActivities(){
-		if(Secured.isAnimator() && Secured.hasAdministration()){
-			Animator animator = Animator.find.byId(request().username());
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			Playground playground;
 			
-			Playground playground = animator.playground;	
+			if(BasicUser.find.byId(request().username()).is(UserType.ANIMATOR)){
+				Animator animator = Animator.find.byId(request().username());
+				playground = animator.playground;
+			}else{
+				Organizer organizer = Organizer.find.byId(request().username());
+				playground = organizer.playground;
+			}
 			
 			return ok(views.html.playground.activity.showActivities.render(playground.activities, Form.form(ActivityForm.class)));
 		}else{

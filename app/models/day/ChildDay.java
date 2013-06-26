@@ -24,6 +24,8 @@ public class ChildDay extends Model{
 	
 	public long date;
 	
+	public double amountPayed;
+	
 	@ManyToOne
 	public Child child;
 	
@@ -70,6 +72,15 @@ public class ChildDay extends Model{
 	
 	public static boolean exists(String childId){
 		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()) != null;
+	}
+	
+	public static void setAmountPayed(Long childDayId, double cost){
+		ChildDay childDay = ChildDay.find.byId(childDayId);
+		
+		childDay.amountPayed = cost;
+		
+		childDay.update();
+		
 	}
 
 }

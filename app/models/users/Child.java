@@ -171,4 +171,32 @@ public class Child extends BasicUser{
 		
 		return form;
 	}
+	
+	public static void addNotPayed(String childId, double cost){
+		Child child = Child.find.byId(childId);
+		child.notPayed += cost;
+		
+		child.update();
+	}
+	
+	public static void payed(String childId){
+		Child child = Child.find.byId(childId);
+		child.notPayed = 0.00;
+		
+		child.update();
+	}
+	
+	public static void onPlayground(String childId){
+		Child child = Child.find.byId(childId);
+		child.onPlayground = true;
+		
+		child.update();
+	}
+	
+	public static void offPlayground(String childId){
+		Child child = Child.find.byId(childId);
+		child.onPlayground = false;
+		
+		child.update();
+	}
 }

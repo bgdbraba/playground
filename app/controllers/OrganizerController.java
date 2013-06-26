@@ -37,7 +37,7 @@ public class OrganizerController extends Controller{
 			Form<OrganizerForm> filledForm = Form.form(OrganizerForm.class).bindFromRequest();
 
 			if (filledForm.hasErrors()) {
-				flash("fail", "register.organizer.fail");
+				flash("fail", MyMessages.get("register.organizer.fail"));
 				return badRequest(views.html.users.organizer.showOrganizers.render(Organizer.find.all(), filledForm));
 			} else {
 				Organizer organizer = filledForm.get().submit();

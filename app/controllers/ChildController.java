@@ -15,6 +15,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import conf.DateConverter;
+import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class ChildController extends Controller{
@@ -29,7 +30,7 @@ public class ChildController extends Controller{
 			Form<ChildForm> filledForm = Form.form(ChildForm.class).bindFromRequest();
 		
 			if (filledForm.hasErrors()) {
-				flash("fail", "register.child.fail");
+				flash("fail", MyMessages.get("register.child.fail"));
 			
 				return badRequest(views.html.users.child.showChildren.render(playground.children, filledForm));
 			
@@ -65,6 +66,7 @@ public class ChildController extends Controller{
 		if (Secured.isAnimator() && Secured.hasAdministration() ) {
 			Child child = Child.find.byId(id);
 			ChildForm editForm = child.toChildForm();
+			
 			return ok(views.html.users.child.details.render(child,Form.form(ChildForm.class).fill(editForm),Form.form(DayForm.class)));
 		
 		} else {
@@ -110,7 +112,7 @@ public class ChildController extends Controller{
 		Form<DayForm> filledForm = Form.form(DayForm.class).bindFromRequest();
 		DayForm form = filledForm.get();
 		form.childId = childId;
-		System.out.println(DateConverter.getCurrentDate());
+		
 		// get request value from submitted form
 	    Map<String, String[]> map = request().body().asFormUrlEncoded();
 	    
@@ -128,8 +130,8 @@ public class ChildController extends Controller{
 	
 	public static Result scribeOut(String childId){
 		Child child = Child.find.byId(childId);
-		child.onPlayground = false;
-		child.update();
+		
+		Child.offPlayground(childId);
 		
 		Playground.removePresentChild(child.playground.id, childId);
 		
@@ -139,7 +141,7 @@ public class ChildController extends Controller{
 
 	
 	public static Result payNow(String childId){
-		Child.find.byId(childId).notPayed = 0.00;
+		Child.payed(childId);
 		
 		return redirect(routes.ChildController.showChildren());
 	}

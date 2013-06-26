@@ -1,5 +1,6 @@
 package controllers;
 
+import conf.MyMessages;
 import models.playground.Playground;
 import models.users.Animator;
 import models.users.Organizer;
@@ -23,7 +24,7 @@ public class AnimatorController extends Controller{
 			Form<AnimatorForm> filledForm = Form.form(AnimatorForm.class).bindFromRequest();
 		
 			if (filledForm.hasErrors()) {
-				flash("fail", "register.animator.fail");
+				flash("fail", MyMessages.get("register.animator.fail"));
 				return badRequest(views.html.users.animator.showAnimators.render(playground.animators, filledForm));
 			} else {
 	

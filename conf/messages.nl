@@ -114,4 +114,8 @@ payment=Betaling
 scribe.out=Uitschrijven
 sessionCardCompensation= Compensatie met beurtenkaart
 sessionCardCompensation.help= (aantal beurten)
-
+today=Vandaag
+day=Vandaag
+day.management=Vandaag
+children.on.playground=Kinderen op het speelplein
+register.formula.success=Formule succesvol geregistreerd!

@@ -1,5 +1,6 @@
 package controllers;
 
+import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.forms.FormulaForm;
 import models.playground.forms.RoleForm;
@@ -22,7 +23,7 @@ public class RoleController extends Controller{
 			Playground playground = organizer.playground;			
 			
 			if (filledForm.hasErrors()) {
-				flash("fail", "register.formula.fail");
+				flash("fail", MyMessages.get("register.formula.fail"));
 				return badRequest(views.html.playground.role.showRoles.render(playground.roles, filledForm));
 			} else {
 				flash("success", "register.formula.success");			

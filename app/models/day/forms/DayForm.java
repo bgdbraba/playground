@@ -20,13 +20,14 @@ public class DayForm {
 	public void submit(){
 		Child child = Child.find.byId(childId);
 		
+		/** CHILD DAY SHIT */
 		ChildDay childDay = ChildDay.create();
 		ChildDay.initialize(childDay.id);
-		
 		ChildDay.addChild(childDay.id, childId);
 		
 		amountToPay = 0.00;
 		
+		/** PLAYGROUNDDAY SHIT AND FORMULADAY SHIT */
 		PlaygroundDay playgroundDay = null;
 		
 		// ALS SPEELDAG MET DEZE DATUM NOG NIET BESTAAT, MAAK ER 1
@@ -36,7 +37,7 @@ public class DayForm {
 			PlaygroundDay.initialize(playgroundDay.id, child.playground.id);
 						
 		}else{
-			playgroundDay = PlaygroundDay.find.byId(child.playground.id);
+			playgroundDay = PlaygroundDay.findbyPlayground(child.playground.id);
 		}
 		
 		if(formulas != null && formulas.size() != 0){
@@ -47,34 +48,34 @@ public class DayForm {
 				
 				amountToPay += formula.cost;
 				
-				FormulaDay formulaDay = null;
-				
+				FormulaDay formulaDay;
+				/** FORMULADAY SHIT */
+								
 				if(PlaygroundDay.getFormulaDay(playgroundDay.id, formula.id) != null){
+					
 					formulaDay = PlaygroundDay.getFormulaDay(playgroundDay.id, formula.id);		
-					
-					
-					
 					
 				}else{
 					formulaDay = FormulaDay.create();
 					FormulaDay.initialize(formulaDay.id);
 
 					FormulaDay.addFormula(formulaDay.id, formula.id);
+					Formula.addFormulaDay(formula.id, formulaDay.id);
 					FormulaDay.addPlaygroundDay(formulaDay.id, playgroundDay.id);	
 					
 					PlaygroundDay.addFormulaDay(playgroundDay.id, formulaDay.id);
 				}
 				
 				FormulaDay.addChild(formulaDay.id, childId);
-				
+							
 				ChildDay.addFormula(childDay.id, formula.id);
-				
 			}
 		}
+		ChildDay.setAmountPayed(childDay.id, amountToPay);
 		
-		child.notPayed = this.amountToPay;
-		child.onPlayground = true;
-		child.update();
+		
+		Child.addNotPayed(child.id, amountToPay);
+		Child.onPlayground(childId);
 		
 		Playground.addPresentChild(child.playground.id, childId);
 	}

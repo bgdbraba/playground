@@ -7,12 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import conf.DateConverter;
+import javax.persistence.OneToOne;
 
 import models.playground.Formula;
 import models.users.Child;
 import play.db.ebean.Model;
+import conf.DateConverter;
 
 @Entity
 public class FormulaDay extends Model{
@@ -23,6 +23,7 @@ public class FormulaDay extends Model{
 	
 	public Long date;
 	
+	@ManyToOne
 	public Formula formula;
 	
 	@ManyToOne
@@ -56,6 +57,8 @@ public class FormulaDay extends Model{
 		formulaDay.children.add(child);
 		
 		formulaDay.update();
+		
+		formulaDay.saveManyToManyAssociations("children");
 	}
 	
 	public static void removeChild(Long formulaDayId, String childId){
@@ -109,4 +112,16 @@ public class FormulaDay extends Model{
 		
 		return find.where().eq("formula", formula).eq("playgroundDay",playgroundDay).findList().get(0);
 	}
+	
+	public static boolean existsForFormula(Long formulaId){
+		return find.where().eq("formula", Formula.find.byId(formulaId)).eq("date",DateConverter.getCurrentDate()) != null;
+	}
+	
+	public static FormulaDay currentFormulaDay(Long formulaId){
+		if(existsForFormula(formulaId)){
+			return find.where().eq("formula", Formula.find.byId(formulaId)).eq("date",DateConverter.getCurrentDate()).findList().get(0);
+		}
+		return null;
+	}
+	
 }
