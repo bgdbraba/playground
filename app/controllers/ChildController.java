@@ -3,6 +3,7 @@ package controllers;
 import java.util.Arrays;
 import java.util.Map;
 
+import models.day.PlaygroundDay;
 import models.day.forms.DayForm;
 import models.playground.Activity;
 import models.playground.Formula;
@@ -167,6 +168,14 @@ public class ChildController extends Controller{
 
 	
 	public static Result payNow(String childId){
+		Animator animator = Animator.find.byId(request().username());
+		
+		Playground playground = animator.playground;
+		
+		PlaygroundDay playgroundDay = PlaygroundDay.findbyPlayground(playground.id);
+		
+		PlaygroundDay.addMoney(playgroundDay.id, Child.find.byId(childId).notPayed);
+		
 		Child.payed(childId);
 		
 		return redirect(routes.ChildController.showChildren());

@@ -6,11 +6,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import models.playground.Formula;
 import models.playground.Playground;
+import models.users.Child;
 import play.db.ebean.Model;
 import conf.DateConverter;
 
@@ -23,11 +24,16 @@ public class PlaygroundDay extends Model{
 	
 	public Long date;
 	
+	public double moneyIncome;
+	
 	@ManyToOne
 	public Playground playground;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playgroundDay")
 	public List<FormulaDay> formulaDays;	
+	
+	@ManyToMany
+	public List<Child> children;
 	
 	public static Finder<Long, PlaygroundDay> find = new Finder<Long, PlaygroundDay>(Long.class, PlaygroundDay.class);
 	
@@ -44,21 +50,11 @@ public class PlaygroundDay extends Model{
 		
 		playgroundDay.date = DateConverter.getCurrentDate();
 		
+		playgroundDay.moneyIncome = 0.00;
+		
 		playgroundDay.update();
 		
-		PlaygroundDay.addPlayground(playgroundDay.id, playgroundId);
-		
-		Playground playgrounded = Playground.find.byId(playgroundId);
-		
-//		for(Formula formula : playgrounded.formulas){
-//			FormulaDay formulaDay = FormulaDay.create();
-//			FormulaDay.initialize(formulaDay.id);
-//			FormulaDay.addFormula(formulaDay.id, formula.id);
-//			FormulaDay.addPlaygroundDay(formulaDay.id, playgroundDay.id);
-//			
-//			PlaygroundDay.addFormulaDay(playgroundDay.id, formulaDay.id);		
-//		}		
-		
+		PlaygroundDay.addPlayground(playgroundDay.id, playgroundId);	
 		
 	}
 	
@@ -69,6 +65,15 @@ public class PlaygroundDay extends Model{
 		playgroundDay.formulaDays.add(formulaDay);
 		
 		playgroundDay.update();
+	}
+	
+	public static void addChild(Long playgroundDayId, String childId){
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		Child child = Child.find.byId(childId);
+		
+		playgroundDay.children.add(child);
+		
+		playgroundDay.saveManyToManyAssociations("children");
 	}
 	
 	public static void addPlayground(Long playgroundDayId, Long playgroundId){
@@ -110,6 +115,14 @@ public class PlaygroundDay extends Model{
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
 		playgroundDay.date = date;
+		
+		playgroundDay.update();
+	}
+	
+	public static void addMoney(Long playgroundDayId, double money){
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		
+		playgroundDay.moneyIncome += money;
 		
 		playgroundDay.update();
 	}

@@ -86,6 +86,8 @@ public class DayForm {
 		ChildDay.amountPayed(childDay.id, amountToPay);
 		ChildDay.addChild(childDay.id, childId);
 		
+		PlaygroundDay.addChild(playgroundDay.id, childId);
+		
 		Child.addNotPayed(child.id, amountToPay);
 		Child.onPlayground(childId);		
 	}

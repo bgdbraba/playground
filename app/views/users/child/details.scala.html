@@ -45,15 +45,15 @@
         
         
         @if(child.playground.sessionCard != null){
-        <div class="well">
-        	<h2>@MyMessages.get("sessionCard.management")</h2>
-    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
-        <p>
-        @modalForm(MyMessages.get("sessionCard"), "sessionCardModal", MyMessages.get("sessionCard")) {
-			@sessionCardForm(child)
-		}		
-		</p>
-        </div>
+	        <div class="well">
+	        	<h2>@MyMessages.get("sessionCard.management")</h2>
+	    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
+	        <p>
+	        @sessionCardModal(MyMessages.get("sessionCard"), "sessionCardModal", MyMessages.get("sessionCard")) {
+				@sessionCardForm(child)
+			}		
+			</p>
+	        </div>
         }
         
 		<div class="well">
