@@ -1,6 +1,8 @@
 package models.playground;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -94,4 +96,26 @@ public class Activity extends Model {
 		
 		return form;
 	}
+	
+	public static Map<String,String> options(Long playgroundId) {
+		Map<String,String> options = new HashMap<String,String>();
+		
+		for(Activity activity : find.where().eq("playground", Playground.find.byId(playgroundId)).findList()) {
+			options.put(activity.id.toString(), activity.name);
+		}
+		
+		return options;
+	}
+	
+	public static void addChild(Long activityId, String childId){
+		Activity activity = Activity.find.byId(activityId);
+		Child child = Child.find.byId(childId);
+		
+		activity.children.add(child);
+		
+		activity.update();
+		
+		activity.saveManyToManyAssociations("children");
+	}
+	
 }

@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.day.ChildDay;
+import models.playground.Activity;
 import models.playground.Playground;
 import models.users.enums.Gender;
 import models.users.forms.ChildForm;
@@ -54,6 +56,9 @@ public class Child extends BasicUser{
 	public List<ChildDay> days;
 	
 	public static Finder<String, Child> find = new Finder<String, Child>(String.class, Child.class);
+	
+	@ManyToMany
+	public List<Activity> activities;
 	
 	public Child(){}
 
@@ -200,7 +205,29 @@ public class Child extends BasicUser{
 		child.update();
 	}
 	
+	public static void addLinkToActivity(String childId, Long activityId){
+		Child child = Child.find.byId(childId);
+		Activity activity = Activity.find.byId(activityId);
+		
+		child.activities.add(activity);
+		child.saveManyToManyAssociations("activities");
+	}
+	
 	public static List<Child> getChildrenForPlayground(Long playgroundId){
 		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+	}
+	
+	public static boolean alreadyHasActivity(String childId, Long activityId){
+		boolean result = false;
+		
+		Child child = Child.find.byId(childId);
+		
+		for(Activity activity : Activity.getActivitiesForPlayground(child.playground.id)){
+			if(activityId == activity.id){
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 }

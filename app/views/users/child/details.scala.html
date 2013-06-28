@@ -7,6 +7,20 @@
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 			
 	<h1>@child.lastName, @child.firstName</h1>
+	
+	<!-- Example row of columns -->
+    <div class="row">
+        <div class="span4 well">
+          <h2>@MyMessages.get("activity.management")</h2>
+          <p>@MyMessages.get("activity.info")</p>
+        <p>
+		<a class="btn" href="@routes.ChildController.linkedActivities(child.id)">@MyMessages.get("view.activities") &raquo;</a>
+		</p>
+        </div>
+ 	</div>
+	
+	
+	
 			
 	@detailslist{
 			@views.html.users.details(BasicUser.getUser(child.id))				

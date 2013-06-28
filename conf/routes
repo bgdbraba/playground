@@ -57,6 +57,8 @@ GET		/children/:id/scribeOut								controllers.ChildController.scribeOut(id : S
 GET		/children/:id/payMent								controllers.ChildController.payment(id : String)
 GET		/children/:id/payNow								controllers.ChildController.payNow(id : String)
 GET		/children/:id/payLater								controllers.ChildController.payLater(id : String)
+POST	/children/:id/linkActivity							controllers.ChildController.linkActivityToChild(id: String)
+GET		/children/:id/linkActivity							controllers.ChildController.linkedActivities(id: String)
 
 # Playground management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()

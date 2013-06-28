@@ -4,17 +4,17 @@ import java.util.Arrays;
 import java.util.Map;
 
 import models.day.forms.DayForm;
+import models.playground.Activity;
 import models.playground.Playground;
+import models.playground.forms.LinkActivityForm;
 import models.users.Animator;
-import models.users.Child;
 import models.users.BasicUser;
+import models.users.Child;
 import models.users.forms.ChildForm;
-import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.DateConverter;
 import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
@@ -177,6 +177,36 @@ public class ChildController extends Controller{
 	
 	public static Result payLater(String childId){		
 		return redirect(routes.ChildController.showChildren());
+	}
+	
+	public static Result linkActivityToChild(String childId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			Form<LinkActivityForm> filledForm = Form.form(LinkActivityForm.class).bindFromRequest();
+			if (filledForm.hasErrors()) {
+				flash("fail", "");
+				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+			} else if (Child.alreadyHasActivity(childId,filledForm.get().activityId)) {
+				flash("fail", "");
+				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+			} else {
+				LinkActivityForm form = filledForm.get();
+				form.childId = childId;
+				form.submit();
+				Child.addNotPayed(childId, Activity.find.byId(form.activityId).cost);
+				flash("success", "");
+				return redirect(routes.ChildController.linkedActivities(childId));
+			}
+		} else {
+			return forbidden();
+		}	
+	}
+	
+	public static Result linkedActivities(String childId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+				return ok(views.html.users.child.linkActivity.render(Child.find.byId(childId),Form.form(LinkActivityForm.class)));
+		} else {
+			return forbidden();
+		}	
 	}
 
 }

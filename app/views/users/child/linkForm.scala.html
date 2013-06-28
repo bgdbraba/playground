@@ -1,0 +1,18 @@
+@(child: models.users.Child, linkForm: Form[models.playground.forms.LinkActivityForm])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@form(routes.ChildController.linkActivityToChild(child.id)) {
+
+<fieldset>
+
+	@select(
+		linkForm("activityId"), 
+		options(models.playground.Activity.options(child.playground.id)), 
+		'_label -> MyMessages.get("choose.activity"),
+		'_default -> MyMessages.get("choose.activity")
+	)
+
+</fieldset>
+}
