@@ -1,0 +1,12 @@
+@(childDay: models.day.ChildDay)
+
+<tr>
+	<td><a href="#">@childDay.id</a></td>
+	<td>@DateConverter.getDateAsString(childDay.date)</td>
+	<td>@childDay.amountPayed</td>
+	<td>
+	@for(formula <- childDay.formulas){
+		@formula.name ; 
+	}
+	</td>
+</tr>

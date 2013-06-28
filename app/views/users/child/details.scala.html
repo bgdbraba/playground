@@ -1,23 +1,68 @@
 @(child: models.users.Child)(childForm: Form[models.users.forms.ChildForm])(dayForm: Form[models.day.forms.DayForm])
 
 @import models.users._
+@import models.day._
+@import models.playground._
 
 @main(BasicUser.getName(child.id)) {
 
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 			
-	<h1>@child.lastName, @child.firstName</h1>
+	<h1>@child.lastName, @child.firstName 
+			@if(Role.getRoleForChild(child.id)!=null){ 
+			
+				: @Role.getRoleForChild(child.id).name 
+			}	
+	</h1>
 	
 	<!-- Example row of columns -->
-    <div class="row">
-        <div class="span4 well">
+   
+        <div class="well">
+        	<h2>@MyMessages.get("scribe.in")</h2>
+    		<p>@MyMessages.get("scribe.in.info")</p>
+        <p>
+		@actions{
+			@if(!child.onPlayground){
+				@scribeInModal(MyMessages.get("scribe.in"), "scribeInModal", MyMessages.get("scribe.in")) {
+					@scribeInForm(dayForm, child)
+				}	
+			}else{
+				<a href="@routes.ChildController.scribeOut(child.id)" class="btn btn-inverse btn-large">@MyMessages.get("scribe.out")</a>
+			}
+		}
+		</p>
+        </div>
+        
+        <div class="well">
+        	<h2>@MyMessages.get("pay.management")</h2>
+    		<h3><strong>&euro; @child.notPayed</strong></h3>
+        <p>
+		@payModal(MyMessages.get("pay"), "payModal", MyMessages.get("pay")) {
+			@payForm(child)
+		}
+		</p>
+        </div>
+        
+        
+        @if(child.playground.sessionCard != null){
+        <div class="well">
+        	<h2>@MyMessages.get("sessionCard.management")</h2>
+    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
+        <p>
+        @modalForm(MyMessages.get("sessionCard"), "sessionCardModal", MyMessages.get("sessionCard")) {
+			@sessionCardForm(child)
+		}		
+		</p>
+        </div>
+        }
+        
+		<div class="well">
           <h2>@MyMessages.get("activity.management")</h2>
           <p>@MyMessages.get("activity.info")</p>
         <p>
-		<a class="btn" href="@routes.ChildController.linkedActivities(child.id)">@MyMessages.get("view.activities") &raquo;</a>
+		<a class="btn btn-large btn-info" href="@routes.ChildController.linkedActivities(child.id)">@MyMessages.get("view.activities") &raquo;</a>
 		</p>
         </div>
- 	</div>
 	
 	
 	
@@ -27,22 +72,22 @@
 			@views.html.users.addressDetails(child.address)
 			
 			<dt>@MyMessages.get("phone.work")</dt>
-			<dd>@child.phoneWork<dd>
+			<dd>@child.phoneWork &nbsp;</dd>
 			
 			<dt>@MyMessages.get("phone.alt")</dt>
-			<dd>@child.phoneAlt<dd>
+			<dd>@child.phoneAlt &nbsp;</dd>
 			
 			<dt>@MyMessages.get("doctor")</dt>
-			<dd>@child.doctor<dd>
+			<dd>@child.doctor &nbsp;</dd>
 			
 			<dt>@MyMessages.get("remarks")</dt>
-			<dd>@child.remarks<dd>
+			<dd>@child.remarks &nbsp;</dd>
 			
 			<dt>@MyMessages.get("receive.mail")</dt>
-			<dd>@MyMessages.get(child.receiveMail.toString())<dd>
+			<dd>@MyMessages.get(child.receiveMail.toString()) &nbsp;</dd>
 			
 			<dt>@MyMessages.get("photographable")</dt>
-			<dd>@MyMessages.get(child.photographable.toString())<dd>
+			<dd>@MyMessages.get(child.photographable.toString()) &nbsp;</dd>
 	}
 	
 	@actions{
@@ -61,12 +106,9 @@
 	
 	}
 	<br>
-	@actions{
-		@if(!child.onPlayground){
-			<a href="@routes.ChildController.scribeInPage(child.id)" class="btn btn-inverse btn-large">@MyMessages.get("scribe.in")</a>	
-		}else{
-			<a href="@routes.ChildController.scribeOut(child.id)" class="btn btn-inverse btn-large">@MyMessages.get("scribe.out")</a>
-		}
-	}
+	<hr>
+	
+	<h1>@MyMessages.get("child.days")</h1>
+	@views.html.day.childDay.list(ChildDay.getChildDaysForChild(child.id))
 
 }

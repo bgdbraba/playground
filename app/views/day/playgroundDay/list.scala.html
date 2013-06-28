@@ -1,0 +1,18 @@
+@(playgroundDays: List[models.day.PlaygroundDay])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("date")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@if(playgroundDays != null){
+		@for(playgroundDay <- playgroundDays) {
+			@item(playgroundDay)
+		}
+	}
+	</tbody>
+}

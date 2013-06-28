@@ -21,6 +21,9 @@ public class SessionCard extends Model{
 		
 	public boolean active;
 	
+	@OneToOne
+	public Playground playground;
+	
 	public static Finder<Long, SessionCard> find = new Finder<Long, SessionCard>(Long.class, SessionCard.class);
 	
 	public static SessionCard create(){
@@ -53,6 +56,19 @@ public class SessionCard extends Model{
 		SessionCard sessionCard = SessionCard.find.byId(id);
 		
 		sessionCard.active = false;
+		
+		sessionCard.update();
+	}
+	
+	public static SessionCard getSessionCardByPlayground(Long playgroundId){
+		return find.where().eq("playground.id", playgroundId).findUnique();
+	}
+	
+	public static void addSessionCard(Long sessionCardId, Long playgroundId){
+		Playground playground = Playground.find.byId(playgroundId);
+		SessionCard sessionCard = SessionCard.find.byId(sessionCardId);
+		
+		sessionCard.playground = playground;
 		
 		sessionCard.update();
 	}

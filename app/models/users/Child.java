@@ -11,8 +11,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.day.ChildDay;
+import models.day.FormulaDay;
 import models.playground.Activity;
 import models.playground.Playground;
+import models.playground.SessionCard;
 import models.users.enums.Gender;
 import models.users.forms.ChildForm;
 import models.users.information.Address;
@@ -45,9 +47,9 @@ public class Child extends BasicUser{
 	@ManyToOne
 	public Playground playground;
 	
-	public boolean sessionCardActive;
-	
 	public boolean onPlayground;
+	
+	public int numberOfSessions;
 	
 	@OneToOne
 	public ChildSessionCard card;
@@ -59,6 +61,9 @@ public class Child extends BasicUser{
 	
 	@ManyToMany
 	public List<Activity> activities;
+	
+	@ManyToMany(mappedBy="children")
+	public List<FormulaDay> formulaDays;
 	
 	public Child(){}
 
@@ -123,25 +128,20 @@ public class Child extends BasicUser{
 		child.update();
 	}
 	
+	public static void addFormulaDay(String childId, Long formulaDayId){
+		Child child = Child.find.byId(childId);
+		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
+		
+		child.formulaDays.add(formulaDay);
+		
+		child.update();
+	}
+	
 	public static void addChildSessionCard(String childId, Long childSessionCardId){
 		Child child = Child.find.byId(childId);
 		ChildSessionCard childSessionCard = ChildSessionCard.find.byId(childSessionCardId);
 		
 		child.card = childSessionCard;
-		
-		child.update();
-	}
-	
-	public static void activateSessionCard(String childId){
-		Child child = Child.find.byId(childId);
-		child.sessionCardActive = true;
-		
-		child.update();
-	}
-	
-	public static void deactivateSessionCard(String childId){
-		Child child = Child.find.byId(childId);
-		child.sessionCardActive = false;
 		
 		child.update();
 	}
@@ -210,6 +210,7 @@ public class Child extends BasicUser{
 		Activity activity = Activity.find.byId(activityId);
 		
 		child.activities.add(activity);
+		
 		child.saveManyToManyAssociations("activities");
 	}
 	
@@ -222,12 +223,37 @@ public class Child extends BasicUser{
 		
 		Child child = Child.find.byId(childId);
 		
-		for(Activity activity : Activity.getActivitiesForPlayground(child.playground.id)){
+		for(Activity activity : child.activities){
 			if(activityId == activity.id){
 				result = true;
 			}
 		}
 		
 		return result;
+	}
+	
+	public static List<Child> childrenOnPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.byId(playgroundId)).eq("onPlayground", true).findList();
+	}
+	
+	public static void renewSessionCard(String childId){
+		Child child = Child.find.byId(childId);
+		Playground playground = child.playground;
+		
+		if(playground.sessionCard.active){
+			child.numberOfSessions += SessionCard.getSessionCardByPlayground(playground.id).numberOfSessions;
+		}else{
+			child.numberOfSessions = 0;
+		}		
+		
+		child.update();
+	}
+	
+	public static void decreaseNumberOfSessions(String childId, int sessions){
+		Child child = Child.find.byId(childId);
+		
+		child.numberOfSessions -= sessions;
+		
+		child.update();
 	}
 }

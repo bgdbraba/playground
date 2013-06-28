@@ -24,7 +24,7 @@ public class SessionCardController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.fail"));
 			
-				return badRequest(views.html.playground.sessionCard.showSessionCard.render(playground.sessionCard, filledForm));
+				return badRequest(views.html.playground.sessionCard.showSessionCard.render(SessionCard.getSessionCardByPlayground(playground.id), filledForm));
 							
 			} else {
 				flash("success", MyMessages.get("register.success"));			
@@ -53,14 +53,14 @@ public class SessionCardController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("edit.fail"));
 			
-				return badRequest(views.html.playground.sessionCard.showSessionCard.render(playground.sessionCard, filledForm));
+				return badRequest(views.html.playground.sessionCard.showSessionCard.render(SessionCard.getSessionCardByPlayground(playground.id), filledForm));
 							
 			} else {
 				flash("success", MyMessages.get("edit.success"));			
 							
 				SessionCardForm sessionCardForm = filledForm.get();
 				sessionCardForm.playgroundId = playground.id;
-				sessionCardForm.id = playground.sessionCard.id;
+				sessionCardForm.id = SessionCard.getSessionCardByPlayground(playground.id).id;
 							
 				sessionCardForm.update();
 							
@@ -78,7 +78,7 @@ public class SessionCardController extends Controller{
 			
 			Playground playground = organizer.playground;
 			
-			return ok(views.html.playground.sessionCard.showSessionCard.render(playground.sessionCard, Form.form(SessionCardForm.class)));
+			return ok(views.html.playground.sessionCard.showSessionCard.render(SessionCard.getSessionCardByPlayground(playground.id), Form.form(SessionCardForm.class)));
 		}else{
 			return forbidden();
 		}
@@ -90,7 +90,7 @@ public class SessionCardController extends Controller{
 			
 			Playground playground = organizer.playground;
 			
-			SessionCard.deactivate(playground.sessionCard.id);
+			SessionCard.deactivate(SessionCard.getSessionCardByPlayground(playground.id).id);
 			
 			return redirect(routes.SessionCardController.showSessionCard());
 		} else {
@@ -103,7 +103,7 @@ public class SessionCardController extends Controller{
 			Organizer organizer = Organizer.find.byId(request().username());
 			
 			Playground playground = organizer.playground;
-			SessionCard.activate(playground.sessionCard.id);
+			SessionCard.activate(SessionCard.getSessionCardByPlayground(playground.id).id);
 			
 			return redirect(routes.SessionCardController.showSessionCard());
 		} else {

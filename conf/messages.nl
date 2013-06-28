@@ -146,3 +146,4 @@ active=Actief
 number.of.sessions.help=(vb.:5)
 Succes=GELUKT!
 sessionCard.add=Speelpas Aanmaken
+pay=Betaal

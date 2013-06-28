@@ -25,20 +25,21 @@
 	 	'_iconcls -> "icon-edit"
 	)
 	
-	@inputText(childForm("password1"), 
+	@inputText(childForm("password1"),  
+		'id -> "password",
 		'_label -> MyMessages.get("password"),
 		'_help -> MyMessages.get("Required"),
 	 	'_iconcls -> "icon-key"
 	 )
 	
-	@inputText(childForm("password2"), 
+	@inputText(childForm("password2"),
 		'_label -> MyMessages.get("password.repeat"),
 		'_help -> MyMessages.get("Required"),
 	 	'_iconcls -> "icon-key"
 	 )
 	
 	<p>
-		<a href="" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
+		<a href="#" class="btn btn-primary generate-password">@MyMessages.get("generate.password")</a>
 	</p>
 	
 	<hr>

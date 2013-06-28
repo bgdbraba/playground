@@ -146,6 +146,7 @@ number.of.sessions=
 active=
 number.of.sessions.help=
 Success=
+pay=
 
 
 register.animator.fail=
@@ -153,5 +154,14 @@ year=
 session.card.compensation=
 administration=
 link.activity.to.child=
-
-
+child.days=
+date=
+formulas=
+view.activities=
+pay.management=
+activity.info=
+scribe.in.info=
+linked.activities=
+register.success=
+child.days=
+sessionCard=

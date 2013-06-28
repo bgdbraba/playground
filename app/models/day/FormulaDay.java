@@ -21,7 +21,7 @@ public class FormulaDay extends Model{
 	@GeneratedValue
 	public Long id;
 	
-	public Long date;
+	public long date;
 	
 	@ManyToOne
 	public Formula formula;
@@ -56,9 +56,7 @@ public class FormulaDay extends Model{
 		
 		formulaDay.children.add(child);
 		
-		formulaDay.update();
-		
-		formulaDay.saveManyToManyAssociations("children");
+		formulaDay.saveManyToManyAssociations("children");		
 	}
 	
 	public static void removeChild(Long formulaDayId, String childId){
@@ -114,14 +112,26 @@ public class FormulaDay extends Model{
 	}
 	
 	public static boolean existsForFormula(Long formulaId){
-		return find.where().eq("formula", Formula.find.byId(formulaId)).eq("date",DateConverter.getCurrentDate()) != null;
+		return find.where().eq("formula", Formula.find.byId(formulaId)).eq("date",DateConverter.getCurrentDate()).findList().size() > 0;
 	}
 	
 	public static FormulaDay currentFormulaDay(Long formulaId){
 		if(existsForFormula(formulaId)){
-			return find.where().eq("formula", Formula.find.byId(formulaId)).eq("date",DateConverter.getCurrentDate()).findList().get(0);
+			return find.where().eq("formula", Formula.find.byId(formulaId)).eq("date",DateConverter.getCurrentDate()).findUnique();
 		}
 		return null;
+	}
+	
+	public static List<Child> getChildren(Long formulaDayId){
+		return find.byId(formulaDayId).children;
+	}
+	
+	public static boolean exists(Long playgroundDayId, Long formulaId){
+		return find.where().eq("formula", Formula.find.byId(formulaId)).eq("playgroundDay",PlaygroundDay.find.byId(playgroundDayId)).findList().size() > 0;
+	}
+	
+	public static FormulaDay findFormulaDay(Long playgroundDayId, Long formulaId){
+		return find.where().eq("formula", Formula.find.byId(formulaId)).eq("playgroundDay",PlaygroundDay.find.byId(playgroundDayId)).findList().get(0);
 	}
 	
 }

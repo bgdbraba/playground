@@ -27,7 +27,7 @@ public class PlaygroundDay extends Model{
 	public Playground playground;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playgroundDay")
-	public List<FormulaDay> formulaDays;
+	public List<FormulaDay> formulaDays;	
 	
 	public static Finder<Long, PlaygroundDay> find = new Finder<Long, PlaygroundDay>(Long.class, PlaygroundDay.class);
 	
@@ -42,27 +42,25 @@ public class PlaygroundDay extends Model{
 	public static void initialize(Long playgroundDayId, Long playgroundId){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
-		PlaygroundDay.setDate(playgroundDayId, DateConverter.getCurrentDate());
+		playgroundDay.date = DateConverter.getCurrentDate();
+		
+		playgroundDay.update();
 		
 		PlaygroundDay.addPlayground(playgroundDay.id, playgroundId);
 		
 		Playground playgrounded = Playground.find.byId(playgroundId);
 		
-		for(Formula formula : playgrounded.formulas){
-			FormulaDay formulaDay = FormulaDay.create();
-			FormulaDay.initialize(formulaDay.id);
-			FormulaDay.addFormula(formulaDay.id, formula.id);
-			FormulaDay.addPlaygroundDay(formulaDay.id, playgroundDay.id);
-			
-			PlaygroundDay.addFormulaDay(playgroundDay.id, formulaDay.id);		
-		}		
+//		for(Formula formula : playgrounded.formulas){
+//			FormulaDay formulaDay = FormulaDay.create();
+//			FormulaDay.initialize(formulaDay.id);
+//			FormulaDay.addFormula(formulaDay.id, formula.id);
+//			FormulaDay.addPlaygroundDay(formulaDay.id, playgroundDay.id);
+//			
+//			PlaygroundDay.addFormulaDay(playgroundDay.id, formulaDay.id);		
+//		}		
 		
 		
 	}
-	
-	
-	
-	
 	
 	public static void addFormulaDay(Long playgroundDayId, Long formulaDayId){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
@@ -100,28 +98,15 @@ public class PlaygroundDay extends Model{
 		playgroundDay.update();
 	}
 
-	public static boolean exists(Long playgroundId) {
+	public static boolean exists(Long playgroundId) {		
 		return PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().size() > 0;
 	}
 	
-	public static FormulaDay getFormulaDay(Long playgroundDayId, Long formulaId){
-		
-		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);		
-		
-		for(FormulaDay day : playgroundDay.formulaDays){
-			if(day.formula == Formula.find.byId(formulaId)){
-				return day;
-			}
-		}
-		
-		return null;
-	}
-
 	public static PlaygroundDay findbyPlayground(Long playgroundId) {
 		return PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().get(0);
 	}
 	
-	public static void setDate(Long playgroundDayId, Long date){
+	public static void addDate(Long playgroundDayId, Long date){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
 		playgroundDay.date = date;

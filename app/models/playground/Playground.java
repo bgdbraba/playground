@@ -33,8 +33,6 @@ public class Playground extends Model{
 	
 	public String website;
 	
-	public boolean sessionCardActive;
-	
 	@OneToOne
 	public Address address;
 	
@@ -55,15 +53,11 @@ public class Playground extends Model{
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<PlaygroundDay> playgroundDays;
-	
-	// CHILDREN PRESENT ON PLAYGROUND THIS EXACT MOMENT
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
-	public List<Child> present;
-	
+		
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Activity> activities;
 	
-	@OneToOne
+	@OneToOne(mappedBy="playground")
 	public SessionCard sessionCard;
 	
 	public static Finder<Long, Playground> find = new Finder<Long, Playground>(Long.class, Playground.class);
@@ -160,43 +154,11 @@ public class Playground extends Model{
 		playground.update();
 	}
 	
-	public static void activateSessionCard(Long playgroundId){
+	public static void addPlaygroundDay(Long playgroundId, Long playgroundDayId){
 		Playground playground = Playground.find.byId(playgroundId);
-		playground.sessionCardActive = true;
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
-		playground.update();
-	}
-	
-	public static void deactivateSessionCard(Long playgroundId){
-		Playground playground = Playground.find.byId(playgroundId);
-		playground.sessionCardActive = false;
-		
-		playground.update();
-	}
-	
-	public static void addPresentChild(Long playgroundId, String childId){
-		Playground playground = Playground.find.byId(playgroundId);
-		Child child = Child.find.byId(childId);
-		
-		playground.present.add(child);
-		
-		playground.update();
-	}
-	
-	public static void removePresentChild(Long playgroundId, String childId){
-		Playground playground = Playground.find.byId(playgroundId);
-		Child child = Child.find.byId(childId);
-		
-		playground.present.remove(child);
-		
-		playground.update();
-	}
-	
-	public static void addSessionCard(Long playgroundId, Long sessionCardId){
-		Playground playground = Playground.find.byId(playgroundId);
-		SessionCard sessionCard = SessionCard.find.byId(sessionCardId);
-		
-		playground.sessionCard = sessionCard;
+		playground.playgroundDays.add(playgroundDay);
 		
 		playground.update();
 	}

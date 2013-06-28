@@ -30,6 +30,6 @@ public class SessionCardForm {
 	public void update(){
 		SessionCard.initialize(id, Integer.parseInt(numberOfSessions), Double.parseDouble(cost));
 				
-		Playground.addSessionCard(playgroundId, id);
+		SessionCard.addSessionCard(id, playgroundId);
 	}
 }

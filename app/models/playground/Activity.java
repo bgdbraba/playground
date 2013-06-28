@@ -34,7 +34,7 @@ public class Activity extends Model {
 	
 	public double cost;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="activities")
 	public List<Child> children;
 	
 	@ManyToMany
@@ -107,15 +107,13 @@ public class Activity extends Model {
 		return options;
 	}
 	
-	public static void addChild(Long activityId, String childId){
-		Activity activity = Activity.find.byId(activityId);
-		Child child = Child.find.byId(childId);
-		
-		activity.children.add(child);
-		
-		activity.update();
-		
-		activity.saveManyToManyAssociations("children");
-	}
+//	public static void addChild(Long activityId, String childId){
+//		Activity activity = Activity.find.byId(activityId);
+//		Child child = Child.find.byId(childId);
+//		
+//		activity.children.add(child);
+//		
+//		activity.saveManyToManyAssociations("children");
+//	}
 	
 }

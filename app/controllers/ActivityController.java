@@ -13,6 +13,7 @@ import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class ActivityController extends Controller{
+	
 	public static Result registerActivity(){
 		if(Secured.isOrganizer()){
 			

@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import conf.DateConverter;
+
+import models.users.Child;
+
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 
@@ -56,5 +60,18 @@ public class Role extends Model{
 	
 	public static List<Role> getRolesForPlayground(Long playgroundId){
 		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+	}
+	
+	public static Role getRoleForChild(String childId){
+		Child child = Child.find.byId(childId);
+		Playground playground = child.playground;
+		
+		for(Role role : Role.getRolesForPlayground(playground.id)){
+			if(role.beginAge <= DateConverter.getAge(child.dateOfBirth) && role.endAge >= DateConverter.getAge(child.dateOfBirth)){
+				return role;
+			}
+		}
+		
+		return null;
 	}
 }

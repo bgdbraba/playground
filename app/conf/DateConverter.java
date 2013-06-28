@@ -100,7 +100,7 @@ public class DateConverter {
 				+ seconds.substring(seconds.length() - 2);
 	}
 	
-	public static long getCurrentDate2(){
+	public static long getCurrentDate(){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 		Date today = null;
 		try {
@@ -126,7 +126,7 @@ public class DateConverter {
 		return date;
 	}
 	
-	public static long getCurrentDate(){
+	public static long getCurrentDate2(){
 		Calendar cal = Calendar.getInstance();
 		
 		cal.clear(Calendar.HOUR_OF_DAY);
@@ -136,6 +136,28 @@ public class DateConverter {
 		cal.clear(Calendar.MILLISECOND);
 		
 		return cal.getTime().getTime();
+		
+	}
+	
+	public static long getCurrentYear(){
+		Calendar cal = Calendar.getInstance();
+		
+		
+		cal.clear(Calendar.YEAR);
+		cal.clear(Calendar.MONTH);
+		cal.clear(Calendar.DAY_OF_MONTH);
+		cal.clear(Calendar.HOUR_OF_DAY);
+		cal.clear(Calendar.HOUR);
+		cal.clear(Calendar.MINUTE);
+		cal.clear(Calendar.SECOND);
+		cal.clear(Calendar.MILLISECOND);
+		
+		return cal.getTime().getTime();
+		
+	}
+	
+	public static int getAge(long date){
+		return Integer.parseInt(formatYear.format(new Date(getCurrentDate()))) - Integer.parseInt(formatYear.format(new Date(date)));
 		
 	}
 }

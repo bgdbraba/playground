@@ -1,0 +1,6 @@
+@(playgroundDay: models.day.PlaygroundDay)
+
+<tr>
+	<td><a href="#">@playgroundDay.id</a></td>
+	<td>@DateConverter.getDateAsString(playgroundDay.date)</td>
+</tr>

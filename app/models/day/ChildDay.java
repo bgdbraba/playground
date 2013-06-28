@@ -29,7 +29,7 @@ public class ChildDay extends Model{
 	@ManyToOne
 	public Child child;
 	
-	@ManyToMany // or MANYTOMANY
+	@ManyToMany
 	public List<Formula> formulas;
 	
 	public static Finder<Long, ChildDay> find = new Finder<Long, ChildDay>(Long.class, ChildDay.class);
@@ -46,6 +46,7 @@ public class ChildDay extends Model{
 		ChildDay childDay = ChildDay.find.byId(childDayId);
 		
 		childDay.date = DateConverter.getCurrentDate();
+		childDay.amountPayed = 0.00;
 		
 		childDay.update();
 	}
@@ -66,21 +67,21 @@ public class ChildDay extends Model{
 		childDay.formulas.add(formula);
 		
 		childDay.saveManyToManyAssociations("formulas");
+	}
+	
+	public static void amountPayed(Long childDayId, double cost){
+		ChildDay childDay = ChildDay.find.byId(childDayId);
+		childDay.amountPayed = cost;
 		
 		childDay.update();		
 	}
 	
-	public static boolean exists(String childId){
-		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()) != null;
+	public static List<ChildDay> getChildDaysForChild(String childId){
+		return find.where().eq("child", Child.find.byId(childId)).findList();
 	}
 	
-	public static void setAmountPayed(Long childDayId, double cost){
-		ChildDay childDay = ChildDay.find.byId(childDayId);
-		
-		childDay.amountPayed = cost;
-		
-		childDay.update();
-		
+	public static boolean exists(String childId){
+		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()) != null;
 	}
 
 }

@@ -1,0 +1,20 @@
+@(childDays: List[models.day.ChildDay])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("date")</th>
+		<th>@MyMessages.get("cost")</th>
+		<th>@MyMessages.get("formulas")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@if(childDays != null){
+		@for(childDay <- childDays) {
+			@item(childDay)
+		}
+	}
+	</tbody>
+}

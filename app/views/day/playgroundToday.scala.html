@@ -1,21 +1,24 @@
 @(playground : models.playground.Playground)
 
 @import models.day._
+@import models.users._
 
 @main(MyMessages.get("today")){
 
-	<h1>@MyMessages.get("children.on.playground") : @playground.present.size()</h1>
+	<h1>@MyMessages.get("children.on.playground") : @Child.childrenOnPlayground(playground.id).size()</h1>
 	
-	@views.html.users.child.list(playground.present)
+	@views.html.users.child.list(Child.childrenOnPlayground(playground.id))
 	
 	
 	@for(formula <- playground.formulas){
 	
 		<h1>@formula.name</h1>
 		@if(FormulaDay.currentFormulaDay(formula.id) != null){
-			@views.html.users.child.list(FormulaDay.currentFormulaDay(formula.id).children)
+			@views.html.users.child.list(FormulaDay.getChildren(FormulaDay.currentFormulaDay(formula.id).id))
 		}
 		
 	
 	}
+	
+	@views.html.day.playgroundDay.list(playground.playgroundDays)
 }

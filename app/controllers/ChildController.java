@@ -5,6 +5,7 @@ import java.util.Map;
 
 import models.day.forms.DayForm;
 import models.playground.Activity;
+import models.playground.Formula;
 import models.playground.Playground;
 import models.playground.forms.LinkActivityForm;
 import models.users.Animator;
@@ -128,10 +129,6 @@ public class ChildController extends Controller{
 		}
 	}
 	
-	public static Result scribeInPage(String childId){
-		return ok(views.html.users.child.scribeIn.render(Form.form(DayForm.class),Child.find.byId(childId)));
-	}
-	
 	public static Result payment(String childId){
 		return ok(views.html.users.child.payment.render(Child.find.byId(childId)));
 	}
@@ -162,7 +159,7 @@ public class ChildController extends Controller{
 		
 		Child.offPlayground(childId);
 		
-		Playground.removePresentChild(child.playground.id, childId);
+		
 		
 		return redirect(routes.ChildController.showChildren());
 	}
@@ -181,19 +178,26 @@ public class ChildController extends Controller{
 	
 	public static Result linkActivityToChild(String childId){
 		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			
 			Form<LinkActivityForm> filledForm = Form.form(LinkActivityForm.class).bindFromRequest();
+			
 			if (filledForm.hasErrors()) {
 				flash("fail", "");
+				
 				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+			
 			} else if (Child.alreadyHasActivity(childId,filledForm.get().activityId)) {
 				flash("fail", "");
+				
 				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
 			} else {
+				
 				LinkActivityForm form = filledForm.get();
 				form.childId = childId;
 				form.submit();
 				Child.addNotPayed(childId, Activity.find.byId(form.activityId).cost);
 				flash("success", "");
+				
 				return redirect(routes.ChildController.linkedActivities(childId));
 			}
 		} else {
@@ -207,6 +211,17 @@ public class ChildController extends Controller{
 		} else {
 			return forbidden();
 		}	
+	}
+	
+	public static Result renewSessionCard(String childId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			Child.renewSessionCard(childId);
+			Child.addNotPayed(childId, Child.find.byId(childId).playground.sessionCard.cost);
+			
+			return redirect(routes.ChildController.showDetails(childId));
+		} else {
+			return forbidden();
+		}
 	}
 
 }

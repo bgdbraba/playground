@@ -4,6 +4,6 @@
 	<td><a href="@routes.ActivityController.showDetails(activity.id)">@activity.id</a></td>
 	<td>@activity.name</td>
 	<td>@activity.cost</td>
-	<td>@DateConverter.getDateAndTimeAsString(activity.beginDate + activity.beginTime)</td>
-	<td>@DateConverter.getDateAndTimeAsString(activity.endDate + activity.endTime)</td>
+	<td>@DateConverter.getDateAsString(activity.beginDate) @DateConverter.getTimeAsString(activity.beginTime)</td>
+	<td>@DateConverter.getDateAsString(activity.endDate) @DateConverter.getTimeAsString(activity.endTime)</td>
 </tr>

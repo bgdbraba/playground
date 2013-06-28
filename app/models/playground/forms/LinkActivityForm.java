@@ -13,6 +13,5 @@ public class LinkActivityForm {
 	
 	public void submit(){
 		Child.addLinkToActivity(childId, activityId);
-		Activity.addChild(activityId, childId);
 	}
 }

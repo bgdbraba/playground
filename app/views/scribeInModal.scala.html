@@ -1,0 +1,12 @@
+@(title: String, id: String, buttonText: String)(form: Html)
+
+
+<!-- Button to show modal -->
+<a href="#@id" role="button" class="btn btn-inverse btn-large" data-toggle="modal">@buttonText</a>
+
+<!-- Modal -->
+@modal(title, id) {
+	@form
+} {
+	<button class="btn btn-primary submit-modal">@MyMessages.get("scribe.in")</button>
+}

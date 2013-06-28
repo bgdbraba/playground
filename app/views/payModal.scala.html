@@ -1,11 +1,12 @@
-@(childId: String)(form: Html) 
+@(title: String, id: String, buttonText: String)(form: Html)
+
+
+<!-- Button to show modal -->
+<a href="#@id" role="button" class="btn btn-success btn-large" data-toggle="modal">@buttonText</a>
 
 <!-- Modal -->
-@modal("title", "payment") {
+@modal(title, id) {
 	@form
 } {
-
-	<a href="@routes.ChildController.payNow(childId)" class="btn btn-info submit-modal">@MyMessages.get("pay.now")</a>
-	<a href="@routes.ChildController.payLater(childId)" class="btn btn-inverse submit-modal">@MyMessages.get("pay.later")</a>
-	<button class="btn btn-primary submit-modal">@MyMessages.get("submit")</button>
+	<button class="btn btn-primary submit-modal">@MyMessages.get("pay")</button>
 }
