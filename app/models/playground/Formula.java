@@ -69,6 +69,10 @@ public class Formula extends Model{
 		formula.update();
 	}
 	
+	public static List<Formula> getFormulasForPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+	}
+	
 	public String toString(){
 		return name + " (" + MyMessages.get("cost") + " " + cost + " ; " + MyMessages.get("sessionCardCompensation")+ " " + sessionCardCompensation + ")";
 	}

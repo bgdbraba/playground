@@ -1,5 +1,7 @@
 @(organizer: models.users.Organizer)(organizerForm: Form[models.users.forms.OrganizerForm])
 
+@import models.users._
+
 @main(MyMessages.get("organizer.details")) {
 
 	@flashConfirm(MyMessages.get("fail"), MyMessages.get("organizer.edit.success"))
@@ -8,8 +10,9 @@
 
 	@detailslist{
 
-			<dt>@MyMessages.get("id")</dt>
-			<dd>@organizer.id</dd>
+			@views.html.users.details(BasicUser.getUser(organizer.id))
+			<dt>@MyMessages.get("password")</dt>
+			<dd>@organizer.password</dd>
 			
 			<dt>@MyMessages.get("playground")</dt>
 			<dd>@organizer.playground.name</dd>

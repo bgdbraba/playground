@@ -27,9 +27,9 @@ public class Child extends BasicUser{
 	
 	public String phoneAlt;
 	
-	public boolean receiveMail = true;
+	public boolean receiveMail;
 	
-	public boolean photographable = true;
+	public boolean photographable;
 	
 	public String remarks;
 	
@@ -45,7 +45,7 @@ public class Child extends BasicUser{
 	
 	public boolean sessionCardActive;
 	
-	public boolean onPlayground = false;
+	public boolean onPlayground;
 	
 	@OneToOne
 	public ChildSessionCard card;
@@ -198,5 +198,9 @@ public class Child extends BasicUser{
 		child.onPlayground = false;
 		
 		child.update();
+	}
+	
+	public static List<Child> getChildrenForPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
 	}
 }

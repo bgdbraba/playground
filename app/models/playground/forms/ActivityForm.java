@@ -38,7 +38,7 @@ public class ActivityForm {
 	}
 	
 	public void update(){
-		Activity.initialize(id, name, Double.parseDouble(cost), DateConverter.parseDate(beginDate) + DateConverter.parseTime(beginTime), DateConverter.parseDate(endDate)+ DateConverter.parseTime(endTime));
+		Activity.initialize(id, name, Double.parseDouble(cost), DateConverter.parseDate(beginDate), DateConverter.parseTime(beginTime), DateConverter.parseDate(endDate), DateConverter.parseTime(endTime));
 		
 		Activity.addPlayground(id, playgroundId);
 		

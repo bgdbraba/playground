@@ -47,5 +47,19 @@
 		'_iconcls -> "icon-hand-up"
 	)
 	
+	@input(playgroundForm("email"), '_label -> MyMessages.get("email"),
+	 	'_iconcls -> "icon-envelope-alt",
+		'_help -> MyMessages.get("optional")
+	 	) { (id, name, value, _) =>
+		<input id="email" type="email" name="@name" value="@value">
+	}
+	
+	@inputText(
+		playgroundForm("website"), 
+		'_label -> MyMessages.get("website"),
+		'placeholder -> MyMessages.get("website.placeholder"),
+		'_iconcls -> "icon-external-link"
+	)
+	
 	
 </fieldset>

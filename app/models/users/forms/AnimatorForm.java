@@ -29,6 +29,7 @@ public class AnimatorForm {
 	public String lastName;
 	
 	@Required
+	@Pattern(value="^[0-9][0-9]-[0-1][0-9]-[0-2][0-9][0-9][0-9]+$")
 	public String dateOfBirth;
 	
 	@Required
@@ -47,6 +48,7 @@ public class AnimatorForm {
 	public boolean hasFollowedCourse = false;
 	
 	@Required
+	@Pattern(value="^[0-9]+$")
 	public String accountNumber;
 
 	@Required
@@ -56,6 +58,7 @@ public class AnimatorForm {
 	public String number;
 
 	@Required
+	@Pattern(value="^[0-9][0-9][0-9][0-9]$")
 	public String zipCode;
 	
 	@Required

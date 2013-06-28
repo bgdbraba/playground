@@ -25,7 +25,7 @@ public class AnimatorController extends Controller{
 		
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.animator.fail"));
-				return badRequest(views.html.users.animator.showAnimators.render(playground.animators, filledForm));
+				return badRequest(views.html.users.animator.showAnimators.render(Animator.getAnimatorsForPlayground(playground.id), filledForm));
 			} else {
 	
 				AnimatorForm animatorForm = filledForm.get();
@@ -58,7 +58,7 @@ public class AnimatorController extends Controller{
 			
 			Playground playground = organizer.playground;	
 			
-			return ok(views.html.users.animator.showAnimators.render(playground.animators, Form.form(AnimatorForm.class)));
+			return ok(views.html.users.animator.showAnimators.render(Animator.getAnimatorsForPlayground(playground.id), Form.form(AnimatorForm.class)));
 		}else{
 			return forbidden();
 		}
@@ -107,7 +107,32 @@ public class AnimatorController extends Controller{
 	}
 	
 	public static Result editAnimator(String id){
-		return TODO;
+		if (Secured.isOrganizer()) {
+			
+			Organizer organizer = Organizer.find.byId(request().username());
+			
+			Playground playground = organizer.playground;	
+			
+			Form<AnimatorForm> filledForm = Form.form(AnimatorForm.class).bindFromRequest();
+		
+			if (filledForm.hasErrors()) {
+				flash("fail", MyMessages.get("register.animator.fail"));
+				return badRequest(views.html.users.animator.details.render(Animator.find.byId(id),filledForm));
+			} else {
+	
+				AnimatorForm animatorForm = filledForm.get();
+				animatorForm.playgroundId = playground.id;	
+				animatorForm.id = id;
+				animatorForm.addressId = Animator.find.byId(id).address.id;
+				animatorForm.update();
+				
+				flash("success", id);
+				
+				return redirect(routes.AnimatorController.showDetails(id));
+			}
+		} else {
+			return forbidden();
+		}
 	}
 
 

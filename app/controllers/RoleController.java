@@ -1,21 +1,20 @@
 package controllers;
 
-import conf.MyMessages;
 import models.playground.Playground;
-import models.playground.forms.FormulaForm;
+import models.playground.Role;
 import models.playground.forms.RoleForm;
 import models.users.Organizer;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class RoleController extends Controller{
 	
 	public static Result registerRole(){
 		if(Secured.isOrganizer()){
-			// ingelogd speelplein vastleggen in form
 			Form<RoleForm> filledForm = Form.form(RoleForm.class).bindFromRequest();
 			
 			Organizer organizer = Organizer.find.byId(request().username());
@@ -23,10 +22,10 @@ public class RoleController extends Controller{
 			Playground playground = organizer.playground;			
 			
 			if (filledForm.hasErrors()) {
-				flash("fail", MyMessages.get("register.formula.fail"));
-				return badRequest(views.html.playground.role.showRoles.render(playground.roles, filledForm));
+				flash("fail", MyMessages.get("register.fail"));
+				return badRequest(views.html.playground.role.showRoles.render(Role.getRolesForPlayground(playground.id), filledForm));
 			} else {
-				flash("success", "register.formula.success");			
+				flash("success", "register.success");			
 				
 				RoleForm roleForm = filledForm.get();
 				roleForm.playgroundId = playground.id;
@@ -47,7 +46,7 @@ public class RoleController extends Controller{
 			
 			Playground playground = organizer.playground;	
 			
-			return ok(views.html.playground.role.showRoles.render(playground.roles, Form.form(RoleForm.class)));
+			return ok(views.html.playground.role.showRoles.render(Role.getRolesForPlayground(playground.id), Form.form(RoleForm.class)));
 		}else{
 			return forbidden();
 		}
@@ -55,19 +54,36 @@ public class RoleController extends Controller{
 	
 	public static Result editRole(Long id){
 		if(Secured.isOrganizer()){
-			// enkel van ingelogd speelplein
+			Form<RoleForm> filledForm = Form.form(RoleForm.class).bindFromRequest();
 			
-			return TODO;
+			Organizer organizer = Organizer.find.byId(request().username());
+			
+			Playground playground = organizer.playground;			
+			
+			if (filledForm.hasErrors()) {
+				flash("fail", MyMessages.get("edit.fail"));
+				return badRequest(views.html.playground.role.details.render(Role.find.byId(id), filledForm));
+			} else {
+				flash("success", MyMessages.get("edit.success"));			
+				
+				RoleForm roleForm = filledForm.get();
+				roleForm.playgroundId = playground.id;
+				roleForm.id = id;
+				
+				roleForm.update();
+				
+				return redirect(routes.RoleController.showDetails(id));
+			}
+			
 		}else{
 			return forbidden();
 		}
+
 	}
 	
 	public static Result showDetails(Long id){
 		if(Secured.isOrganizer()){
-			// enkel van ingelogd speelplein
-			
-			return TODO;
+			return ok(views.html.playground.role.details.render(Role.find.byId(id), Form.form(RoleForm.class)));
 		}else{
 			return forbidden();
 		}

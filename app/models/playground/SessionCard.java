@@ -18,18 +18,17 @@ public class SessionCard extends Model{
 	public int numberOfSessions;
 	
 	public double cost;
-	
-	@OneToOne
-	public Playground playground;
-	
-	public boolean active = true;
+		
+	public boolean active;
 	
 	public static Finder<Long, SessionCard> find = new Finder<Long, SessionCard>(Long.class, SessionCard.class);
 	
-	public static void create(){
+	public static SessionCard create(){
 		SessionCard sessionCard = new SessionCard();
 		
 		sessionCard.save();
+		
+		return sessionCard;
 	}
 	
 	
@@ -42,14 +41,20 @@ public class SessionCard extends Model{
 		sessionCard.update();
 	}
 	
-	public static void addPlayground(Long sessionCardId, Long playgroundId){
-		SessionCard sessionCard = SessionCard.find.byId(sessionCardId);
-		Playground playground = Playground.find.byId(playgroundId);
+	public static void activate(Long id){
+		SessionCard sessionCard = SessionCard.find.byId(id);
 		
-		sessionCard.playground = playground;
+		sessionCard.active = true;
 		
 		sessionCard.update();
+	}
+	
+	public static void deactivate(Long id){
+		SessionCard sessionCard = SessionCard.find.byId(id);
 		
+		sessionCard.active = false;
+		
+		sessionCard.update();
 	}
 
 }

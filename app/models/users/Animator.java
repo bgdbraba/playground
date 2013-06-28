@@ -1,5 +1,7 @@
 package models.users;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -154,6 +156,11 @@ public class Animator extends BasicUser{
 			
 			return playground.animators.get(i);
 		}
+	}
+	
+	public static List<Animator> getAnimatorsForPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+		
 	}
 
 }

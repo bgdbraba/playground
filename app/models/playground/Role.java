@@ -1,5 +1,7 @@
 package models.playground;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -50,5 +52,9 @@ public class Role extends Model{
 		role.playground = playground;
 		
 		role.update();
+	}
+	
+	public static List<Role> getRolesForPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
 	}
 }

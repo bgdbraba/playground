@@ -11,6 +11,15 @@
 	@detailslist{
 			@views.html.users.details(BasicUser.getUser(animator.id))				
 			@views.html.users.addressDetails(animator.address)
+			
+			<dt>@MyMessages.get("accountNumber")</dt>
+			<dd>@animator.accountNumber<dd>
+			
+			<dt>@MyMessages.get("hasFollowedCourse")</dt>
+			<dd>@MyMessages.get(animator.hasFollowedCourse.toString())<dd>
+			
+			<dt>@MyMessages.get("administration")</dt>
+			<dd>@MyMessages.get(animator.administration.toString())<dd>
 	}
 	
 	@actions{

@@ -4,18 +4,18 @@
 
 @main(MyMessages.get("today")){
 
-<h1>@MyMessages.get("children.on.playground") : @playground.present.size()</h1>
-
-@views.html.users.child.list(playground.present)
-
-
-@for(formula <- playground.formulas){
-
-	<h1>@formula.name</h1>
-	@if(FormulaDay.currentFormulaDay(formula.id) != null){
-		@views.html.users.child.list(FormulaDay.currentFormulaDay(formula.id).children)
-	}
+	<h1>@MyMessages.get("children.on.playground") : @playground.present.size()</h1>
 	
-
-}
+	@views.html.users.child.list(playground.present)
+	
+	
+	@for(formula <- playground.formulas){
+	
+		<h1>@formula.name</h1>
+		@if(FormulaDay.currentFormulaDay(formula.id) != null){
+			@views.html.users.child.list(FormulaDay.currentFormulaDay(formula.id).children)
+		}
+		
+	
+	}
 }

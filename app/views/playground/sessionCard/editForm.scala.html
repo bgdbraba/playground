@@ -1,0 +1,9 @@
+@(sessionCardForm: Form[models.playground.forms.SessionCardForm], id : Long)
+
+@import helper._
+
+@form(routes.SessionCardController.editSessionCard()) {
+
+	@fieldset(sessionCardForm)
+
+}

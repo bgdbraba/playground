@@ -11,6 +11,24 @@
 	@detailslist{
 			@views.html.users.details(BasicUser.getUser(child.id))				
 			@views.html.users.addressDetails(child.address)
+			
+			<dt>@MyMessages.get("phone.work")</dt>
+			<dd>@child.phoneWork<dd>
+			
+			<dt>@MyMessages.get("phone.alt")</dt>
+			<dd>@child.phoneAlt<dd>
+			
+			<dt>@MyMessages.get("doctor")</dt>
+			<dd>@child.doctor<dd>
+			
+			<dt>@MyMessages.get("remarks")</dt>
+			<dd>@child.remarks<dd>
+			
+			<dt>@MyMessages.get("receive.mail")</dt>
+			<dd>@MyMessages.get(child.receiveMail.toString())<dd>
+			
+			<dt>@MyMessages.get("photographable")</dt>
+			<dd>@MyMessages.get(child.photographable.toString())<dd>
 	}
 	
 	@actions{

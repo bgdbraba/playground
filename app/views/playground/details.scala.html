@@ -9,8 +9,10 @@
 	<h1>@playground.name</h1>
 			
 	@detailslist{
+		@views.html.users.addressDetails(playground.address)
 		@detail(MyMessages.get("phone"), playground.phone)
-			
+		@detail(MyMessages.get("email"), playground.email)
+		@detail(MyMessages.get("website"), playground.website)
 	}
 	
 	@actions{

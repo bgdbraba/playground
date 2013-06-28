@@ -79,6 +79,13 @@ POST	/activities						controllers.ActivityController.registerActivity()
 GET		/activities/:id/details			controllers.ActivityController.showDetails(id: Long)
 POST	/activities/:id/details			controllers.ActivityController.editActivity(id: Long)
 
+# SessionCard Management
+GET	 	/sessionCard					controllers.SessionCardController.showSessionCard()
+POST	/sessionCard/register			controllers.SessionCardController.registerSessionCard()
+POST	/sessionCard/edit				controllers.SessionCardController.editSessionCard()
+GET		/sessionCard/deactivate    		controllers.SessionCardController.deactivate()
+GET		/sessionCard/activate    		controllers.SessionCardController.activate()
+
 # Role management
 GET		/roles						controllers.RoleController.showRoles()
 POST	/roles						controllers.RoleController.registerRole()

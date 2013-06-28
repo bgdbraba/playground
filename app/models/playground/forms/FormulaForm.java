@@ -2,6 +2,7 @@ package models.playground.forms;
 
 import models.playground.Formula;
 import models.playground.Playground;
+import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
 
 public class FormulaForm {
@@ -12,10 +13,12 @@ public class FormulaForm {
 	public String name;
 	
 	@Required
-	public String cost = "0.00";
+	@Pattern(value="^[0-9]+.[0-9][0-9]$")
+	public String cost;
 	
 	@Required
-	public String sessionCardCompensation = "0";
+	@Pattern(value="^[0-9]+$")
+	public String sessionCardCompensation;
 	
 	public Long playgroundId;
 	

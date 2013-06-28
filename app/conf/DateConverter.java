@@ -13,9 +13,19 @@ public class DateConverter {
 	public static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 	
 	public static SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
+	
+	public static SimpleDateFormat formatDateAndTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 	public static String getDateAsString(long date) {
 		return formatBirth.format(new Date(date));
+	}
+	
+	public static String getDateAndTimeAsString(long time){
+		return formatDateAndTime.format(new Date(time));
+	}
+	
+	public static String getTimeAsString(long time){
+		return formatTime.format(new Date(time));
 	}
 
 	// make sure no instance can be made of this class (implicit: static class)

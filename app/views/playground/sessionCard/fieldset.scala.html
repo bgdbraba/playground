@@ -1,0 +1,26 @@
+@(sessionCardForm: Form[models.playground.forms.SessionCardForm])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+<fieldset>
+
+	        
+	@inputText(sessionCardForm("cost"), 
+		'_label -> MyMessages.get("cost") , 
+		'placeholder -> MyMessages.get("cost.help"),
+		'_help -> MyMessages.get("required"),
+		'_iconcls -> "icon-euro"
+		)
+	
+	<hr>
+	
+	@inputText(sessionCardForm("numberOfSessions"), 
+		'_label -> MyMessages.get("number.of.sessions") , 
+		'placeholder -> MyMessages.get("number.of.sessions.help"),
+		'_help -> MyMessages.get("required"),
+		'_prependedInput -> "#"
+		)
+	
+    
+</fieldset>

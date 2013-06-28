@@ -15,7 +15,7 @@
     
         @elements.input
         
-        <span class="help-block error small"><small>@MyMessages.get(elements.errors.mkString("; "))</small></span> 
+        <span class="help-block error small"><small>@elements.errors.mkString("; ")</small></span> 
     </div>
     }else{
     	@if(elements.args.containsKey('_prependedInput)){

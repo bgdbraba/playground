@@ -1,6 +1,7 @@
 package controllers;
 
 import conf.MyMessages;
+import models.playground.Formula;
 import models.playground.Playground;
 import models.playground.forms.FormulaForm;
 import models.users.Organizer;
@@ -16,7 +17,6 @@ public class FormulaController extends Controller{
 	
 	public static Result registerFormula(){
 		if(Secured.isOrganizer()){
-			// ingelogd speelplein vastleggen in form
 			Form<FormulaForm> filledForm = Form.form(FormulaForm.class).bindFromRequest();
 			
 			Organizer organizer = Organizer.find.byId(request().username());
@@ -26,7 +26,7 @@ public class FormulaController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.formula.fail"));
 				
-				return badRequest(views.html.playground.formula.showFormulas.render(playground.formulas, filledForm));
+				return badRequest(views.html.playground.formula.showFormulas.render(Formula.getFormulasForPlayground(playground.id), filledForm));
 				
 			} else {
 				flash("success", MyMessages.get("register.formula.success"));			
@@ -50,7 +50,7 @@ public class FormulaController extends Controller{
 			
 			Playground playground = organizer.playground;	
 			
-			return ok(views.html.playground.formula.showFormulas.render(playground.formulas, Form.form(FormulaForm.class)));
+			return ok(views.html.playground.formula.showFormulas.render(Formula.getFormulasForPlayground(playground.id), Form.form(FormulaForm.class)));
 		}else{
 			return forbidden();
 		}
@@ -58,9 +58,29 @@ public class FormulaController extends Controller{
 	
 	public static Result editFormula(Long id){
 		if(Secured.isOrganizer()){
-			// enkel van ingelogd speelplein
+			Form<FormulaForm> filledForm = Form.form(FormulaForm.class).bindFromRequest();
 			
-			return TODO;
+			Organizer organizer = Organizer.find.byId(request().username());
+			
+			Playground playground = organizer.playground;			
+			
+			if (filledForm.hasErrors()) {
+				flash("fail", MyMessages.get("register.formula.fail"));
+				
+				return badRequest(views.html.playground.formula.details.render(Formula.find.byId(id), filledForm));
+				
+			} else {
+				flash("success", MyMessages.get("register.formula.success"));			
+				
+				FormulaForm formulaForm = filledForm.get();
+				formulaForm.playgroundId = playground.id;
+				formulaForm.id = id;
+				
+				formulaForm.update();
+				
+				return redirect(routes.FormulaController.showDetails(id));
+			}
+			
 		}else{
 			return forbidden();
 		}
@@ -68,9 +88,7 @@ public class FormulaController extends Controller{
 	
 	public static Result showDetails(Long id){
 		if(Secured.isOrganizer()){
-			// enkel van ingelogd speelplein
-			
-			return TODO;
+			return ok(views.html.playground.formula.details.render(Formula.find.byId(id), Form.form(FormulaForm.class)));
 		}else{
 			return forbidden();
 		}

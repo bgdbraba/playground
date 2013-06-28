@@ -1,0 +1,27 @@
+@(formula: models.playground.Formula)(formulaForm: Form[models.playground.forms.FormulaForm])
+
+@main(formula.name) {
+
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
+			
+	<h1>@formula.name</h1>
+			
+	@detailslist{
+		<dt>@MyMessages.get("name")</dt>
+		<dd>@formula.name</dd>
+		
+		<dt>@MyMessages.get("cost")</dt>
+		<dd>@formula.cost</dd>
+
+		<dt>@MyMessages.get("session.card.compensation")</dt>
+		<dd>@formula.sessionCardCompensation</dd>
+	}
+	
+	@actions{	
+		@modalForm(MyMessages.get("edit"), "formulaModal", MyMessages.get("edit")) {
+			@editForm(formulaForm, formula.id)
+		}	
+		
+		<a href="@routes.FormulaController.showFormulas()" class="btn">@MyMessages.get("go.back")</a>
+	}
+}

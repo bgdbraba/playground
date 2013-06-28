@@ -1,0 +1,31 @@
+@(activity: models.playground.Activity)(activityForm: Form[models.playground.forms.ActivityForm])
+
+@main(activity.name) {
+
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
+			
+	<h1>@activity.name</h1>
+			
+	@detailslist{
+		<dt>@MyMessages.get("activity.name")</dt>
+		<dd>@activity.name</dd>
+		
+		<dt>@MyMessages.get("begin.activity")</dt>
+		<dd>@DateConverter.getDateAsString(activity.beginDate)</dd>
+		<dd>@DateConverter.getTimeAsString(activity.beginTime)</dd>
+			
+		<dt>@MyMessages.get("end.activity")</dt>
+		<dd>@DateConverter.getDateAsString(activity.endDate)</dd>
+		<dd>@DateConverter.getTimeAsString(activity.endTime)</dd>
+		
+		<dt>@MyMessages.get("cost")</dt>
+		<dd><i class="icon-eur"></i> @activity.cost</dd>
+						
+	}
+	
+	@if(Secured.isOrganizer()){
+		@actions{	
+		
+		}
+	}
+}

@@ -8,9 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import models.playground.forms.ActivityForm;
 import models.users.Child;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
+import conf.DateConverter;
 
 @Entity
 public class Activity extends Model {
@@ -23,7 +24,11 @@ public class Activity extends Model {
 
 	public Long beginDate;
 	
+	public Long beginTime;
+	
 	public Long endDate;
+	
+	public Long endTime;
 	
 	public double cost;
 	
@@ -59,14 +64,34 @@ public class Activity extends Model {
 
 
 	public static void initialize(Long id, String name, double cost,
-			long beginDate, long endDate) {
+			long beginDate,long beginTime, long endDate, long endTime) {
 		Activity activity = Activity.find.byId(id);
 		
 		activity.beginDate = beginDate;
+		activity.beginTime = beginTime;
 		activity.endDate = endDate;
+		activity.endTime = endTime;
 		activity.name = name;
 		activity.cost = cost;
 		
 		activity.update();
+	}
+	
+	public static List<Activity> getActivitiesForPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+	}
+	
+	public ActivityForm toForm(){
+		ActivityForm form = new ActivityForm();
+		
+		form.id = id;
+		form.name = name;
+		form.cost = cost + "";
+		form.beginDate = DateConverter.getDateAsString(beginDate);
+		form.endDate = DateConverter.getDateAsString(endDate);
+		form.beginTime = DateConverter.getTimeAsString(beginTime);
+		form.endTime = DateConverter.getTimeAsString(endTime);
+		
+		return form;
 	}
 }

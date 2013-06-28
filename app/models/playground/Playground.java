@@ -29,6 +29,10 @@ public class Playground extends Model{
 	
 	public String phone;
 	
+	public String email;
+	
+	public String website;
+	
 	public boolean sessionCardActive;
 	
 	@OneToOne
@@ -49,7 +53,6 @@ public class Playground extends Model{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<Child> children;
 	
-
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playground")
 	public List<PlaygroundDay> playgroundDays;
 	
@@ -73,11 +76,13 @@ public class Playground extends Model{
 		return playground;
 	}
 	
-	public static void initialize(Long playgroundId, String name, String phone){
+	public static void initialize(Long playgroundId, String name, String phone, String email, String website){
 		Playground playground = Playground.find.byId(playgroundId);
 		
 		playground.name = name;
 		playground.phone = phone;
+		playground.email = email;
+		playground.website = website;
 		
 		playground.update();
 	}
@@ -93,9 +98,11 @@ public class Playground extends Model{
 	
 	public static Map<String,String> options() {
 		Map<String,String> options = new HashMap<String,String>();
+		
 		for(Playground playground : find.all()) {
 			options.put(playground.id.toString(), playground.name + ", " + playground.address.city);
 		}
+		
 		return options;
 	}
 	
@@ -184,6 +191,19 @@ public class Playground extends Model{
 		
 		playground.update();
 	}
+	
+	public static void addSessionCard(Long playgroundId, Long sessionCardId){
+		Playground playground = Playground.find.byId(playgroundId);
+		SessionCard sessionCard = SessionCard.find.byId(sessionCardId);
+		
+		playground.sessionCard = sessionCard;
+		
+		playground.update();
+	}
+	
+	public static List<Animator> getAnimatorOfPlayground(Long id){
+		return Playground.find.byId(id).animators;
+	}
 
 	public PlaygroundForm toForm() {
 		PlaygroundForm form = new PlaygroundForm();
@@ -195,6 +215,8 @@ public class Playground extends Model{
 		form.street = address.street;
 		form.zipCode = address.zipCode;
 		form.city = address.city;
+		form.email = email;
+		form.website = website;
 		
 		return form;
 	}

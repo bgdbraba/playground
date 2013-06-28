@@ -8,7 +8,7 @@
 	
 	@inputText(activityForm("name"),
 		'_label -> MyMessages.get("name"),
-		'_help -> MyMessages.get("name.help"),
+		'_help -> MyMessages.get("required"),
 		'_iconcls -> "icon-edit"
 		)
 	
@@ -16,7 +16,8 @@
           
 	@inputText(activityForm("cost"), 
 		'_label -> MyMessages.get("cost") , 
-		'_help -> MyMessages.get("cost.help"),
+		'placeholder -> MyMessages.get("cost.help"),
+		'_help -> MyMessages.get("required"),
 		'_iconcls -> "icon-euro"
 		)
 	

@@ -2,6 +2,7 @@ package models.playground.forms;
 
 import models.playground.Playground;
 import models.playground.Role;
+import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
 
 public class RoleForm {
@@ -12,9 +13,11 @@ public class RoleForm {
 	public String name;
 	
 	@Required
+	@Pattern(value="^[0-9]+$")
 	public String beginAge;
 	
 	@Required
+	@Pattern(value="^[0-9]+$")
 	public String endAge;
 	
 	public Long playgroundId;

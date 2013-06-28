@@ -6,12 +6,16 @@
 		<th>@MyMessages.get("id")</th>
 		<th>@MyMessages.get("name")</th>
 		<th>@MyMessages.get("cost")</th>
+		<th>@MyMessages.get("from")</th>
+		<th>@MyMessages.get("until")</th>
 		<!-- Extra option buttons -->
 	</tr>
 	</thead>
 	<tbody>
-	@for(activity <- activities) {
-		@item(activity)
+	@if(activities != null){
+		@for(activity <- activities) {
+			@item(activity)
+		}
 	}
 	</tbody>
 }

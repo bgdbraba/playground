@@ -32,7 +32,7 @@ public class ChildController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.child.fail"));
 			
-				return badRequest(views.html.users.child.showChildren.render(playground.children, filledForm));
+				return badRequest(views.html.users.child.showChildren.render(Child.getChildrenForPlayground(playground.id), filledForm));
 			
 			} else {
 	
@@ -56,7 +56,7 @@ public class ChildController extends Controller{
 			
 			Playground playground = animator.playground;	
 			
-			return ok(views.html.users.child.showChildren.render(playground.children, Form.form(ChildForm.class)));
+			return ok(views.html.users.child.showChildren.render(Child.getChildrenForPlayground(playground.id), Form.form(ChildForm.class)));
 		}else{
 			return forbidden();
 		}
@@ -76,7 +76,36 @@ public class ChildController extends Controller{
 	
 
 	public static Result editChild(String id){
-		return TODO;
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			
+			Animator animator = Animator.find.byId(request().username());
+			
+			Playground playground = animator.playground;	
+			
+			Form<ChildForm> filledForm = Form.form(ChildForm.class).bindFromRequest();
+		
+			if (filledForm.hasErrors()) {
+				flash("fail", MyMessages.get("register.child.fail"));
+			
+				return badRequest(views.html.users.child.details.render(Child.find.byId(id), filledForm,Form.form(DayForm.class)));
+			
+			} else {
+	
+				ChildForm childForm = filledForm.get();
+				childForm.playgroundId = playground.id;		
+				childForm.id = id;
+				childForm.addressId = Child.find.byId(id).address.id;
+				
+				childForm.update();
+				
+				flash("success", id);
+				
+				return redirect(routes.ChildController.showDetails(id));
+			}
+			
+		} else {
+			return forbidden();
+		}
 	}
 
 	public static Result deactivate(String childId) {

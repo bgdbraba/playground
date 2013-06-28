@@ -1,0 +1,27 @@
+@(role: models.playground.Role)(roleForm: Form[models.playground.forms.RoleForm])
+
+@main(role.name) {
+
+	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
+			
+	<h1>@role.name</h1>
+			
+	@detailslist{
+		<dt>@MyMessages.get("name")</dt>
+		<dd>@role.name</dd>
+		
+		<dt>@MyMessages.get("begin.age")</dt>
+		<dd>@role.beginAge @MyMessages.get("year")</dd>
+
+		<dt>@MyMessages.get("end.age")</dt>
+		<dd>@role.endAge @MyMessages.get("year")</dd>
+	}
+	
+	@actions{	
+		@modalForm(MyMessages.get("edit"), "roleModal", MyMessages.get("edit")) {
+			@editForm(roleForm, role.id)
+		}	
+		
+		<a href="@routes.RoleController.showRoles()" class="btn">@MyMessages.get("go.back")</a>
+	}
+}

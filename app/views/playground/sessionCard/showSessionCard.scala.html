@@ -1,0 +1,32 @@
+@(sessionCard : models.playground.SessionCard)(sessionCardForm: Form[models.playground.forms.SessionCardForm])
+
+@main(MyMessages.get("session.card")) {
+
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+
+	
+	@if(sessionCard == null){
+			@actions{
+				@modalForm(MyMessages.get("sessionCard.add"), "sessionCardModal", MyMessages.get("sessionCard.add")) {
+					@addForm(sessionCardForm)
+				}	
+			}
+	
+	}else{	
+			@details(sessionCard)
+			
+			@actions{
+				@modalForm(MyMessages.get("sessionCard.edit"), "sessionCardModal", MyMessages.get("sessionCard.edit")) {
+					@editForm(sessionCardForm,sessionCard.id)
+				}	
+				
+				@if(sessionCard.active){
+					<a href="@routes.SessionCardController.deactivate()" class="btn btn-danger">@MyMessages.get("deactivate")</a>
+				}else{
+					<a href="@routes.SessionCardController.activate()" class="btn btn-success">@MyMessages.get("activate")</a>
+				}
+			
+			}
+	}
+	
+}

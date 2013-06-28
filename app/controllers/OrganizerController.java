@@ -25,6 +25,7 @@ public class OrganizerController extends Controller{
 		if (Secured.isAdmin()) {
 			Organizer organizer = Organizer.find.byId(id);
 			OrganizerForm editForm = organizer.toForm();
+			
 			return ok(views.html.users.organizer.details.render(organizer,
 					Form.form(OrganizerForm.class).fill(editForm)));
 		} else {
@@ -50,7 +51,21 @@ public class OrganizerController extends Controller{
 	}
 	
 	public static Result editOrganizer(String id){
-		return TODO;
+		if (Secured.isAdmin()) {
+			Form<OrganizerForm> filledForm = Form.form(OrganizerForm.class).bindFromRequest();
+
+			if (filledForm.hasErrors()) {
+				flash("fail", MyMessages.get("register.organizer.fail"));
+				return badRequest(views.html.users.organizer.details.render(Organizer.find.byId(id), filledForm));
+			} else {
+				filledForm.get().update();
+				flash("success", id);
+				return redirect(routes.OrganizerController.showDetails(id));
+			}
+		} else {
+			return forbidden();
+		}
+
 	}
 
 	public static Result deactivate(String organizerId) {
