@@ -71,7 +71,7 @@
 	
 	@input(childForm("email"), '_label -> MyMessages.get("email"),
 	 	'_iconcls -> "icon-envelope-alt",
-		'_help -> MyMessages.get("Required")
+		'_help -> MyMessages.get("optional")
 		) { (id, name, value, _) =>
 		<input id="email" type="email" name="@name" value="@value">
 	} 
@@ -125,7 +125,7 @@
 	@inputText(
 		childForm("doctor"), 
 		'_label -> MyMessages.get("doctor"),
-		'_help -> MyMessages.get("required"),
+		'_help -> MyMessages.get("optional"),
 		'_iconcls -> "icon-user-md"
 	)
 	

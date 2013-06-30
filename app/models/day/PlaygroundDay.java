@@ -32,7 +32,7 @@ public class PlaygroundDay extends Model{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="playgroundDay")
 	public List<FormulaDay> formulaDays;	
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="playgroundDays")
 	public List<Child> children;
 	
 	public static Finder<Long, PlaygroundDay> find = new Finder<Long, PlaygroundDay>(Long.class, PlaygroundDay.class);
@@ -67,7 +67,7 @@ public class PlaygroundDay extends Model{
 		playgroundDay.update();
 	}
 	
-	public static void addChild(Long playgroundDayId, String childId){
+	public static void newChild(Long playgroundDayId, String childId){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		Child child = Child.find.byId(childId);
 		
@@ -126,4 +126,11 @@ public class PlaygroundDay extends Model{
 		
 		playgroundDay.update();
 	}
+
+	public static boolean hasChild(Long playgroundDayId, String childId) {
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		
+		return playgroundDay.children.contains(Child.find.byId(childId));
+	}
+	
 }

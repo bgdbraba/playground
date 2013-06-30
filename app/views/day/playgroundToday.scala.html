@@ -9,16 +9,19 @@
 	
 	@views.html.users.child.list(Child.childrenOnPlayground(playground.id))
 	
+	@if(PlaygroundDay.exists(playground.id)){
 	
-	@for(formula <- playground.formulas){
-	
-		<h1>@formula.name</h1>
-		@if(FormulaDay.currentFormulaDay(formula.id) != null){
-			@views.html.users.child.list(FormulaDay.getChildren(FormulaDay.currentFormulaDay(formula.id).id))
-		}
+		@for(formulaDay <- PlaygroundDay.findbyPlayground(playground.id).formulaDays){
 		
-	
+			<h1>@formulaDay.formula.name</h1>
+			
+			@if(formulaDay != null){
+				@views.html.users.child.list(formulaDay.children)
+			}
+			
+		
+		}
 	}
 	
-	@views.html.day.playgroundDay.list(playground.playgroundDays)
+	
 }

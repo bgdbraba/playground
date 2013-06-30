@@ -1,8 +1,11 @@
+@import models.users._
+
 @views.html.subnavbar{
 	<li><a href="@routes.FormulaController.showFormulas()" >@MyMessages.get("formula.management")</a></li>
 	<li><a href="@routes.RoleController.showRoles()" >@MyMessages.get("role.management")</a></li>
 	<li><a href="@routes.AnimatorController.showAnimators()" >@MyMessages.get("animator.management")</a></li>
 	<li><a href="@routes.ActivityController.showActivities()" >@MyMessages.get("activity.management")</a></li>
 	<li><a href="@routes.SessionCardController.showSessionCard()" >@MyMessages.get("session.card")</a></li>
-	<li><a href="@routes.PlaygroundController.showToday(models.users.Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("day.management")</a></li>
+	<li><a href="@routes.PlaygroundController.showToday(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("day.management")</a></li>
+	<li><a href="@routes.PlaygroundController.history(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("history")</a></li>
 }

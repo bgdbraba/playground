@@ -29,7 +29,7 @@ public class FormulaDay extends Model{
 	@ManyToOne
 	public PlaygroundDay playgroundDay;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="formulaDays")
 	public List<Child> children;
 
 	public static Finder<Long, FormulaDay> find = new Finder<Long, FormulaDay>(Long.class, FormulaDay.class);
@@ -49,25 +49,7 @@ public class FormulaDay extends Model{
 		
 		formulaDay.update();
 	}
-	
-	public static void addChild(Long formulaDayId, String childId){
-		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
-		Child child = Child.find.byId(childId);
 		
-		formulaDay.children.add(child);
-		
-		formulaDay.saveManyToManyAssociations("children");		
-	}
-	
-	public static void removeChild(Long formulaDayId, String childId){
-		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
-		Child child = Child.find.byId(childId);
-		
-		formulaDay.children.remove(child);
-		
-		formulaDay.update();
-	}
-	
 	public static void addFormula(Long formulaDayId, long formulaId){
 		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
 		Formula formula = Formula.find.byId(formulaId);
@@ -82,24 +64,6 @@ public class FormulaDay extends Model{
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
 		formulaDay.playgroundDay = playgroundDay;
-		
-		formulaDay.update();
-	}
-	
-	// THE METHODS HEREAFTER ARE MADE BUT NOT MEANT TO BE USED
-	
-	public static void removeFormula(Long formulaDayId){
-		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
-				
-		formulaDay.formula = null;
-		
-		formulaDay.update();
-	}
-	
-	public static void removePlaygroundDay(Long formulaDayId){
-		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
-		
-		formulaDay.playgroundDay = null;
 		
 		formulaDay.update();
 	}
@@ -132,6 +96,23 @@ public class FormulaDay extends Model{
 	
 	public static FormulaDay findFormulaDay(Long playgroundDayId, Long formulaId){
 		return find.where().eq("formula", Formula.find.byId(formulaId)).eq("playgroundDay",PlaygroundDay.find.byId(playgroundDayId)).findList().get(0);
+	}
+	
+	public static boolean hasChild(Long formulaDayId, String childId) {
+		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
+		
+		return formulaDay.children.contains(Child.find.byId(childId));
+	}
+	
+	public static void addChild(Long formulaDayId, String childId){
+		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
+		Child child = Child.find.byId(childId);
+		
+		formulaDay.children.add(child);
+		
+		formulaDay.update();
+		
+		formulaDay.saveManyToManyAssociations("children");		
 	}
 	
 }

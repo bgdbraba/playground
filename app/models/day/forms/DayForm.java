@@ -22,47 +22,45 @@ public class DayForm {
 	public void submit(){
 		Child child = Child.find.byId(childId);
 		
-		/** CHILD DAY SHIT */
-		ChildDay childDay = ChildDay.create();
-		ChildDay.initialize(childDay.id);
+		/** KIND DAG */
+		ChildDay childDay;
+		
+		if(!ChildDay.exists(childId)){
+			childDay = ChildDay.create();
+			ChildDay.initialize(childDay.id);
+			ChildDay.addChild(childDay.id, childId);
+		}else{
+			childDay = ChildDay.getCurrentChildDay(childId);	
+		}
 		
 		
 		amountToPay = 0.00;
 		
-		/** PLAYGROUNDDAY SHIT AND FORMULADAY SHIT */
+		/** PLAYGROUND DAY */
 		PlaygroundDay playgroundDay;
 		
-		// ALS SPEELDAG MET DEZE DATUM NOG NIET BESTAAT, MAAK ER 1
 		if(!PlaygroundDay.exists(child.playground.id)){
-			
 			playgroundDay = PlaygroundDay.create();
 			PlaygroundDay.initialize(playgroundDay.id, child.playground.id);
-			Playground.addPlaygroundDay(child.playground.id, playgroundDay.id);
-			
-			
+			Playground.addPlaygroundDay(child.playground.id, playgroundDay.id);		
 			
 		}else{
-			
 			playgroundDay = PlaygroundDay.findbyPlayground(child.playground.id);
+			
 		}
 		
+		/** GESELECTEERD FORMULES */
 		if(formulas != null && formulas.size() != 0){
 			// VOEG KIND TOE AAN DE FORMULEDAGEN
 			for(String formulaId : formulas){
 				
 				Formula formula = Formula.find.byId(Long.parseLong(formulaId));
 				
-				if(child.numberOfSessions != 0 && formula.sessionCardCompensation != 0 && (child.numberOfSessions >= formula.sessionCardCompensation)){
-					Child.decreaseNumberOfSessions(child.id, formula.sessionCardCompensation);
-				}else{
-					amountToPay += formula.cost;
-				}
 				
+				/** FORMULA DAY */
 				FormulaDay formulaDay;
-				/** FORMULADAY SHIT */
-								
+				
 				if(FormulaDay.exists(playgroundDay.id, formula.id)){
-					
 					formulaDay = FormulaDay.findFormulaDay(playgroundDay.id, formula.id);		
 					
 				}else{
@@ -75,19 +73,34 @@ public class DayForm {
 					FormulaDay.addPlaygroundDay(formulaDay.id, playgroundDay.id);	
 					PlaygroundDay.addFormulaDay(playgroundDay.id, formulaDay.id);
 				}
-				
-				FormulaDay.addChild(formulaDay.id, childId);
-				Child.addFormulaDay(childId, formulaDay.id);
-							
-				ChildDay.addFormula(childDay.id, formula.id);
+				/** KIND HEEFT REEDS DEZE FORMULE --> ER GEBEURT NIETS */
+				if(!ChildDay.hasFormula(childDay.id, formula.id)){
+					
+					
+					if(!FormulaDay.hasChild(formulaDay.id,childId)){
+
+						FormulaDay.addChild(formulaDay.id, childId);
+						//Child.addFormulaDay(childId, formulaDay.id);
+					}
+					
+					ChildDay.addFormula(childDay.id, formula.id);
+					
+					if(child.numberOfSessions != 0 && formula.sessionCardCompensation != 0 && (child.numberOfSessions >= formula.sessionCardCompensation)){
+						Child.decreaseNumberOfSessions(child.id, formula.sessionCardCompensation);
+					}else{
+						amountToPay += formula.cost;
+					}
+				}			
 			}
 		}
 		
+		
+		if(!PlaygroundDay.hasChild(playgroundDay.id, childId)){
+			PlaygroundDay.newChild(playgroundDay.id, childId);
+			Child.addPlaygroundDay(childId, playgroundDay.id);
+		}
+		
 		ChildDay.amountPayed(childDay.id, amountToPay);
-		ChildDay.addChild(childDay.id, childId);
-		
-		PlaygroundDay.addChild(playgroundDay.id, childId);
-		
 		Child.addNotPayed(child.id, amountToPay);
 		Child.onPlayground(childId);		
 	}

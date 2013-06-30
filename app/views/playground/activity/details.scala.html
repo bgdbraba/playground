@@ -20,12 +20,22 @@
 		
 		<dt>@MyMessages.get("cost")</dt>
 		<dd><i class="icon-eur"></i> @activity.cost</dd>
+		
+		<dt>@MyMessages.get("number.of.children")</dt>
+		<dd>@activity.numberOfChildren</dd>
 						
 	}
 	
+	
 	@if(Secured.isOrganizer()){
 		@actions{	
-		
+			@modalForm(MyMessages.get("edit"), "activityModal", MyMessages.get("edit")) {
+				@editForm(activityForm, activity.id)
+			}
+			<a href="@routes.ActivityController.showActivities()" class="btn">@MyMessages.get("go.back")</a>
 		}
 	}
+	<br>
+	<h1>@MyMessages.get("children") : @activity.children.size()</h1>
+	@views.html.users.child.list(activity.children)
 }

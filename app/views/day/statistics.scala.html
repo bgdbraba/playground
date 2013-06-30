@@ -1,0 +1,36 @@
+@(playground : models.playground.Playground)
+
+@main(MyMessages.get("statistics")){
+
+	<h1>@MyMessages.get("statistics")</h1>
+	
+	<h4>@MyMessages.get("statistics.info")</h4>
+	
+	@*@helper.form(action = routes.DayController.calculateStatistics, 'enctype -> "multipart/form-data") {*@
+	<table>
+	
+	<tr>
+		<th>
+			@MyMessages.get("select.first.date")
+		</th>
+		
+		<th>
+			@MyMessages.get("select.second.date")
+		</th>
+	</tr>
+	
+	<tr>
+		<td>
+			
+		</td>
+		
+		<td>
+			
+		</td>
+	</tr>
+	
+	</table>
+	
+	<input type="submit" value="@Messages("statistics.calculate")">
+	@*}*@
+}

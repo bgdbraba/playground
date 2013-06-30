@@ -67,7 +67,7 @@ public class Role extends Model{
 		Playground playground = child.playground;
 		
 		for(Role role : Role.getRolesForPlayground(playground.id)){
-			if(role.beginAge <= DateConverter.getAge(child.dateOfBirth) && role.endAge >= DateConverter.getAge(child.dateOfBirth)){
+			if(role.beginAge <= DateConverter.getAge(child.dateOfBirth) && role.endAge > DateConverter.getAge(child.dateOfBirth)){
 				return role;
 			}
 		}

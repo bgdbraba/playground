@@ -1,0 +1,29 @@
+@(day : models.day.PlaygroundDay)
+
+@main(DateConverter.getDateAsString(day.date)) {
+
+	<h1>@DateConverter.getDateAsString(day.date)</h1>
+			
+	@detailslist{
+		<dt>@MyMessages.get("number.of.children")</dt>
+		<dd>@day.children.size()</dd>
+		
+		<dt>@MyMessages.get("cost")</dt>
+		<dd><i class="icon-eur"></i> @day.moneyIncome</dd>
+						
+	}
+	
+	<h2>@MyMessages.get("children.day")</h2>
+	
+	@views.html.users.child.list(day.children)
+	
+	@for(formulaDay <- day.formulaDays){
+		
+		<h2>@formulaDay.formula.name</h2>
+		
+		@views.html.users.child.list(formulaDay.children)
+	
+	
+	}
+	
+}

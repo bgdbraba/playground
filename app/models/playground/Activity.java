@@ -34,6 +34,8 @@ public class Activity extends Model {
 	
 	public double cost;
 	
+	public int numberOfChildren;
+	
 	@ManyToMany(mappedBy="activities")
 	public List<Child> children;
 	
@@ -66,7 +68,7 @@ public class Activity extends Model {
 
 
 	public static void initialize(Long id, String name, double cost,
-			long beginDate,long beginTime, long endDate, long endTime) {
+			long beginDate,long beginTime, long endDate, long endTime, int numberOfChildren) {
 		Activity activity = Activity.find.byId(id);
 		
 		activity.beginDate = beginDate;
@@ -75,6 +77,7 @@ public class Activity extends Model {
 		activity.endTime = endTime;
 		activity.name = name;
 		activity.cost = cost;
+		activity.numberOfChildren = numberOfChildren;
 		
 		activity.update();
 	}
@@ -105,6 +108,14 @@ public class Activity extends Model {
 		}
 		
 		return options;
+	}
+
+
+	public static boolean full(Long activityId) {
+		Activity activity = Activity.find.byId(activityId);
+		
+		
+		return activity.children.size() >= activity.numberOfChildren;
 	}
 	
 //	public static void addChild(Long activityId, String childId){

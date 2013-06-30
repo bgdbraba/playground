@@ -81,7 +81,17 @@ public class ChildDay extends Model{
 	}
 	
 	public static boolean exists(String childId){
-		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()) != null;
+		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()).findList().size() > 0;
 	}
-
+	
+	public static ChildDay getCurrentChildDay(String childId){
+		return ChildDay.find.where().eq("child", Child.find.byId(childId)).eq("date", DateConverter.getCurrentDate()).findList().get(0);
+	}
+	
+	public static boolean hasFormula(Long childDayId, Long formulaId){
+		ChildDay childDay = ChildDay.find.byId(childDayId);
+		Formula formula = Formula.find.byId(formulaId);
+		
+		return childDay.formulas.contains(formula);
+	}
 }

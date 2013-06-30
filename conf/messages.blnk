@@ -147,8 +147,6 @@ active=
 number.of.sessions.help=
 Success=
 pay=
-
-
 register.animator.fail=
 year=
 session.card.compensation=
@@ -166,3 +164,10 @@ register.success=
 child.days=
 sessionCard=
 sessionCard.info=
+history=
+amount.income=
+number.of.children=
+administration.already.given.to=
+role=
+no.group.available=
+children.day=

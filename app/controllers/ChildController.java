@@ -199,7 +199,11 @@ public class ChildController extends Controller{
 				flash("fail", "");
 				
 				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
-			} else {
+			} else if (Activity.full(filledForm.get().activityId)) {
+				flash("fail", MyMessages.get("activity.full"));
+				
+				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+			} else{
 				
 				LinkActivityForm form = filledForm.get();
 				form.childId = childId;

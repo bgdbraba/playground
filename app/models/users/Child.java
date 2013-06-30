@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import models.day.ChildDay;
 import models.day.FormulaDay;
+import models.day.PlaygroundDay;
 import models.playground.Activity;
 import models.playground.Playground;
 import models.playground.SessionCard;
@@ -62,7 +63,10 @@ public class Child extends BasicUser{
 	@ManyToMany
 	public List<Activity> activities;
 	
-	@ManyToMany(mappedBy="children")
+	@ManyToMany
+	public List<PlaygroundDay> playgroundDays;
+
+	@ManyToMany
 	public List<FormulaDay> formulaDays;
 	
 	public Child(){}
@@ -124,15 +128,6 @@ public class Child extends BasicUser{
 		ChildDay childDay = ChildDay.find.byId(childDayId);
 		
 		child.days.add(childDay);
-		
-		child.update();
-	}
-	
-	public static void addFormulaDay(String childId, Long formulaDayId){
-		Child child = Child.find.byId(childId);
-		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
-		
-		child.formulaDays.add(formulaDay);
 		
 		child.update();
 	}
@@ -255,5 +250,28 @@ public class Child extends BasicUser{
 		child.numberOfSessions -= sessions;
 		
 		child.update();
+	}
+	
+	public static void addFormulaDay(String childId, Long formulaDayId){
+		Child child = Child.find.byId(childId);
+		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
+		
+		if(!child.formulaDays.contains(formulaDay)){
+			child.formulaDays.add(formulaDay);
+			
+			child.saveManyToManyAssociations("formulaDays");
+		}
+		
+	}
+	
+	public static void addPlaygroundDay(String childId, Long playgroundDayId){
+		Child child = Child.find.byId(childId);
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		
+		if(!child.playgroundDays.contains(playgroundDay)){
+			child.playgroundDays.add(playgroundDay);
+		
+			child.saveManyToManyAssociations("playgroundDays");
+		}
 	}
 }

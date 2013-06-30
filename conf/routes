@@ -67,6 +67,9 @@ POST	/playgrounds											controllers.PlaygroundController.registerPlayground(
 GET		/playgrounds/:id/details								controllers.PlaygroundController.showDetails(id: Long)
 POST	/playgrounds/:id/details								controllers.PlaygroundController.editPlayground(id: Long)
 GET		/playgrounds/:id/today									controllers.PlaygroundController.showToday(id: Long)
+GET		/history/playground/:id									controllers.PlaygroundController.history(id : Long)
+
+GET		/history/playgroundDay/:id								controllers.DayController.showPlaygroundDay(id : Long)
 
 
 # Formula management

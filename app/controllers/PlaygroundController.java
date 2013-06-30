@@ -81,5 +81,14 @@ public class PlaygroundController extends Controller{
 		}
 	}
 	
+	public static Result history(Long playgroundId){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			
+			return ok(views.html.day.history.render(Playground.find.byId(playgroundId)));
+
+		}else{
+			return forbidden();
+		}
+	}	
 
 }
