@@ -80,7 +80,7 @@ public class DayForm {
 					if(!FormulaDay.hasChild(formulaDay.id,childId)){
 
 						FormulaDay.addChild(formulaDay.id, childId);
-						//Child.addFormulaDay(childId, formulaDay.id);
+						Child.addFormulaDay(childId, formulaDay.id);
 					}
 					
 					ChildDay.addFormula(childDay.id, formula.id);
