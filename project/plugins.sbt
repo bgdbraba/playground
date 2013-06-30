@@ -8,6 +8,6 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 addSbtPlugin("play" % "sbt-plugin" % "2.1.1")
 
 // Google Chrome automatic refresh
-addSbtPlugin("com.jamesward" %% "play-auto-refresh" % "0.0.3")
+// addSbtPlugin("com.jamesward" %% "play-auto-refresh" % "0.0.3")
 
 // addSbtPlugin("com.typesafe.startscript" % "xsbt-start-script-plugin" % "0.5.0")
