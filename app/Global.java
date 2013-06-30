@@ -29,11 +29,11 @@ public class Global extends GlobalSettings{
 	public void onStart(Application app) {
 		Logger.info("Application has started");
 		
-//		 // Check if the database is empty
-//        if (BasicUser.find.findRowCount() == 0) {
-//            Ebean.save((List) Yaml.load("data.yml"));
-//
-//        }		
+		 // Check if the database is empty
+        if (BasicUser.find.findRowCount() == 0) {
+            Ebean.save((List) Yaml.load("data.yml"));
+
+        }		
 		
 	}
 
