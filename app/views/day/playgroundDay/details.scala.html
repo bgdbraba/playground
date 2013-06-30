@@ -19,7 +19,7 @@
 	
 	@for(formulaDay <- day.formulaDays){
 		
-		<h2>@formulaDay.formula.name</h2>
+		<h2>@formulaDay.formula.name : @formulaDay.children.size()</h2>
 		
 		@views.html.users.child.list(formulaDay.children)
 	

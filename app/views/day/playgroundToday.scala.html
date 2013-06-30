@@ -13,7 +13,7 @@
 	
 		@for(formulaDay <- PlaygroundDay.findbyPlayground(playground.id).formulaDays){
 		
-			<h1>@formulaDay.formula.name</h1>
+			<h1>@formulaDay.formula.name : @formulaDay.children.size()</h1>
 			
 			@if(formulaDay != null){
 				@views.html.users.child.list(formulaDay.children)
