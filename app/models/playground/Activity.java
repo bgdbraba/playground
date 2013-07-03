@@ -96,6 +96,7 @@ public class Activity extends Model {
 		form.endDate = DateConverter.getDateAsString(endDate);
 		form.beginTime = DateConverter.getTimeAsString(beginTime);
 		form.endTime = DateConverter.getTimeAsString(endTime);
+		form.numberOfChildren = numberOfChildren + "";
 		
 		return form;
 	}

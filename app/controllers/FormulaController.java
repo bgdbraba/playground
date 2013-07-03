@@ -88,7 +88,7 @@ public class FormulaController extends Controller{
 	
 	public static Result showDetails(Long id){
 		if(Secured.isOrganizer()){
-			return ok(views.html.playground.formula.details.render(Formula.find.byId(id), Form.form(FormulaForm.class)));
+			return ok(views.html.playground.formula.details.render(Formula.find.byId(id), Form.form(FormulaForm.class).fill(Formula.find.byId(id).toForm())));
 		}else{
 			return forbidden();
 		}

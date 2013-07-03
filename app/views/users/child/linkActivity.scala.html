@@ -2,6 +2,8 @@
 
 @main(MyMessages.get("linked.activities")){
 
+	<h1>@MyMessages.get("Gelinkte Activiteiten")</h1>
+	
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 	
 	@views.html.playground.activity.list(child.activities)

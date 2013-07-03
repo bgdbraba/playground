@@ -6,16 +6,17 @@
 		<th>@MyMessages.get("id")</th>
 		<th>@MyMessages.get("firstname")</th>
 		<th>@MyMessages.get("lastname")</th>
-		<th>@MyMessages.get("email")</th>
-		<th>@MyMessages.get("phone")</th>
 		<th>@MyMessages.get("address")</th>
 		<th>@MyMessages.get("role")</th>
+		<th>@MyMessages.get("sign.out")</th>
 		<!-- Extra option buttons -->
 	</tr>
 	</thead>
 	<tbody>
 	@for(child <- children) {
-		@item(child)
+		@if(child.active){
+				@item(child)
+		}
 	}
 	</tbody>
 }

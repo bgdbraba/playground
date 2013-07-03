@@ -3,6 +3,7 @@ package controllers;
 import java.util.Arrays;
 import java.util.Map;
 
+import models.day.ChildDay;
 import models.day.PlaygroundDay;
 import models.day.forms.DayForm;
 import models.playground.Activity;
@@ -23,7 +24,7 @@ import conf.MyMessages;
 public class ChildController extends Controller{
 	
 	public static Result registerChild(){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			
 			Animator animator = Animator.find.byId(request().username());
 			
@@ -65,7 +66,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result showDetails(String id){
-		if (Secured.isAnimator() && Secured.hasAdministration() ) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Child child = Child.find.byId(id);
 			ChildForm editForm = child.toChildForm();
 			
@@ -174,6 +175,21 @@ public class ChildController extends Controller{
 		
 		PlaygroundDay playgroundDay = PlaygroundDay.findbyPlayground(playground.id);
 		
+		
+		
+		ChildDay day;
+		
+		if(ChildDay.exists(childId)){
+			day = ChildDay.getCurrentChildDay(childId);
+			
+		}else{
+			day = ChildDay.create();
+			day.initialize(day.id);
+		}
+		
+		day.amountPayed += Child.find.byId(childId).notPayed;
+		day.update();
+		
 		PlaygroundDay.addMoney(playgroundDay.id, Child.find.byId(childId).notPayed);
 		
 		Child.payed(childId);
@@ -211,7 +227,7 @@ public class ChildController extends Controller{
 				Child.addNotPayed(childId, Activity.find.byId(form.activityId).cost);
 				flash("success", "");
 				
-				return redirect(routes.ChildController.linkedActivities(childId));
+				return redirect(routes.ChildController.payment(childId));
 			}
 		} else {
 			return forbidden();
@@ -236,5 +252,4 @@ public class ChildController extends Controller{
 			return forbidden();
 		}
 	}
-
 }
