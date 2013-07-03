@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import models.day.FormulaDay;
+import models.playground.forms.FormulaForm;
 import play.db.ebean.Model;
 import conf.MyMessages;
 
@@ -79,6 +80,18 @@ public class Formula extends Model{
 	
 	public static List<Formula> findAllForPlayground(Long playgroundId){
 		return Formula.find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+	}
+
+	public FormulaForm toForm() {
+		FormulaForm form = new FormulaForm();
+		
+		form.id = id;
+		form.cost = cost + "";
+		form.name = name;
+		form.sessionCardCompensation = this.sessionCardCompensation + "";
+		form.playgroundId = playground.id;
+		
+		return form;
 	}
 
 }

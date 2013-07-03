@@ -12,16 +12,21 @@
 	</a></td>
 	<td>@child.firstName</td>
 	<td>@child.lastName</td>
-	<td>@child.email</td>
-	<td>@child.phone</td>
 	<td>@child.address.getAddress()</td>
 	<td>
 	@if(Role.getRolesForPlayground(child.playground.id).size()>0){
 		@if(Role.getRoleForChild(child.id)==null){
 			@MyMessages.get("no.group.available")
 		}else{
-			@Role.getRoleForChild(child.id).name
+			@for(role <- Role.getRolesForChild(child.id)){
+				@role.name;    
+			}
 		}
 	}	
+	</td>
+	<td>
+	@if(child.onPlayground){
+	<a href="@routes.ChildController.scribeOut(child.id)" class="btn"><i class="icon-signout"></i></a>
+	}
 	</td>
 </tr>

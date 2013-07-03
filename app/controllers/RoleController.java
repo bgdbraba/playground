@@ -25,7 +25,7 @@ public class RoleController extends Controller{
 				flash("fail", MyMessages.get("register.fail"));
 				return badRequest(views.html.playground.role.showRoles.render(Role.getRolesForPlayground(playground.id), filledForm));
 			} else {
-				flash("success", "register.success");			
+				flash("success", MyMessages.get("register.success"));			
 				
 				RoleForm roleForm = filledForm.get();
 				roleForm.playgroundId = playground.id;
@@ -83,7 +83,7 @@ public class RoleController extends Controller{
 	
 	public static Result showDetails(Long id){
 		if(Secured.isOrganizer()){
-			return ok(views.html.playground.role.details.render(Role.find.byId(id), Form.form(RoleForm.class)));
+			return ok(views.html.playground.role.details.render(Role.find.byId(id), Form.form(RoleForm.class).fill(Role.find.byId(id).toForm())));
 		}else{
 			return forbidden();
 		}

@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import models.playground.forms.SessionCardForm;
+
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 
@@ -71,6 +73,19 @@ public class SessionCard extends Model{
 		sessionCard.playground = playground;
 		
 		sessionCard.update();
+	}
+
+
+	public SessionCardForm toForm() {
+		SessionCardForm form = new SessionCardForm();
+		
+		form.id = id;
+		form.numberOfSessions = numberOfSessions + "";
+		form.playgroundId = playground.id;
+		form.cost = cost + "";
+		
+		return form;
+		
 	}
 
 }

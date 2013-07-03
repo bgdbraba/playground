@@ -1,5 +1,6 @@
 package models.day;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,12 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import conf.DateConverter;
-
 import models.playground.Formula;
 import models.users.Child;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
+import conf.DateConverter;
 
 @Entity	
 public class ChildDay extends Model{
@@ -94,4 +93,5 @@ public class ChildDay extends Model{
 		
 		return childDay.formulas.contains(formula);
 	}
+	
 }

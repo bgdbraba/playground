@@ -17,6 +17,18 @@
 	
 	<!-- Example row of columns -->
    
+        @if(child.playground.sessionCard != null){
+	        <div class="well">
+	        	<h2>@MyMessages.get("sessionCard.management")</h2>
+	    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
+	        <p>
+	        @sessionCardModal(MyMessages.get("sessionCard"), "sessionCardModal", MyMessages.get("sessionCard")) {
+				@sessionCardForm(child)
+			}		
+			</p>
+	        </div>
+        }
+        
         <div class="well">
         	<h2>@MyMessages.get("scribe.in")</h2>
     		<p>@MyMessages.get("scribe.in.info")</p>
@@ -44,17 +56,6 @@
         </div>
         
         
-        @if(child.playground.sessionCard != null){
-	        <div class="well">
-	        	<h2>@MyMessages.get("sessionCard.management")</h2>
-	    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
-	        <p>
-	        @sessionCardModal(MyMessages.get("sessionCard"), "sessionCardModal", MyMessages.get("sessionCard")) {
-				@sessionCardForm(child)
-			}		
-			</p>
-	        </div>
-        }
         
 		<div class="well">
           <h2>@MyMessages.get("activity.management")</h2>
@@ -95,6 +96,8 @@
 		@modalForm(MyMessages.get("edit"), "childModal", MyMessages.get("edit")) {
 			@editForm(childForm, child.id)
 		}
+		
+		
 		
 		@if(child.active){
 			<a href="@routes.ChildController.deactivate(child.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>

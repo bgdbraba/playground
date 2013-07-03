@@ -1,5 +1,6 @@
 package models.playground;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,12 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import conf.DateConverter;
-
+import models.playground.forms.RoleForm;
 import models.users.Child;
-
+import play.data.Form;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
+import conf.DateConverter;
 
 @Entity
 public class Role extends Model{
@@ -73,5 +73,33 @@ public class Role extends Model{
 		}
 		
 		return null;
+	}
+	
+	public static List<Role> getRolesForChild(String childId){
+		Child child = Child.find.byId(childId);
+		Playground playground = child.playground;
+		
+		List<Role> roles = new ArrayList<Role>();
+		
+		for(Role role : Role.getRolesForPlayground(playground.id)){
+			if(role.beginAge <= DateConverter.getAge(child.dateOfBirth) && role.endAge > DateConverter.getAge(child.dateOfBirth)){
+				roles.add(role);
+			}
+		}
+		
+		return roles;
+	}
+
+	public RoleForm toForm() {
+		RoleForm roleForm = new RoleForm();
+		
+		roleForm.id = id;
+		roleForm.beginAge = beginAge.toString();
+		roleForm.endAge = endAge.toString();
+		roleForm.name = name;
+		roleForm.playgroundId = playground.id;
+		
+		return roleForm;
+		
 	}
 }

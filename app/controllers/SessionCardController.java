@@ -78,7 +78,7 @@ public class SessionCardController extends Controller{
 			
 			Playground playground = organizer.playground;
 			
-			return ok(views.html.playground.sessionCard.showSessionCard.render(SessionCard.getSessionCardByPlayground(playground.id), Form.form(SessionCardForm.class)));
+			return ok(views.html.playground.sessionCard.showSessionCard.render(SessionCard.getSessionCardByPlayground(playground.id), Form.form(SessionCardForm.class).fill(playground.sessionCard.toForm())));
 		}else{
 			return forbidden();
 		}

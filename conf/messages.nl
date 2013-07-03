@@ -175,3 +175,7 @@ children.day=Kinderen op deze dag
 activity.full=Activiteit volzet!
 children=Kinderen
 register.child.fail=Registratie van kind mislukt!
+remove.child=Verwijder kind
+remove.info=Ben je zeker dat je dit kind wil verwijderen?
+remove=Verwijder
+sign.out=Uitschrijven

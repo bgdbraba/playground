@@ -3,7 +3,10 @@ package controllers;
 import models.playground.Activity;
 import models.playground.Playground;
 import models.playground.forms.ActivityForm;
+import models.users.Animator;
+import models.users.BasicUser;
 import models.users.Organizer;
+import models.users.enums.UserType;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -15,12 +18,23 @@ import conf.MyMessages;
 public class ActivityController extends Controller{
 	
 	public static Result registerActivity(){
-		if(Secured.isOrganizer()){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			
 			
 			Form<ActivityForm> filledForm = Form.form(ActivityForm.class).bindFromRequest();
-			Organizer organizer = Organizer.find.byId(request().username());
 			
-			Playground playground = organizer.playground;
+			Playground playground;
+			
+			if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
+			
+				Organizer organizer = Organizer.find.byId(request().username());
+			
+				playground = organizer.playground;
+			
+			}else{
+				Animator animator = Animator.find.byId(request().username());
+				playground = animator.playground;
+			}
 			
 			if(DateConverter.parseDate(filledForm.field("beginDate").value()) > DateConverter.parseDate(filledForm.field("endDate").value()) ){
 				filledForm.reject("beginDate", MyMessages.get("beginDate.bigger.than.endDate"));
@@ -28,6 +42,7 @@ public class ActivityController extends Controller{
 			}else if(DateConverter.parseDate(filledForm.field("beginDate").value()) < DateConverter.getCurrentDate()){
 				filledForm.reject("beginDate", MyMessages.get("date.in.past"));
 			}
+			
 			
 			
 			if (filledForm.hasErrors()) {
@@ -53,11 +68,20 @@ public class ActivityController extends Controller{
 	}
 	
 	public static Result showActivities(){
-		if(Secured.isOrganizer()){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			
-			Organizer organizer = Organizer.find.byId(request().username());
+			Playground playground;
 			
-			Playground playground = organizer.playground;
+			if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
+			
+				Organizer organizer = Organizer.find.byId(request().username());
+			
+				playground = organizer.playground;
+			
+			}else{
+				Animator animator = Animator.find.byId(request().username());
+				playground = animator.playground;
+			}
 			
 			return ok(views.html.playground.activity.showActivities.render(Activity.getActivitiesForPlayground(playground.id), Form.form(ActivityForm.class)));
 		}else{
@@ -66,12 +90,21 @@ public class ActivityController extends Controller{
 	}
 	
 	public static Result editActivity(Long id){
-		if(Secured.isOrganizer()){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			Form<ActivityForm> filledForm = Form.form(ActivityForm.class).bindFromRequest();
-			Organizer organizer = Organizer.find.byId(request().username());
 			
-			Playground playground = organizer.playground;
+			Playground playground;
 			
+			if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
+			
+				Organizer organizer = Organizer.find.byId(request().username());
+			
+				playground = organizer.playground;
+			
+			}else{
+				Animator animator = Animator.find.byId(request().username());
+				playground = animator.playground;
+			}
 			if(DateConverter.parseDate(filledForm.field("beginDate").value()) > DateConverter.parseDate(filledForm.field("endDate").value()) ){
 				filledForm.reject("beginDate", MyMessages.get("beginDate.bigger.than.endDate"));
 				filledForm.reject("endDate", MyMessages.get("beginDate.bigger.than.endDate"));
@@ -90,6 +123,7 @@ public class ActivityController extends Controller{
 							
 				ActivityForm activityForm = filledForm.get();
 				activityForm.playgroundId = playground.id;
+				activityForm.id = id;
 							
 				activityForm.update();
 							
