@@ -163,7 +163,7 @@ public class ChildController extends Controller{
 		
 		
 		
-		return redirect(routes.DayController.showPlaygroundDay(PlaygroundDay.findByPlayground(child.playground.id)));
+		return redirect(routes.DayController.showPlaygroundDay(PlaygroundDay.findByPlayground(child.playground.id).id));
 	}
 	
 
