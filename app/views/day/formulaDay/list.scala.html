@@ -1,0 +1,17 @@
+@(formulaDays: List[models.day.FormulaDay])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@if(formulaDays != null){
+		@for(formulaDay <- formulaDays) {
+			@item(formulaDay)
+		}
+	}
+	</tbody>
+}
