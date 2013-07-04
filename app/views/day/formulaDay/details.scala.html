@@ -1,0 +1,11 @@
+@(day : models.day.FormulaDay)
+
+@main(DateConverter.getDateAsString(day.date)) {
+
+	<h1>@DateConverter.getDateAsString(day.date)</h1>
+			
+	<h2>@day.formula.name</h2>
+	
+	@views.html.users.child.list(day.children)
+	
+}

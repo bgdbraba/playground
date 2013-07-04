@@ -1,5 +1,6 @@
 package controllers;
 
+import models.day.FormulaDay;
 import models.day.PlaygroundDay;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -12,6 +13,17 @@ public class DayController extends Controller{
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			
 			return ok(views.html.day.playgroundDay.details.render(PlaygroundDay.find.byId(id)));
+
+		}else{
+			return forbidden();
+		}
+		
+	}
+	
+	public static Result showFormulaDay(Long id){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			
+			return ok(views.html.day.formulaDay.details.render(FormulaDay.find.byId(id)));
 
 		}else{
 			return forbidden();
