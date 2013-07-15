@@ -194,11 +194,11 @@ public class ChildController extends Controller{
 		
 		Child.payed(childId);
 		
-		return redirect(routes.ChildController.showDetails(childId));
+		return redirect(routes.ChildController.showChildren());
 	}
 	
 	public static Result payLater(String childId){		
-		return redirect(routes.ChildController.showDetails(childId));
+		return redirect(routes.ChildController.showChildren());
 	}
 	
 	public static Result linkActivityToChild(String childId){
