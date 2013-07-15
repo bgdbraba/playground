@@ -16,6 +16,7 @@ public class DateConverter {
 	
 	public static SimpleDateFormat formatDateAndTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
+	
 	public static String getDateAsString(long date) {
 		return formatBirth.format(new Date(date));
 	}
