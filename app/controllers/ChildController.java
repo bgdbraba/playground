@@ -45,7 +45,7 @@ public class ChildController extends Controller{
 				
 				flash("success", child.id);
 				
-				return redirect(routes.ChildController.showChildren());
+				return redirect(routes.ChildController.showChildren2(0, "name", "asc", ""));
 			}
 			
 		} else {
