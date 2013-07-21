@@ -1,0 +1,16 @@
+@(currentPage: com.avaje.ebean.Page[models.users.Child], currentSortBy: String, currentOrder: String, currentFilter: String)(childForm: Form[models.users.forms.ChildForm])
+
+@main(MyMessages.get("child.management")) {
+	
+	@flashConfirm(MyMessages.get("fail"),MyMessages.get("success"))
+	
+	<h1>@MyMessages.get("child.management")</h1>
+
+	@list2(currentPage,currentSortBy,currentOrder,currentFilter)
+	
+	@actions{
+		@modalForm(MyMessages.get("children.add"), "childModal", MyMessages.get("children.add")) {
+			@addForm(childForm)
+		}
+	}
+}

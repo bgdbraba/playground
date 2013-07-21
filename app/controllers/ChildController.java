@@ -65,6 +65,19 @@ public class ChildController extends Controller{
 		}
 	}
 	
+	public static Result showChildren2(int page, String sortBy, String order, String filter){
+		if(Secured.isAnimator() && Secured.hasAdministration()){
+			Animator animator = Animator.find.byId(request().username());
+			
+			Playground playground = animator.playground;	
+			
+			return ok(views.html.users.child.showChildren2.render(Child.page(page, 10, sortBy, order, filter),sortBy,order,filter, Form.form(ChildForm.class)));
+		}else{
+			return forbidden();
+		}
+	}
+	
+	
 	public static Result showDetails(String id){
 		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Child child = Child.find.byId(id);

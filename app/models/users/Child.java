@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.avaje.ebean.Page;
+
 import models.day.ChildDay;
 import models.day.FormulaDay;
 import models.day.PlaygroundDay;
@@ -274,5 +276,15 @@ public class Child extends BasicUser{
 			child.saveManyToManyAssociations("playgroundDays");
 		}
 	}
+	
+	public static Page<Child> page(int page, int pageSize, String sortBy, String order, String filter) {
+        return 
+            find.where()
+                .ilike("lastName", "%" + filter + "%")
+                .orderBy(sortBy + " " + order)
+                .fetch("playground")
+                .findPagingList(pageSize)
+                .getPage(page);
+    }
 	
 }
