@@ -43,13 +43,13 @@ GET		/animators/grantAdministration/:animatorId   		controllers.AnimatorControll
 GET		/animators/takeAwayAdministration/:animatorId    	controllers.AnimatorController.takeAwayAdministration(animatorId: String)
 
 # Child management
-GET		/children											controllers.ChildController.showChildren()
+GET		/children/2											controllers.ChildController.showChildren()
 POST	/children											controllers.ChildController.registerChild()
 GET		/children/:id/details								controllers.ChildController.showDetails(id: String)
 POST	/children/:id/details								controllers.ChildController.editChild(id: String)
 GET		/children/:childId/deactivate    					controllers.ChildController.deactivate(childId: String)
 GET		/children/:childId/activate    						controllers.ChildController.activate(childId: String)
-GET     /children/2                 						controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /children                 							controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Day management
 POST 	/children/:id/scribeIn								controllers.ChildController.scribeIn(id : String)
 GET		/children/:id/scribeOut								controllers.ChildController.scribeOut(id : String)
