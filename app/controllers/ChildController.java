@@ -35,7 +35,7 @@ public class ChildController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.child.fail"));
 			
-				return badRequest(views.html.users.child.showChildren.render(Child.getChildrenForPlayground(playground.id), filledForm));
+				return badRequest(views.html.users.child.showChildren2.render(Child.page(0, 10, "lastName", "asc", ""),"lastName","asc","", filledForm));
 			
 			} else {
 	
@@ -173,9 +173,7 @@ public class ChildController extends Controller{
 		Child child = Child.find.byId(childId);
 		
 		Child.offPlayground(childId);
-		
-		
-		
+				
 		return redirect(routes.PlaygroundController.showToday(child.playground.id));
 	}
 	
@@ -207,11 +205,11 @@ public class ChildController extends Controller{
 		
 		Child.payed(childId);
 		
-		return redirect(routes.ChildController.showChildren2(0, "name", "asc", ""));
+		return redirect(routes.ChildController.showChildren2(0, "lastName", "asc", ""));
 	}
 	
 	public static Result payLater(String childId){		
-		return redirect(routes.ChildController.showChildren2(0, "name", "asc", ""));
+		return redirect(routes.ChildController.showChildren2(0, "lastNname", "asc", ""));
 	}
 	
 	public static Result linkActivityToChild(String childId){
