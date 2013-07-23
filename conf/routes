@@ -49,7 +49,7 @@ GET		/children/:id/details								controllers.ChildController.showDetails(id: St
 POST	/children/:id/details								controllers.ChildController.editChild(id: String)
 GET		/children/:childId/deactivate    					controllers.ChildController.deactivate(childId: String)
 GET		/children/:childId/activate    						controllers.ChildController.activate(childId: String)
-GET     /children                 							controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /children                 							controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "lastName", o ?= "asc", f ?= "")
 # Day management
 POST 	/children/:id/scribeIn								controllers.ChildController.scribeIn(id : String)
 GET		/children/:id/scribeOut								controllers.ChildController.scribeOut(id : String)

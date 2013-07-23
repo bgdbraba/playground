@@ -45,7 +45,7 @@ public class ChildController extends Controller{
 				
 				flash("success", child.id);
 				
-				return redirect(routes.ChildController.showChildren2(0, "name", "asc", ""));
+				return redirect(routes.ChildController.showChildren2(0, "lastName", "asc", ""));
 			}
 			
 		} else {
@@ -176,9 +176,7 @@ public class ChildController extends Controller{
 				
 		return redirect(routes.PlaygroundController.showToday(child.playground.id));
 	}
-	
-
-	
+		
 	public static Result payNow(String childId){
 		Animator animator = Animator.find.byId(request().username());
 		
@@ -209,7 +207,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result payLater(String childId){		
-		return redirect(routes.ChildController.showChildren2(0, "lastNname", "asc", ""));
+		return redirect(routes.ChildController.showChildren2(0, "lastName", "asc", ""));
 	}
 	
 	public static Result linkActivityToChild(String childId){
