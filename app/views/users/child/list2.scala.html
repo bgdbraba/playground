@@ -70,7 +70,9 @@
 
                 @for(child <- currentPage.getList) {
                     <tr>
-                        @item(child)
+                    @if(child.active){
+				@item(child)
+		}
                     </tr>
                 }
 
