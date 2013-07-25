@@ -115,4 +115,7 @@ public class FormulaDay extends Model{
 		formulaDay.saveManyToManyAssociations("children");		
 	}
 	
+	public static void remove(Long formulaDayId){
+		find.ref(formulaDayId).delete();
+	}
 }

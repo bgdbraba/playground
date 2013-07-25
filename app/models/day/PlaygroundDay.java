@@ -133,4 +133,8 @@ public class PlaygroundDay extends Model{
 		return playgroundDay.children.contains(Child.find.byId(childId));
 	}
 	
+	public void remove(Long playgroundDayId){
+		find.ref(playgroundDayId).delete();
+	}
+	
 }

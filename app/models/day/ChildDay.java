@@ -94,4 +94,8 @@ public class ChildDay extends Model{
 		return childDay.formulas.contains(formula);
 	}
 	
+	public static void remove(Long childDayId){
+		ChildDay.find.ref(childDayId).delete();
+	}
+	
 }
