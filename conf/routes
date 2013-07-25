@@ -70,8 +70,9 @@ GET		/playgrounds/:id/today									controllers.PlaygroundController.showToday(i
 GET		/history/playground/:id									controllers.PlaygroundController.history(id : Long)
 
 GET		/history/playgroundDay/:id								controllers.DayController.showPlaygroundDay(id : Long)
-GET		/history/playgroundDay/:id/remove								controllers.DayController.removePlaygroundDay(id : Long)
+GET		/history/playgroundDay/:id/remove						controllers.DayController.removePlaygroundDay(id : Long)
 GET		/history/playgroundDay/formulaDay/:id					controllers.DayController.showFormulaDay(id : Long)
+GET		/history/childDay/:id/remove							controllers.DayController.removeChildDay(id : Long)
 
 
 # Formula management

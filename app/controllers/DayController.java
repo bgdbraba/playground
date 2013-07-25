@@ -1,5 +1,6 @@
 package controllers;
 
+import models.day.ChildDay;
 import models.day.FormulaDay;
 import models.day.PlaygroundDay;
 import play.mvc.Controller;
@@ -32,6 +33,19 @@ public class DayController extends Controller{
 			
 			
 			return redirect(routes.PlaygroundController.history(playgroundId));
+
+		}else{
+			return forbidden();
+		}
+	}
+	
+	public static Result removeChildDay(Long id){
+		if(Secured.isAnimator() && Secured.hasAdministration()){
+			String childId = ChildDay.find.byId(id).child.id;
+			// NOG AAN TE VULLEN
+			ChildDay.remove(id);		
+					
+			return redirect(routes.ChildController.showDetails(childId));
 
 		}else{
 			return forbidden();

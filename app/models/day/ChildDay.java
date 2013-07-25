@@ -95,6 +95,8 @@ public class ChildDay extends Model{
 	}
 	
 	public static void remove(Long childDayId){
+		ChildDay childDay = ChildDay.find.byId(childDayId);
+		childDay.deleteManyToManyAssociations("formulas");
 		ChildDay.find.ref(childDayId).delete();
 	}
 	
