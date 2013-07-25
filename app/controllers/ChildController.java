@@ -270,4 +270,14 @@ public class ChildController extends Controller{
 			return forbidden();
 		}
 	}
+	
+	public static Result resetSessionCard(String childId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			Child.setSessionCardToZero(childId);
+			
+			return redirect(routes.ChildController.showDetails(childId));
+		} else {
+			return forbidden();
+		}
+	}
 }

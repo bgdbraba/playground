@@ -59,7 +59,8 @@ GET		/children/:id/payLater								controllers.ChildController.payLater(id : Str
 POST	/children/:id/linkActivity							controllers.ChildController.linkActivityToChild(id: String)
 GET		/children/:id/linkActivity							controllers.ChildController.linkedActivities(id: String)
 GET		/children/:id/linkActivity/:activityId				controllers.ChildController.removeActivityFromChild(id: String, activityId : Long)
-POST	/children/:id/sessionCard							controllers.ChildController.renewSessionCard(id: String)
+POST	/children/:id/sessionCard/renew						controllers.ChildController.renewSessionCard(id: String)
+POST 	/children/:id/sessionCard/reset						controllers.ChildController.resetSessionCard(id: String)
 
 
 # Playground management

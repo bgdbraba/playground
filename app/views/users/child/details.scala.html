@@ -22,10 +22,15 @@
 	        	<h2>@MyMessages.get("sessionCard.management")</h2>
 	    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
 	        <p>
-	        @sessionCardModal(MyMessages.get("sessionCard"), "sessionCardModal", MyMessages.get("sessionCard")) {
+	        @sessionCardModal(MyMessages.get("Nieuwe Speelpas"), "sessionCardModal", MyMessages.get("Nieuwe Speelpas")) {
 				@sessionCardForm(child)
+			}	
+			
+	        @sessionCardModal(MyMessages.get("Reset speelpas"), "resetSessionCardModal", MyMessages.get("Reset speelpas")) {
+				@resetSessionCardForm(child)
 			}		
 			</p>
+			
 	        </div>
         }
         
