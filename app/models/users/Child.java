@@ -211,6 +211,16 @@ public class Child extends BasicUser{
 		child.saveManyToManyAssociations("activities");
 	}
 	
+	public static void removeLinkFromActivity(String childId, Long activityId){
+		Child child = Child.find.byId(childId);
+		Activity activity = Activity.find.byId(activityId);
+		
+		child.activities.remove(activity);
+		
+		child.saveManyToManyAssociations("activities");
+	}
+	
+	
 	public static List<Child> getChildrenForPlayground(Long playgroundId){
 		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
 	}
@@ -304,5 +314,12 @@ public class Child extends BasicUser{
                 .findPagingList(pageSize)
                 .getPage(page);
     }
+
+	public static void removeNotPayed(String childId, double cost) {
+		Child child = Child.find.byId(childId);
+		child.notPayed -= cost;
+		
+		child.update();		
+	}
 	
 }

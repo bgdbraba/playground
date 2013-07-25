@@ -184,8 +184,6 @@ public class ChildController extends Controller{
 		
 		PlaygroundDay playgroundDay = PlaygroundDay.findbyPlayground(playground.id);
 		
-		
-		
 		ChildDay day;
 		
 		if(ChildDay.exists(childId)){
@@ -196,8 +194,7 @@ public class ChildController extends Controller{
 			day.initialize(day.id);
 		}
 		
-		day.amountPayed += Child.find.byId(childId).notPayed;
-		day.update();
+		ChildDay.addAmountPayed(day.id, Child.find.ref(childId).notPayed);
 		
 		PlaygroundDay.addMoney(playgroundDay.id, Child.find.byId(childId).notPayed);
 		
@@ -238,6 +235,18 @@ public class ChildController extends Controller{
 				
 				return redirect(routes.ChildController.payment(childId));
 			}
+		} else {
+			return forbidden();
+		}	
+	}
+	
+	public static Result removeActivityFromChild(String childId, Long activityId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			
+			Child.removeNotPayed(childId,  Activity.find.byId(activityId).cost);
+			Child.removeLinkFromActivity(childId, activityId);
+			
+			return redirect(routes.ChildController.payment(childId));
 		} else {
 			return forbidden();
 		}	

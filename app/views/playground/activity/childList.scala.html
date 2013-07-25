@@ -1,0 +1,22 @@
+@(children: List[models.users.Child], activity : models.playground.Activity)
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("firstname")</th>
+		<th>@MyMessages.get("lastname")</th>
+		<th>@MyMessages.get("address")</th>
+		<th>@MyMessages.get("role")</th>
+		<th>@MyMessages.get("sign.out")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@for(child <- children) {
+		@if(child.active){
+				@childItem(child,activity)
+		}
+	}
+	</tbody>
+}

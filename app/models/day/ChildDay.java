@@ -75,6 +75,13 @@ public class ChildDay extends Model{
 		childDay.update();		
 	}
 	
+	public static void addAmountPayed(Long childDayId, double cost){
+		ChildDay childDay = ChildDay.find.byId(childDayId);
+		childDay.amountPayed += cost;
+		
+		childDay.update();		
+	}
+	
 	public static List<ChildDay> getChildDaysForChild(String childId){
 		return find.where().eq("child", Child.find.byId(childId)).findList();
 	}
