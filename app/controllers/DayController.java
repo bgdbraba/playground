@@ -20,6 +20,19 @@ public class DayController extends Controller{
 		
 	}
 	
+	public static Result removePlaygroundDay(Long id){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			Long playgroundId = PlaygroundDay.find.byId(id).playground.id;
+			
+			PlaygroundDay.remove(id);			
+			
+			return redirect(routes.PlaygroundController.history(playgroundId));
+
+		}else{
+			return forbidden();
+		}
+	}
+	
 	public static Result showFormulaDay(Long id){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			
