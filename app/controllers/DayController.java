@@ -24,7 +24,12 @@ public class DayController extends Controller{
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			Long playgroundId = PlaygroundDay.find.byId(id).playground.id;
 			
-			PlaygroundDay.remove(id);			
+			for(FormulaDay day : PlaygroundDay.find.byId(id).formulaDays){
+				FormulaDay.remove(day.id);
+			}
+			
+			PlaygroundDay.remove(id);		
+			
 			
 			return redirect(routes.PlaygroundController.history(playgroundId));
 

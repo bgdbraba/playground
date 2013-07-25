@@ -70,7 +70,7 @@ GET		/playgrounds/:id/today									controllers.PlaygroundController.showToday(i
 GET		/history/playground/:id									controllers.PlaygroundController.history(id : Long)
 
 GET		/history/playgroundDay/:id								controllers.DayController.showPlaygroundDay(id : Long)
-POST	/history/playgroundDay/:id								controllers.DayController.removePlaygroundDay(id : Long)
+GET		/history/playgroundDay/:id/remove								controllers.DayController.removePlaygroundDay(id : Long)
 GET		/history/playgroundDay/formulaDay/:id					controllers.DayController.showFormulaDay(id : Long)
 
 

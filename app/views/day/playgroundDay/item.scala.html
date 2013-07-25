@@ -5,4 +5,7 @@
 	<td>@DateConverter.getDateAsString(playgroundDay.date)</td>
 	<td>@playgroundDay.children.size()</td>
 	<td>&euro; @playgroundDay.moneyIncome</td>
+	<td>
+	<a href="@routes.DayController.removePlaygroundDay(playgroundDay.id)" class="btn"><i class="icon-remove-sign"></i></a>
+	</td>
 </tr>

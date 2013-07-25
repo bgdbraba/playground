@@ -134,6 +134,10 @@ public class PlaygroundDay extends Model{
 	}
 	
 	public static void remove(Long playgroundDayId){
+		PlaygroundDay day = PlaygroundDay.find.byId(playgroundDayId);
+		day.children = null;
+		day.update();
+		day.deleteManyToManyAssociations("children");	
 		find.ref(playgroundDayId).delete();
 	}
 	
