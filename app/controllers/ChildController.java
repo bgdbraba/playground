@@ -280,4 +280,24 @@ public class ChildController extends Controller{
 			return forbidden();
 		}
 	}
+	
+	public static Result increaseSessionCard(String childId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			Child.increaseSessionCard(childId);
+			
+			return redirect(routes.ChildController.showDetails(childId));
+		} else {
+			return forbidden();
+		}
+	}
+	
+	public static Result decreaseSessionCard(String childId){
+		if (Secured.isAnimator() && Secured.hasAdministration()) {
+			Child.decreaseSessionCard(childId);
+			
+			return redirect(routes.ChildController.showDetails(childId));
+		} else {
+			return forbidden();
+		}
+	}
 }

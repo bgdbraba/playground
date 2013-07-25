@@ -265,6 +265,22 @@ public class Child extends BasicUser{
 		child.update();
 	}
 	
+	public static void increaseSessionCard(String childId){
+		Child child = Child.find.byId(childId);
+		
+		child.numberOfSessions++;
+				
+		child.update();
+	}
+	
+	public static void decreaseSessionCard(String childId){
+		Child child = Child.find.byId(childId);
+		
+		child.numberOfSessions--;
+				
+		child.update();
+	}
+	
 	public static void decreaseNumberOfSessions(String childId, int sessions){
 		Child child = Child.find.byId(childId);
 		

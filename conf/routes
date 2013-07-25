@@ -61,7 +61,8 @@ GET		/children/:id/linkActivity							controllers.ChildController.linkedActiviti
 GET		/children/:id/linkActivity/:activityId				controllers.ChildController.removeActivityFromChild(id: String, activityId : Long)
 POST	/children/:id/sessionCard/renew						controllers.ChildController.renewSessionCard(id: String)
 POST 	/children/:id/sessionCard/reset						controllers.ChildController.resetSessionCard(id: String)
-
+GET		/children/:id/sessionCard/increase					controllers.ChildController.increaseSessionCard(id: String)
+GET		/children/:id/sessionCard/decrease					controllers.ChildController.decreaseSessionCard(id: String)
 
 # Playground management
 GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()
