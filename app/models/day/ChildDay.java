@@ -96,6 +96,24 @@ public class ChildDay extends Model{
 	
 	public static void remove(Long childDayId){
 		ChildDay childDay = ChildDay.find.byId(childDayId);
+		Child child = ChildDay.find.byId(childDayId).child;
+		
+		PlaygroundDay playgroundDay = PlaygroundDay.find.where().eq("date",childDay.date).findList().get(0);
+		
+		PlaygroundDay.subtractMoney(playgroundDay.id, childDay.amountPayed);
+				
+		for(int i = 0 ; i < childDay.formulas.size() ; i++){
+			Formula formula = childDay.formulas.get(i);
+			FormulaDay formulaDay = FormulaDay.find.where().eq("formula", Formula.find.byId(formula.id)).eq("date",childDay.date).findList().get(0);
+			
+			if(formulaDay != null){
+				formulaDay.removeChild(formulaDay.id,childDay.child.id);
+			}
+			
+		}
+		
+		PlaygroundDay.removeChild(playgroundDay.id, child.id);
+		
 		childDay.deleteManyToManyAssociations("formulas");
 		ChildDay.find.ref(childDayId).delete();
 	}

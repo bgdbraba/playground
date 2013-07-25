@@ -122,4 +122,15 @@ public class FormulaDay extends Model{
 		formulaDay.deleteManyToManyAssociations("children");		
 		find.ref(formulaDayId).delete();
 	}
+
+	public void removeChild(Long formulaDayId, String childId) {
+		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
+		Child child = Child.find.byId(childId);
+		
+		formulaDay.children.remove(child);
+		
+		formulaDay.update();
+		
+		formulaDay.saveManyToManyAssociations("children");	
+	}
 }

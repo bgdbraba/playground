@@ -246,6 +246,15 @@ public class Child extends BasicUser{
 		child.update();
 	}
 	
+	public static void setSessionCardToZero(String childId){
+		Child child = Child.find.byId(childId);
+		Playground playground = child.playground;
+		
+		child.numberOfSessions = 0;
+				
+		child.update();
+	}
+	
 	public static void decreaseNumberOfSessions(String childId, int sessions){
 		Child child = Child.find.byId(childId);
 		
@@ -253,6 +262,15 @@ public class Child extends BasicUser{
 		
 		child.update();
 	}
+	
+	public static void increaseNumberOfSessions(String childId, int sessions){
+		Child child = Child.find.byId(childId);
+		
+		child.numberOfSessions += sessions;
+		
+		child.update();
+	}
+	
 	
 	public static void addFormulaDay(String childId, Long formulaDayId){
 		Child child = Child.find.byId(childId);

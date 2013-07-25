@@ -76,6 +76,15 @@ public class PlaygroundDay extends Model{
 		playgroundDay.saveManyToManyAssociations("children");
 	}
 	
+	public static void removeChild(Long playgroundDayId, String childId){
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		Child child = Child.find.byId(childId);
+		
+		playgroundDay.children.remove(child);
+		
+		playgroundDay.saveManyToManyAssociations("children");
+	}
+	
 	public static void addPlayground(Long playgroundDayId, Long playgroundId){
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		Playground playground = Playground.find.byId(playgroundId);
@@ -123,6 +132,14 @@ public class PlaygroundDay extends Model{
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
 		playgroundDay.moneyIncome += money;
+		
+		playgroundDay.update();
+	}
+	
+	public static void subtractMoney(Long playgroundDayId, double money){
+		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
+		
+		playgroundDay.moneyIncome -= money;
 		
 		playgroundDay.update();
 	}
