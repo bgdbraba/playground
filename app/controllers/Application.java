@@ -14,7 +14,7 @@ import conf.PasswordGenerator;
 public class Application extends Controller {
   	
 	public static Result index() {
-        return ok(views.html.index.render());
+        return ok(views.html.pages.home.render());
     }
 	
 	public static Result login() {
