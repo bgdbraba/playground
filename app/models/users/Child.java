@@ -174,6 +174,18 @@ public class Child extends BasicUser{
 		return form;
 	}
 	
+	public static double totalPayed(String childId){
+		Child child = Child.find.byId(childId);
+		
+		double payed = 0.00;
+		
+		for(ChildDay day : child.days){
+			payed += day.amountPayed;
+		}
+		
+		return payed;
+	}
+	
 	public static void addNotPayed(String childId, double cost){
 		Child child = Child.find.byId(childId);
 		child.notPayed += cost;

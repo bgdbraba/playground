@@ -8,14 +8,15 @@
 		<th>@MyMessages.get("lastname")</th>
 		<th>@MyMessages.get("address")</th>
 		<th>@MyMessages.get("role")</th>
-		<th>@MyMessages.get("sign.out")</th>
+		<th>@MyMessages.get("Dagen")</th>
+		<th>@MyMessages.get("Betaald")</th>				
 		<!-- Extra option buttons -->
 	</tr>
 	</thead>
 	<tbody>
 	@for(child <- children) {
 		@if(child.active){
-				@item(child)
+				@item2(child)
 		}
 	}
 	</tbody>
