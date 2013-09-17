@@ -19,7 +19,7 @@
 			@MyMessages.get("no.group.available")
 		}else{
 			@for(role <- Role.getRolesForChild(child.id)){
-				@role.name;    
+				@role.name / 
 			}
 		}
 	}	
