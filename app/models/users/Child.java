@@ -45,7 +45,7 @@ public class Child extends BasicUser{
 	
 	public String doctor;
 	
-	public double notPayed = 0.0;
+	public double notPayed = 0.00;
 	
 	@ManyToOne
 	public Playground playground;
@@ -336,7 +336,7 @@ public class Child extends BasicUser{
 	public static Page<Child> page(int page, int pageSize, String sortBy, String order, String filter) {
         return 
             find.where()
-                .ilike("lastName", "%" + filter + "%")
+                .ilike("firstName", "%" + filter + "%")
                 .orderBy(sortBy + " " + order)
                 .fetch("playground")
                 .findPagingList(pageSize)
