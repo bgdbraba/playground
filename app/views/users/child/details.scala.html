@@ -77,6 +77,13 @@
 		<a class="btn btn-large btn-info" href="@routes.ChildController.linkedActivities(child.id)">@MyMessages.get("view.activities") &raquo;</a>
 		</p>
         </div>
+
+    <div class="well">
+        <h2>@MyMessages.get("fiscal.attest")</h2>
+        <p>
+            <h3><strong>&euro; @Child.totalPayed(child.id)</strong></h3>
+        </p>
+    </div>
 	
 	
 	

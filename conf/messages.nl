@@ -179,3 +179,4 @@ remove.child=Verwijder kind
 remove.info=Ben je zeker dat je dit kind wil verwijderen?
 remove=Verwijder
 sign.out=Uitschrijven
+fiscal.attest=Fiscaal Attest
