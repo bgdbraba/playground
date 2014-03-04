@@ -139,4 +139,9 @@ public class ActivityController extends Controller{
 	public static Result showDetails(Long id){
 		return ok(views.html.playground.activity.details.render(Activity.find.byId(id),Form.form(ActivityForm.class).fill(Activity.find.byId(id).toForm())));
 	}
+
+    public static Result removeActivity(Long id){
+        Activity.remove(id);
+        return redirect(routes.ActivityController.showActivities());
+    }
 }

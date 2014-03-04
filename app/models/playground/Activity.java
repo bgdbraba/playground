@@ -15,6 +15,8 @@ import models.users.Child;
 import play.db.ebean.Model;
 import conf.DateConverter;
 
+import static models.playground.Playground.*;
+
 @Entity
 public class Activity extends Model {
 	
@@ -114,18 +116,24 @@ public class Activity extends Model {
 
 	public static boolean full(Long activityId) {
 		Activity activity = Activity.find.byId(activityId);
-		
-		
+
 		return activity.children.size() >= activity.numberOfChildren;
 	}
 	
-//	public static void addChild(Long activityId, String childId){
-//		Activity activity = Activity.find.byId(activityId);
-//		Child child = Child.find.byId(childId);
-//		
-//		activity.children.add(child);
-//		
-//		activity.saveManyToManyAssociations("children");
-//	}
+    public static void remove(Long activityId){
+        Activity activity = Activity.find.byId(activityId);
+
+
+
+        for(int i = 0 ; i < activity.children.size(); i++){
+            Child.removeLinkFromActivity(activity.children.get(i).id, activityId);
+            activity.children.remove(i);
+        }
+
+        Playground.removeActivity(activity.playground.id, activityId);
+        activity.deleteManyToManyAssociations("children");
+        activity.deleteManyToManyAssociations("roles");
+        Activity.find.ref(activityId).delete();
+    }
 	
 }

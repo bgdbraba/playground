@@ -90,6 +90,7 @@ GET		/activities						controllers.ActivityController.showActivities()
 POST	/activities						controllers.ActivityController.registerActivity()
 GET		/activities/:id/details			controllers.ActivityController.showDetails(id: Long)
 POST	/activities/:id/details			controllers.ActivityController.editActivity(id: Long)
+GET		/activities/:id/remove	        controllers.ActivityController.removeActivity(id : Long)
 
 # SessionCard Management
 GET	 	/sessionCard					controllers.SessionCardController.showSessionCard()

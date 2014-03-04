@@ -10,6 +10,8 @@ public class DateConverter {
 
 	public static SimpleDateFormat formatBirth = new SimpleDateFormat("dd-MM-yyyy");
 
+    public static SimpleDateFormat formatBirth2 = new SimpleDateFormat("dd/MM/yyyy");
+
 	public static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 	
 	public static SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");

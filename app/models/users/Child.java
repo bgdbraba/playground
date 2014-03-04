@@ -136,11 +136,11 @@ public class Child extends BasicUser{
 	
 	public static void addChildSessionCard(String childId, Long childSessionCardId){
 		Child child = Child.find.byId(childId);
-		ChildSessionCard childSessionCard = ChildSessionCard.find.byId(childSessionCardId);
-		
-		child.card = childSessionCard;
-		
-		child.update();
+        ChildSessionCard childSessionCard = ChildSessionCard.find.byId(childSessionCardId);
+
+        child.card = childSessionCard;
+
+        child.update();
 	}
 
 	public ChildForm toChildForm() {

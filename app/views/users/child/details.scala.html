@@ -28,6 +28,7 @@
 	    			<a href="@routes.ChildController.decreaseSessionCard(child.id)" class="btn btn-danger">@MyMessages.get("Verlaag")</a>
 	    			
 	    			}
+                    @MyMessages.get("sessionCard.info")
 	    		</p>
 	        <p>
 	        @sessionCardModal(MyMessages.get("Nieuwe Speelpas"), "sessionCardModal", MyMessages.get("Nieuwe Speelpas")) {
@@ -79,7 +80,7 @@
         </div>
 
     <div class="well">
-        <h2>@MyMessages.get("fiscal.attest")</h2>
+        <h2>@MyMessages.get("total.payed")</h2>
         <p>
             <h3><strong>&euro; @Child.totalPayed(child.id)</strong></h3>
         </p>

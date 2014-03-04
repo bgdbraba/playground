@@ -153,6 +153,15 @@ public class Playground extends Model{
 		
 		playground.update();
 	}
+
+    public static void removeActivity(Long playgroundId, Long activityId){
+        Playground playground = Playground.find.byId(playgroundId);
+        Activity activity = Activity.find.byId(activityId);
+
+        playground.activities.remove(activity);
+
+        playground.update();
+    }
 	
 	public static void addPlaygroundDay(Long playgroundId, Long playgroundDayId){
 		Playground playground = Playground.find.byId(playgroundId);

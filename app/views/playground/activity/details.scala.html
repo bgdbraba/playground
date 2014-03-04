@@ -33,6 +33,7 @@
 				@editForm(activityForm, activity.id)
 			}
 			<a href="@routes.ActivityController.showActivities()" class="btn">@MyMessages.get("go.back")</a>
+            <a href="@routes.ActivityController.removeActivity(activity.id)" class="btn btn-danger">@MyMessages.get("remove")</a>
 		}
 	}
 	<br>
