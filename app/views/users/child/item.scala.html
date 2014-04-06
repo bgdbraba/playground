@@ -19,14 +19,16 @@
 			@MyMessages.get("no.group.available")
 		}else{
 			@for(role <- Role.getRolesForChild(child.id)){
-				@role.name / 
-			}
+				@role.name
+        }
 		}
 	}	
 	</td>
+    <td>@child.getDateOfBirthAsString()</td>
 	<td>
-	@if(child.onPlayground){
-	<a href="@routes.ChildController.scribeOut(child.id)" class="btn"><i class="icon-signout"></i></a>
-	}
+	@child.days.size()
+	</td>
+	<td>
+	@models.users.Child.totalPayed(child.id)
 	</td>
 </tr>
