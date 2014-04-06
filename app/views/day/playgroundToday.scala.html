@@ -7,7 +7,7 @@
 
 	<h1>@MyMessages.get("children.on.playground") : @Child.childrenOnPlayground(playground.id).size()</h1>
 	
-	@views.html.users.child.list(Child.childrenOnPlayground(playground.id))
+	@views.html.users.child.todayList(Child.childrenOnPlayground(playground.id))
 	
 	@if(PlaygroundDay.exists(playground.id)){
 	

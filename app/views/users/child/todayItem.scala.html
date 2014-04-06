@@ -1,0 +1,31 @@
+@(child: models.users.Child)
+
+@import models.playground._
+
+<tr>
+	<td><a href="@routes.ChildController.showDetails(child.id)">
+	@if(child.onPlayground){
+		<span class="badge badge-success">@child.id</span>
+	}else{
+		<span class="badge">@child.id</span>
+	}
+	</a></td>
+	<td>@child.firstName</td>
+	<td>@child.lastName</td>
+	<td>
+	@if(Role.getRolesForPlayground(child.playground.id).size()>0){
+		@if(Role.getRoleForChild(child.id)==null){
+			@MyMessages.get("no.group.available")
+		}else{
+			@for(role <- Role.getRolesForChild(child.id)){
+				@role.name
+        }
+		}
+	}	
+	</td>
+    <td>
+        @if(child.onPlayground){
+        <a href="@routes.ChildController.scribeOut(child.id)" class="btn"><i class="icon-signout"></i></a>
+        }
+    </td>
+</tr>

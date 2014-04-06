@@ -1,0 +1,21 @@
+@(children: List[models.users.Child])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("firstname")</th>
+		<th>@MyMessages.get("lastname")</th>
+		<th>@MyMessages.get("role")</th>
+        <th>@MyMessages.get("sign.out")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@for(child <- children) {
+		@if(child.active){
+				@todayItem(child)
+		}
+	}
+	</tbody>
+}
