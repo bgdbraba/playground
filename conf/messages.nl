@@ -181,3 +181,4 @@ remove.info=Ben je zeker dat je dit kind wil verwijderen?
 remove=Verwijder
 sign.out=Uitschrijven
 sessionCard.info= (Enkel te gebruiken bij een gemaakte fout)
+remove.activity=Verwijder activiteit

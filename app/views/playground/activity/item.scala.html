@@ -7,4 +7,5 @@
 	<td>@DateConverter.getDateAsString(activity.beginDate) @DateConverter.getTimeAsString(activity.beginTime)</td>
 	<td>@DateConverter.getDateAsString(activity.endDate) @DateConverter.getTimeAsString(activity.endTime)</td>
 	<td>@activity.numberOfChildren</td>
+    <td><a href="@routes.ActivityController.removeActivity(activity.id)" class="btn"><i class="icon-remove icon-2x"></i></a></td>
 </tr>
