@@ -1,20 +1,21 @@
 package controllers;
 
+import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.forms.PlaygroundForm;
-import models.users.Animator;
-import models.users.BasicUser;
-import models.users.enums.UserType;
 import play.data.Form;
+import play.db.ebean.Model;
 import play.mvc.Controller;
-import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.MyMessages;
+
+import java.util.List;
+
+import static play.libs.Json.toJson;
 
 @Security.Authenticated(Secured.class)
 public class PlaygroundController extends Controller{
-	
+
 	public static Result showPlaygrounds() {
 		if (Secured.isAdmin()) {
 			return ok(views.html.playground.showPlaygrounds.render(Playground.find.all(), Form.form(PlaygroundForm.class)));

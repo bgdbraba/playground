@@ -5,8 +5,6 @@ import models.playground.Formula;
 import models.playground.Playground;
 import models.playground.forms.FormulaForm;
 import models.users.Organizer;
-import models.users.BasicUser;
-import models.users.forms.OrganizerForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -93,6 +91,19 @@ public class FormulaController extends Controller{
 			return forbidden();
 		}
 	}
+
+    public static Result removeFormula(Long formulaId){
+        if(Secured.isOrganizer()){
+            Formula.remove(formulaId);
+            Organizer organizer = Organizer.find.byId(request().username());
+
+            Playground playground = organizer.playground;
+
+            return ok(views.html.playground.formula.showFormulas.render(Formula.getFormulasForPlayground(playground.id), Form.form(FormulaForm.class)));
+        }else{
+            return forbidden();
+        }
+    }
 	
 	public static Result getFormulasForPlayground(Long playgroundId){
 		return TODO;

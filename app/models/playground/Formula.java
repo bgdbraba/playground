@@ -1,18 +1,12 @@
 package models.playground;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
+import conf.MyMessages;
 import models.day.FormulaDay;
 import models.playground.forms.FormulaForm;
 import play.db.ebean.Model;
-import conf.MyMessages;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Formula extends Model{
@@ -94,4 +88,13 @@ public class Formula extends Model{
 		return form;
 	}
 
+    public static void remove(Long formulaId) {
+        Formula formula = find.byId(formulaId);
+        Playground playground1 = formula.playground;
+
+        // remove formula from playground
+        playground1.formulas.remove(formula);
+        // remove formula
+        formula.delete();
+    }
 }

@@ -3,110 +3,111 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET         /                                                    controllers.Application.index()
 
 # Information Pages
-GET		/about						controllers.PagesController.about()
-GET		/contact					controllers.PagesController.contact()
+GET         /about                                               controllers.PagesController.about()
+GET         /contact                                             controllers.PagesController.contact()
 
 # Login page
-GET		/login						controllers.Application.login()
-GET		/logout						controllers.Application.logout()
-POST	/login						controllers.Application.authenticate()
+GET         /login                                               controllers.Application.login()
+GET         /logout                                              controllers.Application.logout()
+POST        /login                                               controllers.Application.authenticate()
 
 # Language
-GET		/changeLanguage/:code		controllers.Application.setLanguage(code: String)
+GET         /changeLanguage/:code                                controllers.Application.setLanguage(code: String)
 
 # Password generation
-GET		/register/generate/password				controllers.Application.getGeneratedPassword()
+GET         /register/generate/password                          controllers.Application.getGeneratedPassword()
 
 # User management
-GET 	/profile					controllers.UserController.profile()
-POST	/profile					controllers.UserController.editUser()
+GET         /profile                                             controllers.UserController.profile()
+POST        /profile                                             controllers.UserController.editUser()
 
 # Organizer management
-GET		/organizers											controllers.OrganizerController.showOrganizers()
-POST	/organizers											controllers.OrganizerController.registerOrganizer()
-GET		/organizers/:id/details								controllers.OrganizerController.showDetails(id: String)
-POST	/organizers/:id/details								controllers.OrganizerController.editOrganizer(id: String)
-GET		/organizers/deactivate/:organizerId    				controllers.OrganizerController.deactivate(organizerId: String)
-GET		/organizers/activate/:organizerId    				controllers.OrganizerController.activate(organizerId: String)
+GET         /organizers                                          controllers.OrganizerController.showOrganizers()
+POST        /organizers                                          controllers.OrganizerController.registerOrganizer()
+GET         /organizers/:id/details                              controllers.OrganizerController.showDetails(id: String)
+POST        /organizers/:id/details                              controllers.OrganizerController.editOrganizer(id: String)
+GET         /organizers/deactivate/:organizerId                  controllers.OrganizerController.deactivate(organizerId: String)
+GET         /organizers/activate/:organizerId                    controllers.OrganizerController.activate(organizerId: String)
 
 # Animator management
-GET		/animators											controllers.AnimatorController.showAnimators()
-POST	/animators											controllers.AnimatorController.registerAnimator()
-GET		/animators/:id/details								controllers.AnimatorController.showDetails(id: String)
-POST	/animators/:id/details								controllers.AnimatorController.editAnimator(id: String)
-GET		/animators/deactivate/:animatorId    				controllers.AnimatorController.deactivate(animatorId: String)
-GET		/animators/activate/:animatorId    					controllers.AnimatorController.activate(animatorId: String)
-GET		/animators/grantAdministration/:animatorId   		controllers.AnimatorController.giveAdministration(animatorId: String)
-GET		/animators/takeAwayAdministration/:animatorId    	controllers.AnimatorController.takeAwayAdministration(animatorId: String)
+GET         /animators                                           controllers.AnimatorController.showAnimators()
+POST        /animators                                           controllers.AnimatorController.registerAnimator()
+GET         /animators/:id/details                               controllers.AnimatorController.showDetails(id: String)
+POST        /animators/:id/details                               controllers.AnimatorController.editAnimator(id: String)
+GET         /animators/deactivate/:animatorId                    controllers.AnimatorController.deactivate(animatorId: String)
+GET         /animators/activate/:animatorId                      controllers.AnimatorController.activate(animatorId: String)
+GET         /animators/grantAdministration/:animatorId           controllers.AnimatorController.giveAdministration(animatorId: String)
+GET         /animators/takeAwayAdministration/:animatorId        controllers.AnimatorController.takeAwayAdministration(animatorId: String)
 
 # Child management
-GET		/children/2											controllers.ChildController.showChildren()
-POST	/children											controllers.ChildController.registerChild()
-GET		/children/:id/details								controllers.ChildController.showDetails(id: String)
-POST	/children/:id/details								controllers.ChildController.editChild(id: String)
-GET		/children/:childId/deactivate    					controllers.ChildController.deactivate(childId: String)
-GET		/children/:childId/activate    						controllers.ChildController.activate(childId: String)
-GET     /children                 							controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "lastName", o ?= "asc", f ?= "")
+GET         /children/2                                          controllers.ChildController.showChildren()
+POST        /children                                            controllers.ChildController.registerChild()
+GET         /children/:id/details                                controllers.ChildController.showDetails(id: String)
+POST        /children/:id/details                                controllers.ChildController.editChild(id: String)
+GET         /children/:childId/deactivate                        controllers.ChildController.deactivate(childId: String)
+GET         /children/:childId/activate                          controllers.ChildController.activate(childId: String)
+GET         /children                                            controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "lastName", o ?= "asc", f ?= "")
 # Day management
-POST 	/children/:id/scribeIn								controllers.ChildController.scribeIn(id : String)
-GET		/children/:id/scribeOut								controllers.ChildController.scribeOut(id : String)
-GET		/children/:id/payMent								controllers.ChildController.payment(id : String)
-GET		/children/:id/payNow								controllers.ChildController.payNow(id : String)
-GET		/children/:id/payLater								controllers.ChildController.payLater(id : String)
-POST	/children/:id/linkActivity							controllers.ChildController.linkActivityToChild(id: String)
-GET		/children/:id/linkActivity							controllers.ChildController.linkedActivities(id: String)
-GET		/children/:id/linkActivity/:activityId				controllers.ChildController.removeActivityFromChild(id: String, activityId : Long)
-POST	/children/:id/sessionCard/renew						controllers.ChildController.renewSessionCard(id: String)
-POST 	/children/:id/sessionCard/reset						controllers.ChildController.resetSessionCard(id: String)
-GET		/children/:id/sessionCard/increase					controllers.ChildController.increaseSessionCard(id: String)
-GET		/children/:id/sessionCard/decrease					controllers.ChildController.decreaseSessionCard(id: String)
+POST        /children/:id/scribeIn                               controllers.ChildController.scribeIn(id : String)
+GET         /children/:id/scribeOut                              controllers.ChildController.scribeOut(id : String)
+GET         /children/:id/payMent                                controllers.ChildController.payment(id : String)
+GET         /children/:id/payNow                                 controllers.ChildController.payNow(id : String)
+GET         /children/:id/payLater                               controllers.ChildController.payLater(id : String)
+POST        /children/:id/linkActivity                           controllers.ChildController.linkActivityToChild(id: String)
+GET         /children/:id/linkActivity                           controllers.ChildController.linkedActivities(id: String)
+GET         /children/:id/linkActivity/:activityId               controllers.ChildController.removeActivityFromChild(id: String, activityId : Long)
+POST        /children/:id/sessionCard/renew                      controllers.ChildController.renewSessionCard(id: String)
+POST        /children/:id/sessionCard/reset                      controllers.ChildController.resetSessionCard(id: String)
+GET         /children/:id/sessionCard/increase                   controllers.ChildController.increaseSessionCard(id: String)
+GET         /children/:id/sessionCard/decrease                   controllers.ChildController.decreaseSessionCard(id: String)
 
 # Playground management
-GET		/playgrounds											controllers.PlaygroundController.showPlaygrounds()
-POST	/playgrounds											controllers.PlaygroundController.registerPlayground()
-GET		/playgrounds/:id/details								controllers.PlaygroundController.showDetails(id: Long)
-POST	/playgrounds/:id/details								controllers.PlaygroundController.editPlayground(id: Long)
-GET		/playgrounds/:id/today									controllers.PlaygroundController.showToday(id: Long)
-GET		/history/playground/:id									controllers.PlaygroundController.history(id : Long)
+GET         /playgrounds                                         controllers.PlaygroundController.showPlaygrounds()
+POST        /playgrounds                                         controllers.PlaygroundController.registerPlayground()
+GET         /playgrounds/:id/details                             controllers.PlaygroundController.showDetails(id: Long)
+POST        /playgrounds/:id/details                             controllers.PlaygroundController.editPlayground(id: Long)
+GET         /playgrounds/:id/today                               controllers.PlaygroundController.showToday(id: Long)
+GET         /history/playground/:id                              controllers.PlaygroundController.history(id : Long)
 
-GET		/history/playgroundDay/:id								controllers.DayController.showPlaygroundDay(id : Long)
-GET		/history/playgroundDay/:id/remove						controllers.DayController.removePlaygroundDay(id : Long)
-GET		/history/playgroundDay/formulaDay/:id					controllers.DayController.showFormulaDay(id : Long)
-GET		/history/childDay/:id/remove							controllers.DayController.removeChildDay(id : Long)
+GET         /history/playgroundDay/:id                           controllers.DayController.showPlaygroundDay(id : Long)
+GET         /history/playgroundDay/:id/remove                    controllers.DayController.removePlaygroundDay(id : Long)
+GET         /history/playgroundDay/formulaDay/:id                controllers.DayController.showFormulaDay(id : Long)
+GET         /history/childDay/:id/remove                         controllers.DayController.removeChildDay(id : Long)
 
 
 # Formula management
-GET		/formulas								controllers.FormulaController.showFormulas()
-POST	/formulas								controllers.FormulaController.registerFormula()
-GET		/formulas/:id/details					controllers.FormulaController.showDetails(id: Long)
-POST	/formulas/:id/details					controllers.FormulaController.editFormula(id: Long)
+GET         /formulas                                            controllers.FormulaController.showFormulas()
+POST        /formulas                                            controllers.FormulaController.registerFormula()
+GET         /formulas/:id/details                                controllers.FormulaController.showDetails(id: Long)
+POST        /formulas/:id/details                                controllers.FormulaController.editFormula(id: Long)
+GET         /formulas/:id/remove                                 controllers.FormulaController.removeFormula(id: Long)
 
 
 # Activity management
-GET		/activities						controllers.ActivityController.showActivities()
-POST	/activities						controllers.ActivityController.registerActivity()
-GET		/activities/:id/details			controllers.ActivityController.showDetails(id: Long)
-POST	/activities/:id/details			controllers.ActivityController.editActivity(id: Long)
-GET		/activities/:id/remove	        controllers.ActivityController.removeActivity(id : Long)
+GET         /activities                                          controllers.ActivityController.showActivities()
+POST        /activities                                          controllers.ActivityController.registerActivity()
+GET         /activities/:id/details                              controllers.ActivityController.showDetails(id: Long)
+POST        /activities/:id/details                              controllers.ActivityController.editActivity(id: Long)
+GET         /activities/:id/remove                               controllers.ActivityController.removeActivity(id : Long)
 
 # SessionCard Management
-GET	 	/sessionCard					controllers.SessionCardController.showSessionCard()
-POST	/sessionCard/register			controllers.SessionCardController.registerSessionCard()
-POST	/sessionCard/edit				controllers.SessionCardController.editSessionCard()
-GET		/sessionCard/deactivate    		controllers.SessionCardController.deactivate()
-GET		/sessionCard/activate    		controllers.SessionCardController.activate()
+GET         /sessionCard                                         controllers.SessionCardController.showSessionCard()
+POST        /sessionCard/register                                controllers.SessionCardController.registerSessionCard()
+POST        /sessionCard/edit                                    controllers.SessionCardController.editSessionCard()
+GET         /sessionCard/deactivate                              controllers.SessionCardController.deactivate()
+GET         /sessionCard/activate                                controllers.SessionCardController.activate()
 
 # Role management
-GET		/roles						controllers.RoleController.showRoles()
-POST	/roles						controllers.RoleController.registerRole()
-GET		/roles/:id/details			controllers.RoleController.showDetails(id: Long)
-POST	/roles/:id/details			controllers.RoleController.editRole(id: Long)
+GET         /roles                                               controllers.RoleController.showRoles()
+POST        /roles                                               controllers.RoleController.registerRole()
+GET         /roles/:id/details                                   controllers.RoleController.showDetails(id: Long)
+POST        /roles/:id/details                                   controllers.RoleController.editRole(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET         /assets/*file                                        controllers.Assets.at(path="/public", file)
 
 # Javascript router
-GET		/javascriptRoutes			controllers.Application.javascriptRoutes
+GET         /javascriptRoutes                                    controllers.Application.javascriptRoutes
