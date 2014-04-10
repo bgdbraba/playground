@@ -12,7 +12,10 @@
 	</a></td>
 	<td>@child.firstName</td>
 	<td>@child.lastName</td>
-	<td>@child.address.getAddress()</td>
+    <td>@child.address.street</td>
+    <td>@child.address.number</td>
+    <td>@child.address.city</td>
+    <td>@child.address.zipCode</td>
 	<td>
 	@if(Role.getRolesForPlayground(child.playground.id).size()>0){
 		@if(Role.getRoleForChild(child.id)==null){
