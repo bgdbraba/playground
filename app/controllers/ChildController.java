@@ -1,13 +1,10 @@
 package controllers;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import conf.MyMessages;
 import models.day.ChildDay;
 import models.day.PlaygroundDay;
 import models.day.forms.DayForm;
 import models.playground.Activity;
-import models.playground.Formula;
 import models.playground.Playground;
 import models.playground.forms.LinkActivityForm;
 import models.users.Animator;
@@ -18,7 +15,9 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.MyMessages;
+
+import java.util.Arrays;
+import java.util.Map;
 
 @Security.Authenticated(Secured.class)
 public class ChildController extends Controller{
@@ -300,4 +299,17 @@ public class ChildController extends Controller{
 			return forbidden();
 		}
 	}
+
+    /**
+     * Transforms table with all children to excel file.
+     * <p/>
+     * @return Excel file with all children and information.
+     */
+    public static Result transformToExcel(){
+        if( Secured.isAnimator() && Secured.hasAdministration() ){
+            return TODO;
+        } else {
+            return forbidden();
+        }
+    }
 }

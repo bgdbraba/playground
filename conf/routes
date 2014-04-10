@@ -50,6 +50,8 @@ POST        /children/:id/details                                controllers.Chi
 GET         /children/:childId/deactivate                        controllers.ChildController.deactivate(childId: String)
 GET         /children/:childId/activate                          controllers.ChildController.activate(childId: String)
 GET         /children                                            controllers.ChildController.showChildren2(p:Int ?= 0, s ?= "lastName", o ?= "asc", f ?= "")
+GET        /children/toExcel                                    controllers.ChildController.transformToExcel()
+
 # Day management
 POST        /children/:id/scribeIn                               controllers.ChildController.scribeIn(id : String)
 GET         /children/:id/scribeOut                              controllers.ChildController.scribeOut(id : String)
