@@ -183,3 +183,4 @@ sign.out=Uitschrijven
 sessionCard.info= (Enkel te gebruiken bij een gemaakte fout)
 remove.activity=Verwijder activiteit
 total.payed.this.year=Totaal betaald dit jaar.
+table.to.excel=Tabel naar Excel
