@@ -12,7 +12,7 @@ public class WriteTableToExcel {
     /**
      * Method to write children to excel.
      */
-    public static void writeChildrenToExcel(){
+    public static void writeChildrenToExcel() {
         String fileName = "Children";
     }
 }
