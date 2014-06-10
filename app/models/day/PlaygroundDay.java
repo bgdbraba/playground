@@ -1,19 +1,12 @@
 package models.day;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
+import conf.DateConverter;
 import models.playground.Playground;
 import models.users.Child;
 import play.db.ebean.Model;
-import conf.DateConverter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class PlaygroundDay extends Model{
@@ -117,7 +110,20 @@ public class PlaygroundDay extends Model{
 	}
 	
 	public static PlaygroundDay findbyPlayground(Long playgroundId) {
-		return PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().get(0);
+
+
+        PlaygroundDay day;
+
+
+        if (PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().size() == 0) {
+            day = create();
+            initialize(day.id, playgroundId);
+        }
+
+        day = PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().get(0);
+
+
+		return day;
 	}
 	
 	public static void addDate(Long playgroundDayId, Long date){
