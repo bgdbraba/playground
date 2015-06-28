@@ -1,17 +1,8 @@
 package models.users;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 import com.avaje.ebean.Page;
-
+import conf.DateConverter;
+import conf.Language;
 import models.day.ChildDay;
 import models.day.FormulaDay;
 import models.day.PlaygroundDay;
@@ -22,9 +13,15 @@ import models.users.enums.Gender;
 import models.users.forms.ChildForm;
 import models.users.information.Address;
 import models.users.information.ChildSessionCard;
-import conf.DateConverter;
-import conf.Language;
-import play.db.ebean.Model.Finder;
+
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("child")
@@ -92,6 +89,7 @@ public class Child extends BasicUser{
 		child.receiveMail = receiveMail;
 		child.photographable = photographable;
 		child.doctor = doctor;
+        child.remarks = remarks;
 		
 		child.update();	
 	}
