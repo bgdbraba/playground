@@ -23,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
 
+
+
 @Entity
 @DiscriminatorValue("child")
 public class Child extends BasicUser{
