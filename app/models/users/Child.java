@@ -60,7 +60,7 @@ public class Child extends BasicUser{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="child")
 	public List<ChildDay> days;
 	
-	public static Finder<String, Child> find = new Finder<>(String.class, Child.class);
+	public static Finder<String, Child> find = new Finder<String,Child>(String.class, Child.class);
 	
 	@ManyToMany
 	public List<Activity> activities;
