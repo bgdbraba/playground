@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
+import play.db.ebean.Model.Finder;
 
 
 
