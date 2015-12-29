@@ -1,18 +1,16 @@
 package models.playground;
 
-import java.util.ArrayList;
-import java.util.List;
+import conf.DateConverter;
+import models.playground.forms.RoleForm;
+import models.users.Child;
+import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import models.playground.forms.RoleForm;
-import models.users.Child;
-import play.data.Form;
-import play.db.ebean.Model;
-import conf.DateConverter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Role extends Model{

@@ -124,12 +124,13 @@ public class ChildController extends Controller{
 	}
 
 	public static Result deactivate(String childId) {
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isAnimator() && Secured.hasAdministration() && !Child.isOnPlayground(childId)) {
 			BasicUser.deactivate(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
 		} else {
-			return forbidden();
+			flash("fail", MyMessages.get("scribe.out.child.first"));
+			return redirect(routes.ChildController.showDetails(childId));
 		}
 	}
 

@@ -13,16 +13,10 @@ import models.users.enums.Gender;
 import models.users.forms.ChildForm;
 import models.users.information.Address;
 import models.users.information.ChildSessionCard;
+import play.db.ebean.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
-import play.db.ebean.Model.Finder;
 
 
 
@@ -60,7 +54,7 @@ public class Child extends BasicUser{
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="child")
 	public List<ChildDay> days;
 	
-	public static Finder<String, Child> find = new Finder<String,Child>(String.class, Child.class);
+	public static Model.Finder<String, Child> find = new Model.Finder<String,Child>(String.class, Child.class);
 	
 	@ManyToMany
 	public List<Activity> activities;
@@ -213,6 +207,12 @@ public class Child extends BasicUser{
 		child.onPlayground = false;
 		
 		child.update();
+	}
+
+	public static boolean isOnPlayground(String childId) {
+		Child child = Child.find.byId(childId);
+
+		return child.onPlayground;
 	}
 	
 	public static void addLinkToActivity(String childId, Long activityId){
