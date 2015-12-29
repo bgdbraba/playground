@@ -173,8 +173,12 @@ public class ChildController extends Controller{
 		Child child = Child.find.byId(childId);
 		
 		Child.offPlayground(childId);
-				
-		return redirect(routes.PlaygroundController.showToday(child.playground.id));
+
+		if (child.notPayed != 0) { // Child is still in debt.
+			return redirect(routes.ChildController.payment(childId));
+		} else {
+			return redirect(routes.PlaygroundController.showToday(child.playground.id));
+		}
 	}
 		
 	public static Result payNow(String childId){
