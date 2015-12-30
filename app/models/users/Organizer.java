@@ -1,17 +1,15 @@
 package models.users;
 
-import java.util.List;
+import conf.DateConverter;
+import conf.Language;
+import models.playground.Playground;
+import models.users.enums.Gender;
+import models.users.forms.OrganizerForm;
+import play.db.ebean.Model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
-import models.playground.Playground;
-import models.users.enums.Gender;
-import models.users.forms.OrganizerForm;
-import conf.DateConverter;
-import conf.Language;
-import play.db.ebean.Model.Finder;
 
 @Entity
 @DiscriminatorValue("organizer")
@@ -21,8 +19,8 @@ public class Organizer extends BasicUser{
 	
 	@ManyToOne
 	public Playground playground;
-	
-	public static Finder<String, Organizer> find = new Finder<String, Organizer>(String.class, Organizer.class);
+
+	public static Model.Finder<String, Organizer> find = new Model.Finder<String, Organizer>(String.class, Organizer.class);
 
 	public static void remove(String id){
 		find.ref(id).delete();
@@ -66,8 +64,8 @@ public class Organizer extends BasicUser{
 
 	public OrganizerForm toForm() {
 		OrganizerForm form = new OrganizerForm();
-		
-		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+
+		form.dateOfBirth = DateConverter.getDateAsStringBelgium(dateOfBirth);
 		form.email = email;
 		form.firstName = firstName;
 		form.lastName = lastName;

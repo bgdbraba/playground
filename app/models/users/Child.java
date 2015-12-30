@@ -148,7 +148,7 @@ public class Child extends BasicUser{
 		form.language = language;
 		form.addressId = address.id;
 		form.city = address.city;
-		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+		form.dateOfBirth = DateConverter.getDateAsStringBelgium(dateOfBirth);
 		form.email = email;
 		form.gender = gender;
 		form.number = address.number;

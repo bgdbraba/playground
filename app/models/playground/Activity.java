@@ -88,8 +88,8 @@ public class Activity extends Model {
 		form.id = id;
 		form.name = name;
 		form.cost = cost + "";
-		form.beginDate = DateConverter.getDateAsString(beginDate);
-		form.endDate = DateConverter.getDateAsString(endDate);
+		form.beginDate = DateConverter.getDateAsStringBelgium(beginDate);
+		form.endDate = DateConverter.getDateAsStringBelgium(endDate);
 		form.beginTime = DateConverter.getTimeAsString(beginTime);
 		form.endTime = DateConverter.getTimeAsString(endTime);
 		form.numberOfChildren = numberOfChildren + "";

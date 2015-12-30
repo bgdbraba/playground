@@ -1,19 +1,13 @@
 package models.users;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-
+import conf.DateConverter;
+import conf.Language;
 import models.users.enums.Gender;
 import models.users.enums.UserType;
 import models.users.forms.UserForm;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
-import conf.DateConverter;
-import conf.Language;
+
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -44,8 +38,8 @@ public class BasicUser extends Model{
 	
 	@Column(insertable=false,updatable=true)
     public UserType utype;
-	
-	public static Finder<String, BasicUser> find = new Finder<String, BasicUser>(String.class, BasicUser.class);
+
+	public static Model.Finder<String, BasicUser> find = new Model.Finder<String, BasicUser>(String.class, BasicUser.class);
 	
 	public static String getName(String id){
 		BasicUser user = BasicUser.find.byId(id);
@@ -89,7 +83,7 @@ public class BasicUser extends Model{
 		UserForm form = new UserForm();
 		
 		form.id = id;
-		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+		form.dateOfBirth = DateConverter.getDateAsStringBelgium(dateOfBirth);
 		form.firstName = firstName;
 		form.lastName = lastName;
 		form.gender = gender;
@@ -125,6 +119,6 @@ public class BasicUser extends Model{
 	}
 	
 	public String getDateOfBirthAsString(){
-		return DateConverter.getDateAsString(this.dateOfBirth);
+		return DateConverter.getDateAsStringBelgium(this.dateOfBirth);
 	}
 }

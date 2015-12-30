@@ -1,19 +1,18 @@
 package models.users;
 
-import java.util.List;
+import conf.DateConverter;
+import conf.Language;
+import models.playground.Playground;
+import models.users.enums.Gender;
+import models.users.forms.AnimatorForm;
+import models.users.information.Address;
+import play.db.ebean.Model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
-import models.playground.Playground;
-import models.users.enums.Gender;
-import models.users.forms.AnimatorForm;
-import models.users.information.Address;
-import conf.DateConverter;
-import conf.Language;
-import play.db.ebean.Model.Finder;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("animator")
@@ -30,8 +29,8 @@ public class Animator extends BasicUser{
 	
 	@ManyToOne
 	public Playground playground;
-	
-	public static Finder<String, Animator> find = new Finder<String, Animator>(String.class, Animator.class);
+
+	public static Model.Finder<String, Animator> find = new Model.Finder<String, Animator>(String.class, Animator.class);
 
 	public Animator(){}
 	
@@ -115,7 +114,7 @@ public class Animator extends BasicUser{
 		form.language = language;
 		form.addressId = address.id;
 		form.city = address.city;
-		form.dateOfBirth = DateConverter.getDateAsString(dateOfBirth);
+		form.dateOfBirth = DateConverter.getDateAsStringBelgium(dateOfBirth);
 		form.email = email;
 		form.gender = gender;
 		form.hasFollowedCourse = hasFollowedCourse;

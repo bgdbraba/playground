@@ -10,7 +10,7 @@ public class DateConverter {
 
 	public static SimpleDateFormat formatBirth = new SimpleDateFormat("dd-MM-yyyy");
 
-    public static SimpleDateFormat formatBirth2 = new SimpleDateFormat("dd/MM/yyyy");
+	public static SimpleDateFormat formatBirth2 = new SimpleDateFormat("yyyy/MM/dd");
 
 	public static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 	
@@ -19,6 +19,10 @@ public class DateConverter {
 	public static SimpleDateFormat formatDateAndTime = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 	public static String getDateAsString(long date) {
+		return formatBirth2.format(new Date(date));
+	}
+
+	public static String getDateAsStringBelgium(long date) {
 		return formatBirth.format(new Date(date));
 	}
 	
