@@ -186,4 +186,5 @@ sessionCard.info= (Enkel te gebruiken bij een gemaakte fout)
 remove.activity=Verwijder activiteit
 total.payed.this.year=Totaal betaald dit jaar.
 table.to.excel=Tabel naar Excel
+start.with.capital=Moet beginnen met hoofdletter
 scribe.out.child.first=Het kind moet eerst uitgeschreven zijn om te kunnen deactiveren!

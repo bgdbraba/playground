@@ -1,13 +1,13 @@
 package models.users.forms;
 
+import conf.IdGenerator;
+import conf.Language;
 import models.users.Child;
 import models.users.enums.Gender;
 import models.users.information.Address;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
-import conf.IdGenerator;
-import conf.Language;
 
 public class ChildForm {
 	
@@ -22,9 +22,11 @@ public class ChildForm {
 	public Language language;
 	
 	@Required
+	@Pattern(value = "^[A-Z].*$", message = "Moet met hoofdletter beginnen!")
 	public String firstName;
-	
-	@Required 
+
+	@Required
+	@Pattern(value = "^[A-Z].*$", message = "Moet met hoofdletter beginnen!")
 	public String lastName;
 	
 	@Required
@@ -43,6 +45,7 @@ public class ChildForm {
 	public String phone;
 	
 	@Required
+	@Pattern(value = "^[A-Z].*$", message = "Moet met hoofdletter beginnen!")
 	public String street;
 	
 	@Required
@@ -53,6 +56,7 @@ public class ChildForm {
 	public String zipCode;
 	
 	@Required
+	@Pattern(value = "^[A-Z].*$", message = "Moet met hoofdletter beginnen!")
 	public String city;
 	
 	@Pattern(value="^[0-9]+$")

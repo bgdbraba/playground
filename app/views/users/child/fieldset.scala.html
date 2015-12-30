@@ -1,7 +1,8 @@
-@(childForm: Form[models.users.forms.ChildForm]) 
+@(childForm: Form[models.users.forms.ChildForm])
 
-@import models.users.enums._
-@import helper._
+	@import conf.MyMessages
+	@import helper._
+	@import models.users.enums._
 @implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
 
 <fieldset>
@@ -15,6 +16,7 @@
 		childForm("firstName"), 
 		'_label -> MyMessages.get("firstName") , 
 		'_help -> MyMessages.get("required"),
+		'_error -> MyMessages.get("start.with.capital"),
 	 	'_iconcls -> "icon-edit"
 	)
 
