@@ -6,6 +6,8 @@ import models.playground.Playground;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
 
+import java.math.BigDecimal;
+
 public class ActivityForm {
 	
 	public Long id;
@@ -14,6 +16,7 @@ public class ActivityForm {
 	public String name;
 	
 	@Required
+	@Pattern(value = "^[0-9]+.[0-9][0-9]$")
 	public String cost;
 	
 	@Required
@@ -43,7 +46,7 @@ public class ActivityForm {
 	}
 	
 	public void update(){
-		Activity.initialize(id, name, Double.parseDouble(cost), DateConverter.parseDate(beginDate), DateConverter.parseTime(beginTime), DateConverter.parseDate(endDate), DateConverter.parseTime(endTime),Integer.parseInt(numberOfChildren));
+		Activity.initialize(id, name, new BigDecimal(cost), DateConverter.parseDate(beginDate), DateConverter.parseTime(beginTime), DateConverter.parseDate(endDate), DateConverter.parseTime(endTime), Integer.parseInt(numberOfChildren));
 		
 		Activity.addPlayground(id, playgroundId);
 		

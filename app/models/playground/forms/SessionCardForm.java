@@ -1,9 +1,10 @@
 package models.playground.forms;
 
-import models.playground.Playground;
 import models.playground.SessionCard;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
+
+import java.math.BigDecimal;
 
 public class SessionCardForm {
 
@@ -28,7 +29,7 @@ public class SessionCardForm {
 	}
 	
 	public void update(){
-		SessionCard.initialize(id, Integer.parseInt(numberOfSessions), Double.parseDouble(cost));
+		SessionCard.initialize(id, Integer.parseInt(numberOfSessions), new BigDecimal(cost));
 				
 		SessionCard.addSessionCard(id, playgroundId);
 	}

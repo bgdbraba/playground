@@ -6,6 +6,7 @@ import models.users.Child;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,8 @@ public class PlaygroundDay extends Model{
 	public Long id;
 	
 	public Long date;
-	
-	public double moneyIncome;
+
+	public BigDecimal moneyIncome;
 	
 	@ManyToOne
 	public Playground playground;
@@ -42,8 +43,8 @@ public class PlaygroundDay extends Model{
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
 		
 		playgroundDay.date = DateConverter.getCurrentDate();
-		
-		playgroundDay.moneyIncome = 0.00;
+
+		playgroundDay.moneyIncome = new BigDecimal("0.00");
 		
 		playgroundDay.update();
 		
@@ -133,19 +134,19 @@ public class PlaygroundDay extends Model{
 		
 		playgroundDay.update();
 	}
-	
-	public static void addMoney(Long playgroundDayId, double money){
+
+	public static void addMoney(Long playgroundDayId, BigDecimal money) {
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
-		
-		playgroundDay.moneyIncome += money;
+
+		playgroundDay.moneyIncome = playgroundDay.moneyIncome.add(money);
 		
 		playgroundDay.update();
 	}
-	
-	public static void subtractMoney(Long playgroundDayId, double money){
+
+	public static void subtractMoney(Long playgroundDayId, BigDecimal money) {
 		PlaygroundDay playgroundDay = PlaygroundDay.find.byId(playgroundDayId);
-		
-		playgroundDay.moneyIncome -= money;
+
+		playgroundDay.moneyIncome = playgroundDay.moneyIncome.subtract(money);
 		
 		playgroundDay.update();
 	}

@@ -6,6 +6,7 @@ import models.users.Child;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,8 @@ public class Activity extends Model {
 	public Long endDate;
 	
 	public Long endTime;
-	
-	public double cost;
+
+	public BigDecimal cost;
 
 	public int numberOfChildren;
 	
@@ -62,8 +63,8 @@ public class Activity extends Model {
 	}
 
 
-	public static void initialize(Long id, String name, double cost,
-			long beginDate,long beginTime, long endDate, long endTime, int numberOfChildren) {
+	public static void initialize(Long id, String name, BigDecimal cost,
+								  long beginDate, long beginTime, long endDate, long endTime, int numberOfChildren) {
 		Activity activity = Activity.find.byId(id);
 		
 		activity.beginDate = beginDate;

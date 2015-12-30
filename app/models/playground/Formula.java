@@ -6,6 +6,7 @@ import models.playground.forms.FormulaForm;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -15,8 +16,8 @@ public class Formula extends Model{
 	public Long id;
 	
 	public String name;
-	
-	public double cost;
+
+	public BigDecimal cost;
 	
 	public int sessionCardCompensation;
 	
@@ -35,8 +36,8 @@ public class Formula extends Model{
 		
 		return formula;
 	}
-	
-	public static void initialize(Long id, String name, double cost, int sessionCardCompensation){
+
+	public static void initialize(Long id, String name, BigDecimal cost, int sessionCardCompensation) {
 		Formula formula = Formula.find.byId(id);
 		
 		formula.cost = cost;

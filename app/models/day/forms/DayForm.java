@@ -1,9 +1,5 @@
 package models.day.forms;
 
-import java.util.List;
-
-import conf.DateConverter;
-
 import models.day.ChildDay;
 import models.day.FormulaDay;
 import models.day.PlaygroundDay;
@@ -11,13 +7,16 @@ import models.playground.Formula;
 import models.playground.Playground;
 import models.users.Child;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 public class DayForm {
 	
 	public String childId;
 	
 	public List<String> formulas;
-	
-	public double amountToPay;
+
+	public BigDecimal amountToPay;
 	
 	public void submit(){
 		Child child = Child.find.byId(childId);
@@ -32,9 +31,9 @@ public class DayForm {
 		}else{
 			childDay = ChildDay.getCurrentChildDay(childId);	
 		}
-		
-		
-		amountToPay = 0.00;
+
+
+		amountToPay = new BigDecimal("0.00");
 		
 		/** PLAYGROUND DAY */
 		PlaygroundDay playgroundDay;
@@ -88,7 +87,7 @@ public class DayForm {
 					if(child.numberOfSessions != 0 && formula.sessionCardCompensation != 0 && (child.numberOfSessions >= formula.sessionCardCompensation)){
 						Child.decreaseNumberOfSessions(child.id, formula.sessionCardCompensation);
 					}else{
-						amountToPay += formula.cost;
+						amountToPay = amountToPay.add(formula.cost);
 					}
 				}			
 			}

@@ -16,6 +16,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -174,7 +175,7 @@ public class ChildController extends Controller{
 		
 		Child.offPlayground(childId);
 
-		if (child.notPayed != 0) { // Child is still in debt.
+		if (child.notPayed.compareTo(BigDecimal.ZERO) != 0) { // Child is still in debt.
 			return redirect(routes.ChildController.payment(childId));
 		} else {
 			return redirect(routes.PlaygroundController.showToday(child.playground.id));

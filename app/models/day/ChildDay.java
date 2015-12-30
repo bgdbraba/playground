@@ -1,18 +1,13 @@
 package models.day;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
+import conf.DateConverter;
 import models.playground.Formula;
 import models.users.Child;
 import play.db.ebean.Model;
-import conf.DateConverter;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity	
 public class ChildDay extends Model{
@@ -22,8 +17,8 @@ public class ChildDay extends Model{
 	public Long id;
 	
 	public long date;
-	
-	public double amountPayed;
+
+	public BigDecimal amountPayed;
 	
 	@ManyToOne
 	public Child child;
@@ -45,7 +40,7 @@ public class ChildDay extends Model{
 		ChildDay childDay = ChildDay.find.byId(childDayId);
 		
 		childDay.date = DateConverter.getCurrentDate();
-		childDay.amountPayed = 0.00;
+		childDay.amountPayed = new BigDecimal("0.00");
 		
 		childDay.update();
 	}
@@ -67,17 +62,17 @@ public class ChildDay extends Model{
 		
 		childDay.saveManyToManyAssociations("formulas");
 	}
-	
-	public static void amountPayed(Long childDayId, double cost){
+
+	public static void amountPayed(Long childDayId, BigDecimal cost) {
 		ChildDay childDay = ChildDay.find.byId(childDayId);
 		childDay.amountPayed = cost;
 		
 		childDay.update();		
 	}
-	
-	public static void addAmountPayed(Long childDayId, double cost){
+
+	public static void addAmountPayed(Long childDayId, BigDecimal cost) {
 		ChildDay childDay = ChildDay.find.byId(childDayId);
-		childDay.amountPayed += cost;
+		childDay.amountPayed = childDay.amountPayed.add(cost);
 		
 		childDay.update();		
 	}

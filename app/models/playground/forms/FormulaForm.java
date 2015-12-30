@@ -5,6 +5,8 @@ import models.playground.Playground;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
 
+import java.math.BigDecimal;
+
 public class FormulaForm {
 
 	public Long id;
@@ -31,7 +33,7 @@ public class FormulaForm {
 	}
 
 	public void update() {
-		Formula.initialize(id, name, Double.parseDouble(cost), Integer.parseInt(sessionCardCompensation));
+		Formula.initialize(id, name, new BigDecimal(cost), Integer.parseInt(sessionCardCompensation));
 		
 		Formula.addPlayground(id, playgroundId);		
 		

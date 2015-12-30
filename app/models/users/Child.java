@@ -16,6 +16,7 @@ import models.users.information.ChildSessionCard;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -38,8 +39,8 @@ public class Child extends BasicUser{
 	public Address address;
 	
 	public String doctor;
-	
-	public double notPayed = 0.00;
+
+	public BigDecimal notPayed = new BigDecimal("0.00");
 	
 	@ManyToOne
 	public Playground playground;
@@ -168,29 +169,29 @@ public class Child extends BasicUser{
 		
 		return form;
 	}
-	
-	public static double totalPayed(String childId){
+
+	public static BigDecimal totalPayed(String childId) {
 		Child child = Child.find.byId(childId);
-		
-		double payed = 0.00;
+
+		BigDecimal payed = new BigDecimal("0.00");
 		
 		for(ChildDay day : child.days){
-			payed += day.amountPayed;
+			payed = payed.add(day.amountPayed);
 		}
 		
 		return payed;
 	}
-	
-	public static void addNotPayed(String childId, double cost){
+
+	public static void addNotPayed(String childId, BigDecimal cost) {
 		Child child = Child.find.byId(childId);
-		child.notPayed += cost;
+		child.notPayed = child.notPayed.add(cost);
 		
 		child.update();
 	}
 	
 	public static void payed(String childId){
 		Child child = Child.find.byId(childId);
-		child.notPayed = 0.00;
+		child.notPayed = new BigDecimal("0.00");
 		
 		child.update();
 	}
@@ -344,9 +345,9 @@ public class Child extends BasicUser{
                 .getPage(page);
     }
 
-	public static void removeNotPayed(String childId, double cost) {
+	public static void removeNotPayed(String childId, BigDecimal cost) {
 		Child child = Child.find.byId(childId);
-		child.notPayed -= cost;
+		child.notPayed = child.notPayed.subtract(cost);
 		
 		child.update();		
 	}

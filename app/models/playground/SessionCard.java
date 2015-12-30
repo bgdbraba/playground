@@ -1,14 +1,13 @@
 package models.playground;
 
+import models.playground.forms.SessionCardForm;
+import play.db.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-
-import models.playground.forms.SessionCardForm;
-
-import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
+import java.math.BigDecimal;
 
 @Entity
 public class SessionCard extends Model{
@@ -18,8 +17,8 @@ public class SessionCard extends Model{
 	public Long id;
 	
 	public int numberOfSessions;
-	
-	public double cost;
+
+	public BigDecimal cost;
 		
 	public boolean active;
 	
@@ -35,9 +34,9 @@ public class SessionCard extends Model{
 		
 		return sessionCard;
 	}
-	
-	
-	public static void initialize(Long id, int numberOfSessions, double cost){
+
+
+	public static void initialize(Long id, int numberOfSessions, BigDecimal cost) {
 		SessionCard sessionCard = SessionCard.find.byId(id);
 		
 		sessionCard.numberOfSessions = numberOfSessions;
