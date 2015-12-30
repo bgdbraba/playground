@@ -1,21 +1,14 @@
 package models.playground;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
+import conf.DateConverter;
 import models.playground.forms.ActivityForm;
 import models.users.Child;
 import play.db.ebean.Model;
-import conf.DateConverter;
 
-import static models.playground.Playground.*;
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Activity extends Model {
@@ -35,7 +28,7 @@ public class Activity extends Model {
 	public Long endTime;
 	
 	public double cost;
-	
+
 	public int numberOfChildren;
 	
 	@ManyToMany(mappedBy="activities")
