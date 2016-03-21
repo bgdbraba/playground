@@ -24,6 +24,16 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("child")
 public class Child extends BasicUser{
+
+	private static final int MILLIS_IN_SECOND = 1000;
+	private static final int SECONDS_IN_MINUTE = 60;
+	private static final int MINUTES_IN_HOUR = 60;
+	private static final int HOURS_IN_DAY = 24;
+	private static final int DAYS_IN_YEAR = 365;
+
+	private static final long MILLISECONDS_IN_YEAR =
+			(long) MILLIS_IN_SECOND * SECONDS_IN_MINUTE * MINUTES_IN_HOUR
+					* HOURS_IN_DAY * DAYS_IN_YEAR;
 	
 	public String phoneWork;
 	
@@ -176,10 +186,27 @@ public class Child extends BasicUser{
 		BigDecimal payed = new BigDecimal("0.00");
 		
 		for(ChildDay day : child.days){
-			payed = payed.add(day.amountPayed);
+			// only days in 2015
+			if (day.date > (System.currentTimeMillis() - MILLISECONDS_IN_YEAR)) {
+				payed = payed.add(day.amountPayed);
+			}
 		}
 		
 		return payed;
+	}
+
+	public static int daysThisYear(String childId) {
+		int daysThisYear = 0;
+		Child child = Child.find.byId(childId);
+		for (ChildDay day : child.days) {
+			// only days in 2015
+			if (day.date > (System.currentTimeMillis() - MILLISECONDS_IN_YEAR)) {
+				daysThisYear++;
+			}
+		}
+
+		return daysThisYear;
+
 	}
 
 	public static void addNotPayed(String childId, BigDecimal cost) {

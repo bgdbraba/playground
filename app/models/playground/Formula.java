@@ -18,6 +18,8 @@ public class Formula extends Model{
 	public String name;
 
 	public BigDecimal cost;
+
+	public boolean active;
 	
 	public int sessionCardCompensation;
 	

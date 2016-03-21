@@ -1,7 +1,5 @@
 @(child: models.users.Child)
 
-@import models.playground._
-
 <tr>
 	<td><a href="@routes.ChildController.showDetails(child.id)">
 	@if(child.onPlayground){
@@ -12,7 +10,10 @@
 	</a></td>
 	<td>@child.firstName</td>
 	<td>@child.lastName</td>
-	<td>@child.address.getAddress()</td>
+	<td>@child.address.street</td>
+	<td>@child.address.number</td>
+	<td>@child.address.zipCode</td>
+	<td>@child.address.city</td>
 	<td>
 	@if(Role.getRolesForPlayground(child.playground.id).size()>0){
 		@if(Role.getRoleForChild(child.id)==null){
@@ -26,7 +27,7 @@
 	</td>
     <td>@child.getDateOfBirthAsString()</td>
 	<td>
-	@child.days.size()
+	@models.users.Child.daysThisYear(child.id)
 	</td>
 	<td>
 	@models.users.Child.totalPayed(child.id)
