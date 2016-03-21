@@ -1,15 +1,19 @@
-@(dayForm: Form[models.day.forms.DayForm],child: models.users.Child) 
+@(dayForm: Form[models.day.forms.DayForm], child: models.users.Child)
 
-@import models.playground._
 @import helper._
-@implicitField = @{ FieldConstructor(twitterBootstrapInput.f) }
+@import models.playground._
+@implicitField = @{
+    FieldConstructor(twitterBootstrapInput.f)
+}
 
 @form(routes.ChildController.scribeIn(child.id)) {
 
-	@for(formula <- child.playground.formulas){
-		<label class="checkbox">
-			<input type='checkbox' name='formula' value="@formula.id"> @formula.toString() 
-		</label>
-	}
-	
+    @for( formula <- child.playground.formulas) {
+        @if(formula.active) {
+            <label class="checkbox">
+                <input type='checkbox' name='formula' value="@formula.id"> @formula.toString()
+            </label>
+        }
+    }
+
 }

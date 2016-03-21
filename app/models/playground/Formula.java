@@ -100,4 +100,11 @@ public class Formula extends Model{
         // remove formula
         formula.delete();
     }
+
+	public static void deactivate(Long formulaId) {
+		Formula formula = Formula.find.byId(formulaId);
+		formula.active = false;
+
+		formula.update();
+	}
 }

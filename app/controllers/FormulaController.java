@@ -94,8 +94,8 @@ public class FormulaController extends Controller{
 
     public static Result removeFormula(Long formulaId){
         if(Secured.isOrganizer()){
-            Formula.remove(formulaId);
-            Organizer organizer = Organizer.find.byId(request().username());
+			Formula.deactivate(formulaId);
+			Organizer organizer = Organizer.find.byId(request().username());
 
             Playground playground = organizer.playground;
 

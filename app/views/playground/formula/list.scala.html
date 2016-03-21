@@ -13,7 +13,9 @@
 	</thead>
 	<tbody>
 	@for(formula <- formulas) {
-		@item(formula)
+		@if(formula.active) {
+			@item(formula)
+		}
 	}
 	</tbody>
 }
