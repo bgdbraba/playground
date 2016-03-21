@@ -1,5 +1,7 @@
 @(child: models.users.Child)
 
+@import models.playground.Role
+
 <tr>
 	<td><a href="@routes.ChildController.showDetails(child.id)">
 	@if(child.onPlayground){
