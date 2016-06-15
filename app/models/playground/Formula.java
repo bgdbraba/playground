@@ -45,6 +45,7 @@ public class Formula extends Model{
 		formula.cost = cost;
 		formula.name = name;
 		formula.sessionCardCompensation = sessionCardCompensation;
+		formula.active = true;
 		
 		formula.update();
 	}

@@ -18,7 +18,7 @@ public class FormulaController extends Controller{
 			Form<FormulaForm> filledForm = Form.form(FormulaForm.class).bindFromRequest();
 			
 			Organizer organizer = Organizer.find.byId(request().username());
-			
+
 			Playground playground = organizer.playground;			
 			
 			if (filledForm.hasErrors()) {
