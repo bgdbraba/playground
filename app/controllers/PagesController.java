@@ -13,4 +13,7 @@ public class PagesController extends Controller{
 		return ok(views.html.pages.contact.render());
 	}
 
+	public static Result register() {
+		return play.mvc.Results.TODO;
+	}
 }
