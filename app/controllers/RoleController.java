@@ -89,4 +89,13 @@ public class RoleController extends Controller{
 		}
 	}
 
+	public static Result removeRole(long id) {
+		if(Secured.isOrganizer()){
+			Role.find.ref(id).delete();
+
+			return redirect(routes.RoleController.showRoles());
+		}else{
+			return forbidden();
+		}
+	}
 }

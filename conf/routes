@@ -107,6 +107,7 @@ GET         /roles                                               controllers.Rol
 POST        /roles                                               controllers.RoleController.registerRole()
 GET         /roles/:id/details                                   controllers.RoleController.showDetails(id: Long)
 POST        /roles/:id/details                                   controllers.RoleController.editRole(id: Long)
+GET         /roles/:id/remove                                    controllers.RoleController.removeRole(id : Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                                        controllers.Assets.at(path="/public", file)
