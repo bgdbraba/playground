@@ -35,7 +35,7 @@ public class ChildController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.child.fail"));
 			
-				return badRequest(views.html.users.child.showChildren2.render(Child.page(0, 10, "lastName", "asc", ""),"lastName","asc","", filledForm));
+				return badRequest(views.html.users.child.showChildren2.render(Child.page(playground.id,0, 10, "lastName", "asc", ""),"lastName","asc","", filledForm));
 			
 			} else {
 	
@@ -71,7 +71,7 @@ public class ChildController extends Controller{
 			
 			Playground playground = animator.playground;	
 			
-			return ok(views.html.users.child.showChildren2.render(Child.page(page, 10, sortBy, order, filter),sortBy,order,filter, Form.form(ChildForm.class)));
+			return ok(views.html.users.child.showChildren2.render(Child.page(playground.id, page, 10, sortBy, order, filter),sortBy,order,filter, Form.form(ChildForm.class)));
 		}else{
 			return forbidden();
 		}
