@@ -4,14 +4,9 @@ import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.forms.PlaygroundForm;
 import play.data.Form;
-import play.db.ebean.Model;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
-import java.util.List;
-
-import static play.libs.Json.toJson;
 
 @Security.Authenticated(Secured.class)
 public class PlaygroundController extends Controller{
@@ -29,7 +24,7 @@ public class PlaygroundController extends Controller{
 			Form<PlaygroundForm> filledForm = Form.form(PlaygroundForm.class).bindFromRequest();
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.playground.fail"));
-			return badRequest(views.html.playground.showPlaygrounds.render(Playground.find.all(), filledForm));
+				return badRequest(views.html.playground.showPlaygrounds.render(Playground.find.all(), filledForm));
 			} else {
 				flash("success", MyMessages.get("register.playground.success"));
 				

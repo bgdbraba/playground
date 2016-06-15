@@ -1,0 +1,9 @@
+@(childForm: Form[models.users.forms.ChildForm]) 
+
+@import helper._
+
+@form(routes.PagesController.registerAndLinkChild()) {
+
+	@fieldset(childForm)
+
+}

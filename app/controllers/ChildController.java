@@ -22,16 +22,17 @@ import java.util.Map;
 
 @Security.Authenticated(Secured.class)
 public class ChildController extends Controller{
-	
+
+
+
 	public static Result registerChild(){
 		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			
 			Animator animator = Animator.find.byId(request().username());
 			
-			Playground playground = animator.playground;	
-			
+			Playground playground = animator.playground;
 			Form<ChildForm> filledForm = Form.form(ChildForm.class).bindFromRequest();
-		
+
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.child.fail"));
 			
@@ -57,8 +58,8 @@ public class ChildController extends Controller{
 		if(Secured.isAnimator() && Secured.hasAdministration()){
 			Animator animator = Animator.find.byId(request().username());
 			
-			Playground playground = animator.playground;	
-			
+			Playground playground = animator.playground;
+
 			return ok(views.html.users.child.showChildren.render(Child.getChildrenForPlayground(playground.id), Form.form(ChildForm.class)));
 		}else{
 			return forbidden();
@@ -318,4 +319,6 @@ public class ChildController extends Controller{
             return forbidden();
         }
     }
+
+
 }

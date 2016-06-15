@@ -72,8 +72,9 @@ public class ChildForm {
 	public boolean receiveMail;
 	
 	public boolean photographable;
-	
-	public Long playgroundId;
+
+	@Required
+	public Long playgroundId = 0L;
 	
 	public Long addressId;
 	
@@ -86,6 +87,7 @@ public class ChildForm {
 		addressId = address.id;
 		
 		Child child = Child.create(id);
+		Child.addPlayground(id, playgroundId);
 		
 		update();
 		

@@ -1,3 +1,28 @@
+@(childForm: Form[models.users.forms.ChildForm])
+
 @main(MyMessages.get("register.child")) {
 
+
+    @flashConfirm(MyMessages.get("fail"),MyMessages.get("register.success"))
+
+    <div class="hero-unit">
+        <h1>Eenmalige registratie op voorhand</h1>
+        <br>
+        <h2>Waarom vooraf registreren op het platform?</h2>
+        <p>Registratie is nodig de eerste maal een kind naar het speelplein komt. Door vooraf te registreren worden wachtrijen beperkt en wordt tijd bespaard. Dit is geenszins verplicht.
+            Een kind kan even goed de eerste maal als naar het speelplein komt, ter plaatse worden geregistreerd.</p>
+
+        <br>
+        <h2>Wat is het niet!</h2>
+
+        <p>Er is dus geen nood/verplichting aan voorafgaande inschrijving om te mogen komen op een bepaalde dag/middag.</p>
+
+
+    </div>
+
+    @actions{
+        @modalForm(MyMessages.get("children.add"), "registerAndLinkChild", MyMessages.get("register.child")) {
+            @views.html.users.child.registerChild.addForm(childForm)
+        }
+    }
 }

@@ -9,6 +9,7 @@ GET         /                                                    controllers.App
 GET         /about                                               controllers.PagesController.about()
 GET         /contact                                             controllers.PagesController.contact()
 GET         /register                                            controllers.PagesController.register()
+POST        /register                                            controllers.PagesController.registerAndLinkChild()
 
 # Login page
 GET         /login                                               controllers.Application.login()
