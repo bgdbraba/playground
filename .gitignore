@@ -7,6 +7,7 @@ tmp
 .target
 .settings
 conf/evolutions
+conf/application.conf
 /.target
 dist
 /.idea
