@@ -6,7 +6,7 @@
 	
 	@flashConfirm(MyMessages.get("edit.fail"), MyMessages.get("edit.success"))
 	
-	@views.html.playground.activity.list(child.activities)
+	@views.html.users.child.linkedActivities.list(child.activities,child)
 	
 	@modalForm(MyMessages.get("link.activity.to.child"), "linkActivityModal", MyMessages.get("link.activity.to.child")) {
 			@linkForm(child, linkActivityForm)

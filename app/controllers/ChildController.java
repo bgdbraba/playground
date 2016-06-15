@@ -220,16 +220,16 @@ public class ChildController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", "");
 				
-				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+				return badRequest(views.html.users.child.linkedActivities.linkActivity.render(Child.find.byId(childId), filledForm));
 			
 			} else if (Child.alreadyHasActivity(childId,filledForm.get().activityId)) {
 				flash("fail", "");
 				
-				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+				return badRequest(views.html.users.child.linkedActivities.linkActivity.render(Child.find.byId(childId), filledForm));
 			} else if (Activity.full(filledForm.get().activityId)) {
 				flash("fail", MyMessages.get("activity.full"));
 				
-				return badRequest(views.html.users.child.linkActivity.render(Child.find.byId(childId), filledForm));
+				return badRequest(views.html.users.child.linkedActivities.linkActivity.render(Child.find.byId(childId), filledForm));
 			} else{
 				
 				LinkActivityForm form = filledForm.get();
@@ -259,7 +259,7 @@ public class ChildController extends Controller{
 	
 	public static Result linkedActivities(String childId){
 		if (Secured.isAnimator() && Secured.hasAdministration()) {
-				return ok(views.html.users.child.linkActivity.render(Child.find.byId(childId),Form.form(LinkActivityForm.class)));
+				return ok(views.html.users.child.linkedActivities.linkActivity.render(Child.find.byId(childId),Form.form(LinkActivityForm.class)));
 		} else {
 			return forbidden();
 		}	

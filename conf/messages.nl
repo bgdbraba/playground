@@ -188,3 +188,4 @@ total.payed.this.year=Totaal betaald dit jaar.
 table.to.excel=Tabel naar Excel
 start.with.capital=Moet beginnen met hoofdletter
 scribe.out.child.first=Het kind moet eerst uitgeschreven zijn om te kunnen deactiveren!
+remove.linked.activity=Verwijder gelinkte activiteit

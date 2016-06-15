@@ -1,0 +1,11 @@
+@(activity: models.playground.Activity, child: models.users.Child)
+
+<tr>
+	<td><a href="@routes.ActivityController.showDetails(activity.id)">@activity.id</a></td>
+	<td>@activity.name</td>
+	<td>@activity.cost</td>
+	<td>@DateConverter.getDateAsString(activity.beginDate) @DateConverter.getTimeAsString(activity.beginTime)</td>
+	<td>@DateConverter.getDateAsString(activity.endDate) @DateConverter.getTimeAsString(activity.endTime)</td>
+	<td>@activity.numberOfChildren</td>
+    <td><a href="@routes.ChildController.removeActivityFromChild(child.id, activity.id)" class="btn"><i class="icon-remove icon-2x"></i></a></td>
+</tr>
