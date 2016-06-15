@@ -86,26 +86,16 @@ public class AnimatorController extends Controller{
 		}
 	}
 	
-	public static Result deactivate(String animatorId) {
+	public static Result removeAnimator(String animatorId) {
 		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
-			BasicUser.deactivate(animatorId);
+			BasicUser.find.ref(animatorId).delete();
 			
-			return redirect(routes.AnimatorController.showDetails(animatorId));
+			return redirect(routes.AnimatorController.showAnimators());
 		} else {
 			return forbidden();
 		}
 	}
 
-	public static Result activate(String animatorId) {
-		if (Secured.isOrganizer() && Secured.samePlayground(animatorId)) {
-			BasicUser.activate(animatorId);
-			
-			return redirect(routes.AnimatorController.showDetails(animatorId));
-		} else {
-			return forbidden();
-		}
-	}
-	
 	public static Result editAnimator(String id){
 		if (Secured.isOrganizer()) {
 			

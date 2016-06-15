@@ -27,12 +27,8 @@
 		@modalForm(MyMessages.get("edit"), "animatorModal", MyMessages.get("edit")) {
 			@editForm(animatorForm, animator.id)
 		}
-		
-		@if(animator.active){
-			<a href="@routes.AnimatorController.deactivate(animator.id)" class="btn btn-danger">@MyMessages.get("deactivate")</a>
-		}else{
-			<a href="@routes.AnimatorController.activate(animator.id)" class="btn btn-success">@MyMessages.get("activate")</a>
-		}
+
+		<a href="@routes.AnimatorController.removeAnimator(animator.id)" class="btn btn-danger">@MyMessages.get("remove")</a>
 		
 		@if(animator.administration){
 			<a href="@routes.AnimatorController.takeAwayAdministration(animator.id)" class="btn btn-danger">@MyMessages.get("take.away.administration")</a>

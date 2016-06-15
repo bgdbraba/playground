@@ -37,8 +37,7 @@ GET         /animators                                           controllers.Ani
 POST        /animators                                           controllers.AnimatorController.registerAnimator()
 GET         /animators/:id/details                               controllers.AnimatorController.showDetails(id: String)
 POST        /animators/:id/details                               controllers.AnimatorController.editAnimator(id: String)
-GET         /animators/deactivate/:animatorId                    controllers.AnimatorController.deactivate(animatorId: String)
-GET         /animators/activate/:animatorId                      controllers.AnimatorController.activate(animatorId: String)
+GET         /animators/:animatorId/remove                        controllers.AnimatorController.removeAnimator(animatorId: String)
 GET         /animators/grantAdministration/:animatorId           controllers.AnimatorController.giveAdministration(animatorId: String)
 GET         /animators/takeAwayAdministration/:animatorId        controllers.AnimatorController.takeAwayAdministration(animatorId: String)
 
