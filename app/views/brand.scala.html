@@ -7,7 +7,7 @@
 			
 				@if(user != null){
 					@if(user.is(UserType.ADMIN)) {
-							 <a class="brand" href="@routes.Application.index()">PlayGround</a>
+							 <a class="brand" href="@routes.Application.index()">PlayGrounded</a>
 					}
 					@if(user.is(UserType.ORGANIZER)) {
 							 <a class="brand" href="@routes.Application.index()">@Organizer.find.byId(session.get("id")).playground.name.toUpperCase()</a>

@@ -1,0 +1,7 @@
+@(child: models.users.Child)
+
+@if(child.onPlayground){
+  <span class="badge badge-success">@child.id</span>
+}else{
+  <span class="badge">@child.id</span>
+}

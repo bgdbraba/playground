@@ -10,4 +10,5 @@
 	}
 	<li><a href="@routes.PlaygroundController.showToday(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("day.management")</a></li>
 	<li><a href="@routes.PlaygroundController.history(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("history")</a></li>
+	<li><a href="@routes.PlaygroundController.owedMoney(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("owed.money")</a></li>
 }

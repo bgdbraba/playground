@@ -1,16 +1,5 @@
 package models.playground;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 import models.day.PlaygroundDay;
 import models.playground.forms.PlaygroundForm;
 import models.users.Animator;
@@ -18,6 +7,11 @@ import models.users.Child;
 import models.users.Organizer;
 import models.users.information.Address;
 import play.db.ebean.Model;
+
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Playground extends Model{
@@ -190,6 +184,10 @@ public class Playground extends Model{
 		form.website = website;
 		
 		return form;
+	}
+
+	public static List<Child> getListOfChildrenInDebt(Long id) {
+		return Child.find.where().eq("playground",Playground.find.ref(id)).gt("notPayed",0.00).findList();
 	}
 
 }

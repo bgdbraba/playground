@@ -1,0 +1,16 @@
+@(child: models.users.Child)
+
+<tr>
+	<td><a href="@routes.ChildController.showDetails(child.id)">
+	@badge(child)
+	</a></td>
+	<td>@child.firstName</td>
+	<td>@child.lastName</td>
+	<td>@child.address.street</td>
+	<td>@child.address.number</td>
+	<td>@child.address.zipCode</td>
+	<td>@child.address.city</td>
+	<td>@child.phone</td>
+    <td>@child.email</td>
+	<td>@child.notPayed</td>
+</tr>

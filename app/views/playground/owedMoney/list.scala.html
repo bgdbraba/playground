@@ -1,0 +1,26 @@
+@(children: List[models.users.Child])
+
+@table{
+	<thead>
+	<tr>
+		<th>@MyMessages.get("id")</th>
+		<th>@MyMessages.get("firstname")</th>
+		<th>@MyMessages.get("lastname")</th>
+		<th>@MyMessages.get("street")</th>
+		<th>@MyMessages.get("number")</th>
+		<th>@MyMessages.get("zipCode")</th>
+		<th>@MyMessages.get("city")</th>
+		<th>@MyMessages.get("phone")</th>
+		<th>@MyMessages.get("email")</th>
+		<th>@MyMessages.get("owed.money")</th>
+		<!-- Extra option buttons -->
+	</tr>
+	</thead>
+	<tbody>
+	@for(child <- children) {
+		@if(child.active){
+				@item(child)
+		}
+	}
+	</tbody>
+}

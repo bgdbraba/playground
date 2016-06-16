@@ -365,7 +365,7 @@ public class Child extends BasicUser{
 	public static Page<Child> page(Long playgroundId, int page, int pageSize, String sortBy, String order, String filter) {
         return 
             find.where()
-					.eq("playground",Playground.find.byId(playgroundId))
+					.eq("playground",Playground.find.ref(playgroundId))
                 .ilike("firstName", "%" + filter + "%")
                 .orderBy(sortBy + " " + order)
                 .fetch("playground")

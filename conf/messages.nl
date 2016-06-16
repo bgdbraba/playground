@@ -190,3 +190,4 @@ start.with.capital=Moet beginnen met hoofdletter
 scribe.out.child.first=Het kind moet eerst uitgeschreven zijn om te kunnen deactiveren!
 remove.linked.activity=Verwijder gelinkte activiteit
 register.child=Registreer Kind
+owed.money=Nog Te Ontvangen

@@ -1,0 +1,8 @@
+@(childrenInDebt : List[models.users.Child])
+
+@main(MyMessages.get("owed.money")){
+
+  <h1>@MyMessages.get("owed.money")</h1>
+
+  @views.html.playground.owedMoney.list(childrenInDebt)
+}

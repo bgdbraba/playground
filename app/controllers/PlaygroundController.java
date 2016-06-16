@@ -85,6 +85,16 @@ public class PlaygroundController extends Controller{
 		}else{
 			return forbidden();
 		}
-	}	
+	}
 
+	public static Result owedMoney(Long playgroundId) {
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
+			// Get list of children owing money.
+			// Present list.
+			return ok(views.html.playground.owedMoney.owedMoney.render(Playground.getListOfChildrenInDebt(playgroundId)));
+
+		}else{
+			return forbidden();
+		}
+	}
 }
