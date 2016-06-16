@@ -16,10 +16,8 @@ public class RoleController extends Controller{
 	public static Result registerRole(){
 		if(Secured.isOrganizer()){
 			Form<RoleForm> filledForm = Form.form(RoleForm.class).bindFromRequest();
-			
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;			
+
+			Playground playground = Application.getPlayground();
 			
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.fail"));

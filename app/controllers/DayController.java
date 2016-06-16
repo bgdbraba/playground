@@ -30,9 +30,8 @@ public class DayController extends Controller{
 			}
 			
 			PlaygroundDay.remove(id);		
-			
-			
-			return redirect(routes.PlaygroundController.history(playgroundId));
+
+			return redirect(routes.PlaygroundController.history());
 
 		}else{
 			return forbidden();

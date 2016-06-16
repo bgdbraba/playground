@@ -3,7 +3,6 @@ package controllers;
 import conf.MyMessages;
 import models.playground.Playground;
 import models.users.Animator;
-import models.users.Organizer;
 import models.users.BasicUser;
 import models.users.forms.AnimatorForm;
 import play.data.Form;
@@ -16,10 +15,8 @@ public class AnimatorController extends Controller{
 	
 	public static Result registerAnimator(){
 		if (Secured.isOrganizer()) {
-			
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;	
+
+			Playground playground = Application.getPlayground();
 			
 			Form<AnimatorForm> filledForm = Form.form(AnimatorForm.class).bindFromRequest();
 		
@@ -54,9 +51,7 @@ public class AnimatorController extends Controller{
 	
 	public static Result showAnimators(){
 		if(Secured.isOrganizer()){
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;	
+			Playground playground = Application.getPlayground();
 			
 			return ok(views.html.users.animator.showAnimators.render(Animator.getAnimatorsForPlayground(playground.id), Form.form(AnimatorForm.class)));
 		}else{
@@ -99,9 +94,7 @@ public class AnimatorController extends Controller{
 	public static Result editAnimator(String id){
 		if (Secured.isOrganizer()) {
 			
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;	
+			Playground playground = Application.getPlayground();
 			
 			Form<AnimatorForm> filledForm = Form.form(AnimatorForm.class).bindFromRequest();
 		

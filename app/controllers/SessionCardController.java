@@ -1,14 +1,13 @@
 package controllers;
 
+import conf.MyMessages;
 import models.playground.Playground;
 import models.playground.SessionCard;
 import models.playground.forms.SessionCardForm;
-import models.users.Organizer;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class SessionCardController extends Controller{
@@ -17,9 +16,8 @@ public class SessionCardController extends Controller{
 		if(Secured.isOrganizer()){
 			
 			Form<SessionCardForm> filledForm = Form.form(SessionCardForm.class).bindFromRequest();
-			Organizer organizer = Organizer.find.byId(request().username());
 			
-			Playground playground = organizer.playground;		
+			Playground playground = Application.getPlayground();
 			
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.fail"));
@@ -46,9 +44,8 @@ public class SessionCardController extends Controller{
 	public static Result editSessionCard(){
 		if(Secured.isOrganizer()){
 			Form<SessionCardForm> filledForm = Form.form(SessionCardForm.class).bindFromRequest();
-			Organizer organizer = Organizer.find.byId(request().username());
 			
-			Playground playground = organizer.playground;
+			Playground playground = Application.getPlayground();
 						
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("edit.fail"));
@@ -74,9 +71,7 @@ public class SessionCardController extends Controller{
 	public static Result showSessionCard(){
 		if(Secured.isOrganizer()){
 			
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;
+			Playground playground = Application.getPlayground();
 			
 			return ok(views.html.playground.sessionCard.showSessionCard.render(SessionCard.getSessionCardByPlayground(playground.id), Form.form(SessionCardForm.class).fill(playground.sessionCard.toForm())));
 		}else{
@@ -86,9 +81,8 @@ public class SessionCardController extends Controller{
 	
 	public static Result deactivate() {
 		if (Secured.isOrganizer()) {
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;
+
+			Playground playground = Application.getPlayground();
 			
 			SessionCard.deactivate(SessionCard.getSessionCardByPlayground(playground.id).id);
 			
@@ -100,9 +94,9 @@ public class SessionCardController extends Controller{
 
 	public static Result activate() {
 		if (Secured.isOrganizer()) {
-			Organizer organizer = Organizer.find.byId(request().username());
 			
-			Playground playground = organizer.playground;
+			Playground playground = Application.getPlayground();
+
 			SessionCard.activate(SessionCard.getSessionCardByPlayground(playground.id).id);
 			
 			return redirect(routes.SessionCardController.showSessionCard());

@@ -8,7 +8,7 @@
 	@if(Organizer.find.byId(session.get("id")).playground.id == 1) {
 		<li><a href="@routes.SessionCardController.showSessionCard()" >@MyMessages.get("session.card")</a></li>
 	}
-	<li><a href="@routes.PlaygroundController.showToday(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("day.management")</a></li>
-	<li><a href="@routes.PlaygroundController.history(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("history")</a></li>
-	<li><a href="@routes.PlaygroundController.owedMoney(Organizer.find.byId(session.get("id")).playground.id)" >@MyMessages.get("owed.money")</a></li>
+	<li><a href="@routes.PlaygroundController.showToday()" >@MyMessages.get("day.management")</a></li>
+	<li><a href="@routes.PlaygroundController.history()" >@MyMessages.get("history")</a></li>
+	<li><a href="@routes.PlaygroundController.owedMoney()" >@MyMessages.get("owed.money")</a></li>
 }

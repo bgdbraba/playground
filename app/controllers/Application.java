@@ -3,7 +3,12 @@ package controllers;
 
 
 import models.Login;
+import models.playground.Playground;
+import models.users.Animator;
 import models.users.BasicUser;
+import models.users.Child;
+import models.users.Organizer;
+import models.users.enums.UserType;
 import play.Routes;
 import play.data.Form;
 import play.mvc.Controller;
@@ -66,5 +71,26 @@ public class Application extends Controller {
 		return ok(Routes.javascriptRouter("jsRoutes",
 				routes.javascript.Application.setLanguage(),
 				routes.javascript.Application.getGeneratedPassword()));
+	}
+
+
+	public static Playground getPlayground(){
+		Playground playground;
+
+		if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
+
+			Organizer organizer = Organizer.find.byId(request().username());
+
+			playground = organizer.playground;
+
+		}else if(BasicUser.find.byId(request().username()).is(UserType.ANIMATOR)){
+			Animator animator = Animator.find.byId(request().username());
+			playground = animator.playground;
+		} else{
+			Child child = Child.find.byId(request().username());
+			playground = child.playground;
+		}
+
+		return playground;
 	}
 }

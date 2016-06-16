@@ -7,7 +7,6 @@ import models.day.forms.DayForm;
 import models.playground.Activity;
 import models.playground.Playground;
 import models.playground.forms.LinkActivityForm;
-import models.users.Animator;
 import models.users.BasicUser;
 import models.users.Child;
 import models.users.forms.ChildForm;
@@ -27,10 +26,8 @@ public class ChildController extends Controller{
 
 	public static Result registerChild(){
 		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
-			
-			Animator animator = Animator.find.byId(request().username());
-			
-			Playground playground = animator.playground;
+
+			Playground playground = Application.getPlayground();
 			Form<ChildForm> filledForm = Form.form(ChildForm.class).bindFromRequest();
 
 			if (filledForm.hasErrors()) {
@@ -56,9 +53,7 @@ public class ChildController extends Controller{
 	
 	public static Result showChildren(){
 		if(Secured.isAnimator() && Secured.hasAdministration()){
-			Animator animator = Animator.find.byId(request().username());
-			
-			Playground playground = animator.playground;
+			Playground playground = Application.getPlayground();
 
 			return ok(views.html.users.child.showChildren.render(Child.getChildrenForPlayground(playground.id), Form.form(ChildForm.class)));
 		}else{
@@ -68,9 +63,8 @@ public class ChildController extends Controller{
 	
 	public static Result showChildren2(int page, String sortBy, String order, String filter){
 		if(Secured.isAnimator() && Secured.hasAdministration()){
-			Animator animator = Animator.find.byId(request().username());
 			
-			Playground playground = animator.playground;	
+			Playground playground = Application.getPlayground();
 			
 			return ok(views.html.users.child.showChildren2.render(Child.page(playground.id, page, 10, sortBy, order, filter),sortBy,order,filter, Form.form(ChildForm.class)));
 		}else{
@@ -95,9 +89,7 @@ public class ChildController extends Controller{
 	public static Result editChild(String id){
 		if (Secured.isAnimator() && Secured.hasAdministration()) {
 			
-			Animator animator = Animator.find.byId(request().username());
-			
-			Playground playground = animator.playground;	
+			Playground playground = Application.getPlayground();
 			
 			Form<ChildForm> filledForm = Form.form(ChildForm.class).bindFromRequest();
 		
@@ -179,14 +171,13 @@ public class ChildController extends Controller{
 		if (child.notPayed.compareTo(BigDecimal.ZERO) != 0) { // Child is still in debt.
 			return redirect(routes.ChildController.payment(childId));
 		} else {
-			return redirect(routes.PlaygroundController.showToday(child.playground.id));
+			return redirect(routes.PlaygroundController.showToday());
 		}
 	}
 		
 	public static Result payNow(String childId){
-		Animator animator = Animator.find.byId(request().username());
 		
-		Playground playground = animator.playground;
+		Playground playground = Application.getPlayground();
 		
 		PlaygroundDay playgroundDay = PlaygroundDay.findbyPlayground(playground.id);
 		

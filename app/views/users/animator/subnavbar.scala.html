@@ -4,9 +4,9 @@
 	@if(Animator.find.byId(session.get("id")).administration){
 		<li><a href="/children" >@MyMessages.get("children.management")</a></li>
 		<li><a href="@routes.ActivityController.showActivities()" >@MyMessages.get("activity.management")</a></li>
-		<li><a href="@routes.PlaygroundController.showToday(Animator.find.byId(session.get("id")).playground.id)" >@MyMessages.get("day.management")</a></li>
-		<li><a href="@routes.PlaygroundController.history(Animator.find.byId(session.get("id")).playground.id)" >@MyMessages.get("history")</a></li>
-		<li><a href="@routes.PlaygroundController.owedMoney(Animator.find.byId(session.get("id")).playground.id)">@MyMessages.get("owed.money")</a></li>
+		<li><a href="@routes.PlaygroundController.showToday()" >@MyMessages.get("day.management")</a></li>
+		<li><a href="@routes.PlaygroundController.history()" >@MyMessages.get("history")</a></li>
+		<li><a href="@routes.PlaygroundController.owedMoney()">@MyMessages.get("owed.money")</a></li>
 	}
 	
 }

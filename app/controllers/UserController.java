@@ -1,14 +1,13 @@
 package controllers;
 
+import conf.LanguageSettings;
+import conf.MyMessages;
 import models.users.BasicUser;
 import models.users.forms.UserForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.DateConverter;
-import conf.LanguageSettings;
-import conf.MyMessages;
 
 public class UserController extends Controller{
 	
@@ -26,11 +25,7 @@ public class UserController extends Controller{
 			return ok(views.html.users.profile.render(user, Form.form(UserForm.class).fill(editForm)));
 		}
 	}
-	
-	public static Result showUsers(){
-		return TODO;
-	}
-	
+
 	public static Result editUser(){
 		Form<UserForm> editedForm = Form.form(UserForm.class).bindFromRequest();
 		

@@ -67,31 +67,31 @@ public class PlaygroundController extends Controller{
 		}
 	}
 	
-	public static Result showToday(Long playgroundId){
+	public static Result showToday(){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
-			
-				return ok(views.html.today.playgroundToday.render(Playground.find.byId(playgroundId)));
+
+				return ok(views.html.today.playgroundToday.render(Application.getPlayground()));
 
 		}else{
 			return forbidden();
 		}
 	}
 	
-	public static Result history(Long playgroundId){
+	public static Result history(){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			
-			return ok(views.html.day.history.render(Playground.find.byId(playgroundId)));
+			return ok(views.html.day.history.render(Application.getPlayground()));
 
 		}else{
 			return forbidden();
 		}
 	}
 
-	public static Result owedMoney(Long playgroundId) {
+	public static Result owedMoney() {
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			// Get list of children owing money.
 			// Present list.
-			return ok(views.html.playground.owedMoney.owedMoney.render(Playground.getListOfChildrenInDebt(playgroundId)));
+			return ok(views.html.playground.owedMoney.owedMoney.render(Playground.getListOfChildrenInDebt(Application.getPlayground().id)));
 
 		}else{
 			return forbidden();

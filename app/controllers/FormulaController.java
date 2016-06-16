@@ -4,7 +4,6 @@ import conf.MyMessages;
 import models.playground.Formula;
 import models.playground.Playground;
 import models.playground.forms.FormulaForm;
-import models.users.Organizer;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -16,10 +15,8 @@ public class FormulaController extends Controller{
 	public static Result registerFormula(){
 		if(Secured.isOrganizer()){
 			Form<FormulaForm> filledForm = Form.form(FormulaForm.class).bindFromRequest();
-			
-			Organizer organizer = Organizer.find.byId(request().username());
 
-			Playground playground = organizer.playground;			
+			Playground playground = Application.getPlayground();
 			
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.formula.fail"));
@@ -44,9 +41,7 @@ public class FormulaController extends Controller{
 	
 	public static Result showFormulas(){
 		if(Secured.isOrganizer()){
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;	
+			Playground playground = Application.getPlayground();
 			
 			return ok(views.html.playground.formula.showFormulas.render(Formula.getFormulasForPlayground(playground.id), Form.form(FormulaForm.class)));
 		}else{
@@ -58,9 +53,7 @@ public class FormulaController extends Controller{
 		if(Secured.isOrganizer()){
 			Form<FormulaForm> filledForm = Form.form(FormulaForm.class).bindFromRequest();
 			
-			Organizer organizer = Organizer.find.byId(request().username());
-			
-			Playground playground = organizer.playground;			
+			Playground playground = Application.getPlayground();
 			
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.formula.fail"));
@@ -95,18 +88,11 @@ public class FormulaController extends Controller{
     public static Result removeFormula(Long formulaId){
         if(Secured.isOrganizer()){
 			Formula.deactivate(formulaId);
-			Organizer organizer = Organizer.find.byId(request().username());
-
-            Playground playground = organizer.playground;
+            Playground playground = Application.getPlayground();
 
             return ok(views.html.playground.formula.showFormulas.render(Formula.getFormulasForPlayground(playground.id), Form.form(FormulaForm.class)));
         }else{
             return forbidden();
         }
     }
-	
-	public static Result getFormulasForPlayground(Long playgroundId){
-		return TODO;
-	}
-
 }

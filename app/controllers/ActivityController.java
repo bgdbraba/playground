@@ -1,5 +1,7 @@
 package controllers;
 
+import conf.DateConverter;
+import conf.MyMessages;
 import models.playground.Activity;
 import models.playground.Playground;
 import models.playground.forms.ActivityForm;
@@ -11,30 +13,16 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import conf.DateConverter;
-import conf.MyMessages;
 
 @Security.Authenticated(Secured.class)
 public class ActivityController extends Controller{
 	
 	public static Result registerActivity(){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
-			
-			
+
 			Form<ActivityForm> filledForm = Form.form(ActivityForm.class).bindFromRequest();
 			
-			Playground playground;
-			
-			if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
-			
-				Organizer organizer = Organizer.find.byId(request().username());
-			
-				playground = organizer.playground;
-			
-			}else{
-				Animator animator = Animator.find.byId(request().username());
-				playground = animator.playground;
-			}
+			Playground playground = Application.getPlayground();
 			
 			if(DateConverter.parseDate(filledForm.field("beginDate").value()) > DateConverter.parseDate(filledForm.field("endDate").value()) ){
 				filledForm.reject("beginDate", MyMessages.get("beginDate.bigger.than.endDate"));
@@ -93,18 +81,8 @@ public class ActivityController extends Controller{
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			Form<ActivityForm> filledForm = Form.form(ActivityForm.class).bindFromRequest();
 			
-			Playground playground;
-			
-			if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
-			
-				Organizer organizer = Organizer.find.byId(request().username());
-			
-				playground = organizer.playground;
-			
-			}else{
-				Animator animator = Animator.find.byId(request().username());
-				playground = animator.playground;
-			}
+			Playground playground = Application.getPlayground();
+
 			if(DateConverter.parseDate(filledForm.field("beginDate").value()) > DateConverter.parseDate(filledForm.field("endDate").value()) ){
 				filledForm.reject("beginDate", MyMessages.get("beginDate.bigger.than.endDate"));
 				filledForm.reject("endDate", MyMessages.get("beginDate.bigger.than.endDate"));
@@ -133,7 +111,9 @@ public class ActivityController extends Controller{
 			return forbidden();
 		}
 	}
-	
+
+
+
 	/** iedereen mag eigenlijk de details zien alleen de knoppen om aan te passen niet en dergelijke ENKEL ORGANIZER MAG DEZE KNOPPEN ZIEN */
 	
 	public static Result showDetails(Long id){
@@ -144,4 +124,5 @@ public class ActivityController extends Controller{
         Activity.remove(id);
         return redirect(routes.ActivityController.showActivities());
     }
+
 }
