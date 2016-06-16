@@ -162,10 +162,10 @@ public class ChildController extends Controller{
 	    
 		return redirect(routes.ChildController.payment(childId));
 	}
-	
+
 	public static Result scribeOut(String childId){
 		Child child = Child.find.byId(childId);
-		
+
 		Child.offPlayground(childId);
 
 		if (child.notPayed.compareTo(BigDecimal.ZERO) != 0) { // Child is still in debt.

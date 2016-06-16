@@ -1,22 +1,26 @@
 @(children: List[models.users.Child])
 
-@table{
-	<thead>
-	<tr>
-		<th>@MyMessages.get("id")</th>
-		<th>@MyMessages.get("firstname")</th>
-		<th>@MyMessages.get("lastname")</th>
-		<th>@MyMessages.get("role")</th>
-		<th>@MyMessages.get("owed.money")</th>
-        <th>@MyMessages.get("sign.out")</th>
-		<!-- Extra option buttons -->
-	</tr>
+<hr>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover datatable todayTable">
+	<thead id="">
+		<tr>
+			<th>@MyMessages.get("id")</th>
+			<th>@MyMessages.get("firstname")</th>
+			<th>@MyMessages.get("lastname")</th>
+			<th>@MyMessages.get("role")</th>
+			<th>@MyMessages.get("owed.money")</th>
+			<th>@MyMessages.get("sign.out")</th>
+				<!-- Extra option buttons -->
+		</tr>
 	</thead>
 	<tbody>
 	@for(child <- children) {
 		@if(child.active){
-				@views.html.today.todayItem(child)
+			@views.html.today.todayItem(child)
 		}
 	}
 	</tbody>
-}
+</table>
+<hr style="visibility: hidden">
+<hr>
+

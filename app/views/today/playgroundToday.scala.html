@@ -5,7 +5,7 @@
 
 @main(MyMessages.get("today")){
 
-	<h1>@MyMessages.get("children.on.playground") : @Child.childrenOnPlayground(playground.id).size()</h1>
+	<h1>@MyMessages.get("children.on.playground") : <span id="childrenOnPlayground">@Child.childrenOnPlayground(playground.id).size()</span></h1>
 	
 	@views.html.today.todayList(Child.childrenOnPlayground(playground.id))
 	

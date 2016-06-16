@@ -60,6 +60,18 @@ public class Application extends Controller {
 		return ok(PasswordGenerator.generate());
 	}
 
+	public static Result scribeOut(String childId){
+		Child child = Child.find.byId(childId);
+
+		Child.offPlayground(childId);
+
+		return ok();
+//		if (child.notPayed.compareTo(BigDecimal.ZERO) != 0) { // Child is still in debt.
+//			return redirect(routes.ChildController.payment(childId));
+//		} else {
+//			return redirect(routes.PlaygroundController.showToday());
+//		}
+	}
 	
 	/**
 	 * This method is used for setting up the correct javascriptroutes.
@@ -70,6 +82,7 @@ public class Application extends Controller {
 		response().setContentType("text/javascript");
 		return ok(Routes.javascriptRouter("jsRoutes",
 				routes.javascript.Application.setLanguage(),
+				routes.javascript.Application.scribeOut(),
 				routes.javascript.Application.getGeneratedPassword()));
 	}
 

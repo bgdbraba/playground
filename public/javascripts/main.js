@@ -18,4 +18,15 @@ $('.generate-password').on('click', function(event) {
 	});
 });
 
+$('.scribeout-child').click(function(e) {
+		var id = $(this).data('id');
+		var target = $(e.target);
+        var numberOfChildren = parseInt($('#childrenOnPlayground').text()) - 1;
 
+        jsRoutes.controllers.Application.scribeOut(id).ajax({
+            success: function(data, status) {
+                target.closest('tr').remove();
+                $('#childrenOnPlayground').text(numberOfChildren);
+            }
+        });
+});
