@@ -191,3 +191,4 @@ scribe.out.child.first=Het kind moet eerst uitgeschreven zijn om te kunnen deact
 remove.linked.activity=Verwijder gelinkte activiteit
 register.child=Registreer Kind
 owed.money=Nog Te Ontvangen
+payment.inform=Achterstallige betaling inlossen!

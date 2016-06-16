@@ -107,7 +107,7 @@ public class PlaygroundDay extends Model{
 	}
 
 	public static boolean exists(Long playgroundId) {		
-		return PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().size() > 0;
+		return PlaygroundDay.find.where().eq("playground", Playground.find.ref(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().size() > 0;
 	}
 	
 	public static PlaygroundDay findbyPlayground(Long playgroundId) {
@@ -116,12 +116,12 @@ public class PlaygroundDay extends Model{
         PlaygroundDay day;
 
 
-        if (PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().size() == 0) {
+        if (PlaygroundDay.find.where().eq("playground", Playground.find.ref(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().size() == 0) {
             day = create();
             initialize(day.id, playgroundId);
         }
 
-        day = PlaygroundDay.find.where().eq("playground", Playground.find.byId(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().get(0);
+        day = PlaygroundDay.find.where().eq("playground", Playground.find.ref(playgroundId)).eq("date", DateConverter.getCurrentDate()).findList().get(0);
 
 
 		return day;

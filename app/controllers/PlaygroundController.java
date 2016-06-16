@@ -70,7 +70,7 @@ public class PlaygroundController extends Controller{
 	public static Result showToday(Long playgroundId){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			
-				return ok(views.html.day.playgroundToday.render(Playground.find.byId(playgroundId)));
+				return ok(views.html.today.playgroundToday.render(Playground.find.byId(playgroundId)));
 
 		}else{
 			return forbidden();

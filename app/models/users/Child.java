@@ -281,7 +281,7 @@ public class Child extends BasicUser{
 	}
 	
 	public static List<Child> childrenOnPlayground(Long playgroundId){
-		return find.where().eq("playground", Playground.find.byId(playgroundId)).eq("onPlayground", true).findList();
+		return find.where().eq("playground", Playground.find.ref(playgroundId)).eq("onPlayground", true).findList();
 	}
 	
 	public static void renewSessionCard(String childId){
