@@ -73,7 +73,7 @@ POST        /playgrounds                                         controllers.Pla
 GET         /playgrounds/:id/details                             controllers.PlaygroundController.showDetails(id: Long)
 POST        /playgrounds/:id/details                             controllers.PlaygroundController.editPlayground(id: Long)
 GET         /today/playgrounds/:id                               controllers.PlaygroundController.showToday(id: Long)
-GET         /owedMoney/playgrounds/:id                          controllers.PlaygroundController.owedMoney(id: Long)
+GET         /owedMoney/playgrounds/:id                           controllers.PlaygroundController.owedMoney(id: Long)
 GET         /history/playground/:id                              controllers.PlaygroundController.history(id : Long)
 
 GET         /history/playgroundDay/:id                           controllers.DayController.showPlaygroundDay(id : Long)
