@@ -1,0 +1,7 @@
+@(organizer: models.users.Organizer)
+
+@if(organizer.active){
+  <span class="badge badge-success">@organizer.id</span>
+}else{
+  <span class="badge">@organizer.id</span>
+}
