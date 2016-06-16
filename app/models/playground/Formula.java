@@ -69,15 +69,11 @@ public class Formula extends Model{
 	}
 	
 	public static List<Formula> getFormulasForPlayground(Long playgroundId){
-		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+		return find.where().eq("playground", Playground.find.ref(playgroundId)).findList();
 	}
 	
 	public String toString(){
 		return name + " (" + MyMessages.get("cost") + " " + cost + " ; " + MyMessages.get("sessionCardCompensation")+ " " + sessionCardCompensation + ")";
-	}
-	
-	public static List<Formula> findAllForPlayground(Long playgroundId){
-		return Formula.find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
 	}
 
 	public FormulaForm toForm() {
@@ -102,6 +98,9 @@ public class Formula extends Model{
         formula.delete();
     }
 
+	/**
+	 * Formula cannot be deleted if coupled to FormulaDays to retain History.
+	 **/
 	public static void deactivate(Long formulaId) {
 		Formula formula = Formula.find.byId(formulaId);
 		formula.active = false;
