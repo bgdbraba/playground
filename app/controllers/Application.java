@@ -90,17 +90,17 @@ public class Application extends Controller {
 	public static Playground getPlayground(){
 		Playground playground;
 
-		if(BasicUser.find.byId(request().username()).is(UserType.ORGANIZER)){
+		if(BasicUser.find.byId(session("id")).is(UserType.ORGANIZER)){
 
-			Organizer organizer = Organizer.find.byId(request().username());
+			Organizer organizer = Organizer.find.byId(session("id"));
 
 			playground = organizer.playground;
 
-		}else if(BasicUser.find.byId(request().username()).is(UserType.ANIMATOR)){
-			Animator animator = Animator.find.byId(request().username());
+		}else if(BasicUser.find.byId(session("id")).is(UserType.ANIMATOR)){
+			Animator animator = Animator.find.byId(session("id"));
 			playground = animator.playground;
 		} else{
-			Child child = Child.find.byId(request().username());
+			Child child = Child.find.byId(session("id"));
 			playground = child.playground;
 		}
 

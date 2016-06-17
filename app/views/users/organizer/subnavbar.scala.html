@@ -1,4 +1,5 @@
 @import models.users._
+@import models.day.PlaygroundDay
 
 @views.html.subnavbar{
 	<li><a href="@routes.FormulaController.showFormulas()" >@MyMessages.get("formula.management")</a></li>
@@ -9,6 +10,16 @@
 		<li><a href="@routes.SessionCardController.showSessionCard()" >@MyMessages.get("session.card")</a></li>
 	}
 	<li><a href="@routes.PlaygroundController.showToday()" >@MyMessages.get("day.management")</a></li>
-	<li><a href="@routes.PlaygroundController.history()" >@MyMessages.get("history")</a></li>
+
+	<li role="presentation" class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			@MyMessages.get("history") <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			@for(year <- PlaygroundDay.getAvailableYears(Application.getPlayground())){
+				<li><a class="history" href="@routes.PlaygroundController.historyByYear(year)" >year</a></li>
+			}
+		</ul>
+	</li>
 	<li><a href="@routes.PlaygroundController.owedMoney()" >@MyMessages.get("owed.money")</a></li>
 }

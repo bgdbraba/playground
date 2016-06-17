@@ -7,6 +7,7 @@ import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -165,11 +166,35 @@ public class PlaygroundDay extends Model{
 		find.ref(playgroundDayId).delete();
 	}
 
-	public static List<PlaygroundDay> getPlaygroundDaysByYear(Playground playground, int year){
+	public static List<PlaygroundDay> getPlaygroundDaysByYear(Playground playground, int year) {
 
 		Long startYear = DateConverter.parseYear(year + "");
 		Long stopYear = DateConverter.parseYear((year + 1) + "");
 
 		return find.where().eq("playground", playground).gt("date", startYear).lt("date", stopYear).findList();
+	}
+
+	public static List<Integer> getAvailableYears(Playground playground){
+		int startYear = 2013;
+		int stopYear = startYear + 1;
+
+		Long startYearAsLong = DateConverter.parseYear(startYear + "");
+		Long stopYearAsLong = DateConverter.parseYear(stopYear + "");
+
+		List<Integer> results = new ArrayList<>();
+
+		while(startYearAsLong <= DateConverter.getCurrentDate()) {
+
+			if(find.where().eq("playground", playground).gt("date", startYearAsLong).lt("date", stopYearAsLong).findRowCount() > 0){
+				results.add(startYear);
+			}
+
+			startYear++;
+			startYearAsLong = DateConverter.parseYear(startYear + "");
+			stopYear++;
+			stopYearAsLong = DateConverter.parseYear(stopYear + "");
+		}
+
+		return results;
 	}
 }

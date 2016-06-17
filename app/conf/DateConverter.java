@@ -34,6 +34,7 @@ public class DateConverter {
 		return formatTime.format(new Date(time));
 	}
 
+
 	// make sure no instance can be made of this class (implicit: static class)
 	private DateConverter() {}
 

@@ -4,9 +4,10 @@ $('.submit-modal').on('click', function(event) {
 
  // dynamic navbar element activation
 $(function() {
-	  $('li a[href^="/' + location.pathname.split("/")[1] + '/"]').parent().addClass('active');
-	  $('li a[href="/' + location.pathname.split("/")[1] + '"]').parent().addClass('active');
+	$('li a[href^="/' + location.pathname.split("/")[1] + '/"]').parent().addClass('active');
+	$('li a[href="/' + location.pathname.split("/")[1] + '"]').parent().addClass('active');
 });
+
 
 
 
@@ -19,6 +20,7 @@ $('.generate-password').on('click', function(event) {
 });
 
 $('.scribeout-child').click(function(e) {
+		var table = $('#example').DataTable();
 		var id = $(this).data('id');
 		var target = $(e.target);
         var numberOfChildren = parseInt($('#childrenOnPlayground').text()) - 1;
