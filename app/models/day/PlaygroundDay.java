@@ -164,5 +164,12 @@ public class PlaygroundDay extends Model{
 		day.deleteManyToManyAssociations("children");	
 		find.ref(playgroundDayId).delete();
 	}
-	
+
+	public static List<PlaygroundDay> getPlaygroundDaysByYear(Playground playground, int year){
+
+		Long startYear = DateConverter.parseYear(year + "");
+		Long stopYear = DateConverter.parseYear((year + 1) + "");
+
+		return find.where().eq("playground", playground).gt("date", startYear).lt("date", stopYear).findList();
+	}
 }

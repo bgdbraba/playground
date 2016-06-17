@@ -1,8 +1,8 @@
-@(playground : models.playground.Playground)
+@(playgroundDays : List[models.day.PlaygroundDay])
 
 @main(MyMessages.get("history")){
 
 	<h1>@MyMessages.get("history")</h1>
 	
-	@views.html.day.playgroundDay.list(playground.playgroundDays)
+	@views.html.day.playgroundDay.list(playgroundDays)
 }

@@ -1,6 +1,7 @@
 package controllers;
 
 import conf.MyMessages;
+import models.day.PlaygroundDay;
 import models.playground.Playground;
 import models.playground.forms.PlaygroundForm;
 import play.data.Form;
@@ -80,7 +81,7 @@ public class PlaygroundController extends Controller{
 	public static Result history(){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			
-			return ok(views.html.day.history.render(Application.getPlayground()));
+			return ok(views.html.day.history.render(Application.getPlayground().playgroundDays));
 
 		}else{
 			return forbidden();
@@ -96,5 +97,11 @@ public class PlaygroundController extends Controller{
 		}else{
 			return forbidden();
 		}
+	}
+
+	public static Result historyByYear(int year) {
+
+		// Get list of playgrounddays of a particular year.
+		return ok(views.html.day.history.render(PlaygroundDay.getPlaygroundDaysByYear(Application.getPlayground(),year)));
 	}
 }

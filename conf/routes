@@ -76,6 +76,7 @@ POST        /playgrounds/:id/details                             controllers.Pla
 GET         /today                                               controllers.PlaygroundController.showToday()
 GET         /owedMoney                                           controllers.PlaygroundController.owedMoney()
 GET         /history                                             controllers.PlaygroundController.history()
+GET         /history/:year                                       controllers.PlaygroundController.historyByYear(year: Int)
 
 GET         /history/playgroundDay/:id                           controllers.DayController.showPlaygroundDay(id : Long)
 GET         /history/playgroundDay/:id/remove                    controllers.DayController.removePlaygroundDay(id : Long)
