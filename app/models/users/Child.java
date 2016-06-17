@@ -1,5 +1,6 @@
 package models.users;
 
+import com.avaje.ebean.Expr;
 import com.avaje.ebean.Page;
 import conf.DateConverter;
 import conf.Language;
@@ -263,7 +264,11 @@ public class Child extends BasicUser{
 	
 	
 	public static List<Child> getChildrenForPlayground(Long playgroundId){
-		return find.where().eq("playground", Playground.find.byId(playgroundId)).findList();
+		return find.where().eq("playground", Playground.find.ref(playgroundId)).findList();
+	}
+
+	public static List<Child> getActiveChildrenForPlayground(Long playgroundId){
+		return find.where().eq("playground", Playground.find.ref(playgroundId)).eq("active",true).findList();
 	}
 	
 	public static boolean alreadyHasActivity(String childId, Long activityId){
@@ -363,10 +368,12 @@ public class Child extends BasicUser{
 	}
 	
 	public static Page<Child> page(Long playgroundId, int page, int pageSize, String sortBy, String order, String filter) {
-        return 
+
+		return
             find.where()
 					.eq("playground",Playground.find.ref(playgroundId))
-                .ilike("firstName", "%" + filter + "%")
+					.eq("active",true)
+					.or(Expr.ilike("firstName", "%" + filter + "%"),Expr.ilike("lastName", "%" + filter + "%"))
                 .orderBy(sortBy + " " + order)
                 .fetch("playground")
                 .findPagingList(pageSize)

@@ -40,7 +40,7 @@
     <div id="actions">
         
         <form action="@link(0, "name")" method="GET">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Zoek via voornaam...">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Zoek via voor- of achternaam...">
             <input type="submit" id="searchsubmit" value="Zoek" class="btn primary" style="margin-bottom:10px">
         </form>
         
@@ -73,9 +73,7 @@
 
                 @for(child <- currentPage.getList) {
                     <tr>
-                    @if(child.active){
 				        @item2(child)
-		            }
                     </tr>
                 }
 
