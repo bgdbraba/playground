@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.Page[models.users.Child], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(currentPage: com.avaje.ebean.Page[models.users.Child], currentSortBy: String, currentOrder: String, currentFilter: String,dayForm: Form[models.day.forms.DayForm])
 
 @****************************************
 * Helper generating navigation links    *
@@ -73,7 +73,7 @@
 
                 @for(child <- currentPage.getList) {
                     <tr>
-				        @item2(child)
+				        @views.html.users.child.item2(child, dayForm)
                     </tr>
                 }
 

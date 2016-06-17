@@ -33,7 +33,7 @@ public class ChildController extends Controller{
 			if (filledForm.hasErrors()) {
 				flash("fail", MyMessages.get("register.child.fail"));
 			
-				return badRequest(views.html.users.child.showChildren2.render(Child.page(playground.id,0, 10, "lastName", "asc", ""),"lastName","asc","", filledForm));
+				return badRequest(views.html.users.child.showChildren2.render(Child.page(playground.id,0, 10, "lastName", "asc", ""),"lastName","asc","",Form.form(DayForm.class), filledForm));
 			
 			} else {
 	
@@ -66,7 +66,7 @@ public class ChildController extends Controller{
 			
 			Playground playground = Application.getPlayground();
 			
-			return ok(views.html.users.child.showChildren2.render(Child.page(playground.id, page, 10, sortBy, order, filter),sortBy,order,filter, Form.form(ChildForm.class)));
+			return ok(views.html.users.child.showChildren2.render(Child.page(playground.id, page, 10, sortBy, order, filter),sortBy,order,filter, Form.form(DayForm.class), Form.form(ChildForm.class)));
 		}else{
 			return forbidden();
 		}
@@ -188,7 +188,7 @@ public class ChildController extends Controller{
 			
 		}else{
 			day = ChildDay.create();
-			day.initialize(day.id);
+			ChildDay.initialize(day.id);
 		}
 		
 		ChildDay.addAmountPayed(day.id, Child.find.ref(childId).notPayed);

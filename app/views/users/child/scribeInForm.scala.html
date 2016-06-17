@@ -8,7 +8,7 @@
 
 @form(routes.ChildController.scribeIn(child.id)) {
 
-    @for( formula <- child.playground.formulas) {
+    @for(formula <- child.playground.formulas) {
         @if(formula.active) {
             <label class="checkbox">
                 <input type='checkbox' name='formula' value="@formula.id"> @formula.toString()

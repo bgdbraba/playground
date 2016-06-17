@@ -49,8 +49,8 @@
         <p>
 		@actions{
 			@if(!child.onPlayground){
-				@scribeInModal(MyMessages.get("scribe.in"), "scribeInModal", MyMessages.get("scribe.in")) {
-					@scribeInForm(dayForm, child)
+				@views.html.users.child.scribeInModal(MyMessages.get("scribe.in"), "scribeInModal", MyMessages.get("scribe.in")) {
+					@views.html.users.child.scribeInForm(dayForm, child)
 				}	
 			}else{
 				<a href="@routes.ChildController.scribeOut(child.id)" class="btn btn-inverse btn-large">@MyMessages.get("scribe.out")</a>

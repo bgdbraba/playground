@@ -1,5 +1,7 @@
-@(child: models.users.Child)
+@(child: models.users.Child, dayForm: Form[models.day.forms.DayForm])
 
+@import models.users._
+@import models.day._
 @import models.playground._
 
 <tr>
@@ -22,14 +24,22 @@
 			@MyMessages.get("no.group.available")
 		}else{
 			@for(role <- Role.getRolesForChild(child.id)){
-				@role.name / 
+				@role.name /
 			}
 		}
-	}	
+	}
 	</td>
 	<td>
-	@if(child.onPlayground){
-	<a href="@routes.ChildController.scribeOut(child.id)" class="btn"><i class="icon-signout"></i></a>
-	}
+	@* @if(!child.onPlayground){
+        @views.html.users.child.scribeInModalSmallButton(MyMessages.get("scribe.in"), "scribeInModalSmallButton"){
+            @views.html.users.child.scribeInForm(dayForm, child)
+        }
+
+	} else {
+        <a href="@routes.ChildController.scribeOut(child.id)" class="btn"><i class="icon-signout"></i></a>
+    } *@
+        @if(child.onPlayground){
+            <a href="@routes.ChildController.scribeOut(child.id)" class="btn"><i class="icon-signout"></i></a>
+        }
 	</td>
 </tr>
