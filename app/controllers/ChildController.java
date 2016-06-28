@@ -52,7 +52,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result showChildren(){
-		if(Secured.isAnimator() && Secured.hasAdministration()){
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Playground playground = Application.getPlayground();
 
 			return ok(views.html.users.child.showChildren.render(Child.getChildrenForPlayground(playground.id), Form.form(ChildForm.class)));
@@ -62,7 +62,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result showChildren2(int page, String sortBy, String order, String filter){
-		if(Secured.isAnimator() && Secured.hasAdministration()){
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			
 			Playground playground = Application.getPlayground();
 			
@@ -87,7 +87,7 @@ public class ChildController extends Controller{
 	
 
 	public static Result editChild(String id){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			
 			Playground playground = Application.getPlayground();
 			
@@ -129,7 +129,7 @@ public class ChildController extends Controller{
 	}
 
 	public static Result activate(String childId) {
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			BasicUser.activate(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
@@ -205,7 +205,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result linkActivityToChild(String childId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			
 			Form<LinkActivityForm> filledForm = Form.form(LinkActivityForm.class).bindFromRequest();
 			
@@ -238,7 +238,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result removeActivityFromChild(String childId, Long activityId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			
 			Child.removeNotPayed(childId,  Activity.find.byId(activityId).cost);
 			Child.removeLinkFromActivity(childId, activityId);
@@ -250,7 +250,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result linkedActivities(String childId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 				return ok(views.html.users.child.linkedActivities.linkActivity.render(Child.find.byId(childId),Form.form(LinkActivityForm.class)));
 		} else {
 			return forbidden();
@@ -258,7 +258,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result renewSessionCard(String childId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Child.renewSessionCard(childId);
 			Child.addNotPayed(childId, Child.find.byId(childId).playground.sessionCard.cost);
 			
@@ -269,7 +269,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result resetSessionCard(String childId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Child.setSessionCardToZero(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
@@ -279,7 +279,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result increaseSessionCard(String childId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Child.increaseSessionCard(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
@@ -289,7 +289,7 @@ public class ChildController extends Controller{
 	}
 	
 	public static Result decreaseSessionCard(String childId){
-		if (Secured.isAnimator() && Secured.hasAdministration()) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
 			Child.decreaseSessionCard(childId);
 			
 			return redirect(routes.ChildController.showDetails(childId));
@@ -304,7 +304,7 @@ public class ChildController extends Controller{
      * @return Excel file with all children and information.
      */
     public static Result transformToExcel(){
-        if( Secured.isAnimator() && Secured.hasAdministration() ){
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
             return TODO;
         } else {
             return forbidden();
@@ -312,4 +312,11 @@ public class ChildController extends Controller{
     }
 
 
+	public static Result scribeInSessioncard(String id) {
+		if (Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())) {
+			return ok(views.html.scribein.sessioncard.render(Child.find.byId(id)));
+		} else {
+			return forbidden();
+		}
+	}
 }

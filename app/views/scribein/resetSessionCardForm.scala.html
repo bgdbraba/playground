@@ -1,0 +1,11 @@
+@(child : models.users.Child)
+
+@import helper._
+
+@form(routes.ChildController.resetSessionCard(child.id)) {
+
+	<h1>@MyMessages.get("sessionCard")</h1>
+	
+	<h3>@MyMessages.get("Zet speelpas terug op 0!")</h3>
+
+}

@@ -2,6 +2,7 @@
 @import models.day.PlaygroundDay
 
 @views.html.subnavbar{
+	<li><a href="/children" >@MyMessages.get("children.management")</a></li>
 	<li><a href="@routes.FormulaController.showFormulas()" >@MyMessages.get("formula.management")</a></li>
 	<li><a href="@routes.RoleController.showRoles()" >@MyMessages.get("role.management")</a></li>
 	<li><a href="@routes.AnimatorController.showAnimators()" >@MyMessages.get("animator.management")</a></li>
@@ -16,7 +17,7 @@
 			@MyMessages.get("history") <span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu">
-			@for(year <- PlaygroundDay.getAvailableYears(Application.getPlayground())){
+			@for(year <- PlaygroundDay.getAvailableYears(Application.getPlayground)){
 				<li><a class="history" href="@routes.PlaygroundController.historyByYear(year)" >year</a></li>
 			}
 		</ul>

@@ -60,8 +60,7 @@ public class DayForm {
 				FormulaDay formulaDay;
 				
 				if(FormulaDay.exists(playgroundDay.id, formula.id)){
-					formulaDay = FormulaDay.findFormulaDay(playgroundDay.id, formula.id);		
-					
+					formulaDay = FormulaDay.findFormulaDay(playgroundDay.id, formula.id);
 				}else{
 					formulaDay = FormulaDay.create();
 					FormulaDay.initialize(formulaDay.id);
