@@ -380,6 +380,21 @@ public class Child extends BasicUser{
                 .getPage(page);
     }
 
+	public static Page<Child> todayPage(Long playgroundId, int page, int pageSize, String sortBy, String order, String filter) {
+
+		return
+				find.where()
+						.eq("playground",Playground.find.ref(playgroundId))
+						.eq("active",true)
+						.eq("onPlayground", true)
+						.or(Expr.ilike("firstName", "%" + filter + "%"),Expr.ilike("lastName", "%" + filter + "%"))
+						.orderBy(sortBy + " " + order)
+						.fetch("playground")
+						.findPagingList(pageSize)
+						.getPage(page);
+	}
+
+
 	public static void removeNotPayed(String childId, BigDecimal cost) {
 		Child child = Child.find.byId(childId);
 		child.notPayed = child.notPayed.subtract(cost);

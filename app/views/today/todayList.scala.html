@@ -1,26 +1,109 @@
-@(children: List[models.users.Child])
+@(currentPage: com.avaje.ebean.Page[models.users.Child], currentSortBy: String, currentOrder: String, currentFilter: String)
 
-<hr>
-<table id="#example" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover datatable todayTable">
-	<thead id="">
-		<tr>
-			<th>@MyMessages.get("id")</th>
-			<th>@MyMessages.get("firstname")</th>
-			<th>@MyMessages.get("lastname")</th>
-			<th>@MyMessages.get("role")</th>
-			<th>@MyMessages.get("owed.money")</th>
-			<th>@MyMessages.get("sign.out")</th>
-				<!-- Extra option buttons -->
-		</tr>
-	</thead>
-	<tbody>
-	@for(child <- children) {
-		@if(child.active){
-			@views.html.today.todayItem(child)
+		@****************************************
+		* Helper generating navigation links    *
+		****************************************@
+	@link(newPage:Int, newSortBy:String) = @{
+
+		var sortBy = currentSortBy
+		var order = currentOrder
+
+		if(newSortBy != null) {
+			sortBy = newSortBy
+			if(currentSortBy == newSortBy) {
+				if(currentOrder == "asc") {
+					order = "desc"
+				} else {
+					order = "asc"
+				}
+			} else {
+				order = "asc"
+			}
 		}
-	}
-	</tbody>
-</table>
-<hr style="visibility: hidden">
-<hr>
 
+		// Generate the link
+		routes.PlaygroundController.showToday(newPage, sortBy, order, currentFilter)
+		// VERANDEREN!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+	}
+
+		@**********************************
+		* Helper generating table headers *
+		***********************************@
+	@header(key:String, title:String) = {
+		<th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+			<a href="@link(0, key)">@title</a>
+		</th>
+	}
+
+
+
+<div id="actions">
+
+	<form action="@link(0, "name")" method="GET">
+		<input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Zoek via voor- of achternaam...">
+		<input type="submit" id="searchsubmit" value="Zoek" class="btn primary" style="margin-bottom:10px">
+	</form>
+
+</div>
+
+@if(currentPage.getTotalRowCount == 0) {
+
+	<div class="well">
+		<em>Nothing to display</em>
+	</div>
+
+} else {
+
+	<table class="table table-bordered table-hover" data-provides="rowlink">
+		<thead>
+			<tr>
+				<th>@MyMessages.get("id")</th>
+				<th>@MyMessages.get("firstname")</th>
+				<th>@MyMessages.get("lastname")</th>
+				<th>@MyMessages.get("role")</th>
+				<th>@MyMessages.get("owed.money")</th>
+				<th>@MyMessages.get("sign.out")</th>
+					<!-- Extra option buttons -->
+			</tr>
+		</thead>
+		<tbody>
+
+		@for( child <- currentPage.getList) {
+			<tr>
+			@views.html.today.todayItem(child)
+			</tr>
+		}
+
+		</tbody>
+	</table>
+
+	<div id="pagination" class="pagination">
+		<ul>
+			@if(currentPage.hasPrev) {
+				<li class="prev">
+					<a href="@link(currentPage.getPageIndex - 1, null)">&larr; Vorige</a>
+				</li>
+			} else {
+				<li class="prev disabled">
+					<a>&larr; Vorige</a>
+				</li>
+			}
+			<li class="current">
+				<a>Getoond @currentPage.getDisplayXtoYofZ(" tot ", " van ")</a>
+			</li>
+			@if(currentPage.hasNext) {
+				<li class="next">
+					<a href="@link(currentPage.getPageIndex + 1, null)">Volgende &rarr;</a>
+				</li>
+			} else {
+				<li class="next disabled">
+					<a>Volgende &rarr;</a>
+				</li>
+			}
+
+
+		</ul>
+
+	</div>
+}

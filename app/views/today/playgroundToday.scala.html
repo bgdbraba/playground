@@ -1,4 +1,4 @@
-@(playground : models.playground.Playground)
+@(currentPage: com.avaje.ebean.Page[models.users.Child], currentSortBy: String, currentOrder: String, currentFilter: String, playground: models.playground.Playground)
 
 @import models.day._
 @import models.users._
@@ -6,8 +6,8 @@
 @main(MyMessages.get("today")){
 
 	<h1>@MyMessages.get("children.on.playground") : <span id="childrenOnPlayground">@Child.childrenOnPlayground(playground.id).size()</span></h1>
-	
-	@views.html.today.todayList(Child.childrenOnPlayground(playground.id))
+	<hr>
+	@views.html.today.todayList(currentPage,currentSortBy,currentOrder,currentFilter)
 	
 	@if(PlaygroundDay.exists(playground.id)){
 	

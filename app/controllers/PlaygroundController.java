@@ -4,6 +4,7 @@ import conf.MyMessages;
 import models.day.PlaygroundDay;
 import models.playground.Playground;
 import models.playground.forms.PlaygroundForm;
+import models.users.Child;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -68,10 +69,12 @@ public class PlaygroundController extends Controller{
 		}
 	}
 	
-	public static Result showToday(){
+	public static Result showToday(int page, String sortBy, String order, String filter){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 
-				return ok(views.html.today.playgroundToday.render(Application.getPlayground()));
+			Playground playground = Application.getPlayground();
+
+				return ok(views.html.today.playgroundToday.render(Child.todayPage(playground.id, page, 10, sortBy, order, filter),sortBy,order,filter,playground));
 
 		}else{
 			return forbidden();

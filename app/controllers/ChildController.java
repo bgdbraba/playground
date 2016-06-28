@@ -171,7 +171,7 @@ public class ChildController extends Controller{
 		if (child.notPayed.compareTo(BigDecimal.ZERO) != 0) { // Child is still in debt.
 			return redirect(routes.ChildController.payment(childId));
 		} else {
-			return redirect(routes.PlaygroundController.showToday());
+			return redirect(routes.PlaygroundController.showToday(0, "lastName", "asc", ""));
 		}
 	}
 		

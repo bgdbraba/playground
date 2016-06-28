@@ -73,7 +73,7 @@ GET         /playgrounds                                         controllers.Pla
 POST        /playgrounds                                         controllers.PlaygroundController.registerPlayground()
 GET         /playgrounds/:id/details                             controllers.PlaygroundController.showDetails(id: Long)
 POST        /playgrounds/:id/details                             controllers.PlaygroundController.editPlayground(id: Long)
-GET         /today                                               controllers.PlaygroundController.showToday()
+GET         /today                                               controllers.PlaygroundController.showToday(p:Int ?= 0, s ?= "lastName", o ?= "asc", f ?= "")
 GET         /owedMoney                                           controllers.PlaygroundController.owedMoney()
 GET         /history                                             controllers.PlaygroundController.history()
 GET         /history/:year                                       controllers.PlaygroundController.historyByYear(year: Int)
