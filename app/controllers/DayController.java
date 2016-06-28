@@ -23,7 +23,6 @@ public class DayController extends Controller{
 	
 	public static Result removePlaygroundDay(Long id){
 		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
-			Long playgroundId = PlaygroundDay.find.byId(id).playground.id;
 			
 			for(FormulaDay day : PlaygroundDay.find.byId(id).formulaDays){
 				FormulaDay.remove(day.id);
@@ -39,9 +38,9 @@ public class DayController extends Controller{
 	}
 	
 	public static Result removeChildDay(Long id){
-		if(Secured.isAnimator() && Secured.hasAdministration()){
+		if(Secured.isOrganizer() || (Secured.isAnimator() && Secured.hasAdministration())){
 			String childId = ChildDay.find.byId(id).child.id;
-			// NOG AAN TE VULLEN
+
 			ChildDay.remove(id);		
 					
 			return redirect(routes.ChildController.showDetails(childId));

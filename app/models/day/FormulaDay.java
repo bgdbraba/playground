@@ -1,18 +1,12 @@
 package models.day;
 
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
+import conf.DateConverter;
 import models.playground.Formula;
 import models.users.Child;
 import play.db.ebean.Model;
-import conf.DateConverter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class FormulaDay extends Model{
@@ -123,7 +117,7 @@ public class FormulaDay extends Model{
 		find.ref(formulaDayId).delete();
 	}
 
-	public void removeChild(Long formulaDayId, String childId) {
+	public static void removeChild(Long formulaDayId, String childId) {
 		FormulaDay formulaDay = FormulaDay.find.byId(formulaDayId);
 		Child child = Child.find.byId(childId);
 		

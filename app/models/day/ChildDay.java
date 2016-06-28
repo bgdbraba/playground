@@ -109,14 +109,14 @@ public class ChildDay extends Model{
 			FormulaDay formulaDay = FormulaDay.find.where().eq("formula", Formula.find.byId(formula.id)).eq("date",childDay.date).findList().get(0);
 			
 			if(formulaDay != null){
-				formulaDay.removeChild(formulaDay.id,childDay.child.id);
+				FormulaDay.removeChild(formulaDay.id,childDay.child.id);
 			}
-			
 		}
 		
 		PlaygroundDay.removeChild(playgroundDay.id, child.id);
 		
 		childDay.deleteManyToManyAssociations("formulas");
+
 		ChildDay.find.ref(childDayId).delete();
 	}
 	
