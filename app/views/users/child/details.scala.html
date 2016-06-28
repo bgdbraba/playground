@@ -22,13 +22,13 @@
 	        	<h2>@MyMessages.get("sessionCard.management")</h2>
 	    		<h3><strong>@MyMessages.get("number.of.sessions") : @child.numberOfSessions</strong></h3>
 	    		<p>
+					@MyMessages.get("sessionCard.info")
 	    			@actions{
 	    			
 	    			<a href="@routes.ChildController.increaseSessionCard(child.id)" class="btn btn-success">@MyMessages.get("Verhoog")</a>
 	    			<a href="@routes.ChildController.decreaseSessionCard(child.id)" class="btn btn-danger">@MyMessages.get("Verlaag")</a>
 	    			
 	    			}
-                    @MyMessages.get("sessionCard.info")
 	    		</p>
 	        <p>
 	        @sessionCardModal(MyMessages.get("Nieuwe Speelpas"), "sessionCardModal", MyMessages.get("Nieuwe Speelpas")) {
