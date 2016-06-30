@@ -1,14 +1,13 @@
 package models.users.forms;
 
+import conf.IdGenerator;
+import conf.Language;
 import models.users.Animator;
-import models.users.Organizer;
 import models.users.enums.Gender;
 import models.users.information.Address;
 import play.data.validation.Constraints;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
-import conf.IdGenerator;
-import conf.Language;
 
 public class AnimatorForm {
 	
@@ -41,14 +40,14 @@ public class AnimatorForm {
 	public String email;
 
 	@Required
-	@Pattern(value="^[0-9]+$")
+	@Pattern(value="^([0-9]+[/ ])+[0-9]+$")
 	public String phone;
 	
 	@Required
 	public boolean hasFollowedCourse = false;
 	
 	@Required
-	@Pattern(value="^[0-9]+$")
+	@Pattern(value="^([0-9]+[ ]*)+$")
 	public String accountNumber;
 
 	@Required

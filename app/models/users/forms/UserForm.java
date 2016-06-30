@@ -35,7 +35,7 @@ public class UserForm {
 	@Pattern(value="^[a-zA-Z0-9.!#$%&â€™*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$")
 	public String email;
 
-	@Pattern(value="^[0-9]+$")
+	@Pattern(value="^([0-9]+[/ ])+[0-9]+$")
 	public String phone;
 	
 	public void update(String userId){
