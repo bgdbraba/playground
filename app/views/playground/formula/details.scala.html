@@ -18,9 +18,9 @@
 	}
 	
 	@actions{	
-		@modalForm(MyMessages.get("edit"), "formulaModal", MyMessages.get("edit")) {
+		@* modalForm(MyMessages.get("edit"), "formulaModal", MyMessages.get("edit")) {
 			@editForm(formulaForm, formula.id)
-		}	
+		}	*@
 		
 		<a href="@routes.FormulaController.showFormulas()" class="btn">@MyMessages.get("go.back")</a>
 	}
