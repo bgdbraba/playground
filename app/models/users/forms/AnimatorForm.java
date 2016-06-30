@@ -40,7 +40,7 @@ public class AnimatorForm {
 	public String email;
 
 	@Required
-	@Pattern(value="^([0-9]+[/ ])+[0-9]+$")
+	@Pattern(value="^([0-9]+[/ ]*)+[0-9]+$")
 	public String phone;
 	
 	@Required

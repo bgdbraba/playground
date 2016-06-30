@@ -61,6 +61,7 @@ public class DateConverter {
 
 	public static long isCorrectYear(String date) {
 		long parsed = 0;
+
 		try {
 			formatYear.setLenient(false);
 			ParsePosition p = new ParsePosition(0);

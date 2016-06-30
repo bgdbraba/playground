@@ -107,7 +107,7 @@ public class BasicUser extends Model{
 		user.lastName = lastName;
 		user.language = language;
 		user.gender = gender;
-		user.dateOfBirth = DateConverter.parseDate(dateOfBirth);
+		user.dateOfBirth = DateConverter.parseDate(dateOfBirth.replace('/','-'));
 		user.phone = phone;
 		user.email = email;
 		

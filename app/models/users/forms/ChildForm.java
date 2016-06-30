@@ -30,7 +30,7 @@ public class ChildForm {
 	public String lastName;
 	
 	@Required
-	@Pattern(value="^[0-9][0-9]-[0-1][0-9]-[0-2][0-9][0-9][0-9]+$")
+	@Pattern(value="^[0-9][0-9][/-][0-1][0-9][/-][0-2][0-9][0-9][0-9]+$")
 	public String dateOfBirth;
 	
 	@Required
@@ -41,7 +41,7 @@ public class ChildForm {
 	public String email;
 
 	@Required
-	@Pattern(value="^([0-9]+[/ ])+[0-9]+$")
+	@Pattern(value="^([0-9]+[/ ]*)+[0-9]+$")
 	public String phone;
 	
 	@Required
@@ -59,10 +59,10 @@ public class ChildForm {
 	@Pattern(value = "^[A-Z].*$", message = "Moet met hoofdletter beginnen!")
 	public String city;
 
-	@Pattern(value="^([0-9]+[/ ])+[0-9]+$")
+	@Pattern(value="^([0-9]+[/ ]*)+[0-9]+$")
 	public String phoneWork;
 
-	@Pattern(value="^([0-9]+[/ ])+[0-9]+$")
+	@Pattern(value="^([0-9]+[/ ]*)+[0-9]+$")
 	public String phoneAlt;
 	
 	public String doctor;
