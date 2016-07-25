@@ -59,6 +59,7 @@ POST        /children/:id/scribeIn                               controllers.Chi
 GET         /children/:id/sessionCard/scribeIn                   controllers.ChildController.scribeInSessioncard(id : String)
 POST        /children/:id/scribeOut                              controllers.Application.scribeOut(id : String)
 GET         /children/:id/scribeOut                              controllers.ChildController.scribeOut(id : String)
+GET         /children/:id/sessionCard                            controllers.ChildController.showSessionCard(id: String)
 GET         /children/:id/payMent                                controllers.ChildController.payment(id : String)
 GET         /children/:id/payNow                                 controllers.ChildController.payNow(id : String)
 GET         /children/:id/payLater                               controllers.ChildController.payLater(id : String)

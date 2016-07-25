@@ -319,4 +319,8 @@ public class ChildController extends Controller{
 			return forbidden();
 		}
 	}
+
+	public static Result showSessionCard(String id) {
+		return play.mvc.Results.TODO;
+	}
 }
