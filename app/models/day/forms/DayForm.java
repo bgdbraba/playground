@@ -83,7 +83,7 @@ public class DayForm {
 					
 					ChildDay.addFormula(childDay.id, formula.id);
 					
-					if(child.numberOfSessions != 0 && formula.sessionCardCompensation != 0 && (child.numberOfSessions >= formula.sessionCardCompensation)){
+					if(Child.find.byId(child.id).numberOfSessions != 0 && formula.sessionCardCompensation != 0 && (Child.find.byId(child.id).numberOfSessions >= formula.sessionCardCompensation)){
 						Child.decreaseNumberOfSessions(child.id, formula.sessionCardCompensation);
 					}else{
 						amountToPay = amountToPay.add(formula.cost);

@@ -156,7 +156,7 @@ public class ChildController extends Controller{
 	
 		    // assign checked value to model
 		    form.formulas = Arrays.asList(checkedVal);
-	    } 
+	    }
 	 	    
 	    form.submit();
 	    
