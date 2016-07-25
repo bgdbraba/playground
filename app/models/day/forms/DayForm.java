@@ -16,7 +16,7 @@ public class DayForm {
 	
 	public List<String> formulas;
 
-	public BigDecimal amountToPay;
+	public BigDecimal amountToPay = new BigDecimal(0.00);
 	
 	public void submit(){
 		Child child = Child.find.byId(childId);
