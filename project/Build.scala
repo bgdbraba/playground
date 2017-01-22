@@ -8,6 +8,7 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
   val apache_poi      = "org.apache.poi" % "poi" % "3.8"
   val apache_poi_ooxml = "org.apache.poi" % "poi-ooxml" % "3.8"
+  val postgres = "org.postgresql" % "postgresql" % "9.2-1002.jdbc4"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
@@ -17,8 +18,7 @@ object ApplicationBuild extends Build {
     apache_poi, apache_poi_ooxml
   )
   // https://mvnrepository.com/artifact/postgresql/postgresql
-  libraryDependencies += "postgresql" % "postgresql" % "9.2-1002.jdbc4"
-
+  libraryDependencies += postgres
   val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here
     templatesImport += "conf._"
