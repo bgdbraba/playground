@@ -14,9 +14,10 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "postgresql" % "postgresql" % "9.2-1002.jdbc4",
     apache_poi, apache_poi_ooxml
   )
+  // https://mvnrepository.com/artifact/postgresql/postgresql
+  libraryDependencies += "postgresql" % "postgresql" % "9.2-1002.jdbc4"
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here
