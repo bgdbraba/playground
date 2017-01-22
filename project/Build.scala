@@ -14,7 +14,7 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "postgresql" % "postgresql" % "9.4-1201-jdbc41",
+    "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
     apache_poi, apache_poi_ooxml
   )
 
