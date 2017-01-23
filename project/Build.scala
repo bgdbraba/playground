@@ -15,7 +15,6 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    postgres,
     apache_poi, apache_poi_ooxml
   )
 
