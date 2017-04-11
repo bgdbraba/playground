@@ -8,7 +8,7 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
   val apache_poi      = "org.apache.poi" % "poi" % "3.8"
   val apache_poi_ooxml = "org.apache.poi" % "poi-ooxml" % "3.8"
-  val postgres = "org.postgresql" % "postgresql" % "9.2-1003-jdbc4"
+  val postgres = "org.postgresql" % "postgresql" % "9.2-1200-jdbc41"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
